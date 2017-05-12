@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Insight</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_start_title">Start</string>
+    <string name="home_screen_settings_title">Settings</string>
+    <string name="home_screen_rules_title">Rules</string>
+    <string name="home_screen_achievements_title">Achievements</string>
+    <string name="home_screen_about_title">About</string>
+</resources>

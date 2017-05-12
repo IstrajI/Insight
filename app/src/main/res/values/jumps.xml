@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 1 -->
+    <string-array name="jump1_texts">
+        <item>@string/jump1_t1</item>
+        <item>@string/jump1_t2</item>
+        <item>@string/jump1_t3</item>
+        <item>@string/jump1_t4</item>
+    </string-array>
+    <string-array name="jump1_numbers">
+        <item>@string/jump1_n1</item>
+        <item>@string/jump1_n2</item>
+        <item>@string/jump1_n3</item>
+        <item>@string/jump1_n4</item>
+    </string-array>
+    <string name="jump1_t1">Если хотите расспросить об аномальной зоне</string>
+    <string name="jump1_t2">Осмотрите свой корабль</string>
+    <string name="jump1_t3">Отлежитесь до прилёта в лечебной капсуле</string>
+    <string name="jump1_t4">Останетесь на капитанском мостике, заодно подробней ознакомитесь с предстоящим делом (впрочем, информация по нему будет всегда доступна в справочнике)</string>
+    <string name="jump1_n1">23</string>
+    <string name="jump1_n2">102</string>
+    <string name="jump1_n3">60</string>
+    <string name="jump1_n4">301</string>
+
+    <!-- 2 -->
+    <string-array name="jump23_texts">
+        <item>@string/jump23_t1</item>
+        <item>@string/jump23_t2</item>
+        <item>@string/jump23_t3</item>
+    </string-array>
+    <string-array name="jump23_numbers">
+        <item>@string/jump23_n1</item>
+        <item>@string/jump23_n2</item>
+        <item>@string/jump23_n3</item>
+    </string-array>
+
+    <string name="jump23_t1">Осмотрите свой корабль</string>
+    <string name="jump23_t2">Пройдёте сеанс лечебной терапии</string>
+    <string name="jump23_t3">Ознакомитесь подробней с предстоящим делом</string>
+    <string name="jump23_n1">102</string>
+    <string name="jump23_n2">60</string>
+    <string name="jump23_n3">301</string>
+</resources>
