@@ -1,0 +1,34 @@
+ext.versions = [
+
+        androidGradlePlugin     : '2.3.0',
+        gradleVersionsPlugin    : '0.14.0',
+        buildTools              : '25.0.2',
+        compileSdk              : 25,
+
+        moxy                    : '1.5.1',
+
+        butterKnife             : '8.5.1',
+
+        supportLibs             : '25.3.1',
+        supportConstraintLayout : '1.0.1',
+]
+
+ext.gradlePlugins = [
+        android                 : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+        gradleVersions          : "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersionsPlugin"
+]
+
+ext.libraries = [
+        moxy                    : "com.arello-mobile:moxy:$versions.moxy",
+        moxyCompiler            : "com.arello-mobile:moxy-compiler:$versions.moxy",
+
+        butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign           : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView     : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView         : "com.android.support:cardview-v7:$versions.supportLibs",
+        supportPercent          : "com.android.support:percent:$versions.supportLibs",
+        supportConstraintLayout : "com.android.support.constraint:constraint-layout:$versions.supportConstraintLayout",
+]
