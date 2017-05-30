@@ -33,6 +33,7 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.dao.GamePreferences;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.Paragraph;
+import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.all.presentation.PlayerPresenter;
@@ -47,6 +48,11 @@ import butterknife.ButterKnife;
 
 public class GameBookActivity extends BaseMvpActivity implements View.OnClickListener, RecyclerViewListeners.OnItemClickListener,
         GameBookView, PlayerView{
+
+
+
+
+
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView paragraphTextTextView;
     @BindView(R.id.recycler_view_paragraph_jumps)
@@ -63,8 +69,15 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     protected View actionsMenuLayout;
     protected Button closeActionsMenuButton;
+
     protected View statsPanelLayout;
     protected Button closeStatsPanelButton;
+    protected TextView statsTimeTextView;
+    protected TextView statsHpTextView;
+    protected TextView statsPrcTextView;
+    protected TextView statsDexTextView;
+    protected TextView statsAurTextView;
+    protected TextView statsAmnTextView;
 
     @InjectPresenter
     GameBookPresenter gameBookPresenter;
@@ -107,6 +120,12 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
         statsPanelLayout = LayoutInflater.from(this).inflate(R.layout.layout_stats_panel, rootFrameLayout, false);
         closeStatsPanelButton = ButterKnife.findById(statsPanelLayout, R.id.button_stats_panel_close);
+        statsAmnTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_amn);
+        statsTimeTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_time);
+        statsHpTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_hp);
+        statsPrcTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_prc);
+        statsDexTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_dex);
+        statsAurTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_aur);
 
         final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         actionsMenuAdapter = new ActionsMenuAdapter();
@@ -121,7 +140,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         menus.add(new ActionsMenuAdapter.ActionItem("pish2"));
 
         actionsMenuAdapter.update(menus);
-
         closeActionsMenuButton.setOnClickListener(this);
         openActionsMenuButton.setOnClickListener(this);
         closeStatsPanelButton.setOnClickListener(this);
@@ -153,6 +171,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     @Override
+    public void changeStat(final Player.Stats stats, final int statDifference) {
+        playerPresenter.changeStat(stats, statDifference);
+    }
+
+    @Override
     public void onItemClick(View view, int position, RecyclerView.Adapter adapter) {
         switch(view.getId()) {
             case R.id.button_adapter_jump:
@@ -162,7 +185,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                     startActivityForResult(intent, 1);
                     return;
                 }
-
                 gameBookPresenter.loadNextParagraph(getApplicationContext(), nextParagraph);
                 break;
         }
@@ -206,5 +228,4 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
             openStatsPanelButton.setVisibility(View.VISIBLE);
         }
     }
-
 }

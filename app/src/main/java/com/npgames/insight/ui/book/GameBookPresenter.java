@@ -4,6 +4,10 @@ import android.content.Context;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.dao.ParagraphParser;
+import com.npgames.insight.data.model.Paragraph;
+import com.npgames.insight.data.model.Player;
+
+import java.util.Map;
 
 @InjectViewState
 public class GameBookPresenter extends MvpPresenter<GameBookView>{
@@ -12,8 +16,9 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
 
     public static final int INIT_PARAGRAPH = 500;
     public void loadNextParagraph(final Context context, final int paragraphNumber) {
-
-        getViewState().updateParagraph(ParagraphParser.parse(context, paragraphNumber));
+        final Paragraph paragraph = ParagraphParser.parse(context, paragraphNumber);
+        executeParagraphAction(paragraph.getActions());
+        getViewState().updateParagraph(paragraph);
     }
 
     public void interactWithStatsPanel() {
@@ -34,5 +39,11 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
         }
         getViewState().openActionsMenu();
         isActionsMenuOpen = true;
+    }
+
+    public void executeParagraphAction(final Map<Player.Stats, Integer> actions) {
+        for (Map.Entry<Player.Stats, Integer> action : actions.entrySet()) {
+            getViewState().changeStat(action.getKey(), action.getValue());
+        }
     }
 }

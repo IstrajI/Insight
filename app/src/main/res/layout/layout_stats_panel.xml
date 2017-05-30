@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_time_title"
-            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_am_title"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_amn_title"
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- First column -->
@@ -49,11 +49,11 @@
                 android:text="@string/stats_panel_hp_title"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/stats_panel_hp"
+                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_hp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/stats_panel_hp"
+                android:id="@+id/text_view_stats_panel_hp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="25"
@@ -67,16 +67,16 @@
                 android:text="@string/stats_panel_dex_title"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/stats_panel_dex"
+                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_dex"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_hp_title" />
 
             <TextView
-                android:id="@+id/stats_panel_dex"
+                android:id="@+id/text_view_stats_panel_dex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12"
                 app:layout_constraintRight_toLeftOf="@+id/guideline1_stats_percent"
-                app:layout_constraintTop_toBottomOf="@+id/stats_panel_hp" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_hp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline1_stats_percent"
@@ -105,17 +105,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_view_stats_panel_prc"
+                android:id="@+id/text_view_stats_panel_prc_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/stats_panel_prc_title"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toRightOf="@+id/guideline1_stats_percent"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_prc_title"
+                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_prc"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_aur_title" />
 
             <TextView
-                android:id="@+id/text_view_stats_panel_prc_title"
+                android:id="@+id/text_view_stats_panel_prc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5"
@@ -126,7 +126,7 @@
         <!-- Third column -->
 
         <TextView
-            android:id="@+id/text_view_stats_panel_am_title"
+            android:id="@+id/text_view_stats_panel_amn_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/stats_panel_am_title"
@@ -136,13 +136,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_stats_panel_am"
+            android:id="@+id/text_view_stats_panel_amn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="30"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/stats_panel_second_column"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_am_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_amn_title" />
     </android.support.constraint.ConstraintLayout>
 
     <Button

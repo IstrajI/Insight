@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="p500_aKEYS">
+    <string-array name="p1_aKEYS">
         <item>HP</item>
         <item>TIME</item>
     </string-array>
 
-    <integer-array name="p500_aVALUES">
+    <integer-array name="p1_aVALUES">
         <item>-3</item>
         <item>-1</item>
     </integer-array>

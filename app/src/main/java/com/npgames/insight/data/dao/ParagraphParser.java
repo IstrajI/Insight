@@ -1,5 +1,6 @@
 package com.npgames.insight.data.dao;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.Log;
 import android.util.Pair;
@@ -58,6 +59,7 @@ public class ParagraphParser {
         final List jumps = new ArrayList(jumpNumbersArray.length);
         for (int i = 0; i < jumpNumbersArray.length; i++) {
             final Jump jump = new Jump(Integer.parseInt(jumpNumbersArray[i]), jumpTextsArray[i]);
+            jumps.add(jump);
         }
         return jumps;
     }
@@ -66,18 +68,23 @@ public class ParagraphParser {
                                                            final StringBuilder formatStr,
                                                            final Formatter formatter,
                                                            final int paragraph) {
-        final int actionsKeysId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                ACTIONS_KEYS_PATTERN, paragraph);
-        final int actionsValuesId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                ACTIONS_VALUES_PATTERN, paragraph);
 
-        final String [] actionsKeys = context.getResources().getStringArray(actionsKeysId);
-        final int [] actionValues = context.getResources().getIntArray(actionsValuesId);
+        final Map<Player.Stats, Integer> actions;
+        try {
+            final int actionsKeysId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
+                    ACTIONS_KEYS_PATTERN, paragraph);
+            final int actionsValuesId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
+                    ACTIONS_VALUES_PATTERN, paragraph);
 
-        final Map<Player.Stats, Integer> actions = new HashMap<>(actionsKeys.length);
-        for (int i = 0; i < actionsKeys.length; i++) {
-            actions.put(Player.Stats.valueOf(actionsKeys[i]), actionValues[i]);
-        }
-        return actions;
+            final String [] actionsKeys = context.getResources().getStringArray(actionsKeysId);
+            final int [] actionValues = context.getResources().getIntArray(actionsValuesId);
+
+            actions = new HashMap<>(actionsKeys.length);
+
+            for (int i = 0; i < actionsKeys.length; i++) {
+                actions.put(Player.Stats.valueOf(actionsKeys[i]), actionValues[i]);
+            }
+        } catch (Resources.NotFoundException ex) {}
+        return new HashMap<>(0);
     }
 }
