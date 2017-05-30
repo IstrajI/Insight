@@ -1,12 +1,25 @@
 package com.npgames.insight.data.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Paragraph {
     private int id;
-    private String text;
+    private int textId;
     private List<Jump> jumps;
+    private Map<Player.Stats, Integer> actions;
+
+    public Paragraph(final int id, final List<Jump> jumps, final int paragraphTextId,
+                     final Map<Player.Stats, Integer> actions) {
+        this.id = id;
+        this.jumps = jumps;
+        this.textId = paragraphTextId;
+        this.actions = actions;
+    }
 
     public int getId() {
         return id;
@@ -16,12 +29,12 @@ public class Paragraph {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public int getTextId() {
+        return textId;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTextId(int textId) {
+        this.textId = textId;
     }
 
     public List<Jump> getJumps() {
@@ -32,21 +45,11 @@ public class Paragraph {
         this.jumps = jumps;
     }
 
-    public static Paragraph createParagraphFromResources(final int paragraphNumber, final String [] jumpTextsArray, final String [] jumpNumbersArray, final String paragraphText) {
-        final int numberOfJumps = (jumpTextsArray.length < jumpNumbersArray.length) ? jumpTextsArray.length : jumpNumbersArray.length;
-        final List<Jump> jumps = new ArrayList<>(numberOfJumps);
+    public Map<Player.Stats, Integer> getActions() {
+        return actions;
+    }
 
-        for (int i = 0; i < numberOfJumps; i++) {
-            final Jump jump = new Jump();
-            jump.setId(Integer.parseInt(jumpNumbersArray[i]));
-            jump.setText(jumpTextsArray[i]);
-            jumps.add(jump);
-        }
-
-        final Paragraph paragraph = new Paragraph();
-        paragraph.setId(paragraphNumber);
-        paragraph.setText(paragraphText);
-        paragraph.setJumps(jumps);
-        return paragraph;
+    public void setActions(Map<Player.Stats, Integer> actions) {
+        this.actions = actions;
     }
 }

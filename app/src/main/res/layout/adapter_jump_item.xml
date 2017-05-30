@@ -6,6 +6,7 @@
     android:layout_marginTop="@dimen/spacing_8"
     android:layout_marginBottom="@dimen/spacing_8"
     android:orientation="horizontal"
+    android:fitsSystemWindows="true"
     android:layout_height="wrap_content" >
 
     <Button
@@ -14,11 +15,12 @@
         android:layout_height="50dp"/>
 
     <TextView
+        android:layout_gravity="fill"
         android:layout_marginLeft="@dimen/spacing_16"
         android:layout_marginStart="@dimen/spacing_16"
         android:id="@+id/text_view_adapter_jump_title"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearance.Headline"/>
+        android:textAppearance="@style/TextAppearance.Subheading.Primary"/>
 </LinearLayout>

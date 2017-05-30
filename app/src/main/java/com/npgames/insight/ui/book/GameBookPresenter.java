@@ -8,11 +8,25 @@ import com.npgames.insight.data.dao.ParagraphParser;
 @InjectViewState
 public class GameBookPresenter extends MvpPresenter<GameBookView>{
     private boolean isActionsMenuOpen = false;
-    void loadNextParagraph(final Context context, final int paragraphNumber) {
+    private boolean isStatsPanelOpen = false;
+
+    public static final int INIT_PARAGRAPH = 500;
+    public void loadNextParagraph(final Context context, final int paragraphNumber) {
+
         getViewState().updateParagraph(ParagraphParser.parse(context, paragraphNumber));
     }
 
-    void interactWithActionsMenu() {
+    public void interactWithStatsPanel() {
+        if (isStatsPanelOpen) {
+            getViewState().closeStatsPanel();
+            isActionsMenuOpen = false;
+            return;
+        }
+        getViewState().openStatsPanel();
+        isStatsPanelOpen = true;
+    }
+
+    public void interactWithActionsMenu() {
         if (isActionsMenuOpen) {
             getViewState().closeActionsMenu();
             isActionsMenuOpen = false;

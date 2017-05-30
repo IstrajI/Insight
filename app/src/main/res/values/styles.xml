@@ -102,7 +102,7 @@
     </style>
 
     <style name="TextAppearance.Headline.Primary" parent="TextAppearance.Headline.Base">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <!-- Title TextAppearance -->
@@ -111,7 +111,7 @@
     </style>
 
     <style name="TextAppearance.Title.Primary" parent="TextAppearance.Title.Base">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <!-- Subheading TextAppearance -->
@@ -120,7 +120,7 @@
     </style>
 
     <style name="TextAppearance.Subheading.Primary" parent="TextAppearance.Subheading.Base">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <!-- Body 2 TextAppearance -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:ext="http://schemas.android.com/apk/res-auto"
     android:id="@+id/frame_layout_game_book_root"
     android:layout_height="match_parent">
     
@@ -12,34 +12,49 @@
         android:layout_height="80dp"
         android:background="@color/white"/>
 
-    <WebView
-        android:id="@+id/web_view"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"/>
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/button_game_book_open_stats_panel"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:background="@color/white"/>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll_view_game_book_root"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        android:layout_margin="16dp"
+        android:id="@+id/scroll_game_book"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:gravity="center"
+            <com.bluejamesbond.text.DocumentView
                 android:id="@+id/text_view_game_paragraph_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_16"
-                android:textAppearance="?attr/textAppearance.Headline" />
+                ext:documentView_antialias="true"
+                ext:documentView_cacheConfig="high_quality"
+                ext:documentView_reverse="false"
+                ext:documentView_textAlignment="justified"
+                ext:documentView_textColor="@color/colorTextPrimary"
+                ext:documentView_textFormat="plain"
+                ext:documentView_textSize="18sp"
+                ext:documentView_textSubPixel="false"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_paragraph_jumps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 </FrameLayout>
+
+<!--
+
+
+
+
+-->

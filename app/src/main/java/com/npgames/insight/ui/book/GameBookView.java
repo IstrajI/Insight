@@ -7,4 +7,6 @@ public interface GameBookView extends MvpView{
     void updateParagraph(final Paragraph nextParagraph);
     void openActionsMenu();
     void closeActionsMenu();
+    void openStatsPanel();
+    void closeStatsPanel();
 }

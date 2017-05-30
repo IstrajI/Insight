@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ext="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/spacing_8"
+    android:layout_marginLeft="@dimen/spacing_16"
+    android:layout_marginRight="@dimen/spacing_16"
+    android:layout_marginTop="@dimen/spacing_8"
+    android:orientation="vertical">
+
+    <TextView
+        android:textAppearance="@style/TextAppearance.Title.Primary"
+        android:id="@+id/text_view_create_character_overview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_character_overview_title" />
+
+
+    <com.bluejamesbond.text.DocumentView
+        android:id="@+id/text_view_game_paragraph_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginBottom="@dimen/spacing_8"
+        ext:documentView_antialias="true"
+        ext:documentView_cacheConfig="auto_quality"
+        ext:documentView_reverse="false"
+        ext:documentView_textAlignment="justified"
+        ext:documentView_textColor="@color/colorTextPrimary"
+        ext:documentView_textFormat="plain"
+        ext:documentView_textSize="18sp"
+        ext:documentView_textSubPixel="true" />
+
+    <TextView
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:id="@+id/text_view_create_character_points_to_distribute"
+        android:text="4"
+        android:textAppearance="@style/TextAppearance.Title.Primary"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- First row -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_view_create_character_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/create_character_hp_title"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_create_character_hp_points"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:text="30"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guideline_create_character_row_first"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_create_character_row_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="86dp" />
+
+        <Button
+            android:id="@+id/button_create_character_hp_more"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:gravity="center"
+            android:text="@string/create_character_change_skill_question"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- Second row -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_marginTop="@dimen/spacing_8">
+
+        <TextView
+            android:id="@+id/text_view_create_character_aur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/create_character_aur_title"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_create_character_aur_points"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:text="2"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintRight_toLeftOf="@+id/guideline_create_character_row_second"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_create_character_row_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="86dp" />
+
+        <Button
+            android:id="@+id/button_create_character_aur_more"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:text="@string/create_character_change_skill_question"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <!-- Third row -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_view_create_character_dex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/create_character_dex_title"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_dex_points_plus"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:text="@string/create_character_change_skill_plus"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_create_character_dex_points"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_create_character_dex_points"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginLeft="@dimen/spacing_8"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:text="10"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/button_create_character_dex_points_minus"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_dex_points_minus"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:text="@string/create_character_change_skill_minus"
+            app:layout_constraintRight_toLeftOf="@+id/button_create_character_dex_more"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_dex_more"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:text="@string/create_character_change_skill_question"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <!-- Forth row -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_marginTop="@dimen/spacing_8">
+
+        <TextView
+            android:id="@+id/text_view_create_character_prc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/create_character_prc_title"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_prc_points_plus"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:gravity="center"
+            android:text="@string/create_character_change_skill_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_create_character_prc_points"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_create_character_prc_points"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:gravity="center"
+            android:text="3"
+            android:textAppearance="@style/TextAppearance.Subheading.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/button_create_character_prc_points_minus"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_prc_points_minus"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:gravity="center"
+            android:text="@string/create_character_change_skill_minus"
+            app:layout_constraintRight_toLeftOf="@+id/button_create_character_prc_more"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_create_character_prc_more"
+            android:layout_width="@dimen/size_create_character_skill_points_squire"
+            android:layout_height="@dimen/size_create_character_skill_points_squire"
+            android:text="@string/create_character_change_skill_question"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/button_create_character_reset"
+            android:text="@string/create_character_reset_button_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/button_create_character_continue"
+            android:text="@string/create_character_continue_button_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <com.bluejamesbond.text.DocumentView
+        android:layout_marginTop="@dimen/spacing_8"
+        android:id="@+id/document_view_create_character_skill_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ext:documentView_antialias="true"
+        ext:documentView_cacheConfig="auto_quality"
+        ext:documentView_reverse="false"
+        ext:documentView_textAlignment="justified"
+        ext:documentView_textColor="@color/colorTextPrimary"
+        ext:documentView_textFormat="plain"
+        ext:documentView_textSize="18sp"
+        ext:documentView_textSubPixel="true" />
+</LinearLayout>

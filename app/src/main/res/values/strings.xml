@@ -1,10 +1,38 @@
 <resources>
     <string name="app_name">Insight</string>
 
+    <!-- Layout Stats -->
+    <string name="stats_panel_time_title">Время</string>
+    <string name="stats_panel_am_title">Амнезия</string>
+    <string name="stats_panel_hp_title">Здоровье</string>
+    <string name="stats_panel_aur_title">Аура</string>
+    <string name="stats_panel_dex_title">Ловкость</string>
+    <string name="stats_panel_prc_title">Точность</string>
+
     <!-- Home Screen -->
     <string name="home_screen_start_title">Start</string>
     <string name="home_screen_settings_title">Settings</string>
     <string name="home_screen_rules_title">Rules</string>
     <string name="home_screen_achievements_title">Achievements</string>
     <string name="home_screen_about_title">About</string>
+
+    <!-- Create character -->
+    <string name="create_character_hp_title">Здоровье</string>
+    <string name="create_character_aur_title">Аура</string>
+    <string name="create_character_dex_title">Ловкость</string>
+    <string name="create_character_prc_title">Меткость</string>
+    <string name="create_character_change_skill_minus">-</string>
+    <string name="create_character_change_skill_plus">+</string>
+    <string name="create_character_change_skill_question">\?</string>
+
+    <string name="create_character_overview_title">Медицинская справка</string>
+    <string name="create_character_overview">Здесь представлены параметры, с которыми вы начинаете игру.\n\nЕщё четыре очка опыта вы можете распределить между последними двумя параметрами на своё усмотрение.</string>
+    <string name="create_character_skill_info_hp">Здоровье – название говорит само за себя. Если вы получите ранение, ваше Здоровье снизится. В каждом конкретном случае в книге будет указано, на сколько единиц вы должны его уменьшить. Если оно снизится до нуля, это будет означать гибель от ран. Придётся начинать всё с начала. В начале игры ваше Здоровье равно 16. Его можно восстанавливать с помощью аптечек и в лечебной капсуле, но оно никогда не может превышать 22.</string>
+    <string name="create_character_skill_info_aur">Каждое разумное существо имеет ауру, цвет которой может меняться в зависимости от поступков и психологического состояния. Хорошие дела осветляют ауру, плохие затемняют. Аура определяется с помощью прибора называемого аурометр. Для удобства параметр представлен в виде чисел, где нуль – нейтральность (полное равнодушие ко всему), от плюс одного – положительные качества, от минус одного – отрицательные. На изменение АУРЫ также влияют страх, зависть, ненависть, выдающиеся свершения и т.д. Казалось бы, не самый важный параметр, но в жизни бывают разные ситуации. Возможно, случится так, что плохие или хорошие поступки отразятся на АУРЕ и повлияют на ваше будущее. </string>
+    <string name="create_character_skill_info_prc">Параметр меткости влияет на точность стрельбы и глазомер. Чем он выше, тем больше шансов попасть в цель.</string>
+    <string name="create_character_skill_info_dex">Ловкость – это умение двигаться, преодолевать препятствия, общая подвижность. Чем она выше, тем вы быстрее и выносливее. В данной игре на величину Ловкости будет влиять количество снаряжения, которое вы несёте на себе.</string>
+
+    <string name="create_character_reset_button_title">Сбросить</string>
+    <string name="create_character_continue_button_title">Продолжитьб</string>
+
 </resources>

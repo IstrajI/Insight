@@ -30,11 +30,12 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.button_home_start:
-                final Intent intent = new Intent(this, GameBookActivity.class);
-                startActivity(intent);
+                ActivityNavigator.startGameBookActivity(this);
+                //ActivityNavigator.startCreatePlayerActivity(this);
+                break;
         }
     }
 }

@@ -4,6 +4,11 @@ public class Jump {
     private int id;
     private String text;
 
+    public Jump(final int id, final String text) {
+        this.id = id;
+        this.text = text;
+    }
+
     public int getId() {
         return id;
     }
