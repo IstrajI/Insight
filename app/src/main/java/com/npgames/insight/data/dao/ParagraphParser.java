@@ -68,7 +68,6 @@ public class ParagraphParser {
                                                            final StringBuilder formatStr,
                                                            final Formatter formatter,
                                                            final int paragraph) {
-
         final Map<Player.Stats, Integer> actions;
         try {
             final int actionsKeysId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
@@ -84,6 +83,7 @@ public class ParagraphParser {
             for (int i = 0; i < actionsKeys.length; i++) {
                 actions.put(Player.Stats.valueOf(actionsKeys[i]), actionValues[i]);
             }
+            return actions;
         } catch (Resources.NotFoundException ex) {}
         return new HashMap<>(0);
     }

@@ -1,6 +1,8 @@
 package com.npgames.insight.ui.book;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.dao.ParagraphParser;
@@ -15,6 +17,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     private boolean isStatsPanelOpen = false;
 
     public static final int INIT_PARAGRAPH = 500;
+
     public void loadNextParagraph(final Context context, final int paragraphNumber) {
         final Paragraph paragraph = ParagraphParser.parse(context, paragraphNumber);
         executeParagraphAction(paragraph.getActions());

@@ -10,17 +10,18 @@ public class Player {
     public static final int INIT_TIME = 30;
     public static final int INIT_AMNS = 8;
 
-    public enum Stats {HP, AUR, DEX, PRC, TIME, AMNS}
+    public enum Stats {HP, AUR, DEX, PRC, TIME, AMNS, COND_TIME}
+
+    private int [] visittedParagraphs;
 
     private int paragraph;
-
     private int hp;
     private int aur;
     private int dex;
     private int prc;
 
     private int time;
-    private int amns;
+    private int amn;
 
     private List<String> eqpt;
     private List<String> keys;
@@ -74,12 +75,12 @@ public class Player {
         this.time = time;
     }
 
-    public int getAmns() {
-        return amns;
+    public int getAmn() {
+        return amn;
     }
 
-    public void setAmns(final int amns) {
-        this.amns = amns;
+    public void setAmn(final int amn) {
+        this.amn = amn;
     }
 
     public void addDex(final int addingDex) {
@@ -102,7 +103,7 @@ public class Player {
         this.time += addingTime;
     }
 
-    public void addAmns(final int addingAmns) {
-        this.amns += addingAmns;
+    public void addAmn(final int addingAmn) {
+        this.amn += addingAmn;
     }
 }

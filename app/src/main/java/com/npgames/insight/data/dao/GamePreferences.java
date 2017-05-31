@@ -2,11 +2,11 @@ package com.npgames.insight.data.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.presentation.PlayerPresenter;
 import com.npgames.insight.ui.book.GameBookPresenter;
-import com.npgames.insight.ui.player.CreatePlayerPresenter;
 
 public class  GamePreferences {
     private static GamePreferences gamePreferences;
@@ -45,7 +45,8 @@ public class  GamePreferences {
         player.setAur(sharedPreferences.getInt(PLAYER_AUR, PlayerPresenter.INIT_AUR));
         player.setDex(sharedPreferences.getInt(PLAYER_DEX, PlayerPresenter.INIT_DEX));
         player.setTime(sharedPreferences.getInt(PLAYER_TIME, PlayerPresenter.INIT_TIME));
-        player.setAmns(sharedPreferences.getInt(PLAYER_AMNS, PlayerPresenter.INIT_AMNS));
+        player.setAmn(sharedPreferences.getInt(PLAYER_AMNS, PlayerPresenter.INIT_AMNS));
+        Log.d("players hp", ""+player.getHp());
         return player;
     }
 
@@ -57,7 +58,7 @@ public class  GamePreferences {
         editor.putInt(PLAYER_DEX, player.getDex());
         editor.putInt(PLAYER_PRC, player.getPrc());
         editor.putInt(PLAYER_TIME, player.getTime());
-        editor.putInt(PLAYER_AMNS, player.getAmns());
+        editor.putInt(PLAYER_AMNS, player.getAmn());
         editor.apply();
     }
 }

@@ -4,10 +4,12 @@
     <string-array name="p1_aKEYS">
         <item>HP</item>
         <item>TIME</item>
+        <item>COND_TIME</item>
     </string-array>
 
     <integer-array name="p1_aVALUES">
         <item>-3</item>
+        <item>-1</item>
         <item>-1</item>
     </integer-array>
 </resources>

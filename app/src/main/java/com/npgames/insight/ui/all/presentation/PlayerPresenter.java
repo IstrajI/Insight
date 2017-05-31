@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.all.presentation;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -42,7 +43,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
                 player.addHp(statValue);
                 break;
             case AUR:
-                player.addPrc(statValue);
+                player.addAur(statValue);
                 break;
             case PRC:
                 player.addPrc(statValue);
@@ -54,7 +55,11 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
                 player.addTime(statValue);
                 break;
             case AMNS:
-                player.addAmns(statValue);
+                player.addAmn(statValue);
+                break;
+            case COND_TIME:
+                Log.d("addPrc", "current prc:" +player.getPrc());
+                player.addPrc(statValue);
                 break;
         }
     }

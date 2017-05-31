@@ -1,37 +1,20 @@
 package com.npgames.insight.ui.book;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Point;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bluejamesbond.text.DocumentView;
-import com.bluejamesbond.text.style.JustifiedSpan;
-import com.bluejamesbond.text.style.TextAlignment;
 import com.npgames.insight.R;
-import com.npgames.insight.data.dao.GamePreferences;
-import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -173,6 +156,14 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @Override
     public void changeStat(final Player.Stats stats, final int statDifference) {
         playerPresenter.changeStat(stats, statDifference);
+        final Player player = playerPresenter.loadPlayer(getApplicationContext());
+        Log.d("stat", "after : " +player.getPrc());
+        statsAmnTextView.setText(String.valueOf(player.getAmn()));
+        statsTimeTextView.setText(String.valueOf(player.getTime()));
+        statsHpTextView.setText(String.valueOf(player.getHp()));
+        statsPrcTextView.setText(String.valueOf(player.getPrc()));
+        statsDexTextView.setText(String.valueOf(player.getDex()));
+        statsAurTextView.setText(String.valueOf(player.getAur()));
     }
 
     @Override
