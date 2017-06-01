@@ -10,8 +10,9 @@ import com.npgames.insight.ui.player.CreatePlayerActivity;
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
 public final class ActivityNavigator {
 
-    public static void startGameBookActivity(@NonNull final Context context) {
+    public static void startGameBookActivity(@NonNull final Context context, final GameBookActivity.GameType gameType) {
         final Intent intent = new Intent(context, GameBookActivity.class);
+        intent.putExtra(GameBookActivity.GAME_TYPE_KEY, gameType);
         context.startActivity(intent);
     }
 

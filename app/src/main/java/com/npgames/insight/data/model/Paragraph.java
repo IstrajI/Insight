@@ -13,7 +13,10 @@ public class Paragraph {
     private List<Jump> jumps;
     private Map<Player.Stats, Integer> actions;
 
+
     public int [] trackingParagraphs = {1, 40};
+
+    public final static int INIT_PARAGRAPH = 500;
 
     public Paragraph(final int id, final List<Jump> jumps, final int paragraphTextId,
                      final Map<Player.Stats, Integer> actions) {

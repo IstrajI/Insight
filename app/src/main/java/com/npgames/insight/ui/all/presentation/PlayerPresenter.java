@@ -10,14 +10,6 @@ import com.npgames.insight.data.model.Player;
 
 @InjectViewState
 public class PlayerPresenter extends MvpPresenter<PlayerView> {
-    public static final int INIT_HP = 16;
-    public static final int INIT_AUR = 2;
-    public static final int INIT_DEX = 10;
-    public static final int INIT_PRC = 3;
-    public static final int INIT_TIME = 30;
-    public static final int INIT_AMNS = 8;
-    private final int MAX_POINTS_TO_DISTRIBUTE = 4;
-    private int pointsToDistribute = MAX_POINTS_TO_DISTRIBUTE;
 
     private Player player;
 
@@ -25,6 +17,11 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
         if (player == null) {
             player = GamePreferences.getInstance(context).loadPlayer();
         }
+        return player;
+    }
+
+    public Player createPlayer() {
+        player = new Player();
         return player;
     }
 
@@ -54,7 +51,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
             case TIME:
                 player.addTime(statValue);
                 break;
-            case AMNS:
+            case AMN:
                 player.addAmn(statValue);
                 break;
             case COND_TIME:
@@ -62,6 +59,10 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
                 player.addPrc(statValue);
                 break;
         }
+    }
+
+    public void loadCurrentParagraph() {
+        getViewState().updateCurrentParagraph(player.getParagraph());
     }
 
     public void updatePlayersParagraph(final int paragraph) {

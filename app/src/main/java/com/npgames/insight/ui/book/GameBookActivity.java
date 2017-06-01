@@ -31,11 +31,6 @@ import butterknife.ButterKnife;
 
 public class GameBookActivity extends BaseMvpActivity implements View.OnClickListener, RecyclerViewListeners.OnItemClickListener,
         GameBookView, PlayerView{
-
-
-
-
-
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView paragraphTextTextView;
     @BindView(R.id.recycler_view_paragraph_jumps)
@@ -70,6 +65,9 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     private JumpsAdapter jumpsAdapter;
     private ActionsMenuAdapter actionsMenuAdapter;
 
+    public enum GameType {NEW_GAME, CONTINUE}
+    public static String GAME_TYPE_KEY = "GameTypeKey";
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,8 +90,20 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         jumpsRecyclerView.setAdapter(jumpsAdapter);
         jumpsAdapter.setOnItemClickListener(this);
 
-        playerPresenter.loadPlayer(getApplicationContext());
-        gameBookPresenter.loadNextParagraph(getApplicationContext(), 500);
+        chooseGameType();
+        playerPresenter.loadCurrentParagraph();
+    }
+
+    private void chooseGameType() {
+        final GameType gameType = (GameType) getIntent().getSerializableExtra(GAME_TYPE_KEY);
+        switch (gameType) {
+            case CONTINUE:
+                playerPresenter.loadPlayer(getApplicationContext());
+                break;
+            case NEW_GAME:
+                playerPresenter.createPlayer();
+                break;
+        }
     }
 
     private void createActionsMenu() {
@@ -117,16 +127,21 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
 
         List<ActionsMenuAdapter.ActionItem> menus = new ArrayList<>();
-        menus.add(new ActionsMenuAdapter.ActionItem("pish"));
-        menus.add(new ActionsMenuAdapter.ActionItem("pish2"));
-        menus.add(new ActionsMenuAdapter.ActionItem("pish"));
-        menus.add(new ActionsMenuAdapter.ActionItem("pish2"));
+        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.ARMORY));
+        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.INSPECT));
+        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.MEDBAY));
+        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.STATION));
 
         actionsMenuAdapter.update(menus);
         closeActionsMenuButton.setOnClickListener(this);
         openActionsMenuButton.setOnClickListener(this);
         closeStatsPanelButton.setOnClickListener(this);
         openStatsPanelButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void updateCurrentParagraph(final int paragraph) {
+        gameBookPresenter.loadNextParagraph(getApplicationContext(), paragraph);
     }
 
     @Override
@@ -157,7 +172,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     public void changeStat(final Player.Stats stats, final int statDifference) {
         playerPresenter.changeStat(stats, statDifference);
         final Player player = playerPresenter.loadPlayer(getApplicationContext());
-        Log.d("stat", "after : " +player.getPrc());
         statsAmnTextView.setText(String.valueOf(player.getAmn()));
         statsTimeTextView.setText(String.valueOf(player.getTime()));
         statsHpTextView.setText(String.valueOf(player.getHp()));

@@ -12,10 +12,16 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/button_home_start"
+            android:id="@+id/button_home_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/home_screen_start_title"/>
+            android:text="@string/home_screen_continue_title"/>
+
+        <Button
+            android:id="@+id/button_home_new_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_screen_new_game_title"/>
 
         <Button
             android:text="@string/home_screen_rules_title"

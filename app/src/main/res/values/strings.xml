@@ -10,7 +10,8 @@
     <string name="stats_panel_prc_title">Точность</string>
 
     <!-- Home Screen -->
-    <string name="home_screen_start_title">Start</string>
+    <string name="home_screen_continue_title">Continue</string>
+    <string name="home_screen_new_game_title">New game</string>
     <string name="home_screen_settings_title">Settings</string>
     <string name="home_screen_rules_title">Rules</string>
     <string name="home_screen_achievements_title">Achievements</string>

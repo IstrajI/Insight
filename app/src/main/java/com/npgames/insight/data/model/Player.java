@@ -8,9 +8,9 @@ public class Player {
     public static final int INIT_DEX = 10;
     public static final int INIT_PRC = 3;
     public static final int INIT_TIME = 30;
-    public static final int INIT_AMNS = 8;
+    public static final int INIT_AMN = 8;
 
-    public enum Stats {HP, AUR, DEX, PRC, TIME, AMNS, COND_TIME}
+    public enum Stats {HP, AUR, DEX, PRC, TIME, AMN, COND_TIME}
 
     private int [] visittedParagraphs;
 
@@ -26,6 +26,15 @@ public class Player {
     private List<String> eqpt;
     private List<String> keys;
     private List<String> locations;
+
+    public Player() {
+        this.hp = INIT_HP;
+        this.aur = INIT_AUR;
+        this.dex = INIT_DEX;
+        this.prc = INIT_PRC;
+        this.time = INIT_TIME;
+        this.amn = INIT_AMN;
+    }
 
     public int getHp() {
         return hp;

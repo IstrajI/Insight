@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 public class ActionsMenuAdapter extends BaseRecyclerAdapter<ActionsMenuAdapter.ViewHolder>{
 
     private List<ActionItem> items;
+    public enum ActionTypes {STATION, MEDBAY, ARMORY, INSPECT}
 
     ActionsMenuAdapter() {
         items = new ArrayList<>();
@@ -57,7 +58,7 @@ public class ActionsMenuAdapter extends BaseRecyclerAdapter<ActionsMenuAdapter.V
 
     public static class ActionItem {
 
-        public ActionItem(final String text) {
+        public ActionItem(final ActionTypes actionType) {
             this.text = text;
         }
         private boolean status;
