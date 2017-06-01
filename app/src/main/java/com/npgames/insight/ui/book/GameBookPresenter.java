@@ -16,14 +16,6 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     private boolean isActionsMenuOpen = false;
     private boolean isStatsPanelOpen = false;
 
-    public static final int INIT_PARAGRAPH = 500;
-
-    public void loadNextParagraph(final Context context, final int paragraphNumber) {
-        final Paragraph paragraph = ParagraphParser.parse(context, paragraphNumber);
-        executeParagraphAction(paragraph.getActions());
-        getViewState().updateParagraph(paragraph);
-    }
-
     public void interactWithStatsPanel() {
         if (isStatsPanelOpen) {
             getViewState().closeStatsPanel();
@@ -44,9 +36,4 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
         isActionsMenuOpen = true;
     }
 
-    public void executeParagraphAction(final Map<Player.Stats, Integer> actions) {
-        for (Map.Entry<Player.Stats, Integer> action : actions.entrySet()) {
-            getViewState().changeStat(action.getKey(), action.getValue());
-        }
-    }
 }

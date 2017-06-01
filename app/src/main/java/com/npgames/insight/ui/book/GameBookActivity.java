@@ -19,8 +19,10 @@ import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
-import com.npgames.insight.ui.all.presentation.PlayerPresenter;
-import com.npgames.insight.ui.all.presentation.PlayerView;
+import com.npgames.insight.ui.all.presentation.paragraph.ParagraphPresenter;
+import com.npgames.insight.ui.all.presentation.paragraph.ParagraphView;
+import com.npgames.insight.ui.all.presentation.player.PlayerPresenter;
+import com.npgames.insight.ui.all.presentation.player.PlayerView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GameBookActivity extends BaseMvpActivity implements View.OnClickListener, RecyclerViewListeners.OnItemClickListener,
-        GameBookView, PlayerView{
+        GameBookView, PlayerView, ParagraphView{
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView paragraphTextTextView;
     @BindView(R.id.recycler_view_paragraph_jumps)
@@ -58,6 +60,8 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     protected TextView statsAmnTextView;
 
     @InjectPresenter
+    ParagraphPresenter paragraphPresenter;
+    @InjectPresenter
     GameBookPresenter gameBookPresenter;
     @InjectPresenter
     PlayerPresenter playerPresenter;
@@ -78,6 +82,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     public void onDestroy() {
         super.onDestroy();
         playerPresenter.savePlayer(this);
+        paragraphPresenter.saveParagraph(getApplicationContext());
     }
 
     @Override
@@ -91,7 +96,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         jumpsAdapter.setOnItemClickListener(this);
 
         chooseGameType();
-        playerPresenter.loadCurrentParagraph();
     }
 
     private void chooseGameType() {
@@ -99,9 +103,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         switch (gameType) {
             case CONTINUE:
                 playerPresenter.loadPlayer(getApplicationContext());
+                paragraphPresenter.loadLastSavedParagraph(getApplicationContext());
                 break;
             case NEW_GAME:
                 playerPresenter.createPlayer();
+                paragraphPresenter.loadParagraph(getApplicationContext(), 500);
                 break;
         }
     }
@@ -137,11 +143,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         openActionsMenuButton.setOnClickListener(this);
         closeStatsPanelButton.setOnClickListener(this);
         openStatsPanelButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void updateCurrentParagraph(final int paragraph) {
-        gameBookPresenter.loadNextParagraph(getApplicationContext(), paragraph);
     }
 
     @Override
@@ -190,7 +191,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                     startActivityForResult(intent, 1);
                     return;
                 }
-                gameBookPresenter.loadNextParagraph(getApplicationContext(), nextParagraph);
+                paragraphPresenter.loadParagraph(getApplicationContext(), nextParagraph);
                 break;
         }
     }
@@ -227,9 +228,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
             final int prc = data.getIntExtra("PRC", 0);
 
             playerPresenter.updatePlayer(dex, prc);
-            gameBookPresenter.loadNextParagraph(getApplicationContext(), 1);
-            playerPresenter.updatePlayersParagraph(1);
-
+            paragraphPresenter.loadParagraph(getApplicationContext(), 1);
             openStatsPanelButton.setVisibility(View.VISIBLE);
         }
     }

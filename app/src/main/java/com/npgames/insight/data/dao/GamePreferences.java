@@ -2,12 +2,9 @@ package com.npgames.insight.data.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
-import com.npgames.insight.ui.all.presentation.PlayerPresenter;
-import com.npgames.insight.ui.book.GameBookPresenter;
 
 public class  GamePreferences {
     private static GamePreferences gamePreferences;

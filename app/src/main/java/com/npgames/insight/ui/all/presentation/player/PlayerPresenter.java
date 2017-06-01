@@ -1,4 +1,4 @@
-package com.npgames.insight.ui.all.presentation;
+package com.npgames.insight.ui.all.presentation.player;
 
 import android.content.Context;
 import android.util.Log;
@@ -59,13 +59,5 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
                 player.addPrc(statValue);
                 break;
         }
-    }
-
-    public void loadCurrentParagraph() {
-        getViewState().updateCurrentParagraph(player.getParagraph());
-    }
-
-    public void updatePlayersParagraph(final int paragraph) {
-        player.setParagraph(paragraph);
     }
 }
