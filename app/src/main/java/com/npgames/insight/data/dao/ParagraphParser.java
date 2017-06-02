@@ -53,12 +53,12 @@ public class ParagraphParser {
         final int jumpNumbersArrayId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
                 JUMP_NUMBERS_PATTERN, paragraph);
 
-        final String [] jumpTextsArray = context.getResources().getStringArray(jumpNumbersArrayId);
+        final String [] jumpTextsArray = context.getResources().getStringArray(jumpTextsArrayId);
         final String [] jumpNumbersArray = context.getResources().getStringArray(jumpNumbersArrayId);
 
         final List jumps = new ArrayList(jumpNumbersArray.length);
         for (int i = 0; i < jumpNumbersArray.length; i++) {
-            final Jump jump = new Jump(Integer.parseInt(jumpNumbersArray[i]), jumpTextsArray[i]);
+            final Jump jump = new Jump(jumpNumbersArray[i], jumpTextsArray[i]);
             jumps.add(jump);
         }
         return jumps;

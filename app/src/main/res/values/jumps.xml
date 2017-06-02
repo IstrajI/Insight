@@ -317,7 +317,7 @@
     </string-array>
     <string-array name="j102_n">
         <item>65</item>
-        <item> </item>
+        <item>*</item>
     </string-array>
     <!-- 104 -->
     <string-array name="j104_t">
@@ -338,6 +338,55 @@
         <item>@string/j_continue</item>
     </string-array>
     <string-array name="j116_n">
-        <item>120</item>
+        <item>332</item>
     </string-array>
+    <!-- 160 -->
+    <string-array name="j160_t">
+        <item>Если хотите осмотреть комнаты погибших (но учтите, на это уйдет много времени) – (в полной версии)</item>
+        <item>Иначе придётся вернуться</item>
+        <item>Или потратить время, опрашивая всех подряд</item>
+    </string-array>
+    <string-array name="j160_n">
+        <item>170</item>
+        <item>95</item>
+        <item>193</item>
+    </string-array>
+    <!-- 193 -->
+    <string-array name="j193_t">
+        <item>Наконец, закончив безрезультатный опрос, покидаете жилой модуль</item>
+    </string-array>
+    <string-array name="j193_n">
+        <item>95</item>
+    </string-array>
+    <!-- 301 -->
+    <string-array name="j301_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j301_n">
+        <item>90</item>
+    </string-array>
+    <!-- 302 -->
+    <string-array name="j302_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j302_n">
+        <item>49</item>
+    </string-array>
+    <!-- 327 -->
+    <string-array name="j327_t">
+        <item>Бросите в пещеру свето-шумовую гранату (если она у вас есть)</item>
+        <item>Или используя фактор неожиданности, ворвётесь внутрь и будете действовать по обстановке</item>
+    </string-array>
+    <string-array name="j327_n">
+        <item>93</item>
+        <item>77</item>
+    </string-array>
+    <!-- 332 -->
+    <string-array name="j332_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j332_n">
+        <item>95</item>
+    </string-array>
+
 </resources>

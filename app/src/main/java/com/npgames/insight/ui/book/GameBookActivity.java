@@ -185,14 +185,18 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     public void onItemClick(View view, int position, RecyclerView.Adapter adapter) {
         switch(view.getId()) {
             case R.id.button_adapter_jump:
-                final int nextParagraph = ((JumpsAdapter)adapter).getItemAt(position).getId();
-                if (nextParagraph == 0) {
-                    Intent intent = new Intent(this, CreatePlayerActivity.class);
-                    startActivityForResult(intent, 1);
-                    return;
+                try {
+                    final int nextParagraph = Integer.parseInt(((JumpsAdapter) adapter).getItemAt(position).getId());
+                    if (nextParagraph == 0) {
+                        Intent intent = new Intent(this, CreatePlayerActivity.class);
+                        startActivityForResult(intent, 1);
+                        return;
+                    }
+                    paragraphPresenter.loadParagraph(getApplicationContext(), nextParagraph);
+                    break;
+                } catch(NumberFormatException ex) {
+
                 }
-                paragraphPresenter.loadParagraph(getApplicationContext(), nextParagraph);
-                break;
         }
     }
 
