@@ -34,6 +34,13 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.textView.setText(String.valueOf(equipments.get(position).getType()));
+        if (equipments.get(position).getOwnedBy() == Equipment.Owner.ARRMORY) {
+            holder.takeOnButton.setEnabled(true);
+            holder.takeOutButton.setEnabled(false);
+            return;
+        }
+        holder.takeOnButton.setEnabled(false);
+        holder.takeOutButton.setEnabled(true);
     }
 
     @Override

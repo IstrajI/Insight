@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.armory;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -13,16 +14,7 @@ import java.util.List;
 @InjectViewState
 public class ArmoryPresenter extends MvpPresenter<ArmoryView> {
 
-
-
-    public void loadEquipment(final Context context) {
-        /*equipments = GamePreferences.getInstance(context).loadEquipment(GamePreferences.EQPTOwners.ARRMORY, true);
-        getViewState().updateEquipment(equipments);*/
-    }
-
-    public void equipmentClick(final int position) {
-
-    }
+    private List<Equipment> equipments;
 
     public void takeOnEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.ARRMORY);
@@ -30,5 +22,13 @@ public class ArmoryPresenter extends MvpPresenter<ArmoryView> {
 
     public void putOutEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.PLAYER);
+    }
+
+    public void loadEquipment(final List<Equipment> equipments) {
+        this.equipments = new ArrayList<>();
+        for (Equipment equipment : equipments) {
+            if (equipment.getOwnedBy() == Equipment.Owner.ARRMORY) this.equipments.add(equipment);
+        }
+        getViewState().updateEquipment(this.equipments);
     }
 }

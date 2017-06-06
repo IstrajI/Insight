@@ -30,7 +30,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
 
     @InjectPresenter
     ArmoryPresenter armoryPresenter;
-
     @InjectPresenter
     PlayerPresenter playerPresenter;
 
@@ -48,11 +47,9 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         armoryRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         armoryEquipmentAdapter = new ArmoryEquipmentAdapter();
         armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
-        armoryEquipmentAdapter.update(playerPresenter.extractArmoryEquipment());
         armoryEquipmentAdapter.setOnItemClickListener(this);
-
         continueButton.setOnClickListener(this);
-
+        armoryPresenter.loadEquipment(playerPresenter.getEquipment());
     }
 
     @Override

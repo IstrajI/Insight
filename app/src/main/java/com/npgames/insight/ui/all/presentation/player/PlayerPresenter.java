@@ -68,18 +68,9 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
         }
     }
 
-    public List<Equipment> extractArmoryEquipment() {
-        final List<Equipment> armoryEquipments = new ArrayList<>();
-
-        for (Equipment equipment : player.getEquipments()) {
-            if (equipment.getOwnedBy() == Equipment.Owner.ARRMORY) {
-                armoryEquipments.add(equipment);
-            }
-        }
-        return armoryEquipments;
+    public List<Equipment> getEquipment() {
+        return player.getEquipments();
     }
-
-
 
     public void takeEquipment() {
 

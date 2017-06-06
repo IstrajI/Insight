@@ -4,6 +4,7 @@ public class Equipment {
     private EquipmentType type;
     private boolean isActive;
     private Owner ownedBy;
+    private String name;
     public enum Owner {PLAYER, ARRMORY, TRASH}
     public enum EquipmentType {
         BLASTER,
