@@ -1,12 +1,26 @@
 package com.npgames.insight.data.model;
 
-/**
- * Created by Влад on 13.05.2017.
- */
+import java.util.List;
 
 public class Armory {
-    enum Equipment {
-        BLASTER, BEAM, GRANADES_LAN, ELECTROSHOCK, TARGETER, FLAK_JACKET,
-        POWER_SHIELD, AID_KIT, OPEN_SPACE_EQPT
+
+    public Armory() {
+
+    }
+
+    public List<Equipment> equipments;
+
+    public Equipment getEquipment(Equipment.EquipmentType name) {
+        for (Equipment equipment: equipments) {
+            if (equipment.getType() == name) return equipment;
+        }
+        return null;
+    }
+
+    public List<Equipment> getEquipments() {
+        return equipments;
+    }
+    public void setEquipments(List<Equipment> equipments) {
+        this.equipments = equipments;
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_view_equipment_item_name"
+        android:layout_width="match_parent"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_height="40dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <Button
+            android:text="@string/armory_take_on_title"
+            android:layout_weight="1"
+            android:textSize="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/button_equipment_take_on"/>
+        <Button
+            android:text="@string/armory_take_out_title"
+            android:textSize="8sp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/button_equipment_take_out"/>
+    </LinearLayout>
+</LinearLayout>

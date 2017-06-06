@@ -10,7 +10,7 @@ public class Player {
     public static final int INIT_TIME = 30;
     public static final int INIT_AMN = 8;
 
-    public enum Stats {HP, AUR, DEX, PRC, TIME, AMN, COND_TIME}
+    public enum Stats {HP, AUR, DEX, PRC, TIME, AMN}
 
     private int [] visittedParagraphs;
 
@@ -23,7 +23,7 @@ public class Player {
     private int time;
     private int amn;
 
-    private List<String> eqpt;
+    private List<Equipment> equipments;
     private List<String> keys;
     private List<String> locations;
 
@@ -92,6 +92,14 @@ public class Player {
         this.amn = amn;
     }
 
+    public List<Equipment> getEquipments() {
+        return equipments;
+    }
+
+    public void setEquipments(List<Equipment> equipments) {
+        this.equipments = equipments;
+    }
+
     public void addDex(final int addingDex) {
         this.dex += addingDex;
     }
@@ -114,5 +122,13 @@ public class Player {
 
     public void addAmn(final int addingAmn) {
         this.amn += addingAmn;
+    }
+
+    public void takeEquipment(final Equipment equipment) {
+        equipments.add(equipment);
+    }
+
+    public void putEquipment(final Equipment equipment) {
+        //equipment.
     }
 }

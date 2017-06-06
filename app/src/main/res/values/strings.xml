@@ -17,6 +17,10 @@
     <string name="home_screen_achievements_title">Achievements</string>
     <string name="home_screen_about_title">About</string>
 
+    <!-- Armory -->
+    <string name="armory_take_out_title">Снять</string>
+    <string name="armory_take_on_title">Надеть</string>
+
     <!-- Create character -->
     <string name="create_character_hp_title">Здоровье</string>
     <string name="create_character_aur_title">Аура</string>

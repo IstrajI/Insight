@@ -3,10 +3,15 @@ package com.npgames.insight.data.dao;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.npgames.insight.data.model.Armory;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 
-public class  GamePreferences {
+import java.util.ArrayList;
+import java.util.List;
+
+public class GamePreferences {
     private static GamePreferences gamePreferences;
     private static SharedPreferences sharedPreferences;
     private static final String PREFERENCES_NAME = "gamePreferences";
@@ -19,6 +24,12 @@ public class  GamePreferences {
     private final String PLAYER_PRC = "PLAYER_PRC";
     private final String PLAYER_TIME = "PLAYER_TIME";
     private final String PLAYER_AMN = "PLAYER_AMN";
+
+    private final String OWNER_KEY = "_OWNER : ";
+    private final String IS_ACTIVE_KEY = "_IS_ACTIVE : ";
+
+    private String OWNER_HAS = "_HAS_";
+    private String IS_ACTIVE = "IS_ACTIVE_";
 
     public static GamePreferences getInstance(final Context appContext) {
         if (gamePreferences == null) {
@@ -36,6 +47,8 @@ public class  GamePreferences {
         player.setDex(sharedPreferences.getInt(PLAYER_DEX, Player.INIT_DEX));
         player.setTime(sharedPreferences.getInt(PLAYER_TIME, Player.INIT_TIME));
         player.setAmn(sharedPreferences.getInt(PLAYER_AMN, Player.INIT_AMN));
+
+        player.setEquipments(loadEquipment());
         return player;
     }
 
@@ -58,5 +71,25 @@ public class  GamePreferences {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(CURRENT_PARAGRAPH, currentParagraph);
         editor.apply();
+    }
+
+
+
+    public List<Equipment> loadEquipment() {
+        final List<Equipment> equipments = new ArrayList<>();
+        final String defaultOwner = String.valueOf(Equipment.Owner.ARRMORY);
+        final boolean defaultIsActive = true;
+        for (Equipment.EquipmentType equipmentType : Equipment.EquipmentType.values()) {
+            final String typeString = String.valueOf(equipmentType);
+            final String ownerString = sharedPreferences.getString(typeString + OWNER_KEY, String.valueOf(defaultOwner));
+            final boolean isActive = sharedPreferences.getBoolean(typeString + IS_ACTIVE_KEY, defaultIsActive);
+            final Equipment.Owner owner = Equipment.Owner.valueOf(ownerString);
+            equipments.add(new Equipment(equipmentType, owner, isActive));
+        }
+        return equipments;
+    }
+
+    public void clearGamePreferences() {
+        sharedPreferences.edit().clear().apply();
     }
 }

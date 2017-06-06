@@ -11,15 +11,13 @@ public class Paragraph {
     private int id;
     private int textId;
     private List<Jump> jumps;
-    private Map<Player.Stats, Integer> actions;
-
-
-    public int [] trackingParagraphs = {1, 40};
+    private Map<Paragraph.ActionTypes, Integer> actions;
+    public enum ActionTypes {COND_NFT_TIME, TIME, HP, AUR, DEX, PRC, AMN}
 
     public final static int INIT_PARAGRAPH = 500;
 
     public Paragraph(final int id, final List<Jump> jumps, final int paragraphTextId,
-                     final Map<Player.Stats, Integer> actions) {
+                     final Map<Paragraph.ActionTypes, Integer> actions) {
         this.id = id;
         this.jumps = jumps;
         this.textId = paragraphTextId;
@@ -50,11 +48,11 @@ public class Paragraph {
         this.jumps = jumps;
     }
 
-    public Map<Player.Stats, Integer> getActions() {
+    public Map<Paragraph.ActionTypes, Integer> getActions() {
         return actions;
     }
 
-    public void setActions(Map<Player.Stats, Integer> actions) {
+    public void setActions(Map<Paragraph.ActionTypes, Integer> actions) {
         this.actions = actions;
     }
 }

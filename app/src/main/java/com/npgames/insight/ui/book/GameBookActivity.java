@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bluejamesbond.text.DocumentView;
 import com.npgames.insight.R;
+import com.npgames.insight.data.dao.GamePreferences;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -23,6 +25,7 @@ import com.npgames.insight.ui.all.presentation.paragraph.ParagraphPresenter;
 import com.npgames.insight.ui.all.presentation.paragraph.ParagraphView;
 import com.npgames.insight.ui.all.presentation.player.PlayerPresenter;
 import com.npgames.insight.ui.all.presentation.player.PlayerView;
+import com.npgames.insight.ui.book.armory.ArmoryActivity;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
 import java.util.ArrayList;
@@ -88,7 +91,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @Override
     protected void bindViews() {
         createActionsMenu();
-
         jumpsAdapter = new JumpsAdapter(getApplicationContext());
         final LinearLayoutManager jumpsLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         jumpsRecyclerView.setLayoutManager(jumpsLayoutManager);
@@ -100,16 +102,16 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     private void chooseGameType() {
         final GameType gameType = (GameType) getIntent().getSerializableExtra(GAME_TYPE_KEY);
+        playerPresenter.loadPlayer(getApplicationContext());
         switch (gameType) {
             case CONTINUE:
-                playerPresenter.loadPlayer(getApplicationContext());
                 paragraphPresenter.loadLastSavedParagraph(getApplicationContext());
                 break;
             case NEW_GAME:
-                playerPresenter.createPlayer();
                 paragraphPresenter.loadParagraph(getApplicationContext(), 500);
                 break;
         }
+        playerPresenter.printEquipment();
     }
 
     private void createActionsMenu() {
@@ -170,7 +172,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     @Override
-    public void changeStat(final Player.Stats stats, final int statDifference) {
+    public void changeStat(final Paragraph.ActionTypes stats, final int statDifference) {
         playerPresenter.changeStat(stats, statDifference);
         final Player player = playerPresenter.loadPlayer(getApplicationContext());
         statsAmnTextView.setText(String.valueOf(player.getAmn()));
@@ -190,6 +192,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                     if (nextParagraph == 0) {
                         Intent intent = new Intent(this, CreatePlayerActivity.class);
                         startActivityForResult(intent, 1);
+                        return;
+                    }
+                    if (nextParagraph == 100) {
+                        Intent armoryIntent = new Intent(this, ArmoryActivity.class);
+                        startActivityForResult(armoryIntent, 2);
                         return;
                     }
                     paragraphPresenter.loadParagraph(getApplicationContext(), nextParagraph);
@@ -227,13 +234,26 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (resultCode == RESULT_OK) {
-            final int dex = data.getIntExtra("DEX", 0);
-            final int prc = data.getIntExtra("PRC", 0);
+        Log.d("requestCode", "pish" + requestCode);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    final int dex = data.getIntExtra("DEX", 0);
+                    final int prc = data.getIntExtra("PRC", 0);
 
-            playerPresenter.updatePlayer(dex, prc);
-            paragraphPresenter.loadParagraph(getApplicationContext(), 1);
-            openStatsPanelButton.setVisibility(View.VISIBLE);
+                    playerPresenter.updatePlayer(dex, prc);
+                    paragraphPresenter.loadParagraph(getApplicationContext(), 1);
+                    openStatsPanelButton.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    Log.d("TAGIL", "here");
+                    paragraphPresenter.loadParagraph(getApplicationContext(), 40);
+                    Log.d("visibility", ""+openStatsPanelButton.getVisibility());
+                }
+                break;
         }
+
     }
 }

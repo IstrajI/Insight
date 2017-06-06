@@ -11,17 +11,17 @@
         android:theme="@style/InsightBaseTheme">
 
         <activity
-            android:name=".ui.main.MainMenuActivity"
+            android:type=".ui.main.MainMenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:type="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:type="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.gamebook.GamebookActivity"/>
+        <activity android:type=".ui.gamebook.GamebookActivity"/>
     </application>
 
 </manifest>

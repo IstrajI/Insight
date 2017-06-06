@@ -32,7 +32,7 @@ public class ParagraphParser {
 
         final int paragraphTextId = getResId(context, formatStr, RES_STRING_TYPE, formatter, PARAGRAPH_TEXT_PATTERN, paragraph);
         final List<Jump> jumps = parseJumps(context, formatStr, formatter, paragraph);
-        final Map<Player.Stats, Integer> actions = parseActions(context, formatStr, formatter, paragraph);
+        final Map<Paragraph.ActionTypes, Integer> actions = parseActions(context, formatStr, formatter, paragraph);
 
         return new Paragraph(paragraph, jumps, paragraphTextId, actions);
     }
@@ -64,11 +64,11 @@ public class ParagraphParser {
         return jumps;
     }
 
-    private static Map<Player.Stats, Integer> parseActions(final Context context,
+    private static Map<Paragraph.ActionTypes, Integer> parseActions(final Context context,
                                                            final StringBuilder formatStr,
                                                            final Formatter formatter,
                                                            final int paragraph) {
-        final Map<Player.Stats, Integer> actions;
+        final Map<Paragraph.ActionTypes, Integer> actions;
         try {
             final int actionsKeysId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
                     ACTIONS_KEYS_PATTERN, paragraph);
@@ -81,7 +81,7 @@ public class ParagraphParser {
             actions = new HashMap<>(actionsKeys.length);
 
             for (int i = 0; i < actionsKeys.length; i++) {
-                actions.put(Player.Stats.valueOf(actionsKeys[i]), actionValues[i]);
+                actions.put(Paragraph.ActionTypes.valueOf(actionsKeys[i]), actionValues[i]);
             }
             return actions;
         } catch (Resources.NotFoundException ex) {}

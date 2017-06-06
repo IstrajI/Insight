@@ -46,14 +46,14 @@
     </string-array>
     <!-- 5 -->
     <string-array name="j5_t">
-        <item>Прорваться к выходу из пещеры.</item>
+        <item>@string/j_continue</item>
     </string-array>
     <string-array name="j5_n">
         <item>49</item>
     </string-array>
     <!-- 14 -->
     <string-array name="j14_t">
-        <item>Чертыхаясь, спешите на капитанский мостик.</item>
+        <item>@string/j_continue</item>
     </string-array>
     <string-array name="j14_n">
         <item>90</item>
@@ -67,7 +67,7 @@
     </string-array>
     <!-- 22 -->
     <string-array name="j22_t">
-        <item>Побродив ещё немного, решаете вернуться</item>
+        <item>@string/j_continue</item>
     </string-array>
     <string-array name="j22_n">
         <item>95</item>
@@ -94,12 +94,13 @@
     </string-array>
     <!-- 29 -->
     <string-array name="j29_t">
-        <item>- Что он думает по поводу убийств – (в полной версии)?</item>
-        <item>- Кого подозревает – </item>
+        <item>Что он думает по поводу убийств – (в полной версии)?</item>
+        <item>Кого подозревает</item>
         <item>Если не будете приставать с вопросами</item>
     </string-array>
     <string-array name="j29_n">
-        <item>305</item>
+        <!-- 305 -->
+        <item>#</item>
         <item>18</item>
         <item>86</item>
     </string-array>
@@ -135,7 +136,8 @@
     </string-array>
     <string-array name="j49_n">
         <item>95</item>
-        <item></item>
+        <!-- 73 -->
+        <item>#</item>
     </string-array>
     <!-- 54 -->
     <string-array name="j54_t">
@@ -154,7 +156,8 @@
     </string-array>
     <string-array name="j58_n">
         <item>327</item>
-        <item>73</item>
+        <!-- 73 -->
+        <item>#</item>
         <item>95</item>
     </string-array>
     <!-- 59 -->
@@ -183,12 +186,14 @@
     </string-array>
     <string-array name="j65_n">
         <item>14</item>
-        <item></item>
+        <!-- 34 -->
+        <item>#</item>
         <item>301</item>
     </string-array>
     <!-- 67 -->
     <string-array name="j67_t">
         <item>Если у вас бластер</item>
+        <item>Если плазмоизлучатель</item>
         <item>Если лучемет</item>
         <item>Выставите перед собой энергощит</item>
         <item>Примените электрошокер</item>
@@ -196,9 +201,12 @@
     </string-array>
     <string-array name="j67_n">
         <item>26</item>
+        <!-- 313 -->
+        <item>#</item>
         <item>302</item>
         <item>97</item>
-        <item>310</item>
+        <!-- 310 -->
+        <item>#</item>
         <item>104</item>
     </string-array>
     <!-- 75 -->
@@ -209,7 +217,7 @@
     </string-array>
     <string-array name="j75_n">
         <item>14</item>
-        <item></item>
+        <item>#</item>
         <item>301</item>
     </string-array>
     <!-- 77 -->
@@ -219,7 +227,7 @@
     </string-array>
     <string-array name="j77_n">
         <item>95</item>
-        <item> </item>
+        <item>#</item>
     </string-array>
     <!-- 81 -->
     <string-array name="j81_t">
@@ -248,7 +256,7 @@
         <item>Сдержите раздражение</item>
     </string-array>
     <string-array name="j90_n">
-        <item> </item>
+        <item>#</item>
         <item>94</item>
     </string-array>
     <!-- 93 -->
@@ -283,16 +291,16 @@
         <item>В лечебную капсулу</item>
     </string-array>
     <string-array name="j95_n">
-        <item> </item>
+        <item>#</item>
         <item>160</item>
         <item>116</item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
+        <item>#</item>
+        <item>#</item>
+        <item>#</item>
         <item>22</item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
+        <item>#</item>
+        <item>#</item>
+        <item>#</item>
         <item>100</item>
         <item>54</item>
     </string-array>
@@ -317,7 +325,7 @@
     </string-array>
     <string-array name="j102_n">
         <item>65</item>
-        <item>*</item>
+        <item>#</item>
     </string-array>
     <!-- 104 -->
     <string-array name="j104_t">
@@ -347,13 +355,14 @@
         <item>Или потратить время, опрашивая всех подряд</item>
     </string-array>
     <string-array name="j160_n">
-        <item>170</item>
+        <!-- 170 -->
+        <item>#</item>
         <item>95</item>
         <item>193</item>
     </string-array>
     <!-- 193 -->
     <string-array name="j193_t">
-        <item>Наконец, закончив безрезультатный опрос, покидаете жилой модуль</item>
+        <item>@string/j_continue</item>
     </string-array>
     <string-array name="j193_n">
         <item>95</item>

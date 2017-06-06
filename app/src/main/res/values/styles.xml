@@ -45,7 +45,7 @@
 
     <!-- Fonts -->
     <style name="TextAppearance.Base.Regular" parent="android:TextAppearance">
-        <item name="fontPath">@string/font_regular_path</item>
+        <item name="fontPath">font</item>
     </style>
 
     <style name="TextAppearance.Base.Medium" parent="android:TextAppearance">

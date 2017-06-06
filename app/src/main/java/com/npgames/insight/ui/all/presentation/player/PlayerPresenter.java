@@ -6,12 +6,17 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.dao.GamePreferences;
+import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @InjectViewState
 public class PlayerPresenter extends MvpPresenter<PlayerView> {
 
-    private Player player;
+    private static Player player;
 
     public Player loadPlayer(final Context context) {
         if (player == null) {
@@ -34,7 +39,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
         player.setDex(prc);
     }
 
-    public void changeStat(final Player.Stats statName, final int statValue) {
+    public void changeStat(final Paragraph.ActionTypes statName, final int statValue) {
         switch(statName) {
             case HP:
                 player.addHp(statValue);
@@ -54,10 +59,33 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
             case AMN:
                 player.addAmn(statValue);
                 break;
-            case COND_TIME:
-                Log.d("addPrc", "current prc:" +player.getPrc());
-                player.addPrc(statValue);
-                break;
         }
+    }
+
+    public void printEquipment() {
+        for (Equipment equipment : player.getEquipments()) {
+            Log.d("equipment ", ""+equipment.getType());
+        }
+    }
+
+    public List<Equipment> extractArmoryEquipment() {
+        final List<Equipment> armoryEquipments = new ArrayList<>();
+
+        for (Equipment equipment : player.getEquipments()) {
+            if (equipment.getOwnedBy() == Equipment.Owner.ARRMORY) {
+                armoryEquipments.add(equipment);
+            }
+        }
+        return armoryEquipments;
+    }
+
+
+
+    public void takeEquipment() {
+
+    }
+
+    public void putEqiepment() {
+
     }
 }

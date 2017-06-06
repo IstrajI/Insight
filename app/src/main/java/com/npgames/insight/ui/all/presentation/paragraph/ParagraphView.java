@@ -6,5 +6,5 @@ import com.npgames.insight.data.model.Player;
 
 public interface ParagraphView extends MvpView{
     void updateParagraph(final Paragraph nextParagraph);
-    void changeStat(final Player.Stats stats, final int difference);
+    void changeStat(final Paragraph.ActionTypes actionTypes, final int difference);
 }
