@@ -68,6 +68,16 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
         }
     }
 
+
+
+    public void loadEquipmentsOwnedBy(final Equipment.Owner owner) {
+        final List<Equipment> ownerEquipments = new ArrayList<>();
+        for (Equipment equipment : player.getEquipments()) {
+            if (equipment.getOwnedBy() == owner) ownerEquipments.add(equipment);
+        }
+        getViewState().showEquipmentsOwnedBy(ownerEquipments);
+    }
+
     public List<Equipment> getEquipment() {
         return player.getEquipments();
     }

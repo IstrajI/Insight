@@ -33,7 +33,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.textView.setText(String.valueOf(equipments.get(position).getType()));
+        holder.textView.setText(equipments.get(position).getName());
         if (equipments.get(position).getOwnedBy() == Equipment.Owner.ARRMORY) {
             holder.takeOnButton.setEnabled(true);
             holder.takeOutButton.setEnabled(false);
@@ -71,11 +71,15 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             ButterKnife.bind(this, itemView);
             takeOnButton.setOnClickListener(this);
             takeOutButton.setOnClickListener(this);
+            textView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(final View v) {
             switch (v.getId()) {
+                case R.id.text_view_equipment_item_name:
+                    onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
+                    break;
                 case R.id.button_equipment_take_on:
                     this.takeOutButton.setEnabled(true);
                     this.takeOnButton.setEnabled(false);

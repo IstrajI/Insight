@@ -17,6 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bluejamesbond.text.DocumentView;
 import com.npgames.insight.R;
 import com.npgames.insight.data.dao.GamePreferences;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -71,6 +72,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     private JumpsAdapter jumpsAdapter;
     private ActionsMenuAdapter actionsMenuAdapter;
+
+    @Override
+    public void showEquipmentsOwnedBy(List<Equipment> equipments) {
+
+    }
 
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";

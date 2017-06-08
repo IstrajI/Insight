@@ -20,6 +20,16 @@
     <!-- Armory -->
     <string name="armory_take_out_title">Снять</string>
     <string name="armory_take_on_title">Надеть</string>
+    <string name="armory_equipment_blaster_title">Бластер</string>
+    <string name="armory_equipment_beam_title">Лучемет</string>
+    <string name="armory_equipment_grenade_title">Свето-шумовая граната</string>
+    <string name="armory_equipment_electroshock_title">Электрошокер</string>
+    <string name="armory_equipment_targeter_title">Целеуказатель для бластера</string>
+    <string name="armory_equipment_flak_jacket_title">Бронежилет</string>
+    <string name="armory_equipment_power_shield_title">Энергощит</string>
+    <string name="armory_equipment_aid_kit_title">Аптечка</string>
+    <string name="armory_equipment_open_space_eqpt_title">Снаряжение для выхода в открытый космос</string>
+
 
     <!-- Create character -->
     <string name="create_character_hp_title">Здоровье</string>

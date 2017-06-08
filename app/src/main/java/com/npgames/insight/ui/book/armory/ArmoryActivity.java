@@ -1,5 +1,6 @@
 package com.npgames.insight.ui.book.armory;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,11 +23,13 @@ import butterknife.BindView;
 
 public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, RecyclerViewListeners.OnItemClickListener, PlayerView,
             View.OnClickListener{
-
+    private final Equipment.Owner owner = Equipment.Owner.ARRMORY;
     @BindView(R.id.recycler_view_armory_equipment)
     protected RecyclerView armoryRecyclerView;
     @BindView(R.id.button_armory_continue)
     protected Button continueButton;
+
+    private EquipmentDialogFragment equipmentMoreDialogFragment;
 
     @InjectPresenter
     ArmoryPresenter armoryPresenter;
@@ -49,17 +52,19 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
         armoryEquipmentAdapter.setOnItemClickListener(this);
         continueButton.setOnClickListener(this);
-        armoryPresenter.loadEquipment(playerPresenter.getEquipment());
-    }
+        playerPresenter.loadEquipmentsOwnedBy(owner);
 
-    @Override
-    public void updateEquipment(final List<Equipment> equipments) {
-        armoryEquipmentAdapter.update(equipments);
+        equipmentMoreDialogFragment = new EquipmentDialogFragment();
     }
 
     @Override
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
         switch(view.getId()) {
+            case R.id.text_view_equipment_item_name:
+                final Bundle equipmentMoreBundle();
+                equipmentMoreDialogFragment.setArguments();
+                equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
+                break;
             case R.id.button_equipment_take_on:
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 armoryPresenter.takeOnEquipment(equipmentOn);
@@ -79,5 +84,9 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 setResult(RESULT_OK, intent);
                 finish();
         }
+    }
+    @Override
+    public void showEquipmentsOwnedBy(final List<Equipment> equipments) {
+        armoryEquipmentAdapter.update(playerPresenter.getEquipment());
     }
 }

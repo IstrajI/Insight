@@ -23,12 +23,4 @@ public class ArmoryPresenter extends MvpPresenter<ArmoryView> {
     public void putOutEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.PLAYER);
     }
-
-    public void loadEquipment(final List<Equipment> equipments) {
-        this.equipments = new ArrayList<>();
-        for (Equipment equipment : equipments) {
-            if (equipment.getOwnedBy() == Equipment.Owner.ARRMORY) this.equipments.add(equipment);
-        }
-        getViewState().updateEquipment(this.equipments);
-    }
 }

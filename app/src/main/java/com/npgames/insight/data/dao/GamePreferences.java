@@ -31,8 +31,11 @@ public class GamePreferences {
     private String OWNER_HAS = "_HAS_";
     private String IS_ACTIVE = "IS_ACTIVE_";
 
+    private static Context context;
+
     public static GamePreferences getInstance(final Context appContext) {
         if (gamePreferences == null) {
+            context = appContext;
             gamePreferences = new GamePreferences();
             sharedPreferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         }
@@ -84,7 +87,8 @@ public class GamePreferences {
             final String ownerString = sharedPreferences.getString(typeString + OWNER_KEY, String.valueOf(defaultOwner));
             final boolean isActive = sharedPreferences.getBoolean(typeString + IS_ACTIVE_KEY, defaultIsActive);
             final Equipment.Owner owner = Equipment.Owner.valueOf(ownerString);
-            equipments.add(new Equipment(equipmentType, owner, isActive));
+            final String equipmentName = Equipment.getNameByType(context, equipmentType);
+            equipments.add(new Equipment(equipmentType, owner, isActive, equipmentName));
         }
         return equipments;
     }
