@@ -3,10 +3,18 @@ package com.npgames.insight.data.dao;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.npgames.insight.data.model.Armory;
-import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.R;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.equipment.AidKit;
+import com.npgames.insight.data.model.equipment.Beam;
+import com.npgames.insight.data.model.equipment.Blaster;
+import com.npgames.insight.data.model.equipment.Electroshock;
+import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.equipment.FlakJacket;
+import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
+import com.npgames.insight.data.model.equipment.PowerShield;
+import com.npgames.insight.data.model.equipment.Targeter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,21 +84,24 @@ public class GamePreferences {
         editor.apply();
     }
 
-
-
     public List<Equipment> loadEquipment() {
         final List<Equipment> equipments = new ArrayList<>();
-        final String defaultOwner = String.valueOf(Equipment.Owner.ARRMORY);
-        final boolean defaultIsActive = true;
-        for (Equipment.EquipmentType equipmentType : Equipment.EquipmentType.values()) {
-            final String typeString = String.valueOf(equipmentType);
-            final String ownerString = sharedPreferences.getString(typeString + OWNER_KEY, String.valueOf(defaultOwner));
-            final boolean isActive = sharedPreferences.getBoolean(typeString + IS_ACTIVE_KEY, defaultIsActive);
-            final Equipment.Owner owner = Equipment.Owner.valueOf(ownerString);
-            final String equipmentName = Equipment.getNameByType(context, equipmentType);
-            equipments.add(new Equipment(equipmentType, owner, isActive, equipmentName));
-        }
+        equipments.add(new AidKit(loadEquipmentOwnedBy(AidKit.SHARED_PROPERTY_NAME)));
+        equipments.add(new Beam(loadEquipmentOwnedBy(Beam.SHARED_PROPERTY_NAME)));
+        equipments.add(new Blaster(loadEquipmentOwnedBy(Blaster.SHARED_PROPERTY_NAME)));
+        equipments.add(new Electroshock(loadEquipmentOwnedBy(Electroshock.SHARED_PROPERTY_NAME)));
+        equipments.add(new FlakJacket(loadEquipmentOwnedBy(FlakJacket.SHARED_PROPERTY_NAME)));
+        equipments.add(new OpenSpaceEqpt(loadEquipmentOwnedBy(OpenSpaceEqpt.SHARED_PROPERTY_NAME)));
+        equipments.add(new PowerShield(loadEquipmentOwnedBy(PowerShield.SHARED_PROPERTY_NAME)));
+        equipments.add(new Targeter(loadEquipmentOwnedBy(Targeter.SHARED_PROPERTY_NAME)));
         return equipments;
+    }
+
+    private Equipment.Owner loadEquipmentOwnedBy(final String sharedPropertyName) {
+        final String DEFAULT_OWNER = String.valueOf(Equipment.Owner.ARRMORY);
+        final String preferenceProperty = sharedPropertyName + OWNER_KEY;
+        final String ownedByString = sharedPreferences.getString(preferenceProperty, DEFAULT_OWNER);
+        return Equipment.Owner.valueOf(ownedByString);
     }
 
     public void clearGamePreferences() {

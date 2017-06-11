@@ -1,10 +1,10 @@
 package com.npgames.insight.ui.book;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +17,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bluejamesbond.text.DocumentView;
 import com.npgames.insight.R;
 import com.npgames.insight.data.dao.GamePreferences;
-import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.all.presentation.paragraph.ParagraphPresenter;
@@ -48,11 +48,17 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @BindView(R.id.button_game_book_open_stats_panel)
     protected Button openStatsPanelButton;
 
+    @BindView(R.id.frame_game_book_stats)
+    protected FrameLayout statsRoot;
+
     @BindView(R.id.scroll_game_book)
     protected ScrollView scrollView;
 
     protected View actionsMenuLayout;
     protected Button closeActionsMenuButton;
+
+
+
 
     protected View statsPanelLayout;
     protected Button closeStatsPanelButton;
@@ -75,7 +81,17 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     @Override
     public void showEquipmentsOwnedBy(List<Equipment> equipments) {
+    //
+    }
 
+    @Override
+    public void showStats(int hp, int aur, int prc, int dex, int time, int amn) {
+
+    }
+
+    @Override
+    public void showPlayerOwnEquipment() {
+        //
     }
 
     public enum GameType {NEW_GAME, CONTINUE}
@@ -125,7 +141,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         closeActionsMenuButton = ButterKnife.findById(actionsMenuLayout, R.id.button_actions_menu_close_actions_menu);
         final RecyclerView actionsMenuRecyclerView = ButterKnife.findById(actionsMenuLayout, R.id.recycler_view_actions_menu);
 
-        statsPanelLayout = LayoutInflater.from(this).inflate(R.layout.layout_stats_panel, rootFrameLayout, false);
+        statsPanelLayout = LayoutInflater.from(this).inflate(R.layout.layout_stats_panel, statsRoot, true);
         closeStatsPanelButton = ButterKnife.findById(statsPanelLayout, R.id.button_stats_panel_close);
         statsAmnTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_amn);
         statsTimeTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_time);

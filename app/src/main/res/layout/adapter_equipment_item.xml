@@ -2,34 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_16"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_view_equipment_item_name"
         android:layout_width="match_parent"
-        android:textSize="12sp"
+        android:layout_height="@dimen/height_equipment_item"
         android:gravity="center_horizontal"
-        android:layout_height="@dimen/height_equipment_item"/>
+        android:textSize="12sp" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:weightSum="2">
+
         <Button
+            android:id="@+id/button_equipment_take_on"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_weight="1"
             android:text="@string/armory_take_on_title"
-            android:layout_weight="1"
-            android:textSize="8sp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/button_equipment_take_on"/>
+            android:textSize="8sp" />
+
         <Button
-            android:text="@string/armory_take_out_title"
-            android:textSize="8sp"
-            android:layout_weight="1"
+            android:id="@+id/button_equipment_take_out"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:id="@+id/button_equipment_take_out"/>
+            android:layout_weight="1"
+            android:text="@string/armory_take_out_title"
+            android:textSize="8sp" />
     </LinearLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.npgames.insight.ui.book.armory;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.npgames.insight.R;
-import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ import butterknife.ButterKnife;
 
 public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentAdapter.ViewHolder> {
 
-    private List<Equipment> equipments;
+    private List<com.npgames.insight.data.model.equipment.Equipment> equipments;
+    private Context context;
 
-    ArmoryEquipmentAdapter() {
+    ArmoryEquipmentAdapter(final Context context) {
         this.equipments = new ArrayList<>();
+        this.context = context;
     }
 
     @Override
@@ -33,7 +36,11 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.textView.setText(equipments.get(position).getName());
+        final Equipment equipment = equipments.get(position);
+        final String equipmentDescription = context.getResources().getString(equipment.getDescriptionResource());
+        final String equipmentName = context.getResources().getString(equipment.getNameResource());
+
+        holder.textView.setText(equipmentName);
         if (equipments.get(position).getOwnedBy() == Equipment.Owner.ARRMORY) {
             holder.takeOnButton.setEnabled(true);
             holder.takeOutButton.setEnabled(false);

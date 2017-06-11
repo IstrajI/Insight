@@ -6,9 +6,9 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.dao.GamePreferences;
-import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.equipment.Equipment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +64,47 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
 
     public void printEquipment() {
         for (Equipment equipment : player.getEquipments()) {
-            Log.d("equipment ", ""+equipment.getType());
+            Log.d("equipment ", ""+equipment.getClass());
         }
+    }
+
+    public void loadStats() {
+        getViewState().showStats(
+            player.getHp(),
+            player.getAur(),
+            player.getPrc(),
+            player.getDex(),
+            player.getTime(),
+            player.getAmn());
+    }
+
+
+    public void wearEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.PLAYER);
+        equipment.wearChangeStats(player);
+        getViewState().showStats(
+            player.getHp(),
+            player.getAur(),
+            player.getPrc(),
+            player.getDex(),
+            player.getTime(),
+            player.getAmn());
+    }
+
+    public void unwearEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.ARRMORY);
+        equipment.wearChangeStats(player);
+        getViewState().showStats(
+                player.getHp(),
+                player.getAur(),
+                player.getPrc(),
+                player.getDex(),
+                player.getTime(),
+                player.getAmn());
+    }
+
+    public void dropEquipment(final Equipment equipment) {
+        //
     }
 
 
@@ -76,17 +115,5 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
             if (equipment.getOwnedBy() == owner) ownerEquipments.add(equipment);
         }
         getViewState().showEquipmentsOwnedBy(ownerEquipments);
-    }
-
-    public List<Equipment> getEquipment() {
-        return player.getEquipments();
-    }
-
-    public void takeEquipment() {
-
-    }
-
-    public void putEqiepment() {
-
     }
 }

@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model;
 
+import com.npgames.insight.data.model.equipment.Equipment;
+
 import java.util.List;
 
 public class Player {
@@ -34,6 +36,18 @@ public class Player {
         this.prc = INIT_PRC;
         this.time = INIT_TIME;
         this.amn = INIT_AMN;
+    }
+
+    public void takeOnEquipment(final int position) {
+        equipments.get(position).setOwnedBy(Equipment.Owner.PLAYER);
+    }
+
+    public void takeOffEquipment(final int position) {
+        equipments.get(position).setOwnedBy(Equipment.Owner.ARRMORY);
+    }
+
+    public void dropEquipment(final int position) {
+        equipments.get(position).setOwnedBy(Equipment.Owner.TRASH);
     }
 
     public int getHp() {
