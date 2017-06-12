@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.npgames.insight.R;
@@ -72,12 +73,15 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         protected Button takeOnButton;
         @BindView(R.id.button_equipment_take_out)
         protected Button takeOutButton;
+        @BindView(R.id.image_view_equipment_item_picture)
+        protected ImageView pictureImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             takeOnButton.setOnClickListener(this);
             takeOutButton.setOnClickListener(this);
+            pictureImageView.setOnClickListener(this);
             textView.setOnClickListener(this);
         }
 
@@ -85,6 +89,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         public void onClick(final View v) {
             switch (v.getId()) {
                 case R.id.text_view_equipment_item_name:
+                case R.id.image_view_equipment_item_picture:
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
                     break;
                 case R.id.button_equipment_take_on:
@@ -95,6 +100,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                 case R.id.button_equipment_take_out:
                     this.takeOnButton.setEnabled(true);
                     this.takeOutButton.setEnabled(false);
+                    onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
                     break;
             }
         }

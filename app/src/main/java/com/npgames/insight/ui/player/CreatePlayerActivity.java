@@ -14,7 +14,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView {
-
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView overviewDocumentView;
     @BindView(R.id.document_view_create_character_skill_info)

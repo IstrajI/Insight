@@ -93,7 +93,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
 
     public void unwearEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.ARRMORY);
-        equipment.wearChangeStats(player);
+        equipment.unwearChangeStats(player);
         getViewState().showStats(
                 player.getHp(),
                 player.getAur(),

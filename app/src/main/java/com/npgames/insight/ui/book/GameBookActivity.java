@@ -56,10 +56,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     protected View actionsMenuLayout;
     protected Button closeActionsMenuButton;
-
-
-
-
     protected View statsPanelLayout;
     protected Button closeStatsPanelButton;
     protected TextView statsTimeTextView;
@@ -154,7 +150,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         actionsMenuAdapter = new ActionsMenuAdapter();
         actionsMenuRecyclerView.setLayoutManager(actionsMenuLayoutManager);
         actionsMenuRecyclerView.setAdapter(actionsMenuAdapter);
-
 
         List<ActionsMenuAdapter.ActionItem> menus = new ArrayList<>();
         menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.ARMORY));

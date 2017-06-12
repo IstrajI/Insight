@@ -75,6 +75,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
         switch(view.getId()) {
             case R.id.text_view_equipment_item_name:
+            case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 final String equipmentName = getString(equipment.getNameResource());
                 final String equipmentDescription = getString(equipment.getDescriptionResource());

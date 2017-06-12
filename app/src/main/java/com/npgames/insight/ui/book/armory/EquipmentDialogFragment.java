@@ -31,7 +31,6 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
         nameTextView.setText(getArguments().getString(Equipment.NAME));
         descriptionTextView.setText(getArguments().getString(Equipment.DESCRIPTION));
         closeButton.setOnClickListener(this);
-
         return dialogView;
     }
 
@@ -43,5 +42,4 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
                 break;
         }
     }
-
 }

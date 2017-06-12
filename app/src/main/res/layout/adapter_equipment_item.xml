@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_16"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/spacing_8"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_view_equipment_item_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_equipment_item"
-        android:gravity="center_horizontal"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:minLines="2"
+        android:textSize="12sp"/>
 
-        <Button
-            android:id="@+id/button_equipment_take_on"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginBottom="@dimen/spacing_16"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_weight="1"
-            android:text="@string/armory_take_on_title"
-            android:textSize="8sp" />
+    <ImageView
+        android:id="@+id/image_view_equipment_item_picture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_equipment_item"
+        android:background="@color/grey_900"/>
 
-        <Button
-            android:id="@+id/button_equipment_take_out"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:text="@string/armory_take_out_title"
-            android:textSize="8sp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_equipment_take_on"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/armory_take_on_title"
+        android:textSize="8sp"/>
+
+    <Button
+        android:id="@+id/button_equipment_take_out"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/armory_take_out_title"
+        android:textSize="8sp"/>
 </LinearLayout>
