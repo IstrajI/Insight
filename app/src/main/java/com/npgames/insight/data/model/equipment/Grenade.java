@@ -3,8 +3,7 @@ package com.npgames.insight.data.model.equipment;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
 
-public class Grenade extends Equipment{
-    public static final String SHARED_PROPERTY_NAME = "GRENADE";
+public abstract class Grenade extends Equipment{
     private final int NAME_RES_ID = R.string.armory_equipment_grenade_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_grenade_description;
     private final int wereDebuff = -1;
@@ -26,7 +25,5 @@ public class Grenade extends Equipment{
     }
 
     @Override
-    public String getSharedPropertyName() {
-        return SHARED_PROPERTY_NAME;
-    }
+    public abstract String getSharedPropertyName();
 }

@@ -2,8 +2,6 @@ package com.npgames.insight.data.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import com.npgames.insight.R;
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.equipment.AidKit;
@@ -12,6 +10,9 @@ import com.npgames.insight.data.model.equipment.Blaster;
 import com.npgames.insight.data.model.equipment.Electroshock;
 import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.data.model.equipment.FlakJacket;
+import com.npgames.insight.data.model.equipment.Grenade_1;
+import com.npgames.insight.data.model.equipment.Grenade_2;
+import com.npgames.insight.data.model.equipment.Grenade_3;
 import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
 import com.npgames.insight.data.model.equipment.Targeter;
@@ -34,16 +35,9 @@ public class GamePreferences {
     private final String PLAYER_AMN = "PLAYER_AMN";
 
     private final String OWNER_KEY = "_OWNER : ";
-    private final String IS_ACTIVE_KEY = "_IS_ACTIVE : ";
-
-    private String OWNER_HAS = "_HAS_";
-    private String IS_ACTIVE = "IS_ACTIVE_";
-
-    private static Context context;
 
     public static GamePreferences getInstance(final Context appContext) {
         if (gamePreferences == null) {
-            context = appContext;
             gamePreferences = new GamePreferences();
             sharedPreferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         }
@@ -84,11 +78,16 @@ public class GamePreferences {
         editor.apply();
     }
 
+    //Equpment
+
     public List<Equipment> loadEquipment() {
         final List<Equipment> equipments = new ArrayList<>();
         equipments.add(new AidKit(loadEquipmentOwnedBy(AidKit.SHARED_PROPERTY_NAME)));
         equipments.add(new Beam(loadEquipmentOwnedBy(Beam.SHARED_PROPERTY_NAME)));
         equipments.add(new Blaster(loadEquipmentOwnedBy(Blaster.SHARED_PROPERTY_NAME)));
+        equipments.add(new Grenade_1(loadEquipmentOwnedBy(Grenade_1.SHARED_PROPERTY_NAME)));
+        equipments.add(new Grenade_2(loadEquipmentOwnedBy(Grenade_2.SHARED_PROPERTY_NAME)));
+        equipments.add(new Grenade_3(loadEquipmentOwnedBy(Grenade_3.SHARED_PROPERTY_NAME)));
         equipments.add(new Electroshock(loadEquipmentOwnedBy(Electroshock.SHARED_PROPERTY_NAME)));
         equipments.add(new FlakJacket(loadEquipmentOwnedBy(FlakJacket.SHARED_PROPERTY_NAME)));
         equipments.add(new OpenSpaceEqpt(loadEquipmentOwnedBy(OpenSpaceEqpt.SHARED_PROPERTY_NAME)));
@@ -104,7 +103,12 @@ public class GamePreferences {
         return Equipment.Owner.valueOf(ownedByString);
     }
 
-    public void clearGamePreferences() {
-        sharedPreferences.edit().clear().apply();
+    public void saveEqupment(final List<Equipment> equipments) {
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (final Equipment equipment: equipments) {
+            final String ownedByString = String.valueOf(equipment.getOwnedBy());
+            editor.putString(equipment.getSharedPropertyName() + OWNER_KEY, ownedByString);
+        }
+        editor.apply();
     }
 }

@@ -4,7 +4,6 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
 
 public abstract class Equipment {
-    public static  String SHARED_PROPERTY_NAME;
     public static final String NAME = "NAME";
     public static final String DESCRIPTION = "DESCRIPTION";
 

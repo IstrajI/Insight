@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,10 +78,10 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.text_view_equipment_item_name:
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
+                Log.d("shared name", ""+equipment.getSharedPropertyName());
                 final String equipmentName = getString(equipment.getNameResource());
                 final String equipmentDescription = getString(equipment.getDescriptionResource());
                 final Bundle equipmentMoreBundle = new Bundle();
-
                 equipmentMoreBundle.putString(Equipment.NAME, equipmentName);
                 equipmentMoreBundle.putString(Equipment.DESCRIPTION, equipmentDescription);
                 equipmentMoreDialogFragment.setArguments(equipmentMoreBundle);
