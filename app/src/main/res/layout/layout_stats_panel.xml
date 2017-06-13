@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey_900">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_view_stats_panel_time_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/stats_panel_time_title"
+            android:gravity="center_horizontal"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/stats_panel_second_column"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginTop="@dimen/spacing_8"
             android:id="@+id/text_view_stats_panel_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="10"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/stats_panel_second_column"
             app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_time_title" />
 
 
@@ -30,6 +33,8 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/stats_panel_second_column"
             android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/spacing_8"
+            android:layout_marginRight="@dimen/spacing_8"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_time_title"
@@ -39,41 +44,43 @@
             <!-- First column -->
             <TextView
                 android:id="@+id/text_view_stats_panel_hp_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stats_panel_hp_title"
-                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_hp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:layout_marginLeft="@dimen/spacing_8"
                 android:id="@+id/text_view_stats_panel_hp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25"
-                app:layout_constraintRight_toLeftOf="@+id/guideline1_stats_percent"
+                android:text="30"
+                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_hp_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_view_stats_panel_dex_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stats_panel_dex_title"
-                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginTop="@dimen/spacing_8"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_dex"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_hp_title" />
 
             <TextView
+                android:layout_marginTop="@dimen/spacing_8"
                 android:id="@+id/text_view_stats_panel_dex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_8"
                 android:text="12"
-                app:layout_constraintRight_toLeftOf="@+id/guideline1_stats_percent"
+                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_dex_title"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_hp" />
 
             <android.support.constraint.Guideline
+                android:layout_marginLeft="@dimen/spacing_4"
+                android:layout_marginRight="@dimen/spacing_4"
                 android:id="@+id/guideline1_stats_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,14 +95,15 @@
                 android:text="@string/stats_panel_aur_title"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toRightOf="@+id/guideline1_stats_percent"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_aur"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_view_stats_panel_aur"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="2"
+                android:layout_marginLeft="@dimen/spacing_8"
+                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_aur_title"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,18 +111,21 @@
                 android:id="@+id/text_view_stats_panel_prc_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:text="@string/stats_panel_prc_title"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toRightOf="@+id/guideline1_stats_percent"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_prc"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_aur_title" />
 
             <TextView
                 android:id="@+id/text_view_stats_panel_prc"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_8"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:text="5"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_prc_title"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_aur" />
         </android.support.constraint.ConstraintLayout>
 
@@ -125,6 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/stats_panel_am_title"
+            android:gravity="center_horizontal"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/stats_panel_second_column"
             app:layout_constraintRight_toRightOf="parent"
@@ -134,16 +146,12 @@
             android:id="@+id/text_view_stats_panel_amn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
             android:text="30"
+            android:gravity="center"
             app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/stats_panel_second_column"
             app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_amn_title" />
     </android.support.constraint.ConstraintLayout>
-
-    <Button
-        android:id="@+id/button_stats_panel_close"
-        android:layout_width="@dimen/width_layout_stats_panel_close_panel"
-        android:layout_height="@dimen/height_layout_stats_panel_close_panel"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/white" />
 </merge>

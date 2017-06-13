@@ -16,8 +16,10 @@ public class FlakJacket extends Equipment{
     }
 
     @Override
-    public void wearChangeStats(final Player player) {
+    public boolean wearChangeStats(final Player player) {
+        if (!canWearEquipment(player, wereDebuff)) return false;
         player.addDex(wereDebuff);
+        return true;
     }
 
     @Override

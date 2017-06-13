@@ -17,9 +17,11 @@ public class Targeter extends Equipment {
     }
 
     @Override
-    public void wearChangeStats(Player player) {
+    public boolean wearChangeStats(Player player) {
+        if (!canWearEquipment(player, wereDebuff)) return false;
         player.addPrc(wereBonus);
         player.addDex(wereDebuff);
+        return true;
     }
 
     @Override

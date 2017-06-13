@@ -90,6 +90,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         //
     }
 
+    @Override
+    public void showCantWearEquipment() {
+
+    }
+
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
 
@@ -138,7 +143,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         final RecyclerView actionsMenuRecyclerView = ButterKnife.findById(actionsMenuLayout, R.id.recycler_view_actions_menu);
 
         statsPanelLayout = LayoutInflater.from(this).inflate(R.layout.layout_stats_panel, statsRoot, true);
-        closeStatsPanelButton = ButterKnife.findById(statsPanelLayout, R.id.button_stats_panel_close);
         statsAmnTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_amn);
         statsTimeTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_time);
         statsHpTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_hp);
@@ -160,7 +164,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         actionsMenuAdapter.update(menus);
         closeActionsMenuButton.setOnClickListener(this);
         openActionsMenuButton.setOnClickListener(this);
-        closeStatsPanelButton.setOnClickListener(this);
+        //closeStatsPanelButton.setOnClickListener(this);
         openStatsPanelButton.setOnClickListener(this);
     }
 
@@ -236,9 +240,9 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
             case R.id.button_game_book_open_stats_panel:
                 openStatsPanel();
                 break;
-            case R.id.button_stats_panel_close:
+/*            case R.id.button_stats_panel_close:
                 closeStatsPanel();
-                break;
+                break;*/
         }
     }
 

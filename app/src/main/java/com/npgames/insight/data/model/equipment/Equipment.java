@@ -25,7 +25,7 @@ public abstract class Equipment {
         this.ownedBy = ownedBy;
     }
 
-    public abstract void wearChangeStats(final Player player);
+    public abstract boolean wearChangeStats(final Player player);
     public abstract void unwearChangeStats(final Player player);
 
     public int getNameResource() {
@@ -43,4 +43,9 @@ public abstract class Equipment {
     }
 
     public abstract String getSharedPropertyName();
+
+    protected boolean canWearEquipment(final Player player, final int wereDebuff) {
+        return (player.getDex() + wereDebuff > player.getDexMin());
+    }
+
 }

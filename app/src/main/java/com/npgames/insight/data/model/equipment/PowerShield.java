@@ -16,8 +16,10 @@ public class PowerShield extends Equipment{
     }
 
     @Override
-    public void wearChangeStats(Player player) {
+    public boolean wearChangeStats(Player player) {
+        if (!canWearEquipment(player, wereDebuff)) return false;
         player.addPrc(wereDebuff);
+        return true;
     }
 
     @Override

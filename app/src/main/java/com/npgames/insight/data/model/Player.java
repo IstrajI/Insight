@@ -145,4 +145,9 @@ public class Player {
     public void putEquipment(final Equipment equipment) {
         //equipment.
     }
+
+    public int getDexMin() {
+        final int dexMin = 5;
+        return dexMin;
+    }
 }

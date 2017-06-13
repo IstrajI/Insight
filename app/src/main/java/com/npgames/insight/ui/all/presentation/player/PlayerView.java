@@ -9,4 +9,6 @@ public interface PlayerView extends MvpView {
     void showEquipmentsOwnedBy(List<Equipment> equipments);
     void showStats(int hp, int aur, int prc, int dex, int time, int amn);
     void showPlayerOwnEquipment();
+    void showCantWearEquipment();
+    void showWearedEquipment();
 }

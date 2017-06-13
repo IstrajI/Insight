@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.npgames.insight.R;
@@ -126,6 +127,17 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
 
     @Override
     public void showPlayerOwnEquipment() {
+
+    }
+
+    @Override
+    public void showCantWearEquipment() {
+        final String message = "Ловкость не должна опускаться ниже 5";
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showWearedEquipment() {
 
     }
 }
