@@ -8,4 +8,5 @@ public interface CreatePlayerView extends MvpView{
     void updatePrcPoints(final int newPrcPoints, final int pointsToDistribute);
     void resetPlayerSkillPoints(final int newSkillPoints, final int initDex, final int initPrc);
     void sharePoints(final int dex, final int prc);
+    void changeContinueStatus(final boolean status);
 }

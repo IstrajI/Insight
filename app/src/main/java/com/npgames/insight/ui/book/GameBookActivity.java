@@ -95,6 +95,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     }
 
+    @Override
+    public void showWearedEquipment() {
+
+    }
+
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
 
@@ -125,13 +130,14 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     private void chooseGameType() {
         final GameType gameType = (GameType) getIntent().getSerializableExtra(GAME_TYPE_KEY);
-        playerPresenter.loadPlayer(getApplicationContext());
         switch (gameType) {
             case CONTINUE:
                 paragraphPresenter.loadLastSavedParagraph(getApplicationContext());
+                playerPresenter.loadPlayer(getApplicationContext());
                 break;
             case NEW_GAME:
                 paragraphPresenter.loadParagraph(getApplicationContext(), 500);
+                playerPresenter.createPlayer();
                 break;
         }
         playerPresenter.printEquipment();

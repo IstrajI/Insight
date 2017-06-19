@@ -1,7 +1,19 @@
 package com.npgames.insight.data.model;
 
+import com.npgames.insight.data.model.equipment.AidKit;
+import com.npgames.insight.data.model.equipment.Beam;
+import com.npgames.insight.data.model.equipment.Blaster;
+import com.npgames.insight.data.model.equipment.Electroshock;
 import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.equipment.FlakJacket;
+import com.npgames.insight.data.model.equipment.Grenade_1;
+import com.npgames.insight.data.model.equipment.Grenade_2;
+import com.npgames.insight.data.model.equipment.Grenade_3;
+import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
+import com.npgames.insight.data.model.equipment.PowerShield;
+import com.npgames.insight.data.model.equipment.Targeter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -36,6 +48,20 @@ public class Player {
         this.prc = INIT_PRC;
         this.time = INIT_TIME;
         this.amn = INIT_AMN;
+
+
+        equipments = new ArrayList<>();
+        equipments.add(new AidKit(Equipment.Owner.ARRMORY));
+        equipments.add(new Beam(Equipment.Owner.ARRMORY));
+        equipments.add(new Blaster(Equipment.Owner.ARRMORY));
+        equipments.add(new Electroshock(Equipment.Owner.ARRMORY));
+        equipments.add(new FlakJacket(Equipment.Owner.ARRMORY));
+        equipments.add(new Grenade_1(Equipment.Owner.ARRMORY));
+        equipments.add(new Grenade_2(Equipment.Owner.ARRMORY));
+        equipments.add(new Grenade_3(Equipment.Owner.ARRMORY));
+        equipments.add(new OpenSpaceEqpt(Equipment.Owner.ARRMORY));
+        equipments.add(new PowerShield(Equipment.Owner.ARRMORY));
+        equipments.add(new Targeter(Equipment.Owner.ARRMORY));
     }
 
     public void takeOnEquipment(final int position) {

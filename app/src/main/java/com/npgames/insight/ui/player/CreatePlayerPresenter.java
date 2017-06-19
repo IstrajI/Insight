@@ -20,6 +20,8 @@ public class CreatePlayerPresenter extends MvpPresenter<CreatePlayerView> {
         dex += dexPoints;
         pointsToDistribute -= dexPoints;
         getViewState().updateDexPoints(dex, pointsToDistribute);
+
+        checkContinueButtonStatus();
     }
 
     public void changePrcPoints(final int prcPoints) {
@@ -28,6 +30,16 @@ public class CreatePlayerPresenter extends MvpPresenter<CreatePlayerView> {
         prc += prcPoints;
         pointsToDistribute -= prcPoints;
         getViewState().updatePrcPoints(prc, pointsToDistribute);
+
+        checkContinueButtonStatus();
+    }
+
+    private void checkContinueButtonStatus() {
+        if (pointsToDistribute == 0) {
+            getViewState().changeContinueStatus(true);
+            return;
+        }
+        getViewState().changeContinueStatus(false);
     }
 
     void requestPoints() {

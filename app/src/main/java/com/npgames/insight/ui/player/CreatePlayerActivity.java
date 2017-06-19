@@ -2,6 +2,7 @@ package com.npgames.insight.ui.player;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -13,7 +14,7 @@ import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView {
+public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView, View.OnClickListener {
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView overviewDocumentView;
     @BindView(R.id.document_view_create_character_skill_info)
@@ -29,6 +30,9 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
     @BindView(R.id.text_view_create_character_points_to_distribute)
     protected TextView pointsToDistributeTextView;
 
+    @BindView(R.id.button_create_character_continue)
+    protected Button continueButton;
+
     @InjectPresenter
     CreatePlayerPresenter createPlayerPresenter;
 
@@ -42,6 +46,7 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
     protected void bindViews() {
         initDocumentView(overviewDocumentView);
         initDocumentView(skillInfoDocumentView);
+        continueButton.setOnClickListener(this);
 
         overviewDocumentView.setText(getResources().getString(R.string.create_character_overview));
         skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_hp));
@@ -53,13 +58,11 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
         documentView.getDocumentLayoutParams().setTextSize(16);
     }
 
-
     @OnClick({R.id.button_create_character_dex_points_plus,
             R.id.button_create_character_prc_points_plus,
             R.id.button_create_character_prc_points_minus,
             R.id.button_create_character_dex_points_minus,
-            R.id.button_create_character_reset,
-            R.id.button_create_character_continue})
+            R.id.button_create_character_reset})
     public void onSkillPointsClick(final Button button) {
         final int ONE_SKILL_POINT = 1;
         switch(button.getId()) {
@@ -74,9 +77,6 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
                 break;
             case R.id.button_create_character_prc_points_minus:
                 createPlayerPresenter.changePrcPoints(-ONE_SKILL_POINT);
-                break;
-            case R.id.button_create_character_continue:
-                createPlayerPresenter.requestPoints();
                 break;
             case R.id.button_create_character_reset:
                 createPlayerPresenter.resetPoints();
@@ -129,5 +129,20 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
         intent.putExtra("PRC", prc);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void changeContinueStatus(final boolean status) {
+        if (continueButton.isEnabled() == status) return;
+        continueButton.setEnabled(status);
+    }
+
+    @Override
+    public void onClick(final View v) {
+        switch(v.getId()) {
+            case R.id.button_create_character_continue:
+                createPlayerPresenter.requestPoints();
+                break;
+        }
     }
 }
