@@ -90,7 +90,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 break;
             case R.id.button_equipment_take_on:
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                playerPresenter.wearEquipment(equipmentOn);
+                playerPresenter.wearEquipment(equipmentOn, view);
                 break;
             case R.id.button_equipment_take_out:
                 final Equipment equipmentOut = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);

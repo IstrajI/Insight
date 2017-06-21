@@ -8,7 +8,5 @@ public interface GameBookView extends MvpView{
 
     void openActionsMenu();
     void closeActionsMenu();
-    void openStatsPanel();
-    void closeStatsPanel();
 
 }

@@ -2,6 +2,7 @@ package com.npgames.insight.ui.all.presentation.player;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -79,7 +80,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
     }
 
 
-    public void wearEquipment(final Equipment equipment) {
+    public void wearEquipment(final Equipment equipment, final View view) {
         equipment.setOwnedBy(Equipment.Owner.PLAYER);
         if (!equipment.wearChangeStats(player)) getViewState().showCantWearEquipment();
         getViewState().showWearedEquipment();

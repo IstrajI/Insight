@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ import com.npgames.insight.ui.all.presentation.player.PlayerView;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,21 +45,28 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @BindView(R.id.recycler_view_paragraph_jumps)
     protected RecyclerView jumpsRecyclerView;
     @BindView(R.id.frame_layout_game_book_root)
-    protected FrameLayout rootFrameLayout;
-    @BindView(R.id.button_game_book_open_actions_menu)
-    protected Button openActionsMenuButton;
-    @BindView(R.id.button_game_book_open_stats_panel)
-    protected Button openStatsPanelButton;
-
-    @BindView(R.id.frame_game_book_stats)
-    protected FrameLayout statsRoot;
-
+    protected LinearLayout rootLinearLayout;
     @BindView(R.id.scroll_game_book)
     protected ScrollView scrollView;
+    @BindView(R.id.button_game_book_open_actions_menu)
+    protected Button openActionMenuButton;
+
+    @BindView(R.id.text_view_stats_panel_amn)
+    protected TextView amnTextView;
+    @BindView(R.id.text_view_stats_panel_time)
+    protected TextView timeTextView;
+    @BindView(R.id.text_view_stats_panel_hp)
+    protected TextView hpTextView;
+    @BindView(R.id.text_view_stats_panel_prc)
+    protected TextView prcTextView;
+    @BindView(R.id.text_view_stats_panel_dex)
+    protected TextView dexTextView;
+    @BindView(R.id.text_view_stats_panel_aur)
+    protected TextView aurTextView;
 
     protected View actionsMenuLayout;
     protected Button closeActionsMenuButton;
-    protected View statsPanelLayout;
+
     protected Button closeStatsPanelButton;
     protected TextView statsTimeTextView;
     protected TextView statsHpTextView;
@@ -144,11 +154,10 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     private void createActionsMenu() {
-        actionsMenuLayout = LayoutInflater.from(this).inflate(R.layout.layout_actions_menu, rootFrameLayout, false);
+        actionsMenuLayout = LayoutInflater.from(this).inflate(R.layout.layout_actions_menu, rootLinearLayout, false);
         closeActionsMenuButton = ButterKnife.findById(actionsMenuLayout, R.id.button_actions_menu_close_actions_menu);
         final RecyclerView actionsMenuRecyclerView = ButterKnife.findById(actionsMenuLayout, R.id.recycler_view_actions_menu);
 
-        statsPanelLayout = LayoutInflater.from(this).inflate(R.layout.layout_stats_panel, statsRoot, true);
         statsAmnTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_amn);
         statsTimeTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_time);
         statsHpTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_hp);
@@ -169,24 +178,23 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
         actionsMenuAdapter.update(menus);
         closeActionsMenuButton.setOnClickListener(this);
-        openActionsMenuButton.setOnClickListener(this);
+        openActionMenuButton.setOnClickListener(this);
         //closeStatsPanelButton.setOnClickListener(this);
-        openStatsPanelButton.setOnClickListener(this);
     }
 
     @Override
     public void openActionsMenu() {
-        rootFrameLayout.removeView(openActionsMenuButton);
-        rootFrameLayout.addView(actionsMenuLayout);
+        rootLinearLayout.removeView(openActionMenuButton);
+        rootLinearLayout.addView(actionsMenuLayout);
     }
 
     @Override
     public void closeActionsMenu() {
-        rootFrameLayout.removeView(actionsMenuLayout);
-        rootFrameLayout.addView(openActionsMenuButton);
+        rootLinearLayout.removeView(actionsMenuLayout);
+        rootLinearLayout.addView(openActionMenuButton);
     }
 
-    @Override
+/*    @Override
     public void openStatsPanel() {
         rootFrameLayout.removeView(openStatsPanelButton);
         rootFrameLayout.addView(statsPanelLayout);
@@ -196,7 +204,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     public void closeStatsPanel() {
         rootFrameLayout.removeView(statsPanelLayout);
         rootFrameLayout.addView(openStatsPanelButton);
-    }
+    }*/
 
     @Override
     public void changeStat(final Paragraph.ActionTypes stats, final int statDifference) {
@@ -243,9 +251,9 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
             case R.id.button_actions_menu_close_actions_menu:
                 closeActionsMenu();
                 break;
-            case R.id.button_game_book_open_stats_panel:
+/*            case R.id.button_game_book_open_stats_panel:
                 openStatsPanel();
-                break;
+                break;*/
 /*            case R.id.button_stats_panel_close:
                 closeStatsPanel();
                 break;*/
@@ -270,14 +278,14 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
                     playerPresenter.updatePlayer(dex, prc);
                     paragraphPresenter.loadParagraph(getApplicationContext(), 1);
-                    openStatsPanelButton.setVisibility(View.VISIBLE);
+                    //openStatsPanelButton.setVisibility(View.VISIBLE);
                 }
                 break;
             case 2:
                 if (resultCode == RESULT_OK) {
                     Log.d("TAGIL", "here");
                     paragraphPresenter.loadParagraph(getApplicationContext(), 40);
-                    Log.d("visibility", ""+openStatsPanelButton.getVisibility());
+                    //Log.d("visibility", ""+openStatsPanelButton.getVisibility());
                 }
                 break;
         }

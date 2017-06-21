@@ -18,11 +18,11 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
 
     public void interactWithStatsPanel() {
         if (isStatsPanelOpen) {
-            getViewState().closeStatsPanel();
+            //getViewState().closeStatsPanel();
             isActionsMenuOpen = false;
             return;
         }
-        getViewState().openStatsPanel();
+        //getViewState().openStatsPanel();
         isStatsPanelOpen = true;
     }
 
