@@ -36,8 +36,8 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
     }
 
     public void updatePlayer(final int dex, final int prc) {
-        player.setPrc(prc);
-        player.setDex(prc);
+        player.addPrc(prc);
+        player.addDex(prc);
     }
 
     public void changeStat(final Paragraph.ActionTypes statName, final int statValue) {
@@ -80,9 +80,9 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
     }
 
 
-    public void wearEquipment(final Equipment equipment, final View view) {
+    public void wearEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.PLAYER);
-        if (!equipment.wearChangeStats(player)) getViewState().showCantWearEquipment();
+        checkCanWearStatus();
         getViewState().showWearedEquipment();
         getViewState().showStats(
             player.getHp(),
@@ -103,6 +103,15 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
                 player.getDex(),
                 player.getTime(),
                 player.getAmn());
+    }
+
+    public void checkCanWearStatus() {
+        final List<Equipment> equipments = player.getEquipments();
+        for (int i = 0; i < equipments.size(); i++) {
+            if (!equipments.get(i).wearChangeStats(player)) {
+                getViewState().showCantWearEquipment(i);
+            }
+        }
     }
 
     public void dropEquipment(final Equipment equipment) {

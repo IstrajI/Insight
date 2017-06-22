@@ -67,14 +67,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     protected View actionsMenuLayout;
     protected Button closeActionsMenuButton;
 
-    protected Button closeStatsPanelButton;
-    protected TextView statsTimeTextView;
-    protected TextView statsHpTextView;
-    protected TextView statsPrcTextView;
-    protected TextView statsDexTextView;
-    protected TextView statsAurTextView;
-    protected TextView statsAmnTextView;
-
     @InjectPresenter
     ParagraphPresenter paragraphPresenter;
     @InjectPresenter
@@ -101,9 +93,10 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     @Override
-    public void showCantWearEquipment() {
+    public void showCantWearEquipment(int position) {
 
     }
+
 
     @Override
     public void showWearedEquipment() {
@@ -158,13 +151,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         closeActionsMenuButton = ButterKnife.findById(actionsMenuLayout, R.id.button_actions_menu_close_actions_menu);
         final RecyclerView actionsMenuRecyclerView = ButterKnife.findById(actionsMenuLayout, R.id.recycler_view_actions_menu);
 
-        statsAmnTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_amn);
-        statsTimeTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_time);
-        statsHpTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_hp);
-        statsPrcTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_prc);
-        statsDexTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_dex);
-        statsAurTextView = ButterKnife.findById(statsPanelLayout, R.id.text_view_stats_panel_aur);
-
         final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         actionsMenuAdapter = new ActionsMenuAdapter();
         actionsMenuRecyclerView.setLayoutManager(actionsMenuLayoutManager);
@@ -194,28 +180,16 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         rootLinearLayout.addView(openActionMenuButton);
     }
 
-/*    @Override
-    public void openStatsPanel() {
-        rootFrameLayout.removeView(openStatsPanelButton);
-        rootFrameLayout.addView(statsPanelLayout);
-    }
-
-    @Override
-    public void closeStatsPanel() {
-        rootFrameLayout.removeView(statsPanelLayout);
-        rootFrameLayout.addView(openStatsPanelButton);
-    }*/
-
     @Override
     public void changeStat(final Paragraph.ActionTypes stats, final int statDifference) {
         playerPresenter.changeStat(stats, statDifference);
         final Player player = playerPresenter.loadPlayer(getApplicationContext());
-        statsAmnTextView.setText(String.valueOf(player.getAmn()));
-        statsTimeTextView.setText(String.valueOf(player.getTime()));
-        statsHpTextView.setText(String.valueOf(player.getHp()));
-        statsPrcTextView.setText(String.valueOf(player.getPrc()));
-        statsDexTextView.setText(String.valueOf(player.getDex()));
-        statsAurTextView.setText(String.valueOf(player.getAur()));
+        amnTextView.setText(String.valueOf(player.getAmn()));
+        timeTextView.setText(String.valueOf(player.getTime()));
+        hpTextView.setText(String.valueOf(player.getHp()));
+        prcTextView.setText(String.valueOf(player.getPrc()));
+        dexTextView.setText(String.valueOf(player.getDex()));
+        aurTextView.setText(String.valueOf(player.getAur()));
     }
 
     @Override

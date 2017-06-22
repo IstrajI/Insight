@@ -44,6 +44,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     protected TextView aurTextView;
 
     private EquipmentDialogFragment equipmentMoreDialogFragment;
+    private GridLayoutManager equipmentLayoutManager;
 
     @InjectPresenter
     PlayerPresenter playerPresenter;
@@ -60,7 +61,8 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     @Override
     protected void bindViews() {
         final int numberOfColumns = 3;
-        armoryRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        equipmentLayoutManager = new GridLayoutManager(this, numberOfColumns);
+        armoryRecyclerView.setLayoutManager(equipmentLayoutManager);
         armoryEquipmentAdapter = new ArmoryEquipmentAdapter(getApplicationContext());
         armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
         armoryEquipmentAdapter.setOnItemClickListener(this);
@@ -90,7 +92,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 break;
             case R.id.button_equipment_take_on:
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                playerPresenter.wearEquipment(equipmentOn, view);
+                playerPresenter.wearEquipment(equipmentOn);
                 break;
             case R.id.button_equipment_take_out:
                 final Equipment equipmentOut = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
@@ -125,19 +127,22 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         amnTextView.setText(String.valueOf(amn));
     }
 
+    public void checkEquipmentWearStatus() {
+
+    }
+
     @Override
     public void showPlayerOwnEquipment() {
 
     }
 
     @Override
-    public void showCantWearEquipment() {
-        final String message = "Ловкость не должна опускаться ниже 5";
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    public void showCantWearEquipment(final int position) {
+        equipmentLayoutManager.findViewByPosition(position).findViewById(R.id.button_equipment_take_on).setEnabled(false);
+        equipmentLayoutManager.findViewByPosition(position).findViewById(R.id.button_equipment_take_out).setEnabled(true);
     }
 
     @Override
     public void showWearedEquipment() {
-
     }
 }
