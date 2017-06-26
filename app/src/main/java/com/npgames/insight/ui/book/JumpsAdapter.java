@@ -35,6 +35,7 @@ public class JumpsAdapter extends BaseRecyclerAdapter<JumpsAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.jumpTitleTextView.setText(items.get(position).getText());
         holder.jumpButton.setText(items.get(position).getId());
+        holder.jumpButton.setEnabled(items.get(position).isStatus());
     }
 
     @Override

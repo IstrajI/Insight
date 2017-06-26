@@ -76,6 +76,16 @@ public class Player {
         equipments.get(position).setOwnedBy(Equipment.Owner.TRASH);
     }
 
+
+    public boolean isOwnerOf(final String equipmentName){
+        for (Equipment equipment : equipments) {
+            if (equipment.getSharedPropertyName().equals(equipmentName)) {
+                return equipment.getOwnedBy() == Equipment.Owner.PLAYER;
+            }
+        }
+        return false;
+    }
+
     public int getHp() {
         return hp;
     }

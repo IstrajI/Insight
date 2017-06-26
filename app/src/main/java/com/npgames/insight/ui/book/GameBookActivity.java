@@ -139,7 +139,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                 playerPresenter.loadPlayer(getApplicationContext());
                 break;
             case NEW_GAME:
-                paragraphPresenter.loadParagraph(getApplicationContext(), 500);
+                paragraphPresenter.loadParagraph(getApplicationContext(), 59);
                 playerPresenter.createPlayer();
                 break;
         }
@@ -236,6 +236,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     @Override
     public void updateParagraph(final Paragraph nextParagraph) {
+        playerPresenter.checkJumpsConditions(nextParagraph);
         jumpsAdapter.update(nextParagraph.getJumps());
         paragraphTextTextView.setText(getString(nextParagraph.getTextId()));
         scrollView.scrollTo(0, paragraphTextTextView.getTop());
