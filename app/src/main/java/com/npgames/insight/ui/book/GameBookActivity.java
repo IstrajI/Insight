@@ -83,8 +83,13 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     @Override
-    public void showStats(int hp, int aur, int prc, int dex, int time, int amn) {
-
+    public void showStats(final int hp, final int aur, final int prc, final int dex, final int time, final int amn) {
+        amnTextView.setText(String.valueOf(amn));
+        hpTextView.setText(String.valueOf(hp));
+        aurTextView.setText(String.valueOf(aur));
+        prcTextView.setText(String.valueOf(prc));
+        dexTextView.setText(String.valueOf(dex));
+        amnTextView.setText(String.valueOf(amn));
     }
 
     @Override
@@ -94,6 +99,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     @Override
     public void showCantWearEquipment(int position) {
+
+    }
+
+    @Override
+    public void showCanWearEquipment(int equipmentNumber) {
 
     }
 
@@ -183,13 +193,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @Override
     public void changeStat(final Paragraph.ActionTypes stats, final int statDifference) {
         playerPresenter.changeStat(stats, statDifference);
-        final Player player = playerPresenter.loadPlayer(getApplicationContext());
-        amnTextView.setText(String.valueOf(player.getAmn()));
-        timeTextView.setText(String.valueOf(player.getTime()));
-        hpTextView.setText(String.valueOf(player.getHp()));
-        prcTextView.setText(String.valueOf(player.getPrc()));
-        dexTextView.setText(String.valueOf(player.getDex()));
-        aurTextView.setText(String.valueOf(player.getAur()));
     }
 
     @Override
@@ -244,13 +247,16 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         Log.d("requestCode", "pish" + requestCode);
+        playerPresenter.printStats();
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
                     final int dex = data.getIntExtra("DEX", 0);
+                    Log.d("dex multiplier", ""+dex);
                     final int prc = data.getIntExtra("PRC", 0);
-
+                    Log.d("prc multiplier", ""+prc);
                     playerPresenter.updatePlayer(dex, prc);
+                    playerPresenter.printStats();
                     paragraphPresenter.loadParagraph(getApplicationContext(), 1);
                     //openStatsPanelButton.setVisibility(View.VISIBLE);
                 }

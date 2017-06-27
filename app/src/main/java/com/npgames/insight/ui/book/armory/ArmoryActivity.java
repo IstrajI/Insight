@@ -60,6 +60,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
 
     @Override
     protected void bindViews() {
+        playerPresenter.printStats();
         final int numberOfColumns = 3;
         equipmentLayoutManager = new GridLayoutManager(this, numberOfColumns);
         armoryRecyclerView.setLayoutManager(equipmentLayoutManager);
@@ -72,6 +73,8 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         playerPresenter.loadStats();
 
         equipmentMoreDialogFragment = new EquipmentDialogFragment();
+
+        playerPresenter.printStats();
     }
 
 
@@ -91,12 +94,16 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
                 break;
             case R.id.button_equipment_take_on:
+                playerPresenter.printStats();
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 playerPresenter.wearEquipment(equipmentOn);
+                playerPresenter.printStats();
                 break;
             case R.id.button_equipment_take_out:
+                playerPresenter.printStats();
                 final Equipment equipmentOut = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 playerPresenter.unwearEquipment(equipmentOut);
+                playerPresenter.printStats();
                 break;
         }
     }
@@ -137,9 +144,13 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     }
 
     @Override
-    public void showCantWearEquipment(final int position) {
-        equipmentLayoutManager.findViewByPosition(position).findViewById(R.id.button_equipment_take_on).setEnabled(false);
-        equipmentLayoutManager.findViewByPosition(position).findViewById(R.id.button_equipment_take_out).setEnabled(true);
+    public void showCantWearEquipment(final int equipmentNumber) {
+        equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on).setEnabled(false);
+    }
+
+    @Override
+    public void showCanWearEquipment(int equipmentNumber) {
+        equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on).setEnabled(true);
     }
 
     @Override

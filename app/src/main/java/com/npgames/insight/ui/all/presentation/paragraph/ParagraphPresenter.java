@@ -28,7 +28,7 @@ public class ParagraphPresenter extends MvpPresenter<ParagraphView> {
     public void loadParagraph(final Context context, final int number) {
         final Paragraph paragraph = ParagraphParser.parse(context, number);
         currentParagraph = paragraph.getId();
-        executeParagraphAction(number, paragraph.getActions());
+        //executeParagraphAction(number, paragraph.getActions());
         getViewState().updateParagraph(paragraph);
     }
 
