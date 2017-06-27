@@ -27,8 +27,17 @@ public class AidKit extends Equipment{
         player.addDex(-wereDebuff);
     }
 
+    public void canWear() {
+        if ()
+    }
+
     @Override
     public String getSharedPropertyName() {
         return SHARED_PROPERTY_NAME;
+    }
+
+    @Override
+    public boolean checkCanWearEquipment(final int playerDex, final int dexDebuff) {
+        return canWearEquipment(playerDex, )
     }
 }

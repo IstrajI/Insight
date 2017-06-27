@@ -44,8 +44,10 @@ public abstract class Equipment {
 
     public abstract String getSharedPropertyName();
 
-    protected boolean canWearEquipment(final Player player, final int wereDebuff) {
-        return (player.getDex() + wereDebuff > player.getDexMin());
+    protected boolean canWearEquipment(final int playerDex, final int dexDebuff) {
+        return (playerDex + dexDebuff > playerDex);
     }
+
+    public abstract boolean checkCanWearEquipment(final int playerDex, final int dexDebuff);
 
 }
