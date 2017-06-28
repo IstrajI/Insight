@@ -93,7 +93,7 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
         equipment.wearChangeStats(player);
         //checkCanWearStatus();
         Log.d("name = ", ""+equipment.getSharedPropertyName());
-        getViewState().showWearedEquipment();
+        //getViewState().showWearedEquipment();
         getViewState().showStats(
             player.getHp(),
             player.getAur(),
@@ -120,11 +120,17 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
 
     public void obtainWearStatus() {
         final List<Equipment> equipments = player.getEquipments();
+        Log.d("POP SIZE: ", ""+equipments.size());
         for (int i = 0; i < equipments.size(); i++) {
-            if (!equipments.get(i).wearChangeStats(player)) {
+            Log.d("equipment i =", ""+i);
+            Log.d("equipment name", ""+equipments.get(i).getSharedPropertyName());
+            Log.d("equpment dex debuff", ""+equipments.get(i).getDexDebuff());
+            if (!equipments.get(i).canWearEquipment(player)) {
+                Log.d("cant", "cant");
                 getViewState().showCantWearEquipment(i);
                 return;
             }
+            Log.d("can", "can");
             getViewState().showCanWearEquipment(i);
         }
     }

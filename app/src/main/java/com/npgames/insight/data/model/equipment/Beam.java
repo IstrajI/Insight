@@ -8,16 +8,18 @@ public class Beam extends Equipment{
     private final int wereDebuff = -2;
     private final int NAME_RES_ID = R.string.armory_equipment_beam_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_beam_description;
+    private final int dexDebuff = -1;
 
     public Beam(final Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(dexDebuff);
     }
 
     @Override
     public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addDex(wereDebuff);
         return true;
     }

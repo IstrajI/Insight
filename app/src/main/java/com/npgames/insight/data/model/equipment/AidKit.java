@@ -8,16 +8,18 @@ public class AidKit extends Equipment{
     private final int wereDebuff = -1;
     public final int NAME_RES_ID = R.string.armory_equipment_aid_kit_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_aid_kit_description;
+    private final int dexDebuff = -1;
 
     public AidKit(final Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(dexDebuff);
     }
 
     @Override
     public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addDex(wereDebuff);
         return true;
     }
@@ -27,17 +29,8 @@ public class AidKit extends Equipment{
         player.addDex(-wereDebuff);
     }
 
-    public void canWear() {
-        if ()
-    }
-
     @Override
     public String getSharedPropertyName() {
         return SHARED_PROPERTY_NAME;
-    }
-
-    @Override
-    public boolean checkCanWearEquipment(final int playerDex, final int dexDebuff) {
-        return canWearEquipment(playerDex, )
     }
 }

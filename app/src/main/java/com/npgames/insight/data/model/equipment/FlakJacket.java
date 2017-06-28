@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model.equipment;
 
+import android.util.Log;
+
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
 
@@ -8,23 +10,27 @@ public class FlakJacket extends Equipment{
     private final int NAME_RES_ID = R.string.armory_equipment_flak_jacket_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_flak_jacket_description;
     private final int wereDebuff = -2;
+    private final int dexDebuff = -2;
 
     public FlakJacket(final Equipment.Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(dexDebuff);
     }
 
     @Override
     public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addDex(wereDebuff);
         return true;
     }
 
     @Override
     public void unwearChangeStats(final Player player) {
+        Log.d("tictac", ""+player.getDex());
         player.addDex(-wereDebuff);
+        Log.d("after", ""+player.getDex());
     }
 
     @Override

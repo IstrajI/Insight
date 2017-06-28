@@ -8,16 +8,18 @@ public class Blaster extends Equipment{
     private final int wereDebuff = -1;
     private final int NAME_RES_ID = R.string.armory_equipment_blaster_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_blaster_description;
+    private final int dexDebuff = -1;
 
     public Blaster(final Equipment.Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(dexDebuff);
     }
 
     @Override
     public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addDex(wereDebuff);
         return true;
     }

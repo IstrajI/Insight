@@ -7,6 +7,8 @@ public abstract class Equipment {
     public static final String NAME = "NAME";
     public static final String DESCRIPTION = "DESCRIPTION";
 
+    private int dexDebuff = 0;
+
     private int NAME_RES_ID = R.string.armory_equipment_aid_kit_title;
     private int DESCRIPTION_RES_ID = R.string.armory_equipment_aid_kit_description;
 
@@ -42,12 +44,20 @@ public abstract class Equipment {
         this.DESCRIPTION_RES_ID = descriptionResource;
     }
 
-    public abstract String getSharedPropertyName();
-
-    protected boolean canWearEquipment(final int playerDex, final int dexDebuff) {
-        return (playerDex + dexDebuff > playerDex);
+    public int getDexDebuff() {
+        return this.dexDebuff;
+    }
+    public void setDexDebuff(final int dexDebuff) {
+        this.dexDebuff = dexDebuff;
     }
 
-    public abstract boolean checkCanWearEquipment(final int playerDex, final int dexDebuff);
+    public abstract String getSharedPropertyName();
 
+    public boolean canWearEquipment(final Player player) {
+        return (player.getDex() + this.dexDebuff >= player.getDexMin());
+    }
+
+    public boolean isOwner(final Owner owner) {
+        return ownedBy == owner;
+    }
 }

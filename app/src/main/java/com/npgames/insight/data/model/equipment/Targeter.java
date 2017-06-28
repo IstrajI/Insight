@@ -9,18 +9,20 @@ public class Targeter extends Equipment {
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_targeter_description;
     private final int wereDebuff = -2;
     private final int wereBonus = 3;
+    private final int dexDebuff = -2;
 
     public Targeter(Equipment.Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(dexDebuff);
     }
 
     @Override
     public boolean wearChangeStats(Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addPrc(wereBonus);
-        player.addDex(wereDebuff);
+        player.addDex(dexDebuff);
         return true;
     }
 

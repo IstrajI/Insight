@@ -13,11 +13,12 @@ public class PowerShield extends Equipment{
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
+        setDexDebuff(0);
     }
 
     @Override
     public boolean wearChangeStats(Player player) {
-        if (!canWearEquipment(player, wereDebuff)) return false;
+        if (!canWearEquipment(player)) return false;
         player.addPrc(wereDebuff);
         return true;
     }

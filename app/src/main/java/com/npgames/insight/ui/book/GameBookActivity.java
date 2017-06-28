@@ -149,7 +149,7 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                 playerPresenter.loadPlayer(getApplicationContext());
                 break;
             case NEW_GAME:
-                paragraphPresenter.loadParagraph(getApplicationContext(), 59);
+                paragraphPresenter.loadParagraph(getApplicationContext(), 500);
                 playerPresenter.createPlayer();
                 break;
         }
@@ -264,7 +264,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
                 break;
             case 2:
                 if (resultCode == RESULT_OK) {
-                    Log.d("TAGIL", "here");
                     paragraphPresenter.loadParagraph(getApplicationContext(), 40);
                     //Log.d("visibility", ""+openStatsPanelButton.getVisibility());
                 }
