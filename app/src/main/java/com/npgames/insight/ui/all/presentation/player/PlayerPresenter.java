@@ -120,17 +120,11 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
 
     public void obtainWearStatus() {
         final List<Equipment> equipments = player.getEquipments();
-        Log.d("POP SIZE: ", ""+equipments.size());
         for (int i = 0; i < equipments.size(); i++) {
-            Log.d("equipment i =", ""+i);
-            Log.d("equipment name", ""+equipments.get(i).getSharedPropertyName());
-            Log.d("equpment dex debuff", ""+equipments.get(i).getDexDebuff());
             if (!equipments.get(i).canWearEquipment(player)) {
-                Log.d("cant", "cant");
                 getViewState().showCantWearEquipment(i);
-                return;
+                continue;
             }
-            Log.d("can", "can");
             getViewState().showCanWearEquipment(i);
         }
     }
@@ -145,12 +139,6 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
             getViewState().showCanWearEquipment(i);
         }
     }
-
-    public void dropEquipment(final Equipment equipment) {
-        //
-    }
-
-
 
     public void loadEquipmentsOwnedBy(final Equipment.Owner owner) {
         final List<Equipment> ownerEquipments = new ArrayList<>();

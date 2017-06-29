@@ -12,4 +12,5 @@ public interface PlayerView extends MvpView {
     void showCantWearEquipment(final int equipmentNumber);
     void showCanWearEquipment(final int equipmentNumber);
     void showWearedEquipment();
+    void showEquipments(final List<Equipment> equipments);
 }

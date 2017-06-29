@@ -102,7 +102,6 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                     this.takeOnButton.setEnabled(true);
                     this.takeOutButton.setEnabled(false);
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
-
                     break;
             }
         }

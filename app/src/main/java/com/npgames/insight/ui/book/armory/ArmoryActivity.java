@@ -172,4 +172,9 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     @Override
     public void showWearedEquipment() {
     }
+
+    @Override
+    public void showEquipments(final List<Equipment> equipments) {
+        armoryEquipmentAdapter.update(equipments);
+    }
 }

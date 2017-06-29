@@ -113,6 +113,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     }
 
+    @Override
+    public void showEquipments(List<Equipment> equipments) {
+
+    }
+
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
 
