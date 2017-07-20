@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model;
 
+import android.util.Log;
+
 import com.npgames.insight.data.model.equipment.AidKit;
 import com.npgames.insight.data.model.equipment.Beam;
 import com.npgames.insight.data.model.equipment.Blaster;
@@ -26,7 +28,7 @@ public class Player {
 
     public enum Stats {HP, AUR, DEX, PRC, TIME, AMN}
 
-    private int [] visittedParagraphs;
+    private int[] visittedParagraphs;
 
     private int paragraph;
     private int hp;
@@ -64,12 +66,30 @@ public class Player {
         equipments.add(new Targeter(Equipment.Owner.ARRMORY));
     }
 
-    public void takeOnEquipment(final int position) {
-        equipments.get(position).setOwnedBy(Equipment.Owner.PLAYER);
+    public void changeStats(final StatsChanger statsChanger) {
+        hp = getHp() + statsChanger.getHp();
+        dex = getDex() + statsChanger.getDex();
+        amn = getAmn() + statsChanger.getAmn();
+        aur = getAur() + statsChanger.getAur();
+        prc = getPrc() + statsChanger.getPrc();
+        time = getTime() + statsChanger.getTime();
     }
 
-    public void takeOffEquipment(final int position) {
-        equipments.get(position).setOwnedBy(Equipment.Owner.ARRMORY);
+    public void takeOnEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.PLAYER);
+        changeStats(equipment.getTakeOnStatsChanger());
+    }
+
+    public void takeOffEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.ARRMORY);
+        changeStats(equipment.getTakeOffStatsChanger());
+    }
+
+    public boolean canWearEquipment(final Equipment equipment) {
+        final StatsChanger statsChanger = equipment.getTakeOnStatsChanger();
+
+        Log.d("result ", ""+(dex + statsChanger.getDex() >= getDexMin()));
+        return (dex + statsChanger.getDex() >= getDexMin());
     }
 
     public void dropEquipment(final int position) {
@@ -77,7 +97,7 @@ public class Player {
     }
 
 
-    public boolean isOwnerOf(final String equipmentName){
+    public boolean isOwnerOf(final String equipmentName) {
         for (Equipment equipment : equipments) {
             if (equipment.getSharedPropertyName().equals(equipmentName)) {
                 return equipment.getOwnedBy() == Equipment.Owner.PLAYER;
@@ -89,15 +109,13 @@ public class Player {
     public int getHp() {
         return hp;
     }
-
     public void setHp(final int hp) {
-        this.hp = hp >= 22? 22 : hp;
+        this.hp = hp >= 22 ? 22 : hp;
     }
 
     public int getAur() {
         return aur;
     }
-
     public void setAur(final int aur) {
         this.aur = aur;
     }
@@ -105,7 +123,6 @@ public class Player {
     public int getDex() {
         return dex;
     }
-
     public void setDex(final int dex) {
         this.dex = dex;
     }
@@ -113,7 +130,6 @@ public class Player {
     public int getPrc() {
         return prc;
     }
-
     public void setPrc(final int prc) {
         this.prc = prc;
     }
@@ -121,7 +137,6 @@ public class Player {
     public int getParagraph() {
         return paragraph;
     }
-
     public void setParagraph(final int paragraph) {
         this.paragraph = paragraph;
     }
@@ -129,7 +144,6 @@ public class Player {
     public int getTime() {
         return time;
     }
-
     public void setTime(final int time) {
         this.time = time;
     }
@@ -137,7 +151,6 @@ public class Player {
     public int getAmn() {
         return amn;
     }
-
     public void setAmn(final int amn) {
         this.amn = amn;
     }
@@ -145,41 +158,8 @@ public class Player {
     public List<Equipment> getEquipments() {
         return equipments;
     }
-
     public void setEquipments(List<Equipment> equipments) {
         this.equipments = equipments;
-    }
-
-    public void addDex(final int addingDex) {
-        this.dex += addingDex;
-    }
-
-    public void addPrc(final int addingPrc) {
-        this.prc += addingPrc;
-    }
-
-    public void addHp(final int addingHp) {
-        this.hp += addingHp;
-    }
-
-    public void addAur(final int addingAur) {
-        this.aur += addingAur;
-    }
-
-    public void addTime(final int addingTime) {
-        this.time += addingTime;
-    }
-
-    public void addAmn(final int addingAmn) {
-        this.amn += addingAmn;
-    }
-
-    public void takeEquipment(final Equipment equipment) {
-        equipments.add(equipment);
-    }
-
-    public void putEquipment(final Equipment equipment) {
-        //equipment.
     }
 
     public int getDexMin() {

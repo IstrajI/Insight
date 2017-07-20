@@ -2,32 +2,24 @@ package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.StatsChanger;
 
 public class OpenSpaceEqpt extends Equipment{
     public static final String SHARED_PROPERTY_NAME = "OPEN_SPACE_EQPT";
     private final int NAME_RES_ID = R.string.armory_equipment_open_space_eqpt_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_open_space_eqpt_description;
-    private final int wereDebuff = -3;
-    private final int dexDebuff = -3;
+
+    private StatsChanger takeOnStatsChanger = new StatsChanger(-3, 0);
+    private StatsChanger takeOffStatsChanger = new StatsChanger(3, 0);
 
     public OpenSpaceEqpt(final Equipment.Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
-        setDexDebuff(dexDebuff);
+        setTakeOnStatsChanger(takeOnStatsChanger);
+        setTakeOffStatsChanger(takeOffStatsChanger);
     }
 
-    @Override
-    public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player)) return false;
-        player.addDex(wereDebuff);
-        return true;
-    }
-
-    @Override
-    public void unwearChangeStats(final Player player) {
-        player.addDex(-wereDebuff);
-    }
 
     @Override
     public String getSharedPropertyName() {

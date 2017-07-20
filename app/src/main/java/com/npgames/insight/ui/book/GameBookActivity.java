@@ -38,19 +38,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GameBookActivity extends BaseMvpActivity implements View.OnClickListener, RecyclerViewListeners.OnItemClickListener,
+public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, PlayerView, ParagraphView{
     @BindView(R.id.text_view_game_paragraph_text)
     protected DocumentView paragraphTextTextView;
     @BindView(R.id.recycler_view_paragraph_jumps)
     protected RecyclerView jumpsRecyclerView;
-    @BindView(R.id.frame_layout_game_book_root)
-    protected LinearLayout rootLinearLayout;
     @BindView(R.id.scroll_game_book)
     protected ScrollView scrollView;
-    @BindView(R.id.button_game_book_open_actions_menu)
-    protected Button openActionMenuButton;
-
     @BindView(R.id.text_view_stats_panel_amn)
     protected TextView amnTextView;
     @BindView(R.id.text_view_stats_panel_time)
@@ -64,8 +59,8 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     @BindView(R.id.text_view_stats_panel_aur)
     protected TextView aurTextView;
 
-    protected View actionsMenuLayout;
-    protected Button closeActionsMenuButton;
+    @BindView(R.id.frame_layout_gamebook_stats_panel)
+    protected FrameLayout test;
 
     @InjectPresenter
     ParagraphPresenter paragraphPresenter;
@@ -75,7 +70,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     PlayerPresenter playerPresenter;
 
     private JumpsAdapter jumpsAdapter;
-    private ActionsMenuAdapter actionsMenuAdapter;
 
     @Override
     public void showEquipmentsOwnedBy(List<Equipment> equipments) {
@@ -93,28 +87,12 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
     }
 
     @Override
-    public void showPlayerOwnEquipment() {
-        //
-    }
-
-    @Override
-    public void showCantWearEquipment(int position) {
-
-    }
-
-    @Override
-    public void showCanWearEquipment(int equipmentNumber) {
-
-    }
-
-
-    @Override
-    public void showWearedEquipment() {
-
-    }
-
-    @Override
     public void showEquipments(List<Equipment> equipments) {
+
+    }
+
+    @Override
+    public void updateWearEquipmentStatus(int equipmentNumber, boolean canWear) {
 
     }
 
@@ -136,7 +114,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
 
     @Override
     protected void bindViews() {
-        createActionsMenu();
         jumpsAdapter = new JumpsAdapter(getApplicationContext());
         final LinearLayoutManager jumpsLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         jumpsRecyclerView.setLayoutManager(jumpsLayoutManager);
@@ -161,39 +138,6 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         playerPresenter.printEquipment();
     }
 
-    private void createActionsMenu() {
-        actionsMenuLayout = LayoutInflater.from(this).inflate(R.layout.layout_actions_menu, rootLinearLayout, false);
-        closeActionsMenuButton = ButterKnife.findById(actionsMenuLayout, R.id.button_actions_menu_close_actions_menu);
-        final RecyclerView actionsMenuRecyclerView = ButterKnife.findById(actionsMenuLayout, R.id.recycler_view_actions_menu);
-
-        final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        actionsMenuAdapter = new ActionsMenuAdapter();
-        actionsMenuRecyclerView.setLayoutManager(actionsMenuLayoutManager);
-        actionsMenuRecyclerView.setAdapter(actionsMenuAdapter);
-
-        List<ActionsMenuAdapter.ActionItem> menus = new ArrayList<>();
-        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.ARMORY));
-        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.INSPECT));
-        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.MEDBAY));
-        menus.add(new ActionsMenuAdapter.ActionItem(ActionsMenuAdapter.ActionTypes.STATION));
-
-        actionsMenuAdapter.update(menus);
-        closeActionsMenuButton.setOnClickListener(this);
-        openActionMenuButton.setOnClickListener(this);
-        //closeStatsPanelButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void openActionsMenu() {
-        rootLinearLayout.removeView(openActionMenuButton);
-        rootLinearLayout.addView(actionsMenuLayout);
-    }
-
-    @Override
-    public void closeActionsMenu() {
-        rootLinearLayout.removeView(actionsMenuLayout);
-        rootLinearLayout.addView(openActionMenuButton);
-    }
 
     @Override
     public void changeStat(final Paragraph.ActionTypes stats, final int statDifference) {
@@ -224,26 +168,11 @@ public class GameBookActivity extends BaseMvpActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(final View v) {
-        switch (v.getId()) {
-            case R.id.button_game_book_open_actions_menu:
-                openActionsMenu();
-                break;
-            case R.id.button_actions_menu_close_actions_menu:
-                closeActionsMenu();
-                break;
-/*            case R.id.button_game_book_open_stats_panel:
-                openStatsPanel();
-                break;*/
-/*            case R.id.button_stats_panel_close:
-                closeStatsPanel();
-                break;*/
-        }
-    }
 
     @Override
     public void updateParagraph(final Paragraph nextParagraph) {
+
+        Log.d("meajured", "height = "+test.getMeasuredHeight() +" widht = " +test.getMeasuredWidth());
         playerPresenter.checkJumpsConditions(nextParagraph);
         jumpsAdapter.update(nextParagraph.getJumps());
         paragraphTextTextView.setText(getString(nextParagraph.getTextId()));

@@ -9,6 +9,7 @@
     <color name="colorTextPrimarySecondary">@color/white_opacity_70</color>
     <color name="colorTextDisable">@color/white_opacity_50</color>
 
+
     <!-- Base color -->
     <color name="white">#FFFFFF</color>
     <color name="white_opacity_70">#B3FFFFFF</color>

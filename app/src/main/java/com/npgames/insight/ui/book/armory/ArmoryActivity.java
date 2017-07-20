@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.npgames.insight.R;
@@ -21,6 +20,7 @@ import com.npgames.insight.ui.all.presentation.player.PlayerView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, RecyclerViewListeners.OnItemClickListener, PlayerView,
             View.OnClickListener{
@@ -29,7 +29,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     protected RecyclerView armoryRecyclerView;
     @BindView(R.id.button_armory_continue)
     protected Button continueButton;
-
     @BindView(R.id.text_view_stats_panel_time)
     protected TextView timeTextView;
     @BindView(R.id.text_view_stats_panel_amn)
@@ -84,7 +83,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.text_view_equipment_item_name:
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                Log.d("shared name", ""+equipment.getSharedPropertyName());
                 final String equipmentName = getString(equipment.getNameResource());
                 final String equipmentDescription = getString(equipment.getDescriptionResource());
                 final Bundle equipmentMoreBundle = new Bundle();
@@ -94,16 +92,12 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
                 break;
             case R.id.button_equipment_take_on:
-                playerPresenter.printStats();
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                playerPresenter.wearEquipment(equipmentOn);
-                playerPresenter.printStats();
+                playerPresenter.takeOnEquipment(equipmentOn);
                 break;
             case R.id.button_equipment_take_out:
-                playerPresenter.printStats();
-                final Equipment equipmentOut = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                playerPresenter.unwearEquipment(equipmentOut);
-                playerPresenter.printStats();
+                final Equipment equipmentOff = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
+                playerPresenter.takeOffEquipment(equipmentOff);
                 break;
         }
     }
@@ -134,43 +128,16 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         amnTextView.setText(String.valueOf(amn));
     }
 
-
-    @Override
-    public void showPlayerOwnEquipment() {
-
-    }
-
-    @Override
-    public void showCantWearEquipment(final int equipmentNumber) {
+    public void updateWearEquipmentStatus(final int equipmentNumber, final boolean canWear) {
         final boolean isWeared = armoryEquipmentAdapter.getEquipmentByPosition(equipmentNumber).isOwner(Equipment.Owner.PLAYER);
-
         final Button takeOnButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on);
-        final Button takeOffButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_out);
 
-        if (takeOnButton.isEnabled()) {
+        if (!canWear) {
             takeOnButton.setEnabled(false);
-
-            if (!isWeared) {
-                takeOffButton.setEnabled(false);
-            }
         }
-    }
-
-    @Override
-    public void showCanWearEquipment(int equipmentNumber) {
-        final boolean isWeared = armoryEquipmentAdapter.getEquipmentByPosition(equipmentNumber).isOwner(Equipment.Owner.PLAYER);
-
-        final Button takeOnButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on);
-        final Button takeOffButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_out);
-
-        if (takeOnButton.isEnabled()) return;
-        if (isWeared) return;
-        takeOnButton.setEnabled(true);
-        equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on).setEnabled(true);
-    }
-
-    @Override
-    public void showWearedEquipment() {
+        if (canWear && !isWeared) {
+            takeOnButton.setEnabled(true);
+        }
     }
 
     @Override

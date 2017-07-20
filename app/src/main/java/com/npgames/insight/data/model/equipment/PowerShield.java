@@ -2,30 +2,22 @@ package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.StatsChanger;
 
 public class PowerShield extends Equipment{
     public static final String SHARED_PROPERTY_NAME = "POWER_SHIELD";
     private final int NAME_RES_ID = R.string.armory_equipment_power_shield_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_power_shield_description;
-    private final int wereDebuff = -2;
+
+    private StatsChanger takeOnStatsChanger = new StatsChanger(0, -2);
+    private StatsChanger takeOffStatsChanger = new StatsChanger(0, 2);
 
     public PowerShield(Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
-        setDexDebuff(0);
-    }
-
-    @Override
-    public boolean wearChangeStats(Player player) {
-        if (!canWearEquipment(player)) return false;
-        player.addPrc(wereDebuff);
-        return true;
-    }
-
-    @Override
-    public void unwearChangeStats(Player player) {
-        player.addPrc(-wereDebuff);
+        setTakeOnStatsChanger(takeOnStatsChanger);
+        setTakeOffStatsChanger(takeOffStatsChanger);
     }
 
     @Override

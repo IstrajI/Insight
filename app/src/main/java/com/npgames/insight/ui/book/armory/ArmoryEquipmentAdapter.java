@@ -1,7 +1,9 @@
 package com.npgames.insight.ui.book.armory;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
@@ -38,8 +41,25 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
-        final String equipmentDescription = context.getResources().getString(equipment.getDescriptionResource());
         final String equipmentName = context.getResources().getString(equipment.getNameResource());
+
+        int image = R.drawable.blaster;
+        switch (position) {
+            case 0: image = R.drawable.blaster;
+                break;
+            case 1: image = R.drawable.blaster2;
+                break;
+            case 2: image = R.drawable.blaster_black;
+                break;
+            case 3: image = R.drawable.heal_orange;
+                break;
+            case 4: image = R.drawable.blaster_orange;
+                break;
+            case 5 : image = R.drawable.granade_orange;
+                break;
+        }
+
+        Glide.with(context).load(image).into(holder.pictureImageView);
 
         holder.textView.setText(equipmentName);
         if (equipments.get(position).getOwnedBy() == Equipment.Owner.ARRMORY) {
@@ -49,6 +69,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         }
         holder.takeOnButton.setEnabled(false);
         holder.takeOutButton.setEnabled(true);
+
     }
 
     @Override
@@ -90,6 +111,8 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             switch (v.getId()) {
                 case R.id.text_view_equipment_item_name:
                 case R.id.image_view_equipment_item_picture:
+                    Log.d("posj", ""+context.getResources().getDisplayMetrics().density);
+                    Log.d("dsa", ""+pictureImageView.getHeight() +" " +pictureImageView.getWidth());
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
                     break;
                 case R.id.button_equipment_take_on:

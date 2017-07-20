@@ -2,12 +2,14 @@ package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.StatsChanger;
 
 public abstract class Equipment {
     public static final String NAME = "NAME";
     public static final String DESCRIPTION = "DESCRIPTION";
 
-    private int dexDebuff = 0;
+    private StatsChanger takeOnStatsChanger;
+    private StatsChanger takeOffStatsChanger;
 
     private int NAME_RES_ID = R.string.armory_equipment_aid_kit_title;
     private int DESCRIPTION_RES_ID = R.string.armory_equipment_aid_kit_description;
@@ -27,8 +29,19 @@ public abstract class Equipment {
         this.ownedBy = ownedBy;
     }
 
-    public abstract boolean wearChangeStats(final Player player);
-    public abstract void unwearChangeStats(final Player player);
+
+    public StatsChanger getTakeOnStatsChanger() {
+        return takeOnStatsChanger;
+    }
+    public StatsChanger getTakeOffStatsChanger() {
+        return takeOffStatsChanger;
+    }
+    public void setTakeOnStatsChanger(StatsChanger takeOnStatsChanger) {
+        this.takeOnStatsChanger = takeOnStatsChanger;
+    }
+    public void setTakeOffStatsChanger(StatsChanger takeOffStatsChanger) {
+        this.takeOffStatsChanger = takeOffStatsChanger;
+    }
 
     public int getNameResource() {
         return NAME_RES_ID;
@@ -44,18 +57,7 @@ public abstract class Equipment {
         this.DESCRIPTION_RES_ID = descriptionResource;
     }
 
-    public int getDexDebuff() {
-        return this.dexDebuff;
-    }
-    public void setDexDebuff(final int dexDebuff) {
-        this.dexDebuff = dexDebuff;
-    }
-
     public abstract String getSharedPropertyName();
-
-    public boolean canWearEquipment(final Player player) {
-        return (player.getDex() + this.dexDebuff >= player.getDexMin());
-    }
 
     public boolean isOwner(final Owner owner) {
         return ownedBy == owner;

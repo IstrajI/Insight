@@ -4,33 +4,22 @@ import android.util.Log;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.model.StatsChanger;
 
 public class FlakJacket extends Equipment{
     public static final String SHARED_PROPERTY_NAME = "FLAK_JACKET";
     private final int NAME_RES_ID = R.string.armory_equipment_flak_jacket_title;
     private final int DESCRIPTION_RES_ID = R.string.armory_equipment_flak_jacket_description;
-    private final int wereDebuff = -2;
-    private final int dexDebuff = -2;
+
+    private StatsChanger takeOnStatsChanger = new StatsChanger(-2, 0);
+    private StatsChanger takeOffStatsChanger = new StatsChanger(2, 0);
 
     public FlakJacket(final Equipment.Owner ownedBy) {
         super(ownedBy);
         setNameResource(NAME_RES_ID);
         setDescriptionResource(DESCRIPTION_RES_ID);
-        setDexDebuff(dexDebuff);
-    }
-
-    @Override
-    public boolean wearChangeStats(final Player player) {
-        if (!canWearEquipment(player)) return false;
-        player.addDex(wereDebuff);
-        return true;
-    }
-
-    @Override
-    public void unwearChangeStats(final Player player) {
-        Log.d("tictac", ""+player.getDex());
-        player.addDex(-wereDebuff);
-        Log.d("after", ""+player.getDex());
+        setTakeOnStatsChanger(takeOnStatsChanger);
+        setTakeOffStatsChanger(takeOffStatsChanger);
     }
 
     @Override

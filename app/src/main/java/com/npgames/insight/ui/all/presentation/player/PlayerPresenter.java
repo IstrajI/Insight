@@ -2,7 +2,6 @@ package com.npgames.insight.ui.all.presentation.player;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -50,22 +49,22 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
     public void changeStat(final Paragraph.ActionTypes statName, final int statValue) {
         switch(statName) {
             case HP:
-                player.addHp(statValue);
+                player.setHp(player.getHp() + statValue);
                 break;
             case AUR:
-                player.addAur(statValue);
+                player.setAur(player.getAur() + statValue);
                 break;
             case PRC:
-                player.addPrc(statValue);
+                player.setPrc(player.getPrc() + statValue);
                 break;
             case DEX:
-                player.addDex(statValue);
+                player.setDex(player.getDex() + statValue);
                 break;
             case TIME:
-                player.addTime(statValue);
+                player.setTime(player.getTime() + statValue);
                 break;
             case AMN:
-                player.addAmn(statValue);
+                player.setAmn(player.getAmn() + statValue);
                 break;
         }
         loadStats();
@@ -87,56 +86,26 @@ public class PlayerPresenter extends MvpPresenter<PlayerView> {
             player.getAmn());
     }
 
-
-    public void wearEquipment(final Equipment equipment) {
-        equipment.setOwnedBy(Equipment.Owner.PLAYER);
-        equipment.wearChangeStats(player);
-        //checkCanWearStatus();
-        Log.d("name = ", ""+equipment.getSharedPropertyName());
-        //getViewState().showWearedEquipment();
-        getViewState().showStats(
-            player.getHp(),
-            player.getAur(),
-            player.getPrc(),
-            player.getDex(),
-            player.getTime(),
-            player.getAmn());
-        obtainWearStatus();
+    public void takeOnEquipment(final Equipment equipment) {
+        player.takeOnEquipment(equipment);
+        loadStats();
+        obtainWearEquipmentStatus();
     }
 
-    public void unwearEquipment(final Equipment equipment) {
-        equipment.setOwnedBy(Equipment.Owner.ARRMORY);
-        //checkCanWearStatus();
-        equipment.unwearChangeStats(player);
-        getViewState().showStats(
-                player.getHp(),
-                player.getAur(),
-                player.getPrc(),
-                player.getDex(),
-                player.getTime(),
-                player.getAmn());
-        obtainWearStatus();
+    public void takeOffEquipment(final Equipment equipment) {
+        player.takeOffEquipment(equipment);
+        loadStats();
+        obtainWearEquipmentStatus();
     }
 
-    public void obtainWearStatus() {
+    public void obtainWearEquipmentStatus() {
         final List<Equipment> equipments = player.getEquipments();
         for (int i = 0; i < equipments.size(); i++) {
-            if (!equipments.get(i).canWearEquipment(player)) {
-                getViewState().showCantWearEquipment(i);
+            if (player.canWearEquipment(equipments.get(i))) {
+                getViewState().updateWearEquipmentStatus(i, true);
                 continue;
             }
-            getViewState().showCanWearEquipment(i);
-        }
-    }
-
-    public void checkCanWearStatus() {
-        final List<Equipment> equipments = player.getEquipments();
-        for (int i = 0; i < equipments.size(); i++) {
-            if (!equipments.get(i).wearChangeStats(player)) {
-                getViewState().showCantWearEquipment(i);
-                return;
-            }
-            getViewState().showCanWearEquipment(i);
+            getViewState().updateWearEquipmentStatus(i, false);
         }
     }
 

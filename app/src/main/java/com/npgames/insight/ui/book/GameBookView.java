@@ -5,8 +5,4 @@ import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 
 public interface GameBookView extends MvpView{
-
-    void openActionsMenu();
-    void closeActionsMenu();
-
 }

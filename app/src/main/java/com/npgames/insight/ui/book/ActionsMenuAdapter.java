@@ -20,7 +20,7 @@ public class ActionsMenuAdapter extends BaseRecyclerAdapter<ActionsMenuAdapter.V
     private List<ActionItem> items;
     public enum ActionTypes {STATION, MEDBAY, ARMORY, INSPECT}
 
-    ActionsMenuAdapter() {
+    public ActionsMenuAdapter() {
         items = new ArrayList<>();
     }
 
