@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.npgames.insight.ui.book.GameBookActivity;
+import com.npgames.insight.ui.book.GameBookActivity2;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass")

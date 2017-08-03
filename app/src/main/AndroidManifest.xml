@@ -23,6 +23,7 @@
         <activity android:name=".ui.book.GameBookActivity"/>
         <activity android:name=".ui.player.CreatePlayerActivity" android:noHistory="true"/>
         <activity android:name=".ui.book.armory.ArmoryActivity" android:noHistory="true"/>
+        <activity android:name=".ui.book.GameBookActivity2" android:noHistory="true"/>
     </application>
 
 </manifest>

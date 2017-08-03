@@ -2,6 +2,7 @@ package com.npgames.insight.ui.book;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -175,8 +176,25 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         Log.d("meajured", "height = "+test.getMeasuredHeight() +" widht = " +test.getMeasuredWidth());
         playerPresenter.checkJumpsConditions(nextParagraph);
         jumpsAdapter.update(nextParagraph.getJumps());
+        Log.d("pop", ""+paragraphTextTextView.getLayout().getLineCount());
         paragraphTextTextView.setText(getString(nextParagraph.getTextId()));
+
+        Log.d("pop", ""+paragraphTextTextView.getLayout().getMeasuredHeight());
         scrollView.scrollTo(0, paragraphTextTextView.getTop());
+
+        final Paint.FontMetrics fontMetrics = paragraphTextTextView.getLayout().getPaint().getFontMetrics();
+
+        Log.d("fontmetrics", ""+fontMetrics.bottom +"  " +fontMetrics.top);
+        Log.d("fontmetrdsics", ""+fontMetrics.bottom +"  " +fontMetrics.top+"  gg:" +paragraphTextTextView.getLayout().getMeasuredHeight()+"  "+paragraphTextTextView.getMeasuredHeight());
+        Log.d("govno", ""+paragraphTextTextView.getLayout().getLineCount());
+        paragraphTextTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("fontmetrics", ""+fontMetrics.bottom +"  " +fontMetrics.top+"  gg:" +paragraphTextTextView.getHeight()+"  "+paragraphTextTextView.getMeasuredHeight());
+                int lineCount = paragraphTextTextView.getLayout().getLineCount();
+                Log.d("actual", ""+lineCount);
+            }
+        });
     }
 
     @Override

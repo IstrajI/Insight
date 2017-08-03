@@ -47,7 +47,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         switch (position) {
             case 0: image = R.drawable.blaster;
                 break;
-            case 1: image = R.drawable.blaster2;
+            case 1: image = R.drawable.laset_orange;
                 break;
             case 2: image = R.drawable.blaster_black;
                 break;
@@ -56,6 +56,10 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             case 4: image = R.drawable.blaster_orange;
                 break;
             case 5 : image = R.drawable.granade_orange;
+                break;
+            case 6 : image = R.drawable.flack_jakcet_black;
+                break;
+            case 7 : image = R.drawable.flack_jakcet_orange;
                 break;
         }
 
