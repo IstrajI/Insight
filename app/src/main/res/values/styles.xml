@@ -42,22 +42,72 @@
         <item name="textAppearance.Caption.PrimarySecondary">@style/TextAppearance.Caption.PrimarySecondary</item>
     </style>
 
+    <style name="A" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/a_sans</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="B" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/b_bicubik</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="C" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/c_casale</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="D" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/d_cell</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="E" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/e_glasstown_nbp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="F" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/f_hardpixel</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+
+    <style name="G" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/g_opirus_opik</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="H" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/h_pixograd</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="I" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/docker_one</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Regular">
+        <item name="android:fontFamily">@font/g_opirus_opik</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
     <!-- Fonts -->
     <style name="TextAppearance.Base.Regular" parent="android:TextAppearance">
-        <item name="fontPath">font</item>
+        <item name="android:fontFamily">@font/play_regular</item>
     </style>
 
     <style name="TextAppearance.Base.Medium" parent="android:TextAppearance">
-        <item name="fontPath">@string/font_medium_path</item>
+        <item name="fontPath">@font/play_regular</item>
     </style>
 
     <style name="TextAppearance.Base.Light" parent="android:TextAppearance">
-        <item name="fontPath">@string/font_light_path</item>
+        <item name="fontPath">@font/play_regular</item>
     </style>
 
     <style name="TextAppearance.Base.Thin" parent="android:TextAppearance">
-        <item name="fontPath">@string/font_thin_path</item>
+        <item name="fontPath">@font/play_regular</item>
     </style>
 
     <!-- Display 4 TextAppearance -->
@@ -129,7 +179,7 @@
     </style>
 
     <style name="TextAppearance.Body2.Primary" parent="TextAppearance.Body2.Base">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <!-- Body 1 TextAppearance -->
@@ -138,7 +188,7 @@
     </style>
 
     <style name="TextAppearance.Body1.Primary" parent="TextAppearance.Body1.Base">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <style name="TextAppearance.Body1.PrimarySecondary" parent="TextAppearance.Body1.Base">
@@ -153,7 +203,4 @@
     <style name="TextAppearance.Caption.PrimarySecondary" parent="TextAppearance.Caption.Base">
         <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
     </style>
-
-
-
 </resources>

@@ -1,5 +1,6 @@
 package com.npgames.insight.data.model;
 
+import android.support.annotation.StringDef;
 import android.util.Log;
 
 import com.npgames.insight.data.model.equipment.AidKit;
@@ -17,6 +18,7 @@ import com.npgames.insight.data.model.equipment.Targeter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Player {
     public static final int INIT_HP = 16;
@@ -26,31 +28,24 @@ public class Player {
     public static final int INIT_TIME = 30;
     public static final int INIT_AMN = 8;
 
-    public enum Stats {HP, AUR, DEX, PRC, TIME, AMN}
-
     private int[] visittedParagraphs;
-
     private int paragraph;
-    private int hp;
-    private int aur;
-    private int dex;
-    private int prc;
-
-    private int time;
-    private int amn;
+    private com.npgames.insight.data.model.Stats stats;
 
     private List<Equipment> equipments;
-    private List<String> keys;
+    //TODO: add saving
+    private Set<String> keywords;
     private List<String> locations;
 
     public Player() {
-        this.hp = INIT_HP;
-        this.aur = INIT_AUR;
-        this.dex = INIT_DEX;
-        this.prc = INIT_PRC;
-        this.time = INIT_TIME;
-        this.amn = INIT_AMN;
-
+        stats = com.npgames.insight.data.model.Stats.builder()
+                .setHp(INIT_HP)
+                .setAur(INIT_AUR)
+                .setTime(INIT_TIME)
+                .setDex(INIT_DEX)
+                .setPrc(INIT_PRC)
+                .setAmn(INIT_AMN)
+                .build();
 
         equipments = new ArrayList<>();
         equipments.add(new AidKit(Equipment.Owner.ARRMORY));
@@ -67,12 +62,12 @@ public class Player {
     }
 
     public void changeStats(final StatsChanger statsChanger) {
-        hp = getHp() + statsChanger.getHp();
-        dex = getDex() + statsChanger.getDex();
-        amn = getAmn() + statsChanger.getAmn();
-        aur = getAur() + statsChanger.getAur();
-        prc = getPrc() + statsChanger.getPrc();
-        time = getTime() + statsChanger.getTime();
+        stats.setHp(stats.getHp() + statsChanger.getHp());
+        stats.setDex(stats.getDex() + statsChanger.getDex());
+        stats.setAmn(stats.getAmn() + statsChanger.getAmn());
+        stats.setAur(stats.getAur() + statsChanger.getAur());
+        stats.setPrc(stats.getPrc() + statsChanger.getPrc());
+        stats.setTime(stats.getTime() + statsChanger.getTime());
     }
 
     public void takeOnEquipment(final Equipment equipment) {
@@ -88,8 +83,8 @@ public class Player {
     public boolean canWearEquipment(final Equipment equipment) {
         final StatsChanger statsChanger = equipment.getTakeOnStatsChanger();
 
-        Log.d("result ", ""+(dex + statsChanger.getDex() >= getDexMin()));
-        return (dex + statsChanger.getDex() >= getDexMin());
+        Log.d("result ", ""+(stats.getDex() + statsChanger.getDex() >= getDexMin()));
+        return (stats.getDex() + statsChanger.getDex() >= getDexMin());
     }
 
     public void dropEquipment(final int position) {
@@ -106,53 +101,20 @@ public class Player {
         return false;
     }
 
-    public int getHp() {
-        return hp;
-    }
-    public void setHp(final int hp) {
-        this.hp = hp >= 22 ? 22 : hp;
+    public com.npgames.insight.data.model.Stats getStats() {
+        return stats;
     }
 
-    public int getAur() {
-        return aur;
-    }
-    public void setAur(final int aur) {
-        this.aur = aur;
+    public void addKeyword(@KeyWord.KeyWords String keyword) {
+        keywords.add(keyword);
     }
 
-    public int getDex() {
-        return dex;
-    }
-    public void setDex(final int dex) {
-        this.dex = dex;
-    }
-
-    public int getPrc() {
-        return prc;
-    }
-    public void setPrc(final int prc) {
-        this.prc = prc;
-    }
 
     public int getParagraph() {
         return paragraph;
     }
     public void setParagraph(final int paragraph) {
         this.paragraph = paragraph;
-    }
-
-    public int getTime() {
-        return time;
-    }
-    public void setTime(final int time) {
-        this.time = time;
-    }
-
-    public int getAmn() {
-        return amn;
-    }
-    public void setAmn(final int amn) {
-        this.amn = amn;
     }
 
     public List<Equipment> getEquipments() {
@@ -165,5 +127,19 @@ public class Player {
     public int getDexMin() {
         final int dexMin = 5;
         return dexMin;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // -------------------------------  KeyWords ---------------------------------------------------
+    public void addKeyWord(final @KeyWord.KeyWords String keyword) {
+        keywords.add(keyword);
+    }
+
+    public Set<String> getKeyWords() {
+        return keywords;
+    }
+
+    public void setKeyWords(final Set<String> keywords) {
+        this.keywords = keywords;
     }
 }

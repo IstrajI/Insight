@@ -2,6 +2,7 @@ package com.npgames.insight.ui.player;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,9 +17,9 @@ import butterknife.OnClick;
 
 public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView, View.OnClickListener {
     @BindView(R.id.text_view_game_paragraph_text)
-    protected DocumentView overviewDocumentView;
-    @BindView(R.id.document_view_create_character_skill_info)
-    protected DocumentView skillInfoDocumentView;
+    protected TextView overviewTextView;
+    @BindView(R.id.text_view_create_character_skill_info)
+    protected TextView skillInfoTextView;
     @BindView(R.id.text_view_create_character_hp_points)
     protected TextView hpPointsTextView;
     @BindView(R.id.text_view_create_character_aur_points)
@@ -44,18 +45,12 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
 
     @Override
     protected void bindViews() {
-        initDocumentView(overviewDocumentView);
-        initDocumentView(skillInfoDocumentView);
         continueButton.setOnClickListener(this);
 
-        overviewDocumentView.setText(getResources().getString(R.string.create_character_overview));
-        skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_hp));
-    }
+        overviewTextView.setText(getResources().getString(R.string.create_character_overview));
+        skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_hp));
 
-    private void initDocumentView(final DocumentView documentView) {
-        documentView.getDocumentLayoutParams().setTextAlignment(TextAlignment.JUSTIFIED);
-        documentView.getDocumentLayoutParams().setTextColor(getResources().getColor(R.color.colorTextPrimary));
-        documentView.getDocumentLayoutParams().setTextSize(16);
+        Log.d("TestPish", "onBindViewFinished");
     }
 
     @OnClick({R.id.button_create_character_dex_points_plus,
@@ -91,16 +86,16 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
     public void onMoreClick(final Button moreButton) {
         switch (moreButton.getId()) {
             case R.id.button_create_character_hp_more:
-                skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_hp));
+                skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_hp));
                 break;
             case R.id.button_create_character_aur_more:
-                skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_aur));
+                skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_aur));
                 break;
             case R.id.button_create_character_dex_more:
-                skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_dex));
+                skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_dex));
                 break;
             case R.id.button_create_character_prc_more:
-                skillInfoDocumentView.setText(getResources().getString(R.string.create_character_skill_info_prc));
+                skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_prc));
                 break;
         }
     }

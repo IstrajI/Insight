@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="vertical"
+    android:id="@+id/frame_layout_page_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_view_game_book_measuring"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_16"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="18sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="@dimen/spacing_16"
+        android:id="@+id/recycler_view_adapter_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

@@ -1,6 +1,9 @@
 package com.npgames.insight.data.model;
 
-public class Jump {
+import java.io.Serializable;
+
+@Deprecated
+public class Jump implements Serializable{
     private String id;
     private String text;
     private boolean status;

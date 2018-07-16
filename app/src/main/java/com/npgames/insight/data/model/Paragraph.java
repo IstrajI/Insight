@@ -7,14 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public class Paragraph {
     private int id;
     private int textId;
     private List<Jump> jumps;
     private Map<Paragraph.ActionTypes, Integer> actions;
     public enum ActionTypes {COND_NFT_TIME, TIME, HP, AUR, DEX, PRC, AMN}
+    private List<String> pages;
+    private List<List<Jump>> pagJumps;
 
     public final static int INIT_PARAGRAPH = 500;
+
+    public Paragraph(final List<List<Jump>> pagJumps, final List<String> pages) {
+        this.pages = pages;
+        this.pagJumps = pagJumps;
+    }
 
     public Paragraph(final int id, final List<Jump> jumps, final int paragraphTextId,
                      final Map<Paragraph.ActionTypes, Integer> actions) {
@@ -55,4 +63,5 @@ public class Paragraph {
     public void setActions(Map<Paragraph.ActionTypes, Integer> actions) {
         this.actions = actions;
     }
+
 }

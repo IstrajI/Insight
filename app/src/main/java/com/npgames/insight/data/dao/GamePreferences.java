@@ -18,6 +18,7 @@ import com.npgames.insight.data.model.equipment.PowerShield;
 import com.npgames.insight.data.model.equipment.Targeter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GamePreferences {
@@ -33,7 +34,7 @@ public class GamePreferences {
     private final String PLAYER_PRC = "PLAYER_PRC";
     private final String PLAYER_TIME = "PLAYER_TIME";
     private final String PLAYER_AMN = "PLAYER_AMN";
-
+    private final String KEYWORDS = "KEYWORDS";
     private final String OWNER_KEY = "_OWNER : ";
 
     public static GamePreferences getInstance(final Context appContext) {
@@ -46,25 +47,26 @@ public class GamePreferences {
 
     public Player loadPlayer() {
         final Player player = new Player();
-        player.setHp(sharedPreferences.getInt(PLAYER_HP, Player.INIT_HP));
-        player.setPrc(sharedPreferences.getInt(PLAYER_PRC, Player.INIT_PRC));
-        player.setAur(sharedPreferences.getInt(PLAYER_AUR, Player.INIT_AUR));
-        player.setDex(sharedPreferences.getInt(PLAYER_DEX, Player.INIT_DEX));
-        player.setTime(sharedPreferences.getInt(PLAYER_TIME, Player.INIT_TIME));
-        player.setAmn(sharedPreferences.getInt(PLAYER_AMN, Player.INIT_AMN));
-
+        player.getStats().setHp(sharedPreferences.getInt(PLAYER_HP, Player.INIT_HP));
+        player.getStats().setPrc(sharedPreferences.getInt(PLAYER_PRC, Player.INIT_PRC));
+        player.getStats().setAur(sharedPreferences.getInt(PLAYER_AUR, Player.INIT_AUR));
+        player.getStats().setDex(sharedPreferences.getInt(PLAYER_DEX, Player.INIT_DEX));
+        player.getStats().setTime(sharedPreferences.getInt(PLAYER_TIME, Player.INIT_TIME));
+        player.getStats().setAmn(sharedPreferences.getInt(PLAYER_AMN, Player.INIT_AMN));
+        player.setKeyWords(sharedPreferences.getStringSet(KEYWORDS, Collections.EMPTY_SET));
         player.setEquipments(loadEquipment());
         return player;
     }
 
     public void savePlayer(final Player player) {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(PLAYER_HP, player.getHp());
-        editor.putInt(PLAYER_AUR, player.getAur());
-        editor.putInt(PLAYER_DEX, player.getDex());
-        editor.putInt(PLAYER_PRC, player.getPrc());
-        editor.putInt(PLAYER_TIME, player.getTime());
-        editor.putInt(PLAYER_AMN, player.getAmn());
+        editor.putInt(PLAYER_HP, player.getStats().getHp());
+        editor.putInt(PLAYER_AUR, player.getStats().getAur());
+        editor.putInt(PLAYER_DEX, player.getStats().getDex());
+        editor.putInt(PLAYER_PRC, player.getStats().getPrc());
+        editor.putInt(PLAYER_TIME, player.getStats().getTime());
+        editor.putInt(PLAYER_AMN, player.getStats().getAmn());
+        editor.putStringSet(KEYWORDS, player.getKeyWords());
         editor.apply();
     }
 

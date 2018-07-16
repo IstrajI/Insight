@@ -1,15 +1,14 @@
 package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
-import com.npgames.insight.data.model.Player;
-import com.npgames.insight.data.model.StatsChanger;
+import com.npgames.insight.data.model.Stats;
 
 public abstract class Equipment {
     public static final String NAME = "NAME";
     public static final String DESCRIPTION = "DESCRIPTION";
 
-    private StatsChanger takeOnStatsChanger;
-    private StatsChanger takeOffStatsChanger;
+    private Stats takeOnStatsChanger;
+    private Stats takeOffStatsChanger;
 
     private int NAME_RES_ID = R.string.armory_equipment_aid_kit_title;
     private int DESCRIPTION_RES_ID = R.string.armory_equipment_aid_kit_description;
@@ -30,16 +29,16 @@ public abstract class Equipment {
     }
 
 
-    public StatsChanger getTakeOnStatsChanger() {
+    public Stats getTakeOnStatsChanger() {
         return takeOnStatsChanger;
     }
-    public StatsChanger getTakeOffStatsChanger() {
+    public Stats getTakeOffStatsChanger() {
         return takeOffStatsChanger;
     }
-    public void setTakeOnStatsChanger(StatsChanger takeOnStatsChanger) {
+    public void setTakeOnStatsChanger(Stats takeOnStatsChanger) {
         this.takeOnStatsChanger = takeOnStatsChanger;
     }
-    public void setTakeOffStatsChanger(StatsChanger takeOffStatsChanger) {
+    public void setTakeOffStatsChanger(Stats takeOffStatsChanger) {
         this.takeOffStatsChanger = takeOffStatsChanger;
     }
 

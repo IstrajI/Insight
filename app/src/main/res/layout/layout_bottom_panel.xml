@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/button_bottom_panel_ui_top_center"
+        android:scaleType="centerInside"
+        android:background="@drawable/bottom2_new"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_margin="@dimen/spacing_8"
+        android:id="@+id/button_bottom_panel_find"
+        android:background="@drawable/actions_left_find_button_2_xxx"
+        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_station"
+        android:layout_width="@dimen/size_bottom_panel_jumps_button"
+        android:layout_height="@dimen/size_bottom_panel_jumps_button"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <Button
+        android:layout_margin="@dimen/spacing_8"
+        android:id="@+id/button_bottom_panel_station"
+        android:background="@drawable/actions_center_station_button_2_xxx"
+        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_find"
+        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_med_bay"
+        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center"
+        android:layout_width="@dimen/size_bottom_panel_jumps_button"
+        android:layout_height="@dimen/size_bottom_panel_jumps_button" />
+
+
+    <Button
+        android:layout_margin="@dimen/spacing_8"
+        android:id="@+id/button_bottom_panel_med_bay"
+        android:background="@drawable/actions_center_med_bay_button_2_xxx"
+        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_station"
+        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_armory"
+        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center"
+        android:layout_width="@dimen/size_bottom_panel_jumps_button"
+        android:layout_height="@dimen/size_bottom_panel_jumps_button" />
+
+    <Button
+        android:layout_margin="@dimen/spacing_8"
+        android:id="@+id/button_bottom_panel_armory"
+        android:background="@drawable/actions_right_armory_button_4_xxx"
+        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_med_bay"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center"
+        android:layout_width="@dimen/size_bottom_panel_jumps_button"
+        android:layout_height="@dimen/size_bottom_panel_jumps_button" />
+</android.support.constraint.ConstraintLayout>

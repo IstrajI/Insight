@@ -1,22 +1,25 @@
 package com.npgames.insight.data.dao;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.util.Log;
-import android.util.Pair;
 
+import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
+import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Jump;
 import com.npgames.insight.data.model.Paragraph;
-import com.npgames.insight.data.model.Player;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParagraphParser {
+    private static final int ZERO_PARAGRAPH = 0;
+
     private static final String RES_ARRAY_TYPE = "array";
     private static final String RES_STRING_TYPE = "string";
 
@@ -26,22 +29,65 @@ public class ParagraphParser {
     private static final String ACTIONS_KEYS_PATTERN = "p%d_aKEYS";
     private static final String ACTIONS_VALUES_PATTERN = "p%d_aVALUES";
 
-    public static Paragraph parse(final Context context, final int paragraph) {
-        final StringBuilder formatStr = new StringBuilder();
-        final Formatter formatter = new Formatter(formatStr);
+    public static List<BlockArea> parse(final String paragraphText) {
+        final Pattern jumpsPattern = Pattern.compile("\\#(\\d+)\\#");
+        final Matcher jumpsMatcher = jumpsPattern.matcher(paragraphText);
 
-        final int paragraphTextId = getResId(context, formatStr, RES_STRING_TYPE, formatter, PARAGRAPH_TEXT_PATTERN, paragraph);
-        final List<Jump> jumps = parseJumps(context, formatStr, formatter, paragraph);
-        final Map<Paragraph.ActionTypes, Integer> actions = parseActions(context, formatStr, formatter, paragraph);
+        int lastMatchEndPosition = 0;
 
-        return new Paragraph(paragraph, jumps, paragraphTextId, actions);
+        final List<BlockArea> paragraphBlocks = new ArrayList<>();
+
+        while (jumpsMatcher.find()) {
+            final int jumpTextStartPosition = jumpsMatcher.start();
+            final int jumpsTextEndPosition = jumpsMatcher.end();
+
+            final String textBlockText = cutExtremalSpaces(paragraphText.substring(lastMatchEndPosition, jumpTextStartPosition));
+            final BlockText textBlock = new BlockText(textBlockText);
+            paragraphBlocks.add(textBlock);
+
+            final String jumpBlockText = cutExtremalSharps(paragraphText.substring(jumpTextStartPosition, jumpsTextEndPosition));
+            final BlockButton buttonBlock = new BlockButton(jumpBlockText);
+            paragraphBlocks.add(buttonBlock);
+
+            lastMatchEndPosition = jumpsTextEndPosition;
+        }
+
+        final String tail = paragraphText.substring(lastMatchEndPosition, paragraphText.length());
+
+        if (tail.length() != 0) {
+            final BlockText textBlock = new BlockText(tail);
+            paragraphBlocks.add(textBlock);
+        }
+
+        return paragraphBlocks;
+    }
+
+    public static String formatParagraphResName(final int paragraphNumber) {
+        final Formatter paragraphFormatter = new Formatter();
+        return paragraphFormatter.format(PARAGRAPH_TEXT_PATTERN, paragraphNumber).toString();
+        //final int paragraphTextId = getResId(context, formatStr, RES_STRING_TYPE, formatter, PARAGRAPH_TEXT_PATTERN, paragraph);
+
     }
 
     private static int getResId(final Context context, final StringBuilder formatterString, final String type,  final Formatter formatter, final String pattern, int paragraphNumber) {
         formatter.format(pattern, paragraphNumber);
         final int resId = context.getResources().getIdentifier(formatterString.toString(), type, context.getPackageName());
+
         formatterString.setLength(0);
         return resId;
+    }
+
+    private static String cutExtremalSpaces(final String text) {
+        String resultText = text;
+        if (text.charAt(0) == ' ') resultText = text.substring(1, text.length());
+        if (text.charAt(text.length() - 1) == ' ') resultText = text.substring(0, text.length() - 1);
+        return resultText;
+    }
+
+    private static String cutExtremalSharps(final String text) {
+        String resultText = text;
+        resultText = text.substring(1, text.length() - 1);
+        return resultText;
     }
 
     private static List<Jump> parseJumps(final Context context,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="font_regular_path" translatable="false">sans-serif</string>
     <string name="font_medium_path" translatable="false">sans-serif-medium</string>
     <string name="font_light_path" translatable="false">sans-serif-light</string>
     <string name="font_thin_path" translatable="false">sans-serif-thin</string>

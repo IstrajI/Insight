@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.npgames.insight">
 
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23">
+    </uses-sdk>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +28,6 @@
         <activity android:name=".ui.book.GameBookActivity"/>
         <activity android:name=".ui.player.CreatePlayerActivity" android:noHistory="true"/>
         <activity android:name=".ui.book.armory.ArmoryActivity" android:noHistory="true"/>
-        <activity android:name=".ui.book.GameBookActivity2" android:noHistory="true"/>
     </application>
 
 </manifest>

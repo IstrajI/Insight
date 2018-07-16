@@ -2,12 +2,12 @@
     <string name="app_name">Insight</string>
 
     <!-- Layout Stats -->
-    <string name="stats_panel_time_title">Время</string>
-    <string name="stats_panel_am_title">Амнезия</string>
-    <string name="stats_panel_hp_title">Здоровье</string>
-    <string name="stats_panel_aur_title">Аура</string>
-    <string name="stats_panel_dex_title">Ловкость</string>
-    <string name="stats_panel_prc_title">Точность</string>
+    <string name="stats_panel_time_title">ВРМ</string>
+    <string name="stats_panel_am_title">ПАМ</string>
+    <string name="stats_panel_hp_title">ЗДР</string>
+    <string name="stats_panel_aur_title">АУР</string>
+    <string name="stats_panel_dex_title">ЛОВ</string>
+    <string name="stats_panel_prc_title">ТОЧ</string>
 
     <!-- Home Screen -->
     <string name="home_screen_continue_title">Continue</string>
@@ -60,6 +60,6 @@
     <string name="create_character_skill_info_dex">Ловкость – это умение двигаться, преодолевать препятствия, общая подвижность. Чем она выше, тем вы быстрее и выносливее. В данной игре на величину Ловкости будет влиять количество снаряжения, которое вы несёте на себе.</string>
 
     <string name="create_character_reset_button_title">Сбросить</string>
-    <string name="create_character_continue_button_title">Продолжитьб</string>
+    <string name="create_character_continue_button_title">Продолжить</string>
 
 </resources>

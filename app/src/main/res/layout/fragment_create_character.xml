@@ -19,20 +19,12 @@
         android:text="@string/create_character_overview_title" />
 
 
-    <com.bluejamesbond.text.DocumentView
+    <TextView
         android:id="@+id/text_view_game_paragraph_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_8"
-        android:layout_marginBottom="@dimen/spacing_8"
-        ext:documentView_antialias="true"
-        ext:documentView_cacheConfig="auto_quality"
-        ext:documentView_reverse="false"
-        ext:documentView_textAlignment="justified"
-        ext:documentView_textColor="@color/colorTextPrimary"
-        ext:documentView_textFormat="plain"
-        ext:documentView_textSize="18sp"
-        ext:documentView_textSubPixel="true" />
+        android:layout_marginBottom="@dimen/spacing_8" />
 
     <TextView
         android:layout_marginBottom="@dimen/spacing_8"
@@ -269,17 +261,15 @@
 
     </LinearLayout>
 
-    <com.bluejamesbond.text.DocumentView
+    <TextView
         android:layout_marginTop="@dimen/spacing_8"
-        android:id="@+id/document_view_create_character_skill_info"
+        android:id="@+id/text_view_create_character_skill_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Switch
+        android:id="@+id/switch1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ext:documentView_antialias="true"
-        ext:documentView_cacheConfig="auto_quality"
-        ext:documentView_reverse="false"
-        ext:documentView_textAlignment="justified"
-        ext:documentView_textColor="@color/colorTextPrimary"
-        ext:documentView_textFormat="plain"
-        ext:documentView_textSize="18sp"
-        ext:documentView_textSubPixel="true" />
+        android:text="Switch" />
 </LinearLayout>
