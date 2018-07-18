@@ -81,7 +81,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     }
 
     public void checkConditionActions(final int paragraphNumber) {
-        final StatsChanger statsChanger = paragraphActionsChecker.checkParagraph(paragraphNumber);
+        //final StatsChanger statsChanger = paragraphActionsChecker.checkParagraph(paragraphNumber);
         //TODO: apply statschanger
         //playerRepository.
 

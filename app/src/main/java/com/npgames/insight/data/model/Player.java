@@ -70,22 +70,22 @@ public class Player {
         stats.setTime(stats.getTime() + statsChanger.getTime());
     }
 
-    public void takeOnEquipment(final Equipment equipment) {
+/*    public void takeOnEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.PLAYER);
         changeStats(equipment.getTakeOnStatsChanger());
-    }
+    }*/
 
-    public void takeOffEquipment(final Equipment equipment) {
+/*    public void takeOffEquipment(final Equipment equipment) {
         equipment.setOwnedBy(Equipment.Owner.ARRMORY);
         changeStats(equipment.getTakeOffStatsChanger());
-    }
+    }*/
 
-    public boolean canWearEquipment(final Equipment equipment) {
+/*    public boolean canWearEquipment(final Equipment equipment) {
         final StatsChanger statsChanger = equipment.getTakeOnStatsChanger();
 
         Log.d("result ", ""+(stats.getDex() + statsChanger.getDex() >= getDexMin()));
         return (stats.getDex() + statsChanger.getDex() >= getDexMin());
-    }
+    }*/
 
     public void dropEquipment(final int position) {
         equipments.get(position).setOwnedBy(Equipment.Owner.TRASH);

@@ -26,9 +26,9 @@ public class PlayerRepository {
     }
 
     PlayerRepository(final Context context) {
-        player = gamePreferences.loadPlayer();
         gamePreferences = GamePreferences.getInstance(context);
-        paragraphActionsChecker = new ParagraphActionsChecker();
+        player = gamePreferences.loadPlayer();
+        //paragraphActionsChecker = new ParagraphActionsChecker();
         paragraphJumpsChecker = new ParagraphJumpsChecker(player);
     }
 
@@ -67,12 +67,12 @@ public class PlayerRepository {
     }
 
     public void takeOnEquipment(final Equipment equipment) {
-        player.takeOnEquipment(equipment);
+        //layer.takeOnEquipment(equipment);
         obtainWearEquipmentStatus();
     }
 
     public void takeOffEquipment(final Equipment equipment) {
-        player.takeOffEquipment(equipment);
+        //player.takeOffEquipment(equipment);
         obtainWearEquipmentStatus();
     }
 

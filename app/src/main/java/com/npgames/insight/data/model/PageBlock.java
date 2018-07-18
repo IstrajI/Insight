@@ -18,10 +18,6 @@ public class PageBlock {
     @IntDef({TEXT, BUTTON, IMAGE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface BlockTypes{}
-    private enum TYPE {
-        TEXT,
-        BUTTON,
-        IMAGE}
 
     public @PageBlock.BlockTypes int type;
     public String content;

@@ -25,7 +25,6 @@ public class BlockText extends BlockArea implements Serializable{
     public transient StaticLayout layout;
     public @BlockArea.BlockType int type = TEXT;
 
-
     public BlockText(final String text) {
         content = text;
         layout = new StaticLayout(text,
@@ -36,8 +35,6 @@ public class BlockText extends BlockArea implements Serializable{
                 DEF_SPACING_ADD,
                 INCLUDE_PADDING);
     }
-
-
 
     @Override
     public int getViewHeight() {

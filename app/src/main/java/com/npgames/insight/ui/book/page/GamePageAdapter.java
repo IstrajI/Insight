@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.page;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.npgames.insight.R;
+import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.PageBlock;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
@@ -36,7 +38,9 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             case 1:
                 final View buttonViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_button_item, parent, false);
                 return new ButtonViewHolder(buttonViewHolderLayout);
-            case 2:
+            case 3:
+                final View actionViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_button_item, parent, false);
+                return new ActionsViewHolder(actionViewHolderLayout);
         }
         return null;
     }
@@ -52,16 +56,18 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
         final String content = blocks.get(position).content;
         switch(holder.getItemViewType()) {
-            case PageBlock.TEXT:
+            case BlockArea.BlockType.TEXT:
                 ((TextViewHolder)holder).textTextView.setText(content);
                 break;
-            case PageBlock.BUTTON:
+            case BlockArea.BlockType.BUTTON:
                 final ButtonViewHolder buttonViewHolder = (ButtonViewHolder) holder;
                 buttonViewHolder.jumpButton.setText(blocks.get(position).content);
 
                 break;
-            case PageBlock.IMAGE:
-                //((ImageViewHolder) holder).
+            case BlockArea.BlockType.ACTION:
+                Log.d("TestPish", "block = content " +blocks.get(position).content +" code= " +((BlockAction) blocks.get(position)).getCode());
+                final ActionsViewHolder actionViewHolder = (ActionsViewHolder) holder;
+                actionViewHolder.actionButton.setText(blocks.get(position).content);
         }
     }
 
@@ -108,6 +114,22 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         @Override
         public void onClick(final View v) {
            onItemClickListener.onItemClick(v, getAdapterPosition(), GamePageAdapter.this);
+        }
+    }
+
+    class ActionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        @BindView(R.id.adapter_game_page_button_jump_button)
+        protected Button actionButton;
+
+        public ActionsViewHolder(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            actionButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View v) {
+            onItemClickListener.onItemClick(v, getAdapterPosition(), GamePageAdapter.this);
         }
     }
 

@@ -44,7 +44,7 @@ public class Pagination {
     }
 
     private void paginateTooLargeBlock(final List<Page> pages, final BlockArea block, final int remainingHeight) {
-        if (block.type == BlockArea.TEXT) {
+        if (block.type == BlockArea.BlockType.TEXT) {
             paginateText(block, pages, remainingHeight);
         } else {
             Log.d("TestPish", "here");

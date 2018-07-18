@@ -34,7 +34,7 @@ public class ParagraphActionsChecker {
         actions.put(193, () -> paragraph193Action());
     }
 
-    public StatsChanger checkParagraph(final int paragraphNumber) {
+/*    public StatsChanger checkParagraph(final int paragraphNumber) {
         try {
             statsChanger = actions.get(paragraphNumber).call();
             statsChanger = (statsChanger != null) ? statsChanger : new StatsChanger();
@@ -43,7 +43,7 @@ public class ParagraphActionsChecker {
         }
 
         return statsChanger;
-    }
+    }*/
 
     private Stats paragraph5Action() {
         return Stats.builder()

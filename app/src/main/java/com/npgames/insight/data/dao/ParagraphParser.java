@@ -1,7 +1,9 @@
 package com.npgames.insight.data.dao;
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
+import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
@@ -33,23 +35,54 @@ public class ParagraphParser {
         final Pattern jumpsPattern = Pattern.compile("\\#(\\d+)\\#");
         final Matcher jumpsMatcher = jumpsPattern.matcher(paragraphText);
 
+        final Pattern actionPattern = Pattern.compile("\\^(\\d+)\\|?(.+)\\^");
+        final Matcher actionMatcher = actionPattern.matcher(paragraphText);
+
         int lastMatchEndPosition = 0;
 
         final List<BlockArea> paragraphBlocks = new ArrayList<>();
+        boolean actionFound = actionMatcher.find();
+        boolean jumpsFound = jumpsMatcher.find();
 
-        while (jumpsMatcher.find()) {
-            final int jumpTextStartPosition = jumpsMatcher.start();
-            final int jumpsTextEndPosition = jumpsMatcher.end();
 
-            final String textBlockText = cutExtremalSpaces(paragraphText.substring(lastMatchEndPosition, jumpTextStartPosition));
+        final boolean test = true || false;
+
+        while (jumpsFound || actionFound) {
+            final int matchStartPosition;
+            final int matchEndPosition;
+
+            final BlockArea clickBlock;
+
+            if ((jumpsFound && !actionFound)
+                    || (jumpsFound && (jumpsMatcher.start() < actionMatcher.start()))) {
+                matchStartPosition = jumpsMatcher.start();
+                matchEndPosition = jumpsMatcher.end();
+
+                final String clickBlockText = cutExtremalSharps(paragraphText.substring(matchStartPosition, matchEndPosition));
+                clickBlock = new BlockButton(clickBlockText);
+
+                jumpsFound = jumpsMatcher.find();
+            } else {
+                matchStartPosition = actionMatcher.start();
+                matchEndPosition = actionMatcher.end();
+
+                final int actionBlockCode = Integer.parseInt(actionMatcher.group(1));
+
+                final String actionBlockText = actionMatcher.group(2);
+                Log.d("TestPish", "myCheck = " +actionBlockText);
+                clickBlock = new BlockAction(actionBlockText, actionBlockCode);
+
+                actionFound = actionMatcher.find();
+            }
+
+            final String substringText = paragraphText.substring(lastMatchEndPosition, matchStartPosition);
+
+            final String textBlockText = cutExtremalSpaces(substringText);
             final BlockText textBlock = new BlockText(textBlockText);
             paragraphBlocks.add(textBlock);
+            paragraphBlocks.add(clickBlock);
 
-            final String jumpBlockText = cutExtremalSharps(paragraphText.substring(jumpTextStartPosition, jumpsTextEndPosition));
-            final BlockButton buttonBlock = new BlockButton(jumpBlockText);
-            paragraphBlocks.add(buttonBlock);
-
-            lastMatchEndPosition = jumpsTextEndPosition;
+            lastMatchEndPosition = matchEndPosition;
         }
 
         final String tail = paragraphText.substring(lastMatchEndPosition, paragraphText.length());
