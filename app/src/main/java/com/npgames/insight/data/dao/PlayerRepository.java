@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.StatsChanger;
 import com.npgames.insight.data.model.equipment.Equipment;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,19 +50,12 @@ public class PlayerRepository {
         player.getStats().setDex(dex);
     }
 
-    public void changeStat(final StatsChanger statsChanger) {
+    public void changeStat(final Stats statsChanger) {
         player.changeStats(statsChanger);
     }
 
     public Stats getStats() {
-        return Stats.builder()
-                .setAmn(player.getStats().getAmn())
-                .setAur(player.getStats().getAur())
-                .setDex(player.getStats().getDex())
-                .setHp(player.getStats().getHp())
-                .setPrc(player.getStats().getPrc())
-                .setTime(player.getStats().getTime())
-                .build();
+        return player.getStats();
     }
 
     public void takeOnEquipment(final Equipment equipment) {

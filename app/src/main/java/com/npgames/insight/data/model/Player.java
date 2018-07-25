@@ -1,8 +1,5 @@
 package com.npgames.insight.data.model;
 
-import android.support.annotation.StringDef;
-import android.util.Log;
-
 import com.npgames.insight.data.model.equipment.AidKit;
 import com.npgames.insight.data.model.equipment.Beam;
 import com.npgames.insight.data.model.equipment.Blaster;
@@ -30,7 +27,7 @@ public class Player {
 
     private int[] visittedParagraphs;
     private int paragraph;
-    private com.npgames.insight.data.model.Stats stats;
+    private Stats stats;
 
     private List<Equipment> equipments;
     //TODO: add saving
@@ -38,7 +35,7 @@ public class Player {
     private List<String> locations;
 
     public Player() {
-        stats = com.npgames.insight.data.model.Stats.builder()
+        stats = Stats.builder()
                 .setHp(INIT_HP)
                 .setAur(INIT_AUR)
                 .setTime(INIT_TIME)
@@ -61,13 +58,13 @@ public class Player {
         equipments.add(new Targeter(Equipment.Owner.ARRMORY));
     }
 
-    public void changeStats(final StatsChanger statsChanger) {
-        stats.setHp(stats.getHp() + statsChanger.getHp());
-        stats.setDex(stats.getDex() + statsChanger.getDex());
-        stats.setAmn(stats.getAmn() + statsChanger.getAmn());
-        stats.setAur(stats.getAur() + statsChanger.getAur());
-        stats.setPrc(stats.getPrc() + statsChanger.getPrc());
-        stats.setTime(stats.getTime() + statsChanger.getTime());
+    public void changeStats(final Stats stats) {
+        this.stats.setHp(this.stats.getHp() + stats.getHp());
+        this.stats.setDex(this.stats.getDex() + stats.getDex());
+        this.stats.setAmn(this.stats.getAmn() + stats.getAmn());
+        this.stats.setAur(this.stats.getAur() + stats.getAur());
+        this.stats.setPrc(this.stats.getPrc() + stats.getPrc());
+        this.stats.setTime(this.stats.getTime() + stats.getTime());
     }
 
 /*    public void takeOnEquipment(final Equipment equipment) {
@@ -101,7 +98,7 @@ public class Player {
         return false;
     }
 
-    public com.npgames.insight.data.model.Stats getStats() {
+    public Stats getStats() {
         return stats;
     }
 

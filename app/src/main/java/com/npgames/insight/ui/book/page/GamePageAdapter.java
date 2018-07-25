@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.PageBlock;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 
@@ -29,8 +30,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     private View.OnClickListener onPageClickListener;
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         switch(viewType) {
             case 0:
                 final View textViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_text_item, parent, false);
@@ -39,7 +39,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
                 final View buttonViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_button_item, parent, false);
                 return new ButtonViewHolder(buttonViewHolderLayout);
             case 3:
-                final View actionViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_button_item, parent, false);
+                final View actionViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_action_item, parent, false);
                 return new ActionsViewHolder(actionViewHolderLayout);
         }
         return null;
@@ -53,7 +53,6 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
         final String content = blocks.get(position).content;
         switch(holder.getItemViewType()) {
             case BlockArea.BlockType.TEXT:
@@ -62,12 +61,13 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             case BlockArea.BlockType.BUTTON:
                 final ButtonViewHolder buttonViewHolder = (ButtonViewHolder) holder;
                 buttonViewHolder.jumpButton.setText(blocks.get(position).content);
+                buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
 
                 break;
             case BlockArea.BlockType.ACTION:
-                Log.d("TestPish", "block = content " +blocks.get(position).content +" code= " +((BlockAction) blocks.get(position)).getCode());
                 final ActionsViewHolder actionViewHolder = (ActionsViewHolder) holder;
                 actionViewHolder.actionButton.setText(blocks.get(position).content);
+                actionViewHolder.actionButton.setEnabled(((BlockAction)blocks.get(position)).isEnable());
         }
     }
 
@@ -118,7 +118,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     }
 
     class ActionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @BindView(R.id.adapter_game_page_button_jump_button)
+        @BindView(R.id.adapter_game_page_action_button)
         protected Button actionButton;
 
         public ActionsViewHolder(final View itemView) {

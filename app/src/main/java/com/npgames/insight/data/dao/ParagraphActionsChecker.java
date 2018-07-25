@@ -5,16 +5,18 @@ import android.util.SparseArray;
 import com.npgames.insight.data.model.KeyWord;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.StatsChanger;
+import com.npgames.insight.ui.book.ActionsCallBack;
 
 import java.util.concurrent.Callable;
 
 public class ParagraphActionsChecker {
-    final SparseArray<Callable<Stats>> actions = new SparseArray<>();
-    final Player player;
+    final SparseArray<Callable<Void>> actions = new SparseArray<>();
+    private final ActionsCallBack actionsCallBack;
+    Player player;
 
-    public ParagraphActionsChecker(final Player player) {
-        this.player = player;
+    public ParagraphActionsChecker(final ActionsCallBack actionsCallBack) {
+        this.actionsCallBack = actionsCallBack;
+        actions.put(500, () -> paragraph37Action());
         actions.put(5, () -> paragraph5Action());
         actions.put(22, () -> paragraph22Action());
         actions.put(32, () -> paragraph32Action());
@@ -34,119 +36,131 @@ public class ParagraphActionsChecker {
         actions.put(193, () -> paragraph193Action());
     }
 
-/*    public StatsChanger checkParagraph(final int paragraphNumber) {
+    public void applyAction(final int paragraphNumber, final Player player) {
+        this.player = player;
         try {
-            statsChanger = actions.get(paragraphNumber).call();
-            statsChanger = (statsChanger != null) ? statsChanger : new StatsChanger();
+            actions.get(paragraphNumber).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        return statsChanger;
-    }*/
-
-    private Stats paragraph5Action() {
-        return Stats.builder()
+    private Void paragraph5Action() {
+        player.changeStats(Stats.builder()
                 .setHp(-6)
-                .build();
+                .build());
+        return null;
     }
 
-    private Stats paragraph22Action() {
-        return Stats.builder()
+    private Void paragraph22Action() {
+        Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph32Action() {
-        return Stats.builder()
+    private Void paragraph32Action() {
+        Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph37Action() {
-        //TODO: death
-        return Stats.builder().build();
+    private Void paragraph37Action() {
+        actionsCallBack.onDeathAction();
+        return null;
     }
 
-    private Stats paragraph49Action() {
-        //TODO: achievement
-        return Stats.builder().build();
+    private Void paragraph49Action() {
+        actionsCallBack.onAchievementUnlocked(GamePreferences.Achievements.NATURALIST);
+        return null;
     }
 
-    private Stats paragraph59Action() {
+    private Void paragraph59Action() {
         //TODO: complex logic
-        return Stats.builder()
+        Stats.builder()
                 .setHp(-10)
                 .build();
+        return null;
     }
 
-    private Stats paragraph60Action() {
-        return Stats.builder()
+    private Void paragraph60Action() {
+        Stats.builder()
                 .setHp(5)
                 .build();
+        return null;
     }
 
-    private Stats paragraph67Action() {
-        return Stats.builder()
+    private Void paragraph67Action() {
+        Stats.builder()
                 .setHp(-4)
                 .build();
+        return null;
     }
 
-    private Stats paragraph75Action() {
-        return Stats.builder()
+    private Void paragraph75Action() {
+        Stats.builder()
                 .setAmn(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph81Action() {
+    private Void paragraph81Action() {
         player.addKeyword(KeyWord.KeyWords.SHINE);
-        return Stats.builder()
+        Stats.builder()
                 .build();
+        return null;
     }
 
-    private Stats paragraph87Action() {
-        return Stats.builder()
+    private Void paragraph87Action() {
+         Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph97Action() {
-        return Stats.builder()
+    private Void paragraph97Action() {
+        Stats.builder()
                 .setHp(-2)
                 .build();
-
+        return null;
         //TODO:DISABLE POWER SHIELD
     }
 
-    private Stats paragraph100Action() {
-        return Stats.builder()
+    private Void paragraph100Action() {
+        Stats.builder()
                 .setHp(-2)
                 .build();
         //TODO: - TIME if NOT FIRST TIME
+        return null;
     }
 
-    private Stats paragraph104Action() {
-        return Stats.builder()
+    private Void paragraph104Action() {
+        Stats.builder()
                 .setTime(-1)
                 .setHp(-4)
                 .build();
+        return null;
     }
 
-    private Stats paragraph116Action() {
-        return Stats.builder()
+    private Void paragraph116Action() {
+        Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph327Action() {
-        return Stats.builder()
+    private Void paragraph327Action() {
+        Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 
-    private Stats paragraph193Action() {
-        return Stats.builder()
+    private Void paragraph193Action() {
+        Stats.builder()
                 .setTime(-1)
                 .build();
+        return null;
     }
 }

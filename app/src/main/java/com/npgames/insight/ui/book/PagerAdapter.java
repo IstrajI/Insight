@@ -3,6 +3,7 @@ package com.npgames.insight.ui.book;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
@@ -24,15 +25,22 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+        Log.d("TestPish", "pagerAdaptersize = " +paragraphModel.pages.size());
         return paragraphModel.pages.size();
     }
 
     public void update(final Paragraph paragraphModel) {
         this.paragraphModel = paragraphModel;
         notifyDataSetChanged();
+
     }
 
     public void setOnItemClickListener(final RecyclerViewListeners.OnItemClickListener clickListener) {
         this.clickListener = clickListener;
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

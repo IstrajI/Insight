@@ -10,26 +10,28 @@ import com.npgames.insight.data.dao.GamePreferences;
 import com.npgames.insight.data.dao.ParagraphActionsChecker;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.dao.PlayerRepository;
+import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
-import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.StatsChanger;
 import com.npgames.insight.data.model.TrackingParagraph;
+import com.npgames.insight.data.model.new_model.Paragraph;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @InjectViewState
-public class GameBookPresenter extends MvpPresenter<GameBookView>{
+public class GameBookPresenter extends MvpPresenter<GameBookView> implements ActionsCallBack{
     private boolean isActionsMenuOpen = false;
     private boolean isStatsPanelOpen = false;
     private int screenHeight;
-    private int currentParagraph;
+    private int currentParagraphNumber;
+    private Paragraph currentParagraph;
     private boolean isBottomPanelOpened = false;
     private ParagraphActionsChecker paragraphActionsChecker;
+    private boolean wasActionPressed;
 
     private PlayerRepository playerRepository;
     private GamePreferences gamePreferences;
@@ -38,7 +40,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
         playerRepository = PlayerRepository.getInstance(context);
         final Player player = playerRepository.getPlayer();
         gamePreferences = GamePreferences.getInstance(context);
-        paragraphActionsChecker = new ParagraphActionsChecker(player);
+        paragraphActionsChecker = new ParagraphActionsChecker(this);
     }
 
     public void interactWithStatsPanel() {
@@ -63,11 +65,14 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     private List<TrackingParagraph> trackingParagraphs = new ArrayList<>();
 
     public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight, final String paragraphString) {
-        currentParagraph = paragraphNumber;
+
+        currentParagraphNumber = paragraphNumber;
 
         final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
         final Pagination pagination = new Pagination();
-        getViewState().updateParagraph(pagination.createParagraphModel(blockAreas, paragraphTextHeight));
+        currentParagraph = pagination.createParagraphModel(blockAreas, paragraphTextHeight);
+        checkIfActionDisableJumps(currentParagraph);
+        getViewState().updateParagraph(currentParagraph);
     }
 
     public int loadCurrentParagraphNumber(final Context context) {
@@ -77,25 +82,11 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     //TODO: we should save current paragraph similar to player
     public void saveGame(final Context context) {
         playerRepository.savePlayer();
-        GamePreferences.getInstance(context).saveCurrentParagraph(currentParagraph);
-    }
-
-    public void checkConditionActions(final int paragraphNumber) {
-        //final StatsChanger statsChanger = paragraphActionsChecker.checkParagraph(paragraphNumber);
-        //TODO: apply statschanger
-        //playerRepository.
-
-        getViewState().showStats(playerRepository.getStats());
+        GamePreferences.getInstance(context).saveCurrentParagraph(currentParagraphNumber);
     }
 
 
-    public boolean checkConditionNotFirstTime(final Map.Entry<Paragraph.ActionTypes, Integer> action, final TrackingParagraph.Action action1) {
-        if (!action1.isStatus()) {
-            action1.setStatus(true);
-            return false;
-        }
-        return true;
-    }
+
 
     private TrackingParagraph findOrCreateParagraphAction(final int paragraphNumber) {
         for (TrackingParagraph action : trackingParagraphs) {
@@ -127,7 +118,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     }
 
     public int getWantedParagraph() {
-        return currentParagraph + 10;
+        return currentParagraphNumber + 10;
     }
 
     public String getResourceName(final int nextParagraph) {
@@ -137,7 +128,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     void newGame() {
         final int FIRST_PARAGRAPH_NUMBER = 500;
         getViewState().showParagraph(FIRST_PARAGRAPH_NUMBER);
-
+        playerRepository.createPlayer();
         final Stats stats = playerRepository.getStats();
         getViewState().showStats(stats);
     }
@@ -160,4 +151,63 @@ public class GameBookPresenter extends MvpPresenter<GameBookView>{
     }
 
 
+    void checkIfActionDisableJumps(final Paragraph paragraph) {
+        //General approach
+        final List<BlockArea> blockAreas = paragraph.getBlockAreas();
+        boolean paragraphHasAction = false;
+        wasActionPressed = true;
+
+        for (final BlockArea blockArea: blockAreas) {
+            if (blockArea.type == BlockArea.BlockType.ACTION) {
+                paragraphHasAction = true;
+                wasActionPressed = false;
+            }
+        }
+
+        if (paragraphHasAction) {
+            disableJumps(blockAreas);
+        }
+    }
+
+    private void disableJumps(final List<BlockArea> blockAreas) {
+        for (final BlockArea blockArea: blockAreas) {
+            if (blockArea.type == BlockArea.BlockType.BUTTON) {
+                ((BlockButton) blockArea).setEnable(false);
+            }
+        }
+    }
+
+    void actionPressed() {
+        wasActionPressed = true;
+        paragraphActionsChecker.applyAction(currentParagraphNumber, playerRepository.getPlayer());
+        getViewState().showStats(playerRepository.getStats());
+
+        enableJumpsDisableActions();
+        getViewState().updateParagraph(currentParagraph);
+    }
+
+    private void enableJumpsDisableActions() {
+        final List<BlockArea> blockAreas = currentParagraph.getBlockAreas();
+
+        for (final BlockArea blockArea: blockAreas) {
+            if (blockArea.type == BlockArea.BlockType.ACTION) {
+                ((BlockAction) blockArea).setEnable(false);
+            }
+
+            if (blockArea.type == BlockArea.BlockType.BUTTON) {
+                ((BlockButton) blockArea).setEnable(true);
+            }
+        }
+    }
+
+    @Override
+    public void onDeathAction() {
+        //TODO: clean player
+        getViewState().showDeathScreen();
+    }
+
+    @Override
+    public void onAchievementUnlocked(final String achievement) {
+        gamePreferences.addAchievement(achievement);
+    }
 }

@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model.new_model;
 
+import com.npgames.insight.data.model.BlockArea;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,5 +18,15 @@ public class Paragraph {
 
     public Paragraph(final List<Page> pages) {
         this.pages = pages;
+    }
+
+    public List<BlockArea> getBlockAreas() {
+        final List<BlockArea> blockAreas = new ArrayList<>();
+
+        for (Page page : pages) {
+            blockAreas.addAll(page.blocks);
+        }
+
+        return blockAreas;
     }
 }

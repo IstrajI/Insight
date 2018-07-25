@@ -15,6 +15,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.application.ScreenUtils;
+import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -25,6 +26,8 @@ import com.npgames.insight.ui.book.top_panel.TopPanelView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
 import butterknife.BindView;
+
+import static com.npgames.insight.ui.book.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, com.npgames.insight.ui.book.bottom_new.BottomPanelView.OnClickListener {
@@ -48,6 +51,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     @InjectPresenter
     GameBookPresenter gameBookPresenter;
 
+    private PagerAdapter pagerAdapter;
     @ProvidePresenter
     GameBookPresenter provideGameBookPresenter() {
         return new GameBookPresenter(getApplicationContext());
@@ -59,6 +63,10 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamebook);
+
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        pagerAdapter.setOnItemClickListener(this);
+        pagesViewPager.setAdapter(pagerAdapter);
 
         initScreenUtils();
     }
@@ -118,6 +126,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void onItemClick(View view, int position, RecyclerView.Adapter adapter) {
         switch(view.getId()) {
             case R.id.adapter_game_page_button_jump_button:
+                Log.d("TestPish", "ActionClicked");
                 try {
                     final int nextParagraph = Integer.parseInt(((GamePageAdapter) adapter).getItemAt(position).content);
                     if (nextParagraph == 0) {
@@ -135,11 +144,19 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
                     //gameBookPresenter.loadParagraphResName(nextParagraph);
                     //gameBookPresenter.showParagraph(getApplicationContext(), nextParagraph, paragraphTextHeight);
-                    break;
+
                 } catch(NumberFormatException ex) {
 
                 }
+                break;
+
+            case R.id.adapter_game_page_action_button:
+                gameBookPresenter.actionPressed();
         }
+    }
+
+    public void disableJumps() {
+
     }
 
     public void showParagraph(final int paragraphNumber) {
@@ -147,17 +164,21 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         final int paragraphResId = getResources().getIdentifier(paragraphResName, "string", getPackageName());
         final String paragraphString = getString(paragraphResId);
 
-        gameBookPresenter.checkConditionActions(paragraphNumber);
+
+        //gameBookPresenter.checkConditionActions(paragraphNumber);
         gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
     }
 
     @Override
     public void updateParagraph(final Paragraph paragraph) {
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        pagerAdapter.setOnItemClickListener(this);
-        pagesViewPager.setAdapter(pagerAdapter);
+        pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
+    }
 
+    @Override
+    public void showDeathScreen() {
+        final DeathDialogFragment deathDialogFragment = new DeathDialogFragment();
+        deathDialogFragment.show(getSupportFragmentManager(), DEATH_DIALOG_FRAGMENT_TAG);
     }
 
     @Override

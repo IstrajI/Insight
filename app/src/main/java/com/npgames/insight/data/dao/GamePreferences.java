@@ -2,6 +2,8 @@ package com.npgames.insight.data.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.StringDef;
+
 import com.npgames.insight.data.model.Paragraph;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.equipment.AidKit;
@@ -17,14 +19,20 @@ import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
 import com.npgames.insight.data.model.equipment.Targeter;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.npgames.insight.data.dao.GamePreferences.Achievements.NATURALIST;
 
 public class GamePreferences {
     private static GamePreferences gamePreferences;
     private static SharedPreferences sharedPreferences;
     private static final String PREFERENCES_NAME = "gamePreferences";
+    private final List<String> achievements = new ArrayList<>();
+
 
     private final String CURRENT_PARAGRAPH = "CURRENT_PARAGRAPH";
 
@@ -112,5 +120,17 @@ public class GamePreferences {
             editor.putString(equipment.getSharedPropertyName() + OWNER_KEY, ownedByString);
         }
         editor.apply();
+    }
+
+
+
+    public void addAchievement(final @Achievements String achievement) {
+        achievements.add(achievement);
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({NATURALIST})
+    public @interface Achievements {
+        String NATURALIST = "NATURALIST";
     }
 }
