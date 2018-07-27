@@ -1,0 +1,20 @@
+public class EquipmentRepository {
+    public static EquipmentRepository equipmentRepository;
+    public static List<Equipment> equipments;
+
+    public static EquipmentRepository getInstance(final Context context) {
+        if (equipmentRepository == null) {
+            equipmentRepository = new EquipmentRepository(context);
+        }
+
+        return equipmentRepository;
+    }
+
+    EquipmentRepository(final Context context) {
+        equipmentRepository = EquipmentPreferences.getInstance(context);
+        equipments = equipmentRepository.loadEquipment();
+    }
+
+    
+
+}
