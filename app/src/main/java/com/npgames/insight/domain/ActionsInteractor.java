@@ -1,21 +1,30 @@
-package com.npgames.insight.data.dao;
+package com.npgames.insight.domain;
 
+import android.content.Context;
 import android.util.SparseArray;
 
+import com.npgames.insight.data.dao.GamePreferences;
 import com.npgames.insight.data.model.KeyWord;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.ui.book.ActionsCallBack;
+import com.npgames.insight.data.repositories.GameRepository;
+import com.npgames.insight.data.repositories.PlayerRepository;
+import com.npgames.insight.data.repositories.StatsRepository;
 
 import java.util.concurrent.Callable;
 
-public class ParagraphActionsChecker {
-    final SparseArray<Callable<Void>> actions = new SparseArray<>();
-    private final ActionsCallBack actionsCallBack;
-    Player player;
+public class ActionsInteractor {
+    private final PlayerRepository playerRepository;
+    private final GameRepository gameRepository;
+    private final StatsRepository statsRepository;
 
-    public ParagraphActionsChecker(final ActionsCallBack actionsCallBack) {
-        this.actionsCallBack = actionsCallBack;
+    private final SparseArray<Callable<Void>> actions = new SparseArray<>();
+
+    public ActionsInteractor(final Context context) {
+        playerRepository = PlayerRepository.getInstance(context);
+        gameRepository = GameRepository.getInstance(context);
+        statsRepository = StatsRepository.getInstance(context);
+
         actions.put(500, () -> paragraph37Action());
         actions.put(5, () -> paragraph5Action());
         actions.put(22, () -> paragraph22Action());
@@ -36,19 +45,23 @@ public class ParagraphActionsChecker {
         actions.put(193, () -> paragraph193Action());
     }
 
-    public void applyAction(final int paragraphNumber, final Player player) {
-        this.player = player;
+    public Player applyAction(final int paragraphNumber) {
         try {
             actions.get(paragraphNumber).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        statsRepository.
+
     }
 
     private Void paragraph5Action() {
-        player.changeStats(Stats.builder()
+        final Stats changedStats = Stats.builder()
                 .setHp(-6)
-                .build());
+                .build();
+        playerRepository.changeStat(changedStats);
+
         return null;
     }
 
@@ -72,7 +85,7 @@ public class ParagraphActionsChecker {
     }
 
     private Void paragraph49Action() {
-        actionsCallBack.onAchievementUnlocked(GamePreferences.Achievements.NATURALIST);
+        gameRepository.addAchievement(GamePreferences.Achievements.NATURALIST);
         return null;
     }
 
@@ -113,7 +126,7 @@ public class ParagraphActionsChecker {
     }
 
     private Void paragraph87Action() {
-         Stats.builder()
+        Stats.builder()
                 .setTime(-1)
                 .build();
         return null;
