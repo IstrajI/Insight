@@ -26,6 +26,12 @@ public class PlayerRepository {
         player = gamePreferences.loadPlayer();
     }
 
+/*
+    public Player getPlayer() {
+        return player;
+    }
+*/
+
     public void createPlayer() {
         player = new Player();
     }

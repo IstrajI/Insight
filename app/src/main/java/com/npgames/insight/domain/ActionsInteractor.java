@@ -56,7 +56,6 @@ public class ActionsInteractor {
         final Equipment equipment; //TODO: init
 
         final static List<String> ololo = Coll
-
     }
 
     private Void paragraph5Action() {
