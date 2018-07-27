@@ -2,14 +2,13 @@ package com.npgames.insight.ui.book;
 
 import android.content.Context;
 import android.text.TextPaint;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.dao.GamePreferences;
-import com.npgames.insight.data.dao.ParagraphActionsChecker;
+import com.npgames.insight.domain.ActionsInteractor;
 import com.npgames.insight.data.dao.ParagraphParser;
-import com.npgames.insight.data.dao.PlayerRepository;
+import com.npgames.insight.data.repositories.PlayerRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
@@ -30,7 +29,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
     private int currentParagraphNumber;
     private Paragraph currentParagraph;
     private boolean isBottomPanelOpened = false;
-    private ParagraphActionsChecker paragraphActionsChecker;
+    private ActionsInteractor actionsInteractor;
     private boolean wasActionPressed;
 
     private PlayerRepository playerRepository;
@@ -40,7 +39,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
         playerRepository = PlayerRepository.getInstance(context);
         final Player player = playerRepository.getPlayer();
         gamePreferences = GamePreferences.getInstance(context);
-        paragraphActionsChecker = new ParagraphActionsChecker(this);
+        paragraphActionsChecker = new ActionsInteractor(this);
     }
 
     public void interactWithStatsPanel() {
@@ -179,7 +178,8 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
 
     void actionPressed() {
         wasActionPressed = true;
-        paragraphActionsChecker.applyAction(currentParagraphNumber, playerRepository.getPlayer());
+
+        actionsInteractor.applyAction(currentParagraphNumber);
         getViewState().showStats(playerRepository.getStats());
 
         enableJumpsDisableActions();
@@ -198,16 +198,5 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
                 ((BlockButton) blockArea).setEnable(true);
             }
         }
-    }
-
-    @Override
-    public void onDeathAction() {
-        //TODO: clean player
-        getViewState().showDeathScreen();
-    }
-
-    @Override
-    public void onAchievementUnlocked(final String achievement) {
-        gamePreferences.addAchievement(achievement);
     }
 }

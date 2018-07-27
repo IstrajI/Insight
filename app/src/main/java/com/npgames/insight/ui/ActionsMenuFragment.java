@@ -37,6 +37,8 @@ public class ActionsMenuFragment extends BaseMvpFragment implements View.OnClick
     @Override
     protected void bindViews() {
         initActions();
+        
+
 
         openActionsButton.setOnClickListener(this);
     }

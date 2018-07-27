@@ -3,7 +3,7 @@ package com.npgames.insight.ui.book.armory;
 import android.content.Context;
 
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.dao.PlayerRepository;
+import com.npgames.insight.data.repositories.PlayerRepository;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
 
