@@ -10,10 +10,10 @@ import com.npgames.insight.data.model.equipment.Grenade_3;
 import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
 
-public class ParagraphJumpsChecker {
+public class JumpInteractor {
     private Player player;
 
-    ParagraphJumpsChecker(final Player player) {
+    JumpInteractor(final Player player) {
         this.player = player;
     }
 

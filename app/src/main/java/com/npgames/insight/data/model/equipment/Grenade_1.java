@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.data.model.equipment;
 
 public class Grenade_1 extends Grenade{
@@ -11,3 +12,4 @@ public class Grenade_1 extends Grenade{
         return SHARED_PROPERTY_NAME;
     }
 }
+*/

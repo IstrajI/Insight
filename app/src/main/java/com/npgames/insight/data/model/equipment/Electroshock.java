@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
@@ -31,3 +32,4 @@ public class Electroshock extends Equipment{
         return SHARED_PROPERTY_NAME;
     }
 }
+*/

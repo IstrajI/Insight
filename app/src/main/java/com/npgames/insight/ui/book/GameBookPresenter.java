@@ -5,7 +5,8 @@ import android.text.TextPaint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.dao.GamePreferences;
+import com.npgames.insight.data.db.GamePreferences;
+import com.npgames.insight.data.repositories.StatsRepository;
 import com.npgames.insight.domain.ActionsInteractor;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.repositories.PlayerRepository;
@@ -17,6 +18,7 @@ import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.TrackingParagraph;
 import com.npgames.insight.data.model.new_model.Paragraph;
+import com.npgames.insight.domain.GameInteractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +35,17 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
     private boolean wasActionPressed;
 
     private PlayerRepository playerRepository;
+    private StatsRepository statsRepository;
     private GamePreferences gamePreferences;
+
+    private GameInteractor gameInteractor;
 
     GameBookPresenter(final Context context) {
         playerRepository = PlayerRepository.getInstance(context);
         final Player player = playerRepository.getPlayer();
         gamePreferences = GamePreferences.getInstance(context);
         paragraphActionsChecker = new ActionsInteractor(this);
+        gameInteractor = new GameInteractor(context);
     }
 
     public void interactWithStatsPanel() {
@@ -127,8 +133,8 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
     void newGame() {
         final int FIRST_PARAGRAPH_NUMBER = 500;
         getViewState().showParagraph(FIRST_PARAGRAPH_NUMBER);
-        playerRepository.createPlayer();
-        final Stats stats = playerRepository.getStats();
+        gameInteractor.startNewGame();
+        final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
     }
 
@@ -136,17 +142,18 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
         final int currentParagraphNumber = gamePreferences.loadCurrentParagraph();
         getViewState().showParagraph(currentParagraphNumber);
 
-        final Stats stats = playerRepository.getStats();
+        final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
     }
 
-    public void updatePlayerStats(final int dex, final int prc) {
-        final Stats stats = Stats.builder().setDex(dex)
+    void updatePlayerStats(final int dex, final int prc) {
+        final Stats stats = Stats.builder()
+                .setDex(dex)
                 .setPrc(prc)
                 .build();
 
-        playerRepository.updateStats(stats);
-        getViewState().showStats(playerRepository.getStats());
+        statsRepository.updateStats(stats);
+        getViewState().showStats(statsRepository.getStats());
     }
 
 

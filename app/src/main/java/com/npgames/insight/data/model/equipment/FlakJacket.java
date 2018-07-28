@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
@@ -32,3 +33,4 @@ public class FlakJacket extends Equipment{
         return SHARED_PROPERTY_NAME;
     }
 }
+*/

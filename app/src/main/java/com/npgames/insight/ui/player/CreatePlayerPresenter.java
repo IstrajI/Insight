@@ -1,10 +1,7 @@
 package com.npgames.insight.ui.player;
 
-import android.content.Context;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.dao.GamePreferences;
 import com.npgames.insight.data.model.Player;
 
 @InjectViewState

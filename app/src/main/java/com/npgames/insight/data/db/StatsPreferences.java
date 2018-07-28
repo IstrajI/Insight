@@ -52,4 +52,6 @@ public class StatsPreferences {
         editor.putInt(PLAYER_AMN, stats.getAmn());
         editor.apply();
     }
+
+
 }

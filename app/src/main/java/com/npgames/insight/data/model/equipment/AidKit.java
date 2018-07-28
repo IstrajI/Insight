@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
@@ -27,7 +28,8 @@ public class AidKit extends Equipment{
     }
 
     @Override
-    public String getSharedPropertyName() {
+    public static String getSharedPropertyName() {
         return SHARED_PROPERTY_NAME;
     }
 }
+*/

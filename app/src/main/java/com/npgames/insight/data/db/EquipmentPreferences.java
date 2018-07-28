@@ -3,28 +3,20 @@ package com.npgames.insight.data.db;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.npgames.insight.data.model.equipment.AidKit;
-import com.npgames.insight.data.model.equipment.Beam;
-import com.npgames.insight.data.model.equipment.Blaster;
-import com.npgames.insight.data.model.equipment.Electroshock;
+import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
-import com.npgames.insight.data.model.equipment.FlakJacket;
-import com.npgames.insight.data.model.equipment.Grenade_1;
-import com.npgames.insight.data.model.equipment.Grenade_2;
-import com.npgames.insight.data.model.equipment.Grenade_3;
-import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
-import com.npgames.insight.data.model.equipment.PowerShield;
-import com.npgames.insight.data.model.equipment.Targeter;
+import com.npgames.insight.data.model.equipment.Equipment.TYPE;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EquipmentPreferences {
-    private EquipmentPreferences equipmentPreferences;
+    private SharedPreferences preferences;
+    private static EquipmentPreferences equipmentPreferences;
     private final String PREFERENCES_NAME = "EQUIPMENT_PREFERENCES";
 
-    EquipmentPrefereces(final Context context) {
-        equipmentPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+    EquipmentPreferences(final Context context) {
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
     public static EquipmentPreferences getInstance(final Context context) {
@@ -36,11 +28,10 @@ public class EquipmentPreferences {
     }
 
     public void saveEqupment(final List<Equipment> equipments) {
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final SharedPreferences.Editor editor = preferences.edit();
 
         for (final Equipment equipment: equipments) {
-            final String ownedByString = String.valueOf(equipment.getOwnedBy());
-            editor.putString(equipment.getSharedPropertyName(), ownedByString);
+            editor.putString(equipment.getType(), equipment.getOwnedBy());
         }
 
         editor.apply();
@@ -48,17 +39,68 @@ public class EquipmentPreferences {
 
     public List<Equipment> loadEquipment() {
         final List<Equipment> equipments = new ArrayList<>();
-        equipments.add(new AidKit(loadEquipmentOwnedBy()));
-        equipments.add(new Beam(loadEquipmentOwnedBy(Beam.SHARED_PROPERTY_NAME)));
-        equipments.add(new Blaster(loadEquipmentOwnedBy(Blaster.SHARED_PROPERTY_NAME)));
-        equipments.add(new Grenade_1(loadEquipmentOwnedBy(Grenade_1.SHARED_PROPERTY_NAME)));
-        equipments.add(new Grenade_2(loadEquipmentOwnedBy(Grenade_2.SHARED_PROPERTY_NAME)));
-        equipments.add(new Grenade_3(loadEquipmentOwnedBy(Grenade_3.SHARED_PROPERTY_NAME)));
-        equipments.add(new Electroshock(loadEquipmentOwnedBy(Electroshock.SHARED_PROPERTY_NAME)));
-        equipments.add(new FlakJacket(loadEquipmentOwnedBy(FlakJacket.SHARED_PROPERTY_NAME)));
-        equipments.add(new OpenSpaceEqpt(loadEquipmentOwnedBy(OpenSpaceEqpt.SHARED_PROPERTY_NAME)));
-        equipments.add(new PowerShield(loadEquipmentOwnedBy(PowerShield.SHARED_PROPERTY_NAME)));
-        equipments.add(new Targeter(loadEquipmentOwnedBy(Targeter.SHARED_PROPERTY_NAME)));
+
+        //Aid Kit
+        final Stats aidKitTakeOnStatsChanger = Stats.builder().setDex(-1).build();
+        final Stats aidKitTakeOffStatsChanger = Stats.builder().setDex(1).build();
+        final @Equipment.Owner String aidKitOwner = preferences.getString(TYPE.AID_KIT, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.AID_KIT, aidKitTakeOnStatsChanger, aidKitTakeOffStatsChanger, aidKitOwner));
+
+        //Beam
+        final Stats beamTakeOnStatsChanger = Stats.builder().setDex(-2).build();
+        final Stats beamTakeOffStatsChanger = Stats.builder().setDex(2).build();
+        final @Equipment.Owner String beamOwner = preferences.getString(TYPE.BEAM, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.BEAM, beamTakeOnStatsChanger, beamTakeOffStatsChanger, beamOwner));
+
+        //Blaster
+        final Stats blasterTakeOnStatsChanger = Stats.builder().setDex(-1).build();
+        final Stats blasterTakeOffStatsChanger = Stats.builder().setDex(1).build();
+        final @Equipment.Owner String blasterOwner = preferences.getString(TYPE.BLASTER, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.BLASTER, blasterTakeOnStatsChanger, blasterTakeOffStatsChanger, blasterOwner));
+
+        //Electroshock
+        final Stats electroshockTakeOnStatsChanger = Stats.builder().setDex(-1).build();
+        final Stats electroshockTakeOffStatsChanger = Stats.builder().setDex(1).build();
+        final @Equipment.Owner String electroshockOwner = preferences.getString(TYPE.ELECTROSHOCK, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.ELECTROSHOCK, electroshockTakeOnStatsChanger, electroshockTakeOffStatsChanger, electroshockOwner));
+
+        //FlakJacket
+        final Stats flakJacketTakeOnStatsChanger = Stats.builder().setDex(-2).build();
+        final Stats flakJacketTakeOffStatsChanger = Stats.builder().setDex(2).build();
+        final @Equipment.Owner String flakJacketOwner = preferences.getString(TYPE.FlAK_JACKET, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.FlAK_JACKET, flakJacketTakeOnStatsChanger, flakJacketTakeOffStatsChanger, flakJacketOwner));
+
+        //OpenSpaceEqpt
+        final Stats openSpaceEqptTakeOnStatsChanger = Stats.builder().setDex(-3).build();
+        final Stats openSpaceEqptTakeOffStatsChanger = Stats.builder().setDex(3).build();
+        final @Equipment.Owner String openSpaceEqptOwner = preferences.getString(TYPE.OPEN_SPACE_EQUIPMENT, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.OPEN_SPACE_EQUIPMENT, openSpaceEqptTakeOnStatsChanger, openSpaceEqptTakeOffStatsChanger, openSpaceEqptOwner));
+
+        //Power Shield
+        final Stats powerShieldTakeOnStatsChanger = Stats.builder().setPrc(-2).build();
+        final Stats powerShieldTakeOffStatsChanger = Stats.builder().setPrc(2).build();
+        final @Equipment.Owner String powerShieldOwner = preferences.getString(TYPE.POWER_SHIELD, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.OPEN_SPACE_EQUIPMENT, powerShieldTakeOnStatsChanger, powerShieldTakeOffStatsChanger, powerShieldOwner));
+
+        //Targeter Shield
+        final Stats targeterTakeOnStatsChanger = Stats.builder().setPrc(-2).build();
+        final Stats targeterTakeOffStatsChanger = Stats.builder().setDex(2).build();
+        final @Equipment.Owner String targeterOwner = preferences.getString(TYPE.TARGETTER, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.TARGETTER, targeterTakeOnStatsChanger, targeterTakeOffStatsChanger, targeterOwner));
+
+        //Grenades
+        final Stats grenadeTakeOnStatsChanger = Stats.builder().setDex(-1).build();
+        final Stats grenadeTakeOffStatsChanger = Stats.builder().setDex(1).build();
+
+        final @Equipment.Owner String grenade_1_Owner = preferences.getString(TYPE.GRENADE_1, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.GRENADE, grenadeTakeOnStatsChanger, grenadeTakeOffStatsChanger, grenade_1_Owner));
+
+        final @Equipment.Owner String grenade_2_Owner = preferences.getString(TYPE.GRENADE_2, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.GRENADE, grenadeTakeOnStatsChanger, grenadeTakeOffStatsChanger, grenade_2_Owner));
+
+        final @Equipment.Owner String grenade_3_Owner = preferences.getString(TYPE.GRENADE_3, String.valueOf(Equipment.Owner.ARRMORY));
+        equipments.add(new Equipment(TYPE.GRENADE, grenadeTakeOnStatsChanger, grenadeTakeOffStatsChanger, grenade_3_Owner));
+
         return equipments;
     }
 }

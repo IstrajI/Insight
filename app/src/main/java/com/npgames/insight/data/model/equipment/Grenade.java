@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.data.model.equipment;
 
 import com.npgames.insight.R;
@@ -29,3 +30,4 @@ public abstract class Grenade extends Equipment {
     @Override
     public abstract String getSharedPropertyName();
 }
+*/

@@ -8,7 +8,7 @@ import com.npgames.insight.data.model.Stats;
 public class StatsRepository {
     private static StatsRepository statsRepository;
     private final StatsPreferences statsPreferences;
-    private final Stats stats;
+    private Stats stats;
 
     StatsRepository(final Context context) {
         statsPreferences = StatsPreferences.getInstance(context);
@@ -23,6 +23,14 @@ public class StatsRepository {
         return statsRepository;
     }
 
+    public void setStats(final Stats stats) {
+        this.stats = stats;
+    }
+
+    public Stats getStats() {
+        return this.stats;
+    }
+
     public Stats updateStats(final Stats stats) {
         this.stats.setAmn(stats.getAmn() == 0 ? this.stats.getAmn() : this.stats.getAmn() + stats.getAmn());
         this.stats.setAur(stats.getAur() == 0 ? this.stats.getAur() : this.stats.getAur() + stats.getAur());
@@ -34,9 +42,4 @@ public class StatsRepository {
         statsPreferences.saveStats(this.stats);
         return this.stats;
     }
-
-    public Stats getStats() {
-        return this.stats;
-    }
-
 }

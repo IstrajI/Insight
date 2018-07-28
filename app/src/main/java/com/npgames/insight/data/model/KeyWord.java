@@ -7,13 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 
 public class KeyWord {
 
-    @Retention(RetentionPolicy.SOURCE)
-    @StringDef({
-            KeyWords.SHINE
-    })
 
-    public @interface KeyWords {
-        public String SHINE = "SHINE";
-    }
 
 }

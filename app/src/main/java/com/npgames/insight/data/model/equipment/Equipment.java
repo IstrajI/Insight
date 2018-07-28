@@ -3,62 +3,59 @@ package com.npgames.insight.data.model.equipment;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 
-public abstract class Equipment {
-    public static final String NAME = "NAME";
-    public static final String DESCRIPTION = "DESCRIPTION";
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-    private Stats takeOnStatsChanger;
-    private Stats takeOffStatsChanger;
+public class Equipment {
+    private final @TYPE String type;
+    private final Stats takeOnStatsChanger;
+    private final Stats takeOffStatsChanger;
+    private final @Owner String ownedBy;
+    private String name;
+    private String description;
 
-    private int NAME_RES_ID = R.string.armory_equipment_aid_kit_title;
-    private int DESCRIPTION_RES_ID = R.string.armory_equipment_aid_kit_description;
-
-    public enum Owner {PLAYER, ARRMORY, TRASH}
-
-    private Owner ownedBy;
-
-    public Equipment(final Owner ownedBy) {
+    public Equipment(final @TYPE String type, final Stats takeOnStatsChanger, final Stats takeOffStatsChanger, final @Owner String ownedBy) {
+        this.type = type;
+        this.takeOnStatsChanger = takeOnStatsChanger;
+        this.takeOffStatsChanger = takeOffStatsChanger;
         this.ownedBy = ownedBy;
     }
 
-    public Owner getOwnedBy() {
+    public String getType() {
+        return type;
+    }
+
+    public String getOwnedBy() {
         return ownedBy;
     }
-    public void setOwnedBy(Owner ownedBy) {
-        this.ownedBy = ownedBy;
-    }
 
-
-    public Stats getTakeOnStatsChanger() {
-        return takeOnStatsChanger;
-    }
-    public Stats getTakeOffStatsChanger() {
-        return takeOffStatsChanger;
-    }
-    public void setTakeOnStatsChanger(Stats takeOnStatsChanger) {
-        this.takeOnStatsChanger = takeOnStatsChanger;
-    }
-    public void setTakeOffStatsChanger(Stats takeOffStatsChanger) {
-        this.takeOffStatsChanger = takeOffStatsChanger;
-    }
-
-    public int getNameResource() {
-        return NAME_RES_ID;
-    }
-    public void setNameResource(final int nameResource) {
-        this.NAME_RES_ID = nameResource;
-    }
-
-    public int getDescriptionResource() {
-        return DESCRIPTION_RES_ID;
-    }
-    public void setDescriptionResource(final int descriptionResource) {
-        this.DESCRIPTION_RES_ID = descriptionResource;
-    }
-
-    public abstract String getSharedPropertyName();
+    /*
 
     public boolean isOwner(final Owner owner) {
         return ownedBy == owner;
+    }*/
+
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Owner {
+        String PLAYER = "PLAYER";
+        String ARRMORY = "ARRMORY";
+        String TRASH = "TRASH";
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TYPE {
+        String AID_KIT = "AID_KIT";
+        String BEAM = "BEAM";
+        String BLASTER = "BLASTER";
+        String ELECTROSHOCK = "ELECTROSHOCK";
+        String FlAK_JACKET = "FLACK_JACKET";
+        String GRENADE = "GRENADE";
+        String GRENADE_1 = "GRENADE_1";
+        String GRENADE_2 = "GRENADE_2";
+        String GRENADE_3 = "GRENADE_3";
+        String OPEN_SPACE_EQUIPMENT = "OPEN_SPACE_EQUIPMENT";
+        String POWER_SHIELD = "POWER_SHIELD";
+        String TARGETTER = "TARGETTER";
     }
 }
