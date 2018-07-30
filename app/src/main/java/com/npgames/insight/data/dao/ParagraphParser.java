@@ -8,10 +8,8 @@ import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Jump;
-import com.npgames.insight.data.model.Paragraph;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +41,6 @@ public class ParagraphParser {
         final List<BlockArea> paragraphBlocks = new ArrayList<>();
         boolean actionFound = actionMatcher.find();
         boolean jumpsFound = jumpsMatcher.find();
-
 
         final boolean test = true || false;
 
@@ -121,49 +118,5 @@ public class ParagraphParser {
         String resultText = text;
         resultText = text.substring(1, text.length() - 1);
         return resultText;
-    }
-
-    private static List<Jump> parseJumps(final Context context,
-                                  final StringBuilder formatStr,
-                                  final Formatter formatter,
-                                  final int paragraph) {
-        final int jumpTextsArrayId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                JUMP_TEXTS_PATTERN, paragraph);
-        final int jumpNumbersArrayId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                JUMP_NUMBERS_PATTERN, paragraph);
-
-        final String [] jumpTextsArray = context.getResources().getStringArray(jumpTextsArrayId);
-        final String [] jumpNumbersArray = context.getResources().getStringArray(jumpNumbersArrayId);
-
-        final List jumps = new ArrayList(jumpNumbersArray.length);
-        for (int i = 0; i < jumpNumbersArray.length; i++) {
-            final Jump jump = new Jump(jumpNumbersArray[i], jumpTextsArray[i]);
-            jumps.add(jump);
-        }
-        return jumps;
-    }
-
-    private static Map<Paragraph.ActionTypes, Integer> parseActions(final Context context,
-                                                           final StringBuilder formatStr,
-                                                           final Formatter formatter,
-                                                           final int paragraph) {
-        final Map<Paragraph.ActionTypes, Integer> actions;
-        try {
-            final int actionsKeysId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                    ACTIONS_KEYS_PATTERN, paragraph);
-            final int actionsValuesId = getResId(context, formatStr, RES_ARRAY_TYPE, formatter,
-                    ACTIONS_VALUES_PATTERN, paragraph);
-
-            final String [] actionsKeys = context.getResources().getStringArray(actionsKeysId);
-            final int [] actionValues = context.getResources().getIntArray(actionsValuesId);
-
-            actions = new HashMap<>(actionsKeys.length);
-
-            for (int i = 0; i < actionsKeys.length; i++) {
-                actions.put(Paragraph.ActionTypes.valueOf(actionsKeys[i]), actionValues[i]);
-            }
-            return actions;
-        } catch (Resources.NotFoundException ex) {}
-        return new HashMap<>(0);
     }
 }

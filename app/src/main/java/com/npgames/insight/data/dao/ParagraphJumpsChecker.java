@@ -1,6 +1,7 @@
 package com.npgames.insight.data.dao;
 
-import com.npgames.insight.data.model.Paragraph;
+import android.util.SparseArray;
+
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.equipment.Beam;
 import com.npgames.insight.data.model.equipment.Blaster;
@@ -9,15 +10,15 @@ import com.npgames.insight.data.model.equipment.Grenade_2;
 import com.npgames.insight.data.model.equipment.Grenade_3;
 import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
+import com.npgames.insight.data.model.new_model.Paragraph;
 
-public class JumpInteractor {
-    private Player player;
+import java.util.function.Function;
 
-    JumpInteractor(final Player player) {
-        this.player = player;
-    }
+public class ParagraphJumpsChecker {
+    private final SparseArray<Function<Paragraph, Void>> jumpStateChecker = new SparseArray<>();
 
-    public void checkJumpsConditions(final Paragraph paragraph) {
+    public void checkJumpsConditions(final Paragraph paragraph, final Player player) {
+
         switch(paragraph.getId()) {
             case 26:
                 paragraph26JumpConditions(paragraph);
@@ -37,7 +38,7 @@ public class JumpInteractor {
         }
     }
 
-    private void paragraph26JumpConditions(final Paragraph paragraph) {
+    private Void paragraph26JumpConditions(final Paragraph paragraph) {
         if (player.getStats().getPrc() >= 7) {
             paragraph.getJumps().get(0).setStatus(false);
             return;

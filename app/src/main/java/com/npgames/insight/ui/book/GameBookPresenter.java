@@ -9,7 +9,6 @@ import com.npgames.insight.data.db.GamePreferences;
 import com.npgames.insight.data.repositories.StatsRepository;
 import com.npgames.insight.domain.ActionsInteractor;
 import com.npgames.insight.data.dao.ParagraphParser;
-import com.npgames.insight.data.repositories.PlayerRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @InjectViewState
-public class GameBookPresenter extends MvpPresenter<GameBookView> implements ActionsCallBack{
+public class GameBookPresenter extends MvpPresenter<GameBookView> {
     private boolean isActionsMenuOpen = false;
     private boolean isStatsPanelOpen = false;
     private int screenHeight;
@@ -34,17 +33,13 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
     private ActionsInteractor actionsInteractor;
     private boolean wasActionPressed;
 
-    private PlayerRepository playerRepository;
     private StatsRepository statsRepository;
     private GamePreferences gamePreferences;
 
     private GameInteractor gameInteractor;
 
     GameBookPresenter(final Context context) {
-        playerRepository = PlayerRepository.getInstance(context);
-        final Player player = playerRepository.getPlayer();
-        gamePreferences = GamePreferences.getInstance(context);
-        paragraphActionsChecker = new ActionsInteractor(this);
+        actionsInteractor = new ActionsInteractor(context);
         gameInteractor = new GameInteractor(context);
     }
 
@@ -70,12 +65,8 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
     private List<TrackingParagraph> trackingParagraphs = new ArrayList<>();
 
     public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight, final String paragraphString) {
-
         currentParagraphNumber = paragraphNumber;
-
-        final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
-        final Pagination pagination = new Pagination();
-        currentParagraph = pagination.createParagraphModel(blockAreas, paragraphTextHeight);
+        currentParagraph = gameInteractor.nextParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
         checkIfActionDisableJumps(currentParagraph);
         getViewState().updateParagraph(currentParagraph);
     }
@@ -187,7 +178,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> implements Act
         wasActionPressed = true;
 
         actionsInteractor.applyAction(currentParagraphNumber);
-        getViewState().showStats(playerRepository.getStats());
+        getViewState().showStats(statsRepository.getStats());
 
         enableJumpsDisableActions();
         getViewState().updateParagraph(currentParagraph);

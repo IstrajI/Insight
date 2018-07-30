@@ -39,7 +39,10 @@ public class StatsRepository {
         this.stats.setPrc(stats.getPrc() == 0 ? this.stats.getPrc() : this.stats.getPrc() + stats.getPrc());
         this.stats.setTime(stats.getTime() == 0 ? this.stats.getTime() : this.stats.getTime() + stats.getTime());
 
-        statsPreferences.saveStats(this.stats);
         return this.stats;
+    }
+
+    public void saveStats() {
+        statsPreferences.saveStats(this.stats);
     }
 }
