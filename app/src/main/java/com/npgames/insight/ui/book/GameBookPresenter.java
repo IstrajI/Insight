@@ -64,7 +64,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     }
     private List<TrackingParagraph> trackingParagraphs = new ArrayList<>();
 
-    public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight, final String paragraphString) {
+    public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight) {
         currentParagraphNumber = paragraphNumber;
         currentParagraph = gameInteractor.nextParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
         checkIfActionDisableJumps(currentParagraph);
@@ -117,9 +117,6 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         return currentParagraphNumber + 10;
     }
 
-    public String getResourceName(final int nextParagraph) {
-        return ParagraphParser.formatParagraphResName(nextParagraph);
-    }
 
     void newGame() {
         final int FIRST_PARAGRAPH_NUMBER = 500;
@@ -146,7 +143,6 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         statsRepository.updateStats(stats);
         getViewState().showStats(statsRepository.getStats());
     }
-
 
     void checkIfActionDisableJumps(final Paragraph paragraph) {
         //General approach

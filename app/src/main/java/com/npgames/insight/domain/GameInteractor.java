@@ -1,20 +1,19 @@
 package com.npgames.insight.domain;
 
 import android.content.Context;
+import android.util.SparseArray;
 
 import com.npgames.insight.data.dao.ParagraphJumpsChecker;
-import com.npgames.insight.data.dao.ParagraphParser;
-import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.data.repositories.EquipmentRepository;
 import com.npgames.insight.data.repositories.KeyWordsRepository;
+import com.npgames.insight.data.repositories.ParagraphRepository;
 import com.npgames.insight.data.repositories.StatsRepository;
-import com.npgames.insight.ui.book.Pagination;
 
-import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Created by i_straj_i on 28.07.2018.
@@ -24,10 +23,13 @@ public class GameInteractor {
     private final StatsRepository statsRepository;
     private final EquipmentRepository equipmentRepository;
     private final KeyWordsRepository keyWordsRepository;
+    private final ParagraphRepository paragraphRepository;
 
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
         equipmentRepository = EquipmentRepository.getInstance(context);
+        paragraphRepository = ParagraphRepository.getInstance(context);
+        keyWordsRepository = KeyWordsRepository.getInstance(context);
     }
 
     public void startNewGame() {
@@ -50,19 +52,80 @@ public class GameInteractor {
         //reset paragraph
     }
 
-    public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight, final String paragraphString) {
-        final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
-        final Pagination pagination = new Pagination();
-        final Paragraph nextParagraph = pagination.createParagraphModel(blockAreas, availableHeight);
+    public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
+        final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
 
         final Player player = new Player(statsRepository.getStats(),
                 keyWordsRepository.getKeyWords(),
                 equipmentRepository.getEquipmentsOwnedBy(Equipment.Owner.PLAYER));
 
-        final ParagraphJumpsChecker paragraphJumpsChecker = new ParagraphJumpsChecker();
-        paragraphJumpsChecker.checkJumpsConditions(nextParagraph, player);
-
+        checkJumpsConditions();
 
         return nextParagraph;
+    }
+
+
+    private final SparseArray<Callable<Void>> jumpStateChecker = new SparseArray<>();
+
+    public void checkJumpsConditions() {
+        jumpStateChecker.put(26, paragraph26JumpConditions());
+        jumpStateChecker.put(59, paragraph59JumpConditions());
+        jumpStateChecker.put(32, paragraph32JumpConditions());
+        jumpStateChecker.put(67, paragraph67JumpConditions());
+        jumpStateChecker.put(327, paragraph327JumpConditions());
+    }
+
+    private Callable<Void> paragraph26JumpConditions() {
+        if (statsRepository.getStats().getPrc() >= 7) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        } else {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
+        }
+
+        return null;
+    }
+
+    private Callable<Void> paragraph59JumpConditions() {
+        if (statsRepository.getStats().getDex() >= 7) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        } else {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
+        }
+
+        return null;
+    }
+
+    private Callable<Void> paragraph32JumpConditions() {
+    gg //here i lost type of weapon
+        if (equipmentRepository.isOwnedBy(Equipment.Owner.PLAYER, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        }
+
+        return null;
+    }
+
+    private Callable<Void> paragraph67JumpConditions() {
+
+        if (equipmentRepository.isOwnedBy(Equipment.TYPE.BLASTER, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        }
+
+        if (equipmentRepository.isOwnedBy(Equipment.TYPE.BEAM, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
+        }
+
+        if (equipmentRepository.isOwnedBy(Equipment.TYPE.POWER_SHIELD, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(2, false);
+        }
+
+        return null;
+    }
+
+    private Callable<Void> paragraph327JumpConditions() {
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.GRENADE, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        }
+
+        return null;
     }
 }

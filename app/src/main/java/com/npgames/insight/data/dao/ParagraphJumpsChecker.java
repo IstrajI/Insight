@@ -12,12 +12,16 @@ import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
 import com.npgames.insight.data.model.new_model.Paragraph;
 
+import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 public class ParagraphJumpsChecker {
-    private final SparseArray<Function<Paragraph, Void>> jumpStateChecker = new SparseArray<>();
+    private final SparseArray<Fun<Void>> jumpStateChecker = new SparseArray<>();
 
     public void checkJumpsConditions(final Paragraph paragraph, final Player player) {
+
+        jumpStateChecker.put(26, paragraph26JumpConditions(paragraph, player));
+        jumpStateChecker.put(32, player);
 
         switch(paragraph.getId()) {
             case 26:
@@ -38,10 +42,9 @@ public class ParagraphJumpsChecker {
         }
     }
 
-    private Void paragraph26JumpConditions(final Paragraph paragraph) {
-        if (player.getStats().getPrc() >= 7) {
+    private Void paragraph26JumpConditions(final Paragraph paragraph, final Player player) {
+        if (player.get.getPrc() >= 7) {
             paragraph.getJumps().get(0).setStatus(false);
-            return;
         }
         paragraph.getJumps().get(1).setStatus(false);
     }

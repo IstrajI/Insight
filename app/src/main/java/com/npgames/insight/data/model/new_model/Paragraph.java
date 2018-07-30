@@ -1,6 +1,7 @@
 package com.npgames.insight.data.model.new_model;
 
 import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +29,18 @@ public class Paragraph {
         }
 
         return blockAreas;
+    }
+
+    public List<BlockButton> getJumps() {
+        final List<BlockArea> blockAreas = getBlockAreas();
+        final List<BlockButton> blockJumps = new ArrayList();
+
+        for (final BlockArea blockArea: blockAreas) {
+            if (BlockType.Button.equals(blockArea.type)) {
+                blockJumps.add(blockArea);
+            }
+        }
+
+        return blockJumps;
     }
 }

@@ -160,9 +160,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     public void showParagraph(final int paragraphNumber) {
-        final String paragraphResName = gameBookPresenter.getResourceName(paragraphNumber);
-        final int paragraphResId = getResources().getIdentifier(paragraphResName, "string", getPackageName());
-        final String paragraphString = getString(paragraphResId);
+
 
 
         //gameBookPresenter.checkConditionActions(paragraphNumber);

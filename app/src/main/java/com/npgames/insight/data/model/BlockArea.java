@@ -20,8 +20,7 @@ public abstract class BlockArea {
         int ACTION = 3;
     }
 
-    public @BlockArea.BlockType
-    int type;
+    public @BlockArea.BlockType int type;
     public String content;
 
     public abstract int getViewHeight();

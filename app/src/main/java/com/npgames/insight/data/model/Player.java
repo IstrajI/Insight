@@ -51,6 +51,8 @@ public class Player {
         equipments = playerEquipments;
     }
 
+    public Stats
+
 
 
 

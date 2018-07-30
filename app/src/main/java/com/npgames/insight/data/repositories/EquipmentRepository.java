@@ -35,4 +35,14 @@ public class EquipmentRepository {
 
         return resultList;
     }
+
+    public boolean isOwnedBy(final @Equipment.TYPE String type, final @Equipment.Owner String owner) {
+        for (final Equipment equipment : equipments) {
+            if (type.equals(equipment.getType()) && owner.equals(equipment.getOwnedBy())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
