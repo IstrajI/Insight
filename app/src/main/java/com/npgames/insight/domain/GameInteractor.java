@@ -3,7 +3,6 @@ package com.npgames.insight.domain;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.npgames.insight.data.dao.ParagraphJumpsChecker;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
@@ -55,11 +54,8 @@ public class GameInteractor {
     public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
 
-        final Player player = new Player(statsRepository.getStats(),
-                keyWordsRepository.getKeyWords(),
-                equipmentRepository.getEquipmentsOwnedBy(Equipment.Owner.PLAYER));
-
         checkJumpsConditions();
+        checkIfActionDisableJumps();
 
         return nextParagraph;
     }
@@ -73,6 +69,8 @@ public class GameInteractor {
         jumpStateChecker.put(32, paragraph32JumpConditions());
         jumpStateChecker.put(67, paragraph67JumpConditions());
         jumpStateChecker.put(327, paragraph327JumpConditions());
+
+        jumpStateChecker.
     }
 
     private Callable<Void> paragraph26JumpConditions() {
@@ -96,8 +94,7 @@ public class GameInteractor {
     }
 
     private Callable<Void> paragraph32JumpConditions() {
-    gg //here i lost type of weapon
-        if (equipmentRepository.isOwnedBy(Equipment.Owner.PLAYER, Equipment.Owner.PLAYER)) {
+        if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }
 

@@ -67,7 +67,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight) {
         currentParagraphNumber = paragraphNumber;
         currentParagraph = gameInteractor.nextParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
-        checkIfActionDisableJumps(currentParagraph);
+
         getViewState().updateParagraph(currentParagraph);
     }
 
