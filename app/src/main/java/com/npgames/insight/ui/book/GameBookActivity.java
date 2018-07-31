@@ -15,6 +15,10 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.application.ScreenUtils;
+<<<<<<< HEAD
+=======
+import com.npgames.insight.data.model.BlockAction;
+>>>>>>> 3f08fe57145b749326e75575f21dbef0b5d811e8
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -208,7 +212,11 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void showFindSuccess(final int paragraphNumber, final int paragraphResId) {
         final String paragraphString = getString(paragraphResId);
         Toast.makeText(getApplicationContext(), "Find Success", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
         gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight);
+=======
+        gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
+>>>>>>> 3f08fe57145b749326e75575f21dbef0b5d811e8
     }
 
     @Override

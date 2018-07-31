@@ -14,10 +14,8 @@ import com.npgames.insight.data.repositories.EquipmentRepository;
 import com.npgames.insight.data.repositories.KeyWordsRepository;
 import com.npgames.insight.data.repositories.ParagraphRepository;
 import com.npgames.insight.data.repositories.StatsRepository;
-
 import java.util.List;
 import java.util.concurrent.Callable;
-
 public class GameInteractor {
     private final StatsRepository statsRepository;
     private final EquipmentRepository equipmentRepository;
@@ -30,7 +28,6 @@ public class GameInteractor {
         equipmentRepository = EquipmentRepository.getInstance(context);
         paragraphRepository = ParagraphRepository.getInstance(context);
         keyWordsRepository = KeyWordsRepository.getInstance(context);
-
         jumpStateChecker.put(26, paragraph26JumpConditions());
         jumpStateChecker.put(59, paragraph59JumpConditions());
         jumpStateChecker.put(32, paragraph32JumpConditions());

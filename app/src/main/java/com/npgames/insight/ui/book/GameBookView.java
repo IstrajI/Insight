@@ -9,6 +9,7 @@ public interface GameBookView extends MvpView {
     void showFindSuccess(int paragraphNumber, int paragraphResId);
     void showFindFailed();
     void showStats(final Stats stats);
-    void showParagraph(int paragraphNumber);
+    void showParagraph(int paragraphNumber);-
+    void disableJumps();
     void showDeathScreen();
 }
