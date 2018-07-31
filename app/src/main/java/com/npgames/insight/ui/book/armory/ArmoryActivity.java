@@ -1,0 +1,139 @@
+package com.npgames.insight.ui.book.armory;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.npgames.insight.R;
+import com.npgames.insight.data.model.Stats;
+import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.ui.all.activities.BaseMvpActivity;
+import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
+
+import java.util.List;
+
+import butterknife.BindView;
+
+public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, RecyclerViewListeners.OnItemClickListener,
+            View.OnClickListener{
+
+    @BindView(R.id.recycler_view_armory_equipment)
+    protected RecyclerView armoryRecyclerView;
+    @BindView(R.id.button_armory_continue)
+    protected Button continueButton;
+/*    @BindView(R.id.text_view_stats_panel_time)
+    protected TextView timeTextView;
+    @BindView(R.id.text_view_stats_panel_amn)
+    protected TextView amnTextView;
+    @BindView(R.id.text_view_stats_panel_hp)
+    protected TextView hpTextView;
+    @BindView(R.id.text_view_stats_panel_prc)
+    protected TextView prcTextView;
+    @BindView(R.id.text_view_stats_panel_dex)
+    protected TextView dexTextView;
+    @BindView(R.id.text_view_stats_panel_aur)
+    protected TextView aurTextView;*/
+
+    private EquipmentDialogFragment equipmentMoreDialogFragment;
+    private GridLayoutManager equipmentLayoutManager;
+
+
+    @InjectPresenter
+    ArmoryPresenter armoryPresenter;
+    @ProvidePresenter
+    ArmoryPresenter provideGameBookPresenter() {
+        return new ArmoryPresenter(getApplicationContext());
+    }
+
+    private final Equipment.Owner owner = Equipment.Owner.ARRMORY;
+    private ArmoryEquipmentAdapter armoryEquipmentAdapter;
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_armory);
+    }
+
+    @Override
+    protected void bindViews() {
+        final int numberOfColumns = 3;
+        equipmentLayoutManager = new GridLayoutManager(this, numberOfColumns);
+        armoryRecyclerView.setLayoutManager(equipmentLayoutManager);
+        armoryEquipmentAdapter = new ArmoryEquipmentAdapter(getApplicationContext());
+        armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
+        armoryEquipmentAdapter.setOnItemClickListener(this);
+        continueButton.setOnClickListener(this);
+
+        armoryPresenter.loadEquipmentsOwnedBy(owner);
+        armoryPresenter.loadStatsPlayerStats();
+
+        equipmentMoreDialogFragment = new EquipmentDialogFragment();
+    }
+
+
+    @Override
+    public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
+        switch(view.getId()) {
+            case R.id.text_view_equipment_item_name:
+            case R.id.image_view_equipment_item_picture:
+                final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
+                final String equipmentName = getString(equipment.getNameResource());
+                final String equipmentDescription = getString(equipment.getDescriptionResource());
+                final Bundle equipmentMoreBundle = new Bundle();
+                equipmentMoreBundle.putString(Equipment.NAME, equipmentName);
+                equipmentMoreBundle.putString(Equipment.DESCRIPTION, equipmentDescription);
+                equipmentMoreDialogFragment.setArguments(equipmentMoreBundle);
+                equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
+                break;
+            case R.id.button_equipment_take_on:
+                final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
+                armoryPresenter.takeOnEquipment(equipmentOn);
+                break;
+            case R.id.button_equipment_take_out:
+                final Equipment equipmentOff = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
+                armoryPresenter.takeOffEquipment(equipmentOff);
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(final View v) {
+        switch (v.getId()){
+            case R.id.button_armory_continue:
+                final Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+        }
+    }
+
+    @Override
+    public void showEquipment(final List<Equipment> equipments) {
+        armoryEquipmentAdapter.update(equipments);
+    }
+
+    @Override
+    public void showStats(final Stats stats) {
+/*        hpTextView.setText(String.valueOf(hp));
+        aurTextView.setText(String.valueOf(aur));
+        prcTextView.setText(String.valueOf(prc));
+        dexTextView.setText(String.valueOf(dex));
+        timeTextView.setText(String.valueOf(time));
+        amnTextView.setText(String.valueOf(amn));*/
+    }
+
+    public void updateWearEquipmentStatus(final int equipmentNumber, final boolean canWear) {
+        final boolean isWeared = armoryEquipmentAdapter.getEquipmentByPosition(equipmentNumber).isOwner(Equipment.Owner.PLAYER);
+        final Button takeOnButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on);
+
+        if (!canWear) {
+            takeOnButton.setEnabled(false);
+        }
+        if (canWear && !isWeared) {
+            takeOnButton.setEnabled(true);
+        }
+    }
+}

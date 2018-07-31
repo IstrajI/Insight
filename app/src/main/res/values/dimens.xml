@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- BASE SPACINGS -->
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+
+    <dimen name="height_equipment_item">90dp</dimen>
+
+    <dimen name="size_create_character_skill_points_squire">35dp</dimen>
+
+    <dimen name="size_bottom_panel_jumps_button">40dp</dimen>
+
+</resources>

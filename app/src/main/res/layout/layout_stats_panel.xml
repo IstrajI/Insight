@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="@dimen/spacing_4"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/top_panel_new"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- first row -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/top_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_dex_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_dex_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_dex_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/image_view_stats_panel_dex_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_8"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_dex_title"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_prc_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_prc_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_prc_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_dex_bar"
+            app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_prc_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/image_view_stats_panel_prc_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_prc_title"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_au_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_au_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_aur_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_prc_bar"
+            app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_au_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/image_view_stats_panel_au_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_au_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+    <!-- second row -->
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottom_row"
+        android:textAppearance="@style/D"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_row">
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_hp_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_hp_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_hp_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/image_view_stats_panel_hp_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_8"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_hp_title"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_time_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_time_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_time_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_hp_bar"
+            app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_time_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/image_view_stats_panel_time_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_time_title"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_mem_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_mem_title"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/stats_panel_am_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_time_bar"
+            app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_mem_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_stats_panel_mem_bar"
+            android:textAppearance="@style/D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_mem_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/stats_panel_button"
+        android:layout_width="65dp"
+        android:visibility="gone"
+        android:layout_height="45dp"
+        android:background="#00ff00" />
+
+</android.support.constraint.ConstraintLayout>

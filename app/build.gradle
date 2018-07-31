@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 28
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.npgames.insight"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    compile 'com.android.support:design:28.0.0-alpha3'
+    compile "com.android.support:support-compat:28.0.0-alpha3"
+    compile 'com.android.support:multidex:1.0.0'
+
+    //Moxy lib
+    compile 'com.arello-mobile:moxy:1.5.1'
+    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.1'
+
+    //ButterKnife lib
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    compile 'com.android.support:recyclerview-v7:28.0.0-alpha3'
+
+    //Glide
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
+    compile 'com.android.support:support-v4:28.0.0-alpha3'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+
+    // Calligraphy
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+
+    compile 'com.github.deano2390:FlowTextView:2.0.5'
+
+    compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
+
+    compile 'com.uncopt:android.justified:1.0'
+}

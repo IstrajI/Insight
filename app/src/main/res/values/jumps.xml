@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="j_continue">Продолжить</string>
+    <!-- intro -->
+    <!-- 500 -->
+    <string-array name="j500_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j500_n">
+        <item>501</item>
+    </string-array>
+    <!-- 501 -->
+    <string-array name="j501_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j501_n">
+        <item>502</item>
+    </string-array>
+    <!-- 502 -->
+    <string-array name="j502_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j502_n">
+        <item>503</item>
+    </string-array>
+    <!-- 503 -->
+    <string-array name="j503_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j503_n">
+        <item>0</item>
+    </string-array>
+    <!-- 1 -->
+    <string-array name="j1_t">
+        <item>Если хотите расспросить об аномальной зоне</item>
+        <item>Осмотрите свой корабль</item>
+        <item>Отлежитесь до прилёта в лечебной капсуле</item>
+        <item>Останетесь на капитанском мостике, заодно подробней ознакомитесь с предстоящим делом (впрочем, информация по нему будет всегда доступна в справочнике)</item>
+    </string-array>
+    <string-array name="j1_n">
+        <item>23</item>
+        <item>102</item>
+        <item>60</item>
+        <item>301</item>
+    </string-array>
+    <!-- 5 -->
+    <string-array name="j5_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j5_n">
+        <item>49</item>
+    </string-array>
+    <!-- 14 -->
+    <string-array name="j14_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j14_n">
+        <item>90</item>
+    </string-array>
+    <!-- 18 -->
+    <string-array name="j18_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j18_n">
+        <item>86</item>
+    </string-array>
+    <!-- 22 -->
+    <string-array name="j22_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j22_n">
+        <item>95</item>
+    </string-array>
+    <!-- 23 -->
+    <string-array name="j23_t">
+        <item>Осмотрите свой корабль</item>
+        <item>Пройдёте сеанс лечебной терапии</item>
+        <item>Ознакомитесь подробней с предстоящим делом</item>
+    </string-array>
+    <string-array name="j23_n">
+        <item>102</item>
+        <item>60</item>
+        <item>301</item>
+    </string-array>
+    <!-- 26 -->
+    <string-array name="j26_t">
+        <item>Если ваша Меткость равна 7 или выше</item>
+        <item>Если ниже</item>
+    </string-array>
+    <string-array name="j26_n">
+        <item>5</item>
+        <item>59</item>
+    </string-array>
+    <!-- 29 -->
+    <string-array name="j29_t">
+        <item>Что он думает по поводу убийств – (в полной версии)?</item>
+        <item>Кого подозревает</item>
+        <item>Если не будете приставать с вопросами</item>
+    </string-array>
+    <string-array name="j29_n">
+        <!-- 305 -->
+        <item>#</item>
+        <item>18</item>
+        <item>86</item>
+    </string-array>
+    <!-- 32 -->
+    <string-array name="j32_t">
+        <item>Если у вас есть снаряжение для выхода в открытый космос, можете сойти с дороги и тщательнее обследовать поверхность астероида у кратера</item>
+        <item>Если снаряжения с собой нет или вы не считаете нужным туда идти, возвращайтесь на станцию</item>
+    </string-array>
+    <string-array name="j32_n">
+        <item>58</item>
+        <item>95</item>
+    </string-array>
+    <!-- 37 -->
+    <string-array name="j37_t">
+        <item></item>
+    </string-array>
+    <string-array name="j37_n">
+        <item></item>
+    </string-array>
+    <!-- 40 -->
+    <string-array name="j40_t">
+        <item>Если вы здесь в первый раз</item>
+        <item>Если уже были</item>
+    </string-array>
+    <string-array name="j40_n">
+        <item>29</item>
+        <item>95</item>
+    </string-array>
+    <!-- 49 -->
+    <string-array name="j49_t">
+        <item>Вернётесь на станцию</item>
+        <item>Продолжите поиски теперь уже в хвосте кометы</item>
+    </string-array>
+    <string-array name="j49_n">
+        <item>95</item>
+        <!-- 73 -->
+        <item>#</item>
+    </string-array>
+    <!-- 54 -->
+    <string-array name="j54_t">
+        <item>Вернуться на станцию</item>
+        <item>Пройти в оружейную комнату</item>
+    </string-array>
+    <string-array name="j54_n">
+        <item>40</item>
+        <item>100</item>
+    </string-array>
+    <!-- 58 -->
+    <string-array name="j58_t">
+        <item>Если отправитесь на поиски, то обследуете скалы в поисках убежища маньяка</item>
+        <item>Решите что стоит поискать его корабль в хвосте кометы среди обломков</item>
+        <item>Вернётесь на станцию </item>
+    </string-array>
+    <string-array name="j58_n">
+        <item>327</item>
+        <!-- 73 -->
+        <item>#</item>
+        <item>95</item>
+    </string-array>
+    <!-- 59 -->
+    <string-array name="j59_t">
+        <item>Если ваша Ловкость меньше 7</item>
+        <item>Если 7 и больше</item>
+    </string-array>
+    <string-array name="j59_n">
+        <item>37</item>
+        <item>49</item>
+    </string-array>
+    <!-- 60 -->
+    <string-array name="j60_t">
+        <item>Вернуться на мостик, чтобы ознакомиться подробней с предстоящим делом</item>
+        <item>Зайти по дороге в свою каюту</item>
+    </string-array>
+    <string-array name="j60_n">
+        <item>301</item>
+        <item>65</item>
+    </string-array>
+    <!-- 65 -->
+    <string-array name="j65_t">
+        <item>Если вы уже были в трюме или в лечебной капсуле</item>
+        <item>Если ещё не были, то спуститесь в трюм</item>
+        <item>Вернётесь на капитанский мостик, чтобы ознакомится с предстоящим делом</item>
+    </string-array>
+    <string-array name="j65_n">
+        <item>14</item>
+        <!-- 34 -->
+        <item>#</item>
+        <item>301</item>
+    </string-array>
+    <!-- 67 -->
+    <string-array name="j67_t">
+        <item>Если у вас бластер</item>
+        <item>Если плазмоизлучатель</item>
+        <item>Если лучемет</item>
+        <item>Выставите перед собой энергощит</item>
+        <item>Примените электрошокер</item>
+        <item>Или отойдете в глубь пещеры и попробуете переждать опасность</item>
+    </string-array>
+    <string-array name="j67_n">
+        <item>26</item>
+        <!-- 313 -->
+        <item>#</item>
+        <item>302</item>
+        <item>97</item>
+        <!-- 310 -->
+        <item>#</item>
+        <item>104</item>
+    </string-array>
+    <!-- 75 -->
+    <string-array name="j75_t">
+        <item>Если вы уже были в трюме или в лечебной капсуле</item>
+        <item>Если ещё не были, то спуститесь в трюм</item>
+        <item>Вернётесь на капитанский мостик, чтобы ознакомится с предстоящим делом</item>
+    </string-array>
+    <string-array name="j75_n">
+        <item>14</item>
+        <item>#</item>
+        <item>301</item>
+    </string-array>
+    <!-- 77 -->
+    <string-array name="j77_t">
+        <item>Вернётесь ни с чем на станцию</item>
+        <item>Продолжите поиски теперь уже в хвосте кометы – (в полной версии)?</item>
+    </string-array>
+    <string-array name="j77_n">
+        <item>95</item>
+        <item>#</item>
+    </string-array>
+    <!-- 81 -->
+    <string-array name="j81_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j81_n">
+        <item>108</item>
+    </string-array>
+    <!-- 86 -->
+    <string-array name="j86_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j86_n">
+        <item>95</item>
+    </string-array>
+    <!-- 87 -->
+    <string-array name="j87_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j87_n">
+        <item>67</item>
+    </string-array>
+    <!-- 90 -->
+    <string-array name="j90_t">
+        <item>«А не много ли этот кусок железа болтает» - (в полной версии)?</item>
+        <item>Сдержите раздражение</item>
+    </string-array>
+    <string-array name="j90_n">
+        <item>#</item>
+        <item>94</item>
+    </string-array>
+    <!-- 93 -->
+    <string-array name="j93_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j93_n">
+        <item>67</item>
+    </string-array>
+    <!-- 94 -->
+    <string-array name="j94_t">
+        <item>Если решите прикрепить его себе на грудь</item>
+        <item>Если предпочтёте не привлекать к себе лишнего внимания, убираете в карман</item>
+    </string-array>
+    <string-array name="j94_n">
+        <item>81</item>
+        <item>108</item>
+    </string-array>
+    <!-- 95 -->
+    <string-array name="j95_t">
+        <item>Бар – (в полной версии)</item>
+        <item>Жилой модуль</item>
+        <item>Шахта редкоземельных элементов</item>
+        <item>Если у вас есть вопросы к капитану, отправляйтесь к нему – (в полной версии).</item>
+        <item>Если хотите найти старпома и поговорить с ним – (в полной версии).</item>
+        <item>Если решили пообщаться с блогером – (в полной версии).</item>
+        <item>Исследуете первое место убийства, возле шахты</item>
+        <item>Осмотрите второе место убийства, у входа в главную шахту</item>
+        <item>Осмотрите место двойного убийства</item>
+        <item>Осмотрите последнее место убийства, на территории станции</item>
+        <item>Отправитесь в оружейку</item>
+        <item>В лечебную капсулу</item>
+    </string-array>
+    <string-array name="j95_n">
+        <item>#</item>
+        <item>160</item>
+        <item>116</item>
+        <item>#</item>
+        <item>#</item>
+        <item>#</item>
+        <item>22</item>
+        <item>#</item>
+        <item>#</item>
+        <item>#</item>
+        <item>100</item>
+        <item>54</item>
+    </string-array>
+    <!-- 97 -->
+    <string-array name="j97_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j97_n">
+        <item>49</item>
+    </string-array>
+    <!-- 100 -->
+    <string-array name="j100_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j100_n">
+        <item>40</item>
+    </string-array>
+    <!-- 102 -->
+    <string-array name="j102_t">
+        <item>Загляните в свою каюту</item>
+        <item>Спуститесь в трюм – (в полной версии)?</item>
+    </string-array>
+    <string-array name="j102_n">
+        <item>65</item>
+        <item>#</item>
+    </string-array>
+    <!-- 104 -->
+    <string-array name="j104_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j104_n">
+        <item>49</item>
+    </string-array>
+    <!-- 108 -->
+    <string-array name="j108_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j108_n">
+        <item>100</item>
+    </string-array>
+    <!-- 116 -->
+    <string-array name="j116_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j116_n">
+        <item>332</item>
+    </string-array>
+    <!-- 160 -->
+    <string-array name="j160_t">
+        <item>Если хотите осмотреть комнаты погибших (но учтите, на это уйдет много времени) – (в полной версии)</item>
+        <item>Иначе придётся вернуться</item>
+        <item>Или потратить время, опрашивая всех подряд</item>
+    </string-array>
+    <string-array name="j160_n">
+        <!-- 170 -->
+        <item>#</item>
+        <item>95</item>
+        <item>193</item>
+    </string-array>
+    <!-- 193 -->
+    <string-array name="j193_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j193_n">
+        <item>95</item>
+    </string-array>
+    <!-- 301 -->
+    <string-array name="j301_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j301_n">
+        <item>90</item>
+    </string-array>
+    <!-- 302 -->
+    <string-array name="j302_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j302_n">
+        <item>49</item>
+    </string-array>
+    <!-- 327 -->
+    <string-array name="j327_t">
+        <item>Бросите в пещеру свето-шумовую гранату (если она у вас есть)</item>
+        <item>Или используя фактор неожиданности, ворвётесь внутрь и будете действовать по обстановке</item>
+    </string-array>
+    <string-array name="j327_n">
+        <item>93</item>
+        <item>77</item>
+    </string-array>
+    <!-- 332 -->
+    <string-array name="j332_t">
+        <item>@string/j_continue</item>
+    </string-array>
+    <string-array name="j332_n">
+        <item>95</item>
+    </string-array>
+
+</resources>

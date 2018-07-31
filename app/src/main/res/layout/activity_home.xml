@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_home_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_screen_continue_title"/>
+
+        <Button
+            android:id="@+id/button_home_new_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_screen_new_game_title"/>
+
+        <Button
+            android:text="@string/home_screen_rules_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="@string/home_screen_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="@string/home_screen_achievements_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="@string/home_screen_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,206 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="InsightBaseTheme" parent="BaseAppCompatTheme"/>
+
+    <style name="BaseAppCompatTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+
+        <!-- BASE TEXT APPEARANCE -->
+        <item name="textAppearance.Display4">@style/TextAppearance.Display4.Base</item>
+        <item name="textAppearance.Display4.PrimarySecondary">@style/TextAppearance.Display4.PrimarySecondary</item>
+
+        <item name="textAppearance.Display3">@style/TextAppearance.Display3.Base</item>
+        <item name="textAppearance.Display3.PrimarySecondary">@style/TextAppearance.Display3.PrimarySecondary</item>
+
+        <item name="textAppearance.Display2">@style/TextAppearance.Display2.Base</item>
+        <item name="textAppearance.Display2.PrimarySecondary">@style/TextAppearance.Display2.PrimarySecondary</item>
+
+        <item name="textAppearance.Display1">@style/TextAppearance.Display1.Base</item>
+        <item name="textAppearance.Display1.PrimarySecondary">@style/TextAppearance.Display1.PrimarySecondary</item>
+
+        <item name="textAppearance.Headline">@style/TextAppearance.Headline.Base</item>
+        <item name="textAppearance.Headline.Primary">@style/TextAppearance.Headline.Primary</item>
+
+        <item name="textAppearance.Title">@style/TextAppearance.Title.Base</item>
+        <item name="textAppearance.Title.Primary">@style/TextAppearance.Title.Primary</item>
+
+        <item name="textAppearance.Subheading">@style/TextAppearance.Subheading.Base</item>
+        <item name="textAppearance.Subheading.Primary">@style/TextAppearance.Subheading.Primary</item>
+
+        <item name="textAppearance.Body2">@style/TextAppearance.Body2.Base</item>
+        <item name="textAppearance.Body2.Primary">@style/TextAppearance.Body2.Primary</item>
+
+        <item name="textAppearance.Body1">@style/TextAppearance.Body1.Base</item>
+        <item name="textAppearance.Body1.Primary">@style/TextAppearance.Body1.Primary</item>
+        <item name="textAppearance.Body1.PrimarySecondary">@style/TextAppearance.Body1.PrimarySecondary</item>
+
+        <item name="textAppearance.Caption">@style/TextAppearance.Caption.Base</item>
+        <item name="textAppearance.Caption.PrimarySecondary">@style/TextAppearance.Caption.PrimarySecondary</item>
+    </style>
+
+    <style name="A" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/a_sans</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="B" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/b_bicubik</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="C" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/c_casale</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="D" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/d_cell</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="E" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/e_glasstown_nbp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="F" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/f_hardpixel</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+
+    <style name="G" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/g_opirus_opik</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="H" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/h_pixograd</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="I" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/docker_one</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Regular">
+        <item name="android:fontFamily">@font/g_opirus_opik</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Fonts -->
+    <style name="TextAppearance.Base.Regular" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/play_regular</item>
+    </style>
+
+    <style name="TextAppearance.Base.Medium" parent="android:TextAppearance">
+        <item name="fontPath">@font/play_regular</item>
+    </style>
+
+    <style name="TextAppearance.Base.Light" parent="android:TextAppearance">
+        <item name="fontPath">@font/play_regular</item>
+    </style>
+
+    <style name="TextAppearance.Base.Thin" parent="android:TextAppearance">
+        <item name="fontPath">@font/play_regular</item>
+    </style>
+
+    <!-- Display 4 TextAppearance -->
+    <style name="TextAppearance.Display4.Base" parent="TextAppearance.Base.Light">
+        <item name="android:textSize">112sp</item>
+    </style>
+
+    <style name="TextAppearance.Display4.PrimarySecondary" parent="TextAppearance.Display4.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+
+    <!-- Display 3 TextAppearance -->
+    <style name="TextAppearance.Display3.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">56sp</item>
+    </style>
+
+    <style name="TextAppearance.Display3.PrimarySecondary" parent="TextAppearance.Display3.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+
+    <!-- Display 2 TextAppearance -->
+    <style name="TextAppearance.Display2.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">45sp</item>
+    </style>
+
+    <style name="TextAppearance.Display2.PrimarySecondary" parent="TextAppearance.Display2.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+
+    <!-- Display 1 TextAppearance -->
+    <style name="TextAppearance.Display1.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="TextAppearance.Display1.PrimarySecondary" parent="TextAppearance.Display1.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+
+    <!-- Headline TextAppearance -->
+    <style name="TextAppearance.Headline.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Headline.Primary" parent="TextAppearance.Headline.Base">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <!-- Title TextAppearance -->
+    <style name="TextAppearance.Title.Base" parent="TextAppearance.Base.Medium">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Title.Primary" parent="TextAppearance.Title.Base">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <!-- Subheading TextAppearance -->
+    <style name="TextAppearance.Subheading.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Subheading.Primary" parent="TextAppearance.Subheading.Base">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <!-- Body 2 TextAppearance -->
+    <style name="TextAppearance.Body2.Base" parent="TextAppearance.Base.Medium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Body2.Primary" parent="TextAppearance.Body2.Base">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <!-- Body 1 TextAppearance -->
+    <style name="TextAppearance.Body1.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Body1.Primary" parent="TextAppearance.Body1.Base">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Body1.PrimarySecondary" parent="TextAppearance.Body1.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+
+    <!-- Caption TextAppearance -->
+    <style name="TextAppearance.Caption.Base" parent="TextAppearance.Base.Regular">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Caption.PrimarySecondary" parent="TextAppearance.Caption.Base">
+        <item name="android:textColor">?attr/colorTextPrimarySecondary</item>
+    </style>
+</resources>

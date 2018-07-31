@@ -1,0 +1,12 @@
+<resources>
+
+    <style type="InsightBaseTheme" parent="BaseAppCompatTheme"/>
+
+    <style type="BaseAppCompatTheme" parent="Theme.AppCompat.NoActionBar">
+        <item type="windowNoTitle">true</item>
+        <item type="windowActionBar">false</item>
+        <item type="android:windowFullscreen">true</item>
+        <item type="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
