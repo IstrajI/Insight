@@ -5,6 +5,7 @@ import android.content.res.Resources;
 
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.db.KeyWordsPreferences;
+import com.npgames.insight.data.db.ParagraphPreferences;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
@@ -17,6 +18,10 @@ public class ParagraphRepository {
     private final Resources resources;
     private Paragraph paragraph;
     private final String packageName;
+    private final ParagraphPreferences paragraphPreferences;
+
+    private boolean wasActionPressed;
+    private int currentParagraph;
 
     public static ParagraphRepository getInstance(final Context context) {
         if (paragraphRepository == null) {
@@ -29,6 +34,10 @@ public class ParagraphRepository {
     ParagraphRepository(final Context context) {
         resources = context.getResources();
         packageName = context.getPackageName();
+
+        paragraphPreferences = ParagraphPreferences.getInstance(context);
+        wasActionPressed = paragraphPreferences.loadWasActionPressed();
+        currentParagraph = paragraphPreferences.loadCurrentParagraphNumber();
     }
 
     public Paragraph getNextParagraph(final int paragraphNumber, final int availableHeight) {
@@ -43,11 +52,41 @@ public class ParagraphRepository {
         return paragraph;
     }
 
+    public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
+        paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
+    }
+
+
     public Paragraph getParagraph() {
         return paragraph;
     }
 
-    public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
-        paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
+    //---------------------------- Was Action Pressed ----------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public boolean wasActionPressed() {
+        return wasActionPressed;
+    }
+
+    private boolean loadWasActionPressed() {
+        return paragraphPreferences.loadWasActionPressed();
+    }
+
+    public void saveWasActionPressed() {
+        paragraphPreferences.saveWasActionPressed(wasActionPressed);
+    }
+
+    //---------------------------- Current Paragraph -----------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public int getCurrentParagraph() {
+        return currentParagraph;
+    }
+
+    public void saveCurrentParagraphNumber(final int paragraph) {
+        paragraphPreferences.saveCurrentParagraphNumber(paragraph);
+    }
+
+    private int loadCurrentParagraph() {
+        return paragraphPreferences.loadCurrentParagraphNumber();
     }
 }

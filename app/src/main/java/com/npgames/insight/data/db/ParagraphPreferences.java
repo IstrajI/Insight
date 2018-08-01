@@ -9,6 +9,7 @@ public class ParagraphPreferences{
 
     private final String PREFERENCES_NAME = "PARAGRAPH_PREFERENCES";
     private final String CURRENT_PARAGRAPH = "CURRENT_PARAGRAPH";
+    private final String WAS_ACTION_PRESSED = "WAS_ACTION_PRESSED";
 
     ParagraphPreferences(final Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -20,6 +21,16 @@ public class ParagraphPreferences{
         }
 
         return paragraphPreferences;
+    }
+
+    public void saveWasActionPressed(final boolean wasActionPressed) {
+        final SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(WAS_ACTION_PRESSED, wasActionPressed);
+        editor.apply();
+    }
+
+    public boolean loadWasActionPressed() {
+        return preferences.getBoolean(WAS_ACTION_PRESSED, false);
     }
 
     public void saveCurrentParagraphNumber(final int currentParagraphNumber) {

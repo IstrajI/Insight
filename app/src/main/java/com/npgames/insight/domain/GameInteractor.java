@@ -16,6 +16,7 @@ import com.npgames.insight.data.repositories.ParagraphRepository;
 import com.npgames.insight.data.repositories.StatsRepository;
 import java.util.List;
 import java.util.concurrent.Callable;
+
 public class GameInteractor {
     private final StatsRepository statsRepository;
     private final EquipmentRepository equipmentRepository;
@@ -28,6 +29,7 @@ public class GameInteractor {
         equipmentRepository = EquipmentRepository.getInstance(context);
         paragraphRepository = ParagraphRepository.getInstance(context);
         keyWordsRepository = KeyWordsRepository.getInstance(context);
+
         jumpStateChecker.put(26, paragraph26JumpConditions());
         jumpStateChecker.put(59, paragraph59JumpConditions());
         jumpStateChecker.put(32, paragraph32JumpConditions());
@@ -55,10 +57,17 @@ public class GameInteractor {
         //reset paragraph
     }
 
+    public void loadSavedParagraph() {
+        paragraphRepository.getC()
+    }
+
+    public void load
+
     public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
 
         if (nextParagraph.hasActions()) {
+            paragraphRepository.wasActionPressed();
             disableJumps();
         } else {
             checkJumpsConditions();
@@ -96,7 +105,6 @@ public class GameInteractor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private Callable<Void> paragraph26JumpConditions() {

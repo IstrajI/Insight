@@ -8,15 +8,11 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.db.GamePreferences;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.TrackingParagraph;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.data.repositories.ParagraphRepository;
 import com.npgames.insight.data.repositories.StatsRepository;
 import com.npgames.insight.domain.ActionsInteractor;
 import com.npgames.insight.domain.GameInteractor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @InjectViewState
 public class GameBookPresenter extends MvpPresenter<GameBookView> {
@@ -59,8 +55,6 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         BlockText.DEF_TEXT_PAINT = textPaint;
         BlockText.DEF_WIDTH = width;
     }
-
-    private List<TrackingParagraph> trackingParagraphs = new ArrayList<>();
 
     public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight) {
         currentParagraph = gameInteractor.nextParagraph(paragraphNumber, paragraphTextHeight);

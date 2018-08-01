@@ -1,15 +1,11 @@
 package com.npgames.insight.data.model.new_model;
 
-<<<<<<< HEAD
 import com.npgames.insight.data.model.BlockAction;
-=======
->>>>>>> 3f08fe57145b749326e75575f21dbef0b5d811e8
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Влад on 05.11.2017.
