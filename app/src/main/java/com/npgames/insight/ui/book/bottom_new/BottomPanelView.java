@@ -100,9 +100,11 @@ public class BottomPanelView extends RelativeLayout implements IBottomPanelView,
             case R.id.button_bottom_panel_station:
                 onClickListener.onStation();
                 break;
+
             case R.id.button_bottom_panel_med_bay:
                 onClickListener.onMedBay();
                 break;
+
             case R.id.button_bottom_panel_armory:
                 onClickListener.onArmory();
                 break;

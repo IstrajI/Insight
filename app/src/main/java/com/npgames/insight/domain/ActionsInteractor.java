@@ -3,15 +3,15 @@ package com.npgames.insight.domain;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.npgames.insight.data.db.GamePreferences;
-import com.npgames.insight.data.db.KeyWordsPreferences;
+import com.npgames.insight.data.game.GamePreferences;
+import com.npgames.insight.data.keywords.KeyWordsPreferences;
 import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
-import com.npgames.insight.data.repositories.EquipmentRepository;
-import com.npgames.insight.data.repositories.GameRepository;
-import com.npgames.insight.data.repositories.KeyWordsRepository;
-import com.npgames.insight.data.repositories.StatsRepository;
+import com.npgames.insight.data.equipment.EquipmentRepository;
+import com.npgames.insight.data.game.GameRepository;
+import com.npgames.insight.data.keywords.KeyWordsRepository;
+import com.npgames.insight.data.stats.StatsRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -51,18 +51,12 @@ public class ActionsInteractor {
         actions.put(193, this::paragraph193Action);
     }
 
-    public Player applyAction(final int paragraphNumber) {
+    public void applyAction(final int paragraphNumber) {
         try {
             actions.get(paragraphNumber).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        final Stats stats = statsRepository.getStats();
-        final List<Equipment> equipment = equipmentRepository.getEquipmentsOwnedBy(Equipment.Owner.PLAYER);
-        final Set<String> keyWords = keyWordsRepository.getKeyWords();
-
-        return new Player(stats, keyWords, equipment);
     }
 
     private Void paragraph5Action() {

@@ -1,4 +1,4 @@
-package com.npgames.insight.data.db;
+package com.npgames.insight.data.equipment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,7 +27,7 @@ public class EquipmentPreferences {
         return equipmentPreferences;
     }
 
-    public void saveEqupment(final List<Equipment> equipments) {
+    void saveEqupment(final List<Equipment> equipments) {
         final SharedPreferences.Editor editor = preferences.edit();
 
         for (final Equipment equipment: equipments) {
@@ -37,7 +37,7 @@ public class EquipmentPreferences {
         editor.apply();
     }
 
-    public List<Equipment> loadEquipment() {
+    List<Equipment> loadEquipment() {
         final List<Equipment> equipments = new ArrayList<>();
 
         //Aid Kit

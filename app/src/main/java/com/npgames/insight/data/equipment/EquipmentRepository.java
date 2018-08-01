@@ -1,8 +1,7 @@
-package com.npgames.insight.data.repositories;
+package com.npgames.insight.data.equipment;
 
 import android.content.Context;
 
-import com.npgames.insight.data.db.EquipmentPreferences;
 import com.npgames.insight.data.model.equipment.Equipment;
 
 import java.util.ArrayList;
@@ -44,5 +43,15 @@ public class EquipmentRepository {
         }
 
         return false;
+    }
+
+    public void saveEquipment() {
+        equipmentPreferences.saveEqupment(equipments);
+    }
+
+    public void resetEquipment() {
+        for (final Equipment equipment: equipments) {
+            equipment.setOwnedBy(Equipment.Owner.ARRMORY);
+        }
     }
 }

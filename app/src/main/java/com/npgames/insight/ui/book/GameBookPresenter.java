@@ -5,35 +5,33 @@ import android.text.TextPaint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.db.GamePreferences;
+import com.npgames.insight.data.game.GamePreferences;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
-import com.npgames.insight.data.repositories.ParagraphRepository;
-import com.npgames.insight.data.repositories.StatsRepository;
+import com.npgames.insight.data.paragraph.ParagraphRepository;
+import com.npgames.insight.data.stats.StatsRepository;
 import com.npgames.insight.domain.ActionsInteractor;
 import com.npgames.insight.domain.GameInteractor;
+import com.npgames.insight.domain.UserActionInteractor;
 
 @InjectViewState
 public class GameBookPresenter extends MvpPresenter<GameBookView> {
     private boolean isActionsMenuOpen = false;
     private boolean isStatsPanelOpen = false;
-    private int screenHeight;
-    private Paragraph currentParagraph;
     private boolean isBottomPanelOpened = false;
     private ActionsInteractor actionsInteractor;
     private StatsRepository statsRepository;
     private ParagraphRepository paragraphRepository;
-    private GamePreferences gamePreferences;
-
     private GameInteractor gameInteractor;
+    private UserActionInteractor userActionInteractor;
 
     GameBookPresenter(final Context context) {
+        userActionInteractor = new UserActionInteractor(context);
         actionsInteractor = new ActionsInteractor(context);
         gameInteractor = new GameInteractor(context);
         statsRepository = StatsRepository.getInstance(context);
         paragraphRepository = ParagraphRepository.getInstance(context);
-        gamePreferences = GamePreferences.getInstance(context);
     }
 
     public void interactWithStatsPanel() {
@@ -56,57 +54,54 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         BlockText.DEF_WIDTH = width;
     }
 
-    public void loadParagraph(final int paragraphNumber, final int paragraphTextHeight) {
-        currentParagraph = gameInteractor.nextParagraph(paragraphNumber, paragraphTextHeight);
-        getViewState().updateParagraph(currentParagraph);
-    }
+    //---------------------------- User Bottom Panel Actions ---------------------------------------
+    //----------------------------------------------------------------------------------------------
 
-    public int loadCurrentParagraphNumber(final Context context) {
-        return GamePreferences.getInstance(context).loadCurrentParagraph();
-    }
+    public void onFindClick(final int availableHeight) {
+        final Paragraph searchingParagraph = userActionInteractor.loadSeachingParagraph(availableHeight);
 
-    //TODO: we should save current paragraph similar to player
-    public void saveGame(final Context context) {
-        playerRepository.savePlayer();
-        GamePreferences.getInstance(context).saveCurrentParagraph(paragraphRepository.getParagraph().paragraphNumber);
-    }
-
-    private void onFindButtonClick() {
-
-    }
-
-    private void onMedBayButtonClick() {
-
-    }
-
-
-    public void onFindAction(final int paragraphNumber, final int paragraphResId) {
-        final boolean isParagraphExists = paragraphResId != 0;
-
-        if (isParagraphExists) {
-            getViewState().showFindSuccess(paragraphNumber, paragraphResId);
-        } else {
-            //changeStats
+        if (searchingParagraph == null) {
             getViewState().showFindFailed();
+        } else {
+            getViewState().showFindSuccess();
+            getViewState().updateParagraph(searchingParagraph);
         }
     }
 
-    public int getWantedParagraph() {
-        return paragraphRepository.getParagraph().paragraphNumber + 10;
+    public void onMedBayClick(final int availableHeight) {
+        userActionInteractor.loadMedBay(availableHeight);
     }
 
+    public void onStationClick(final int availableHeight) {
+        userActionInteractor.loadStation(availableHeight);
+    }
 
-    void newGame() {
-        final int FIRST_PARAGRAPH_NUMBER = 500;
-        getViewState().showParagraph(FIRST_PARAGRAPH_NUMBER);
-        gameInteractor.startNewGame();
+    //---------------------------- Game Modes ------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    void newGame(final int availableTextHeight) {
+        final Paragraph paragraph = gameInteractor.startNewGame(availableTextHeight);
+        getViewState().updateParagraph(paragraph);
+
         final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
     }
 
-    void continueGame() {
-        final int currentParagraphNumber = gamePreferences.loadCurrentParagraph();
-        getViewState().showParagraph(currentParagraphNumber);
+    void continueGame(final int availableHeight) {
+        final Paragraph paragraph = gameInteractor.loadSavedParagraph(availableHeight);
+        getViewState().updateParagraph(paragraph);
+
+        final Stats stats = statsRepository.getStats();
+        getViewState().showStats(stats);
+    }
+
+    public void saveGame() {
+        gameInteractor.saveGame();
+    }
+
+    void loadGameParagraph(final int availableTextHeight, final int paragraphNumber) {
+        final Paragraph paragraph = gameInteractor.nextParagraph(paragraphNumber, availableTextHeight);
+        getViewState().updateParagraph(paragraph);
 
         final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
@@ -126,7 +121,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         if (!paragraphRepository.getParagraph().wasActionPressed) {
             paragraphRepository.getParagraph().wasActionPressed = true;
 
-            actionsInteractor.applyAction(paragraphRepository.getParagraph().paragraphNumber);
+            actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
             getViewState().showStats(statsRepository.getStats());
 
             gameInteractor.enableJumpsDisableActions();

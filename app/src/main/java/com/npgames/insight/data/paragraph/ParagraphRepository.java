@@ -1,17 +1,12 @@
-package com.npgames.insight.data.repositories;
+package com.npgames.insight.data.paragraph;
 
 import android.content.Context;
 import android.content.res.Resources;
-
 import com.npgames.insight.data.dao.ParagraphParser;
-import com.npgames.insight.data.db.KeyWordsPreferences;
-import com.npgames.insight.data.db.ParagraphPreferences;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
-
 import java.util.List;
-import java.util.Set;
 
 public class ParagraphRepository {
     private static ParagraphRepository paragraphRepository;
@@ -19,8 +14,6 @@ public class ParagraphRepository {
     private Paragraph paragraph;
     private final String packageName;
     private final ParagraphPreferences paragraphPreferences;
-
-    private boolean wasActionPressed;
     private int currentParagraph;
 
     public static ParagraphRepository getInstance(final Context context) {
@@ -36,26 +29,43 @@ public class ParagraphRepository {
         packageName = context.getPackageName();
 
         paragraphPreferences = ParagraphPreferences.getInstance(context);
-        wasActionPressed = paragraphPreferences.loadWasActionPressed();
         currentParagraph = paragraphPreferences.loadCurrentParagraphNumber();
     }
 
-    public Paragraph getNextParagraph(final int paragraphNumber, final int availableHeight) {
+    private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
         final String paragraphResName = ParagraphParser.formatParagraphResName(paragraphNumber);
         final int paragraphResId = resources.getIdentifier(paragraphResName, "string", packageName);
-        final String paragraphString = resources.getString(paragraphResId);
+        final String paragraphString;
+
+        try {
+             paragraphString = resources.getString(paragraphResId);
+        } catch (Resources.NotFoundException ex) {
+            return null;
+        }
 
         final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
         final Pagination pagination = new Pagination();
-        paragraph = pagination.createParagraphModel(blockAreas, availableHeight);
+        final Paragraph paragraph = pagination.createParagraphModel(blockAreas, availableHeight);
         paragraph.paragraphNumber = paragraphNumber;
+        return paragraph;
+    }
+
+    public Paragraph getSavedParagraph(final int availableHeight) {
+        final int currentParagraphNumber = loadSavedParagraphNumber();
+        paragraph = loadParagraph(currentParagraphNumber, availableHeight);
+        paragraph.wasActionPressed = loadWasActionPressed();
+        return paragraph;
+    }
+
+    public Paragraph getNextParagraph(final int paragraphNumber, final int availableHeight) {
+        paragraph = loadParagraph(paragraphNumber, availableHeight);
+        paragraph.wasActionPressed = false;
         return paragraph;
     }
 
     public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
         paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
     }
-
 
     public Paragraph getParagraph() {
         return paragraph;
@@ -64,29 +74,25 @@ public class ParagraphRepository {
     //---------------------------- Was Action Pressed ----------------------------------------------
     //----------------------------------------------------------------------------------------------
 
-    public boolean wasActionPressed() {
-        return wasActionPressed;
-    }
-
     private boolean loadWasActionPressed() {
         return paragraphPreferences.loadWasActionPressed();
     }
 
     public void saveWasActionPressed() {
-        paragraphPreferences.saveWasActionPressed(wasActionPressed);
+        paragraphPreferences.saveWasActionPressed(paragraph.wasActionPressed);
     }
 
     //---------------------------- Current Paragraph -----------------------------------------------
     //----------------------------------------------------------------------------------------------
-    public int getCurrentParagraph() {
+    public int getParagraphNumber() {
         return currentParagraph;
     }
 
-    public void saveCurrentParagraphNumber(final int paragraph) {
-        paragraphPreferences.saveCurrentParagraphNumber(paragraph);
+    public void saveParagraphNumber() {
+        paragraphPreferences.saveCurrentParagraphNumber(paragraph.paragraphNumber);
     }
 
-    private int loadCurrentParagraph() {
+    private int loadSavedParagraphNumber() {
         return paragraphPreferences.loadCurrentParagraphNumber();
     }
 }

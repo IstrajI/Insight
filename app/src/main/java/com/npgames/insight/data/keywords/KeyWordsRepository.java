@@ -1,9 +1,8 @@
-package com.npgames.insight.data.repositories;
+package com.npgames.insight.data.keywords;
 
 import android.content.Context;
 
-import com.npgames.insight.data.db.KeyWordsPreferences;
-
+import java.util.Collections;
 import java.util.Set;
 
 public class KeyWordsRepository {
@@ -30,5 +29,13 @@ public class KeyWordsRepository {
 
     public void addKeyWord(final @KeyWordsPreferences.KeyWords String keyWord) {
         keyWords.add(keyWord);
+    }
+
+    public void saveKeyWords() {
+        keyWordsPreferences.saveKeyWords(keyWords);
+    }
+
+    public void resetKeyWords() {
+        keyWords = Collections.emptySet();
     }
 }

@@ -2,18 +2,16 @@ package com.npgames.insight.domain;
 
 import android.content.Context;
 import android.util.SparseArray;
-
+import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
-import com.npgames.insight.data.model.Player;
-import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
 import com.npgames.insight.data.model.new_model.Paragraph;
-import com.npgames.insight.data.repositories.EquipmentRepository;
-import com.npgames.insight.data.repositories.KeyWordsRepository;
-import com.npgames.insight.data.repositories.ParagraphRepository;
-import com.npgames.insight.data.repositories.StatsRepository;
+import com.npgames.insight.data.equipment.EquipmentRepository;
+import com.npgames.insight.data.keywords.KeyWordsRepository;
+import com.npgames.insight.data.paragraph.ParagraphRepository;
+import com.npgames.insight.data.stats.StatsRepository;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -22,13 +20,17 @@ public class GameInteractor {
     private final EquipmentRepository equipmentRepository;
     private final KeyWordsRepository keyWordsRepository;
     private final ParagraphRepository paragraphRepository;
+    private final GameRepository gameRepository;
     private final SparseArray<Callable<Void>> jumpStateChecker = new SparseArray<>();
+
+    final int FIRST_PARAGRAPH_NUMBER = 500;
 
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
         equipmentRepository = EquipmentRepository.getInstance(context);
         paragraphRepository = ParagraphRepository.getInstance(context);
         keyWordsRepository = KeyWordsRepository.getInstance(context);
+        gameRepository = GameRepository.getInstance(context);
 
         jumpStateChecker.put(26, paragraph26JumpConditions());
         jumpStateChecker.put(59, paragraph59JumpConditions());
@@ -37,48 +39,46 @@ public class GameInteractor {
         jumpStateChecker.put(327, paragraph327JumpConditions());
     }
 
-    public void startNewGame() {
-        //reset stats
-        final Stats stats = Stats.builder()
-                .setAmn(Player.INIT_AMN)
-                .setTime(Player.INIT_TIME)
-                .setDex(Player.INIT_DEX)
-                .setAur(Player.INIT_AUR)
-                .setPrc(Player.INIT_PRC)
-                .setHp(Player.INIT_HP)
-                .build();
+    public Paragraph startNewGame(final int availableHeight) {
+        statsRepository.resetStats();
+        equipmentRepository.resetEquipment();
+        keyWordsRepository.resetKeyWords();
 
-        statsRepository.setStats(stats);
-
-        //reset equipment
-
-        //reset keywords
-
-        //reset paragraph
+        return nextParagraph(FIRST_PARAGRAPH_NUMBER, availableHeight);
     }
 
-    public void loadSavedParagraph() {
-        paragraphRepository.getC()
+    public void saveGame() {
+        equipmentRepository.saveEquipment();
+        gameRepository.saveAchievements();
+        keyWordsRepository.saveKeyWords();
+        paragraphRepository.saveParagraphNumber();
+        paragraphRepository.saveWasActionPressed();
+        statsRepository.saveStats();
     }
 
-    public void load
-
-    public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
-        final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
-
-        if (nextParagraph.hasActions()) {
-            paragraphRepository.wasActionPressed();
-            disableJumps();
-        } else {
-            checkJumpsConditions();
-        }
+    public Paragraph loadSavedParagraph(final int availableHeight) {
+        final Paragraph nextParagraph = paragraphRepository.getSavedParagraph(availableHeight);
+        checkJumpStatus(nextParagraph);
 
         return nextParagraph;
     }
 
-    private void disableJumps() {
-        for (final BlockButton jump: paragraphRepository.getParagraph().getJumps()) {
-            jump.setEnable(false);
+    public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
+        final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
+        checkJumpStatus(nextParagraph);
+
+        return nextParagraph;
+    }
+
+    private void checkJumpStatus(final Paragraph paragraph) {
+        if (paragraph.hasActions() && !paragraph.wasActionPressed) {
+
+            for (final BlockButton jump: paragraphRepository.getParagraph().getJumps()) {
+                jump.setEnable(false);
+            }
+
+        } else {
+            checkJumpsConditions();
         }
     }
 

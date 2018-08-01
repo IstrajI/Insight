@@ -10,7 +10,7 @@ public class Equipment {
     private final @TYPE String type;
     private final Stats takeOnStatsChanger;
     private final Stats takeOffStatsChanger;
-    private final @Owner String ownedBy;
+    private @Owner String ownedBy;
     private String name;
     private String description;
 
@@ -29,11 +29,9 @@ public class Equipment {
         return ownedBy;
     }
 
-    /*
-
-    public boolean isOwner(final Owner owner) {
-        return ownedBy == owner;
-    }*/
+    public void setOwnedBy(final @Equipment.Owner String owner)  {
+        this.ownedBy = owner;
+    }
 
 
     @Retention(RetentionPolicy.SOURCE)

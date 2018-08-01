@@ -1,8 +1,8 @@
-package com.npgames.insight.data.repositories;
+package com.npgames.insight.data.stats;
 
 import android.content.Context;
 
-import com.npgames.insight.data.db.StatsPreferences;
+import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 
 public class StatsRepository {
@@ -44,5 +44,16 @@ public class StatsRepository {
 
     public void saveStats() {
         statsPreferences.saveStats(this.stats);
+    }
+
+    public void resetStats() {
+        stats = Stats.builder()
+                .setAmn(Player.INIT_AMN)
+                .setTime(Player.INIT_TIME)
+                .setDex(Player.INIT_DEX)
+                .setAur(Player.INIT_AUR)
+                .setPrc(Player.INIT_PRC)
+                .setHp(Player.INIT_HP)
+                .build();
     }
 }

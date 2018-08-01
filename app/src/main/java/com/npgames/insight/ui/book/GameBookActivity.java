@@ -15,10 +15,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.application.ScreenUtils;
-<<<<<<< HEAD
-=======
-import com.npgames.insight.data.model.BlockAction;
->>>>>>> 3f08fe57145b749326e75575f21dbef0b5d811e8
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -37,7 +33,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
-
     @BindView(R.id.viewpager_gamebook_pages)
     protected ViewPager pagesViewPager;
     @BindView(R.id.text_view_game_book_measuring)
@@ -55,12 +50,11 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     GameBookPresenter gameBookPresenter;
 
     private PagerAdapter pagerAdapter;
+
     @ProvidePresenter
     GameBookPresenter provideGameBookPresenter() {
         return new GameBookPresenter(getApplicationContext());
     }
-
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -71,13 +65,15 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         pagerAdapter.setOnItemClickListener(this);
         pagesViewPager.setAdapter(pagerAdapter);
 
-        initScreenUtils();
-    }
-
-    private void initScreenUtils() {
         final DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ScreenUtils.init(metrics.widthPixels, metrics.heightPixels);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        gameBookPresenter.saveGame();
     }
 
     @Override
@@ -104,23 +100,15 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         statsTopPanelView.setStats(stats);
     }
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        gameBookPresenter.saveGame(getApplicationContext());
-    }
-
     private void chooseGameType() {
         final GameType gameType = (GameType) getIntent().getSerializableExtra(GAME_TYPE_KEY);
         switch (gameType) {
             case CONTINUE:
-                gameBookPresenter.continueGame();
+                gameBookPresenter.continueGame(paragraphTextHeight);
                 break;
 
             case NEW_GAME:
-                gameBookPresenter.newGame();
-                showParagraph(500);
+                gameBookPresenter.newGame(paragraphTextHeight);
                 break;
         }
     }
@@ -129,7 +117,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void onItemClick(View view, int position, RecyclerView.Adapter adapter) {
         switch(view.getId()) {
             case R.id.adapter_game_page_button_jump_button:
-                Log.d("TestPish", "ActionClicked");
                 try {
                     final int nextParagraph = Integer.parseInt(((GamePageAdapter) adapter).getItemAt(position).content);
                     if (nextParagraph == 0) {
@@ -143,10 +130,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                         return;
                     }
 
-                    showParagraph(nextParagraph);
-
-                    //gameBookPresenter.loadParagraphResName(nextParagraph);
-                    //gameBookPresenter.showParagraph(getApplicationContext(), nextParagraph, paragraphTextHeight);
+                    gameBookPresenter.loadGameParagraph(paragraphTextHeight, nextParagraph);
 
                 } catch(NumberFormatException ex) {
 
@@ -156,11 +140,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case R.id.adapter_game_page_action_button:
                 gameBookPresenter.applyAction();
         }
-    }
-
-    public void showParagraph(final int paragraphNumber) {
-        //gameBookPresenter.checkConditionActions(paragraphNumber);
-        gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight);
     }
 
     @Override
@@ -181,42 +160,31 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case 1:
                 if (resultCode == RESULT_OK) {
                     final int dex = data.getIntExtra("DEX", 0);
-                    Log.d("dex multiplier", ""+dex);
                     final int prc = data.getIntExtra("PRC", 0);
-                    Log.d("prc multiplier", ""+prc);
+
                     gameBookPresenter.updatePlayerStats(dex, prc);
-                    showParagraph(1);
+                    gameBookPresenter.loadGameParagraph(paragraphTextHeight, 1);
                 }
+
                 break;
             case 2:
                 if (resultCode == RESULT_OK) {
-                    //gameBookPresenter.showParagraph(getApplicationContext(), 40, paragraphTextHeight);
-                    //Log.d("visibility", ""+openStatsPanelButton.getVisibility());
+                    gameBookPresenter.loadGameParagraph(paragraphTextHeight, 40);
                 }
                 break;
         }
     }
 
+    //---------------------------- User Bottom Panel Actions ---------------------------------------
+    //----------------------------------------------------------------------------------------------
     @Override
     public void onFind() {
-        final int wantedParagraph = gameBookPresenter.getWantedParagraph();
-        Log.d("TestPish", "wantedParagraph = " +wantedParagraph);
-        final String paragraphResName = gameBookPresenter.getResourceName(wantedParagraph);
-        Log.d("TestPish", "paragraphResId = " +paragraphResName);
-        final int paragraphResId = getResources().getIdentifier(paragraphResName, "string", getPackageName());
-        Log.d("TestPish", "paragraphResId = " +paragraphResId);
-        gameBookPresenter.onFindAction(wantedParagraph, paragraphResId);
+        gameBookPresenter.onFindClick(paragraphTextHeight);
     }
 
     @Override
-    public void showFindSuccess(final int paragraphNumber, final int paragraphResId) {
-        final String paragraphString = getString(paragraphResId);
+    public void showFindSuccess() {
         Toast.makeText(getApplicationContext(), "Find Success", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-        gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight);
-=======
-        gameBookPresenter.loadParagraph(paragraphNumber, paragraphTextHeight, paragraphString);
->>>>>>> 3f08fe57145b749326e75575f21dbef0b5d811e8
     }
 
     @Override
@@ -226,17 +194,17 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void onStation() {
-        showParagraph(95);
+        gameBookPresenter.onStationClick(paragraphTextHeight);
     }
 
     @Override
     public void onMedBay() {
-        showParagraph(54);
+        gameBookPresenter.onMedBayClick(paragraphTextHeight);
     }
 
     @Override
     public void onArmory() {
-        Intent intent = new Intent(this, ArmoryActivity.class);
+        final Intent intent = new Intent(this, ArmoryActivity.class);
         startActivityForResult(intent, 1);
     }
 }

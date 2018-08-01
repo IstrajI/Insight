@@ -6,10 +6,8 @@ import com.npgames.insight.data.model.new_model.Paragraph;
 
 public interface GameBookView extends MvpView {
     void updateParagraph(final Paragraph blocks);
-    void showFindSuccess(int paragraphNumber, int paragraphResId);
+    void showFindSuccess();
     void showFindFailed();
     void showStats(final Stats stats);
-    void showParagraph(int paragraphNumber);-
-    void disableJumps();
     void showDeathScreen();
 }

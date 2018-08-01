@@ -1,4 +1,4 @@
-package com.npgames.insight.data.db;
+package com.npgames.insight.data.game;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,19 +10,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.npgames.insight.data.db.GamePreferences.Achievements.NATURALIST;
+import static com.npgames.insight.data.game.GamePreferences.Achievements.NATURALIST;
 
 public class GamePreferences {
     private static GamePreferences gamePreferences;
     private static SharedPreferences sharedPreferences;
+
     private static final String PREFERENCES_NAME = "gamePreferences";
-
     private final String ACHIEVEMENTS = "ACHIEVEMENTS";
-    private final String CURRENT_PARAGRAPH = "CURRENT_PARAGRAPH";
 
-    private final Set<String> achievements = new HashSet<>();
+    private Set<String> achievements;
 
-    public static GamePreferences getInstance(final Context appContext) {
+    GamePreferences() {
+        achievements = loadAchievements();
+    }
+
+    static GamePreferences getInstance(final Context appContext) {
         if (gamePreferences == null) {
             gamePreferences = new GamePreferences();
             sharedPreferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -30,23 +33,16 @@ public class GamePreferences {
         return gamePreferences;
     }
 
-    public int loadCurrentParagraph() {
-        return sharedPreferences.getInt(CURRENT_PARAGRAPH, Paragraph.INIT_PARAGRAPH);
-    }
+    //---------------------------- Achievements ----------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
-    public void saveCurrentParagraph(final int currentParagraph) {
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(CURRENT_PARAGRAPH, currentParagraph);
-        editor.apply();
-    }
-
-    public void saveAchievements(final Set<String> achievements) {
+    void saveAchievements(final Set<String> achievements) {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(ACHIEVEMENTS, achievements);
         editor.apply();
     }
 
-    public Set<String> loadAchievements() {
+    Set<String> loadAchievements() {
         return sharedPreferences.getStringSet(ACHIEVEMENTS, Collections.emptySet());
     }
 

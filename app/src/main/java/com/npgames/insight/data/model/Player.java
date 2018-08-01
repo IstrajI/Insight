@@ -1,6 +1,5 @@
 package com.npgames.insight.data.model;
 
-import com.npgames.insight.data.db.KeyWordsPreferences;
 import com.npgames.insight.data.model.equipment.AidKit;
 import com.npgames.insight.data.model.equipment.Beam;
 import com.npgames.insight.data.model.equipment.Blaster;
@@ -14,7 +13,6 @@ import com.npgames.insight.data.model.equipment.OpenSpaceEqpt;
 import com.npgames.insight.data.model.equipment.PowerShield;
 import com.npgames.insight.data.model.equipment.Targeter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

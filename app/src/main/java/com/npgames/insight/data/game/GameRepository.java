@@ -1,14 +1,13 @@
-package com.npgames.insight.data.repositories;
+package com.npgames.insight.data.game;
 
 import android.content.Context;
-
-import com.npgames.insight.data.db.GamePreferences;
 
 import java.util.Set;
 
 public class GameRepository {
     private static GameRepository gameRepository;
     private GamePreferences gamePreferences;
+
     private Set<String> achievements;
 
     public static GameRepository getInstance(final Context context) {
@@ -24,6 +23,8 @@ public class GameRepository {
         achievements = gamePreferences.loadAchievements();
     }
 
+    //---------------------------- Achievement -----------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     public void addAchievement(final @GamePreferences.Achievements String achievement) {
         achievements.add(achievement);
     }
@@ -32,7 +33,7 @@ public class GameRepository {
         return achievements;
     }
 
-    public void updateAchievements(final Set<String> achievements) {
+    public void saveAchievements() {
         gamePreferences.saveAchievements(achievements);
     }
 }

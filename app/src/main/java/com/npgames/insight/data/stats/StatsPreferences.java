@@ -1,4 +1,4 @@
-package com.npgames.insight.data.db;
+package com.npgames.insight.data.stats;
 
 import android.content.Context;
 import android.content.SharedPreferences;
