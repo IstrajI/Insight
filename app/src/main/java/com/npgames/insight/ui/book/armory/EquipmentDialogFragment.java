@@ -27,9 +27,9 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View dialogView = inflater.inflate(R.layout.dialog_fragment_equipment_more, null);
         ButterKnife.bind(this, dialogView);
-
+/*
         nameTextView.setText(getArguments().getString(Equipment.NAME));
-        descriptionTextView.setText(getArguments().getString(Equipment.DESCRIPTION));
+        descriptionTextView.setText(getArguments().getString(Equipment.DESCRIPTION));*/
         closeButton.setOnClickListener(this);
         return dialogView;
     }

@@ -41,7 +41,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
-        final String equipmentName = context.getResources().getString(equipment.getNameResource());
+        //final String equipmentName = context.getResources().getString(equipment.getNameResource());
 
         int image = R.drawable.blaster;
         switch (position) {
@@ -65,7 +65,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
 
         Glide.with(context).load(image).into(holder.pictureImageView);
 
-        holder.textView.setText(equipmentName);
+        //holder.textView.setText(equipmentName);
         if (equipments.get(position).getOwnedBy() == Equipment.Owner.ARRMORY) {
             holder.takeOnButton.setEnabled(true);
             holder.takeOutButton.setEnabled(false);

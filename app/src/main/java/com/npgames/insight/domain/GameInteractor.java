@@ -21,7 +21,7 @@ public class GameInteractor {
     private final KeyWordsRepository keyWordsRepository;
     private final ParagraphRepository paragraphRepository;
     private final GameRepository gameRepository;
-    private final SparseArray<Callable<Void>> jumpStateChecker = new SparseArray<>();
+    private final SparseArray<Callable> jumpStateChecker = new SparseArray<>();
 
     final int FIRST_PARAGRAPH_NUMBER = 500;
 
@@ -32,11 +32,11 @@ public class GameInteractor {
         keyWordsRepository = KeyWordsRepository.getInstance(context);
         gameRepository = GameRepository.getInstance(context);
 
-        jumpStateChecker.put(26, paragraph26JumpConditions());
-        jumpStateChecker.put(59, paragraph59JumpConditions());
-        jumpStateChecker.put(32, paragraph32JumpConditions());
-        jumpStateChecker.put(67, paragraph67JumpConditions());
-        jumpStateChecker.put(327, paragraph327JumpConditions());
+        jumpStateChecker.put(26, this::paragraph26JumpConditions);
+        jumpStateChecker.put(59, this::paragraph59JumpConditions);
+        jumpStateChecker.put(32, this::paragraph32JumpConditions);
+        jumpStateChecker.put(67, this::paragraph67JumpConditions);
+        jumpStateChecker.put(327, this::paragraph327JumpConditions);
     }
 
     public Paragraph startNewGame(final int availableHeight) {
@@ -107,7 +107,7 @@ public class GameInteractor {
         }
     }
 
-    private Callable<Void> paragraph26JumpConditions() {
+    private Callable paragraph26JumpConditions() {
         if (statsRepository.getStats().getPrc() >= 7) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         } else {
@@ -117,7 +117,7 @@ public class GameInteractor {
         return null;
     }
 
-    private Callable<Void> paragraph59JumpConditions() {
+    private Callable paragraph59JumpConditions() {
         if (statsRepository.getStats().getDex() >= 7) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         } else {
@@ -127,7 +127,7 @@ public class GameInteractor {
         return null;
     }
 
-    private Callable<Void> paragraph32JumpConditions() {
+    private Callable paragraph32JumpConditions() {
         if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }
@@ -135,7 +135,7 @@ public class GameInteractor {
         return null;
     }
 
-    private Callable<Void> paragraph67JumpConditions() {
+    private Callable paragraph67JumpConditions() {
 
         if (equipmentRepository.isOwnedBy(Equipment.TYPE.BLASTER, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
@@ -152,7 +152,7 @@ public class GameInteractor {
         return null;
     }
 
-    private Callable<Void> paragraph327JumpConditions() {
+    private Callable paragraph327JumpConditions() {
         if (!equipmentRepository.isOwnedBy(Equipment.TYPE.GRENADE, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }

@@ -160,8 +160,13 @@ public class ActionsInteractor {
                 .build();
         statsRepository.updateStats(changedStats);
 
+        final Equipment powerShield = equipmentRepository.getEquipmentByType(Equipment.TYPE.POWER_SHIELD);
+
+        if (Equipment.Owner.PLAYER.equals(powerShield.getOwnedBy())) {
+            powerShield.setEnabled(false);
+        }
+
         return null;
-        //TODO:DISABLE POWER SHIELD
     }
 
     private Void paragraph100Action() {

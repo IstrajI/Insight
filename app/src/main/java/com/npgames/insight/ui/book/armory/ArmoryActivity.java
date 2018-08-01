@@ -18,6 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+
 public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, RecyclerViewListeners.OnItemClickListener,
             View.OnClickListener{
 
@@ -49,7 +50,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         return new ArmoryPresenter(getApplicationContext());
     }
 
-    private final Equipment.Owner owner = Equipment.Owner.ARRMORY;
     private ArmoryEquipmentAdapter armoryEquipmentAdapter;
 
     @Override
@@ -68,7 +68,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         armoryEquipmentAdapter.setOnItemClickListener(this);
         continueButton.setOnClickListener(this);
 
-        armoryPresenter.loadEquipmentsOwnedBy(owner);
+        //armoryPresenter.loadEquipmentsOwnedBy(owner);
         armoryPresenter.loadStatsPlayerStats();
 
         equipmentMoreDialogFragment = new EquipmentDialogFragment();
@@ -81,11 +81,11 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.text_view_equipment_item_name:
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-                final String equipmentName = getString(equipment.getNameResource());
-                final String equipmentDescription = getString(equipment.getDescriptionResource());
+/*                final String equipmentName = getString(equipment.getNameResource());
+                final String equipmentDescription = getString(equipment.getDescriptionResource());*/
                 final Bundle equipmentMoreBundle = new Bundle();
-                equipmentMoreBundle.putString(Equipment.NAME, equipmentName);
-                equipmentMoreBundle.putString(Equipment.DESCRIPTION, equipmentDescription);
+/*                equipmentMoreBundle.putString(Equipment.NAME, equipmentName);
+                equipmentMoreBundle.putString(Equipment.DESCRIPTION, equipmentDescription);*/
                 equipmentMoreDialogFragment.setArguments(equipmentMoreBundle);
                 equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
                 break;
@@ -125,7 +125,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         amnTextView.setText(String.valueOf(amn));*/
     }
 
-    public void updateWearEquipmentStatus(final int equipmentNumber, final boolean canWear) {
+/*    public void updateWearEquipmentStatus(final int equipmentNumber, final boolean canWear) {
         final boolean isWeared = armoryEquipmentAdapter.getEquipmentByPosition(equipmentNumber).isOwner(Equipment.Owner.PLAYER);
         final Button takeOnButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on);
 
@@ -135,5 +135,5 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         if (canWear && !isWeared) {
             takeOnButton.setEnabled(true);
         }
-    }
+    }*/
 }

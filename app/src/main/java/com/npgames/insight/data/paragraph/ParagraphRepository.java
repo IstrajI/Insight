@@ -7,6 +7,7 @@ import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
 import java.util.List;
+import java.util.Set;
 
 public class ParagraphRepository {
     private static ParagraphRepository paragraphRepository;
@@ -15,6 +16,7 @@ public class ParagraphRepository {
     private final String packageName;
     private final ParagraphPreferences paragraphPreferences;
     private int currentParagraph;
+    private Set<String> specialVisitedParagraphs;
 
     public static ParagraphRepository getInstance(final Context context) {
         if (paragraphRepository == null) {
@@ -63,12 +65,25 @@ public class ParagraphRepository {
         return paragraph;
     }
 
+
+
     public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
         paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
     }
 
     public Paragraph getParagraph() {
         return paragraph;
+    }
+
+    //---------------------------- Visited Paragraphs ----------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public Set<String> loadSpecialVisitedParagraphs() {
+        return paragraphPreferences.loadSpecialVisitedParagraphs();
+    }
+
+    public void saveSpecialVisitedParagraphs() {
+        paragraphPreferences.saveSpecialVisitedParagraphs(specialVisitedParagraphs);
     }
 
     //---------------------------- Was Action Pressed ----------------------------------------------

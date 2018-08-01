@@ -27,8 +27,8 @@ public class GamePreferences {
 
     static GamePreferences getInstance(final Context appContext) {
         if (gamePreferences == null) {
-            gamePreferences = new GamePreferences();
             sharedPreferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            gamePreferences = new GamePreferences();
         }
         return gamePreferences;
     }

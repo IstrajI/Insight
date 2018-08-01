@@ -1,6 +1,5 @@
 package com.npgames.insight.data.model.equipment;
 
-import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 
 import java.lang.annotation.Retention;
@@ -13,12 +12,18 @@ public class Equipment {
     private @Owner String ownedBy;
     private String name;
     private String description;
+    private boolean isEnabled;
+
+    public Equipment() {
+        this(TYPE.NONE, Stats.builder().build(), Stats.builder().build(), Owner.NONE);
+    }
 
     public Equipment(final @TYPE String type, final Stats takeOnStatsChanger, final Stats takeOffStatsChanger, final @Owner String ownedBy) {
         this.type = type;
         this.takeOnStatsChanger = takeOnStatsChanger;
         this.takeOffStatsChanger = takeOffStatsChanger;
         this.ownedBy = ownedBy;
+        this.isEnabled = true;
     }
 
     public String getType() {
@@ -33,9 +38,18 @@ public class Equipment {
         this.ownedBy = owner;
     }
 
+    public boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(final boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface Owner {
+        String NONE = "NONE";
         String PLAYER = "PLAYER";
         String ARRMORY = "ARRMORY";
         String TRASH = "TRASH";
@@ -43,6 +57,7 @@ public class Equipment {
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
+        String NONE = "NONE";
         String AID_KIT = "AID_KIT";
         String BEAM = "BEAM";
         String BLASTER = "BLASTER";

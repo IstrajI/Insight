@@ -9,5 +9,4 @@ import java.util.List;
 public interface ArmoryView extends MvpView{
     void showEquipment(List<Equipment> equipments);
     void showStats(Stats stats);
-    void updateWearEquipmentStatus(int equipmentNumber, boolean canWear);
 }

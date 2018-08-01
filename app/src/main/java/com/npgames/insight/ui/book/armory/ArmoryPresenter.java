@@ -3,41 +3,43 @@ package com.npgames.insight.ui.book.armory;
 import android.content.Context;
 
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.repositories.PlayerRepository;
+import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.stats.StatsRepository;
 
 import java.util.List;
 
 public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
-
-    private PlayerRepository playerRepository;
+    private EquipmentRepository equipmentRepository;
+    private StatsRepository statsRepository;
 
     ArmoryPresenter(final Context context) {
-        playerRepository = PlayerRepository.getInstance(context);
+        equipmentRepository = EquipmentRepository.getInstance(context);
+        statsRepository = StatsRepository.getInstance(context);
     }
 
 
-    void loadEquipmentsOwnedBy(final Equipment.Owner owner) {
-        final List<Equipment> equipments = playerRepository.loadEquipmentsOwnedBy(owner);
+    void loadEquipmentsOwnedBy(final @Equipment.Owner String owner) {
+        final List<Equipment> equipments = equipmentRepository.getEquipmentsOwnedBy(owner);
         getViewState().showEquipment(equipments);
     }
 
     void loadStatsPlayerStats() {
-        final Stats stats = playerRepository.getStats();
+        final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
     }
 
     void takeOnEquipment(final Equipment equipmentOn) {
-        playerRepository.takeOnEquipment(equipmentOn);
+/*        playerRepository.takeOnEquipment(equipmentOn);
         final Stats stats = playerRepository.getStats();
-        getViewState().showStats(stats);
+        getViewState().showStats(stats);*/
     }
 
     void takeOffEquipment(final Equipment equipmentOff) {
-        playerRepository.takeOffEquipment(equipmentOff);
+/*        playerRepository.takeOffEquipment(equipmentOff);
         final Stats stats = playerRepository.getStats();
-        getViewState().showStats(stats);
+        getViewState().showStats(stats);*/
     }
 
     //TODO: wrong logic

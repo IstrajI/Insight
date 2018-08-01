@@ -54,4 +54,14 @@ public class EquipmentRepository {
             equipment.setOwnedBy(Equipment.Owner.ARRMORY);
         }
     }
+
+    public Equipment getEquipmentByType(final @Equipment.TYPE String type) {
+        for (final Equipment equipment: equipments) {
+            if (type.equals(equipment.getType())) {
+                return equipment;
+            }
+        }
+
+        return new Equipment();
+    }
 }

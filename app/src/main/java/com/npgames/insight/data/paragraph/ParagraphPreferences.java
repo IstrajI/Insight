@@ -3,6 +3,10 @@ package com.npgames.insight.data.paragraph;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 public class ParagraphPreferences{
     private static ParagraphPreferences paragraphPreferences;
     private final SharedPreferences preferences;
@@ -10,6 +14,7 @@ public class ParagraphPreferences{
     private final String PREFERENCES_NAME = "PARAGRAPH_PREFERENCES";
     private final String CURRENT_PARAGRAPH = "CURRENT_PARAGRAPH";
     private final String WAS_ACTION_PRESSED = "WAS_ACTION_PRESSED";
+    private final String SPECIAL_VISITED_PARAGRAPHS = "SPECIAL_VISITED_PARAGRAPHS";
 
     ParagraphPreferences(final Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -21,6 +26,19 @@ public class ParagraphPreferences{
         }
 
         return paragraphPreferences;
+    }
+
+    //---------------------------- Visited Paragraphs ----------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    Set<String> loadSpecialVisitedParagraphs() {
+        return preferences.getStringSet(SPECIAL_VISITED_PARAGRAPHS, Collections.emptySet());
+    }
+
+    void saveSpecialVisitedParagraphs(final Set<String> specialVisitedParagraphs) {
+        final SharedPreferences.Editor editor = preferences.edit();
+        editor.putStringSet(SPECIAL_VISITED_PARAGRAPHS, specialVisitedParagraphs);
+        editor.apply();
     }
 
     public void saveWasActionPressed(final boolean wasActionPressed) {
