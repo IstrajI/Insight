@@ -10,9 +10,10 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
+import com.npgames.insight.ui.book.top_panel.TopPanelView;
 
 import java.util.List;
 
@@ -26,23 +27,10 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     protected RecyclerView armoryRecyclerView;
     @BindView(R.id.button_armory_continue)
     protected Button continueButton;
-/*    @BindView(R.id.text_view_stats_panel_time)
-    protected TextView timeTextView;
-    @BindView(R.id.text_view_stats_panel_amn)
-    protected TextView amnTextView;
-    @BindView(R.id.text_view_stats_panel_hp)
-    protected TextView hpTextView;
-    @BindView(R.id.text_view_stats_panel_prc)
-    protected TextView prcTextView;
-    @BindView(R.id.text_view_stats_panel_dex)
-    protected TextView dexTextView;
-    @BindView(R.id.text_view_stats_panel_aur)
-    protected TextView aurTextView;*/
 
     private EquipmentDialogFragment equipmentMoreDialogFragment;
-    private GridLayoutManager equipmentLayoutManager;
-
-
+    @BindView(R.id.gamebook_stats_top_panel_view)
+    TopPanelView statsTopPanel;
     @InjectPresenter
     ArmoryPresenter armoryPresenter;
     @ProvidePresenter
@@ -61,19 +49,20 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     @Override
     protected void bindViews() {
         final int numberOfColumns = 3;
-        equipmentLayoutManager = new GridLayoutManager(this, numberOfColumns);
+
+        final GridLayoutManager equipmentLayoutManager = new GridLayoutManager(this, numberOfColumns);
         armoryRecyclerView.setLayoutManager(equipmentLayoutManager);
         armoryEquipmentAdapter = new ArmoryEquipmentAdapter(getApplicationContext());
         armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
+
         armoryEquipmentAdapter.setOnItemClickListener(this);
         continueButton.setOnClickListener(this);
 
-        //armoryPresenter.loadEquipmentsOwnedBy(owner);
+        armoryPresenter.loadEquipment();
         armoryPresenter.loadStatsPlayerStats();
 
         equipmentMoreDialogFragment = new EquipmentDialogFragment();
     }
-
 
     @Override
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
@@ -81,18 +70,23 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.text_view_equipment_item_name:
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
-/*                final String equipmentName = getString(equipment.getNameResource());
-                final String equipmentDescription = getString(equipment.getDescriptionResource());*/
+
                 final Bundle equipmentMoreBundle = new Bundle();
-/*                equipmentMoreBundle.putString(Equipment.NAME, equipmentName);
-                equipmentMoreBundle.putString(Equipment.DESCRIPTION, equipmentDescription);*/
+                final String equipmentName = equipment.getName();
+                final String equipmentDescription = equipment.getDescription();
+
+                equipmentMoreBundle.putString(EquipmentDialogFragment.NAME, equipmentName);
+                equipmentMoreBundle.putString(EquipmentDialogFragment.DESCRIPTION, equipmentDescription);
+
                 equipmentMoreDialogFragment.setArguments(equipmentMoreBundle);
-                equipmentMoreDialogFragment.show(getFragmentManager(), "dlg1");
+                equipmentMoreDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
                 break;
+
             case R.id.button_equipment_take_on:
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 armoryPresenter.takeOnEquipment(equipmentOn);
                 break;
+
             case R.id.button_equipment_take_out:
                 final Equipment equipmentOff = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 armoryPresenter.takeOffEquipment(equipmentOff);
@@ -117,23 +111,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
 
     @Override
     public void showStats(final Stats stats) {
-/*        hpTextView.setText(String.valueOf(hp));
-        aurTextView.setText(String.valueOf(aur));
-        prcTextView.setText(String.valueOf(prc));
-        dexTextView.setText(String.valueOf(dex));
-        timeTextView.setText(String.valueOf(time));
-        amnTextView.setText(String.valueOf(amn));*/
+        statsTopPanel.setStats(stats);
     }
-
-/*    public void updateWearEquipmentStatus(final int equipmentNumber, final boolean canWear) {
-        final boolean isWeared = armoryEquipmentAdapter.getEquipmentByPosition(equipmentNumber).isOwner(Equipment.Owner.PLAYER);
-        final Button takeOnButton = (Button) equipmentLayoutManager.findViewByPosition(equipmentNumber).findViewById(R.id.button_equipment_take_on);
-
-        if (!canWear) {
-            takeOnButton.setEnabled(false);
-        }
-        if (canWear && !isWeared) {
-            takeOnButton.setEnabled(true);
-        }
-    }*/
 }

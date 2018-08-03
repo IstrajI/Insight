@@ -6,7 +6,7 @@ import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.keywords.KeyWordsRepository;
@@ -23,7 +23,7 @@ public class GameInteractor {
     private final GameRepository gameRepository;
     private final SparseArray<Callable> jumpStateChecker = new SparseArray<>();
 
-    final int FIRST_PARAGRAPH_NUMBER = 500;
+    private final int FIRST_PARAGRAPH_NUMBER = 500;
 
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
@@ -33,9 +33,11 @@ public class GameInteractor {
         gameRepository = GameRepository.getInstance(context);
 
         jumpStateChecker.put(26, this::paragraph26JumpConditions);
-        jumpStateChecker.put(59, this::paragraph59JumpConditions);
         jumpStateChecker.put(32, this::paragraph32JumpConditions);
+        jumpStateChecker.put(40, this::paragraph40JumpConditions);
+        jumpStateChecker.put(59, this::paragraph59JumpConditions);
         jumpStateChecker.put(67, this::paragraph67JumpConditions);
+        jumpStateChecker.put(75, this::paragraph75JumpConditions);
         jumpStateChecker.put(327, this::paragraph327JumpConditions);
     }
 
@@ -71,7 +73,9 @@ public class GameInteractor {
     }
 
     private void checkJumpStatus(final Paragraph paragraph) {
-        if (paragraph.hasActions() && !paragraph.wasActionPressed) {
+        if (paragraph.hasActions() && !paragraph.wasActionPressed
+                //A bit of kost'il here
+                && !isMedBay(paragraph.paragraphNumber)) {
 
             for (final BlockButton jump: paragraphRepository.getParagraph().getJumps()) {
                 jump.setEnable(false);
@@ -80,6 +84,14 @@ public class GameInteractor {
         } else {
             checkJumpsConditions();
         }
+    }
+
+    public boolean isDead() {
+        return statsRepository.getStats().getHp() <= 0;
+    }
+
+    public boolean isMedBay(final int paragraphNumber) {
+        return paragraphNumber == 54;
     }
 
     public void enableJumpsDisableActions() {
@@ -117,19 +129,29 @@ public class GameInteractor {
         return null;
     }
 
-    private Callable paragraph59JumpConditions() {
-        if (statsRepository.getStats().getDex() >= 7) {
+    private Callable paragraph32JumpConditions() {
+        if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
-        } else {
-            paragraphRepository.changeJumpsButtonStatus(1, false);
         }
 
         return null;
     }
 
-    private Callable paragraph32JumpConditions() {
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
+    private Callable paragraph40JumpConditions() {
+        if (!paragraphRepository.isParagraphVisited(40)) {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
+        } else {
             paragraphRepository.changeJumpsButtonStatus(0, false);
+        }
+
+        return null;
+    }
+
+    private Callable paragraph59JumpConditions() {
+        if (statsRepository.getStats().getDex() >= 7) {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
+        } else {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
         }
 
         return null;
@@ -146,6 +168,17 @@ public class GameInteractor {
         }
 
         if (equipmentRepository.isOwnedBy(Equipment.TYPE.POWER_SHIELD, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(2, false);
+        }
+
+        return null;
+    }
+
+    private Callable paragraph75JumpConditions() {
+        if (paragraphRepository.isParagraphVisited(60) || paragraphRepository.isParagraphVisited(34)) {
+            paragraphRepository.changeJumpsButtonStatus(1, false);
+        } else {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
             paragraphRepository.changeJumpsButtonStatus(2, false);
         }
 

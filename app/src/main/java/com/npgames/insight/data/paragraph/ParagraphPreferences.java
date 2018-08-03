@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public class ParagraphPreferences{

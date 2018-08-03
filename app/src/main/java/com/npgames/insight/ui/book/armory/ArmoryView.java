@@ -2,7 +2,7 @@ package com.npgames.insight.ui.book.armory;
 
 import com.arellomobile.mvp.MvpView;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 
 import java.util.List;
 

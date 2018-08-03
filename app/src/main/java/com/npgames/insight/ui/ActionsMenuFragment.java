@@ -16,6 +16,7 @@ import com.npgames.insight.ui.book.ActionsMenuAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -44,7 +45,7 @@ public class ActionsMenuFragment extends BaseMvpFragment implements View.OnClick
     }
 
     private void initActions() {
-        final Context context = getActivity().getApplicationContext();
+        final Context context = Objects.requireNonNull(getActivity()).getApplicationContext();
         final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         final ActionsMenuAdapter actionsMenuAdapter = new ActionsMenuAdapter();
         actionsRecyclerView.setAdapter(actionsMenuAdapter);
@@ -74,6 +75,7 @@ public class ActionsMenuFragment extends BaseMvpFragment implements View.OnClick
             actionsRecyclerView.setVisibility(View.VISIBLE);
             return;
         }
+
         actionsRecyclerView.setVisibility(View.INVISIBLE);
     }
 }

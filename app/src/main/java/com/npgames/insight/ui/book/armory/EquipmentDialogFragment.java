@@ -9,12 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.npgames.insight.R;
-import com.npgames.insight.data.model.equipment.Equipment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EquipmentDialogFragment extends DialogFragment implements View.OnClickListener{
+    public static final String TAG = "EQUIPMENT_DIALOG_TAG";
+    public static final String NAME = "NAME";
+    public static final String DESCRIPTION = "DESCRIPTION";
+
     @BindView(R.id.text_view_dialog_fragment_equipment_more_name)
     protected TextView nameTextView;
     @BindView(R.id.text_view_dialog_fragment_equipment_more_description)
@@ -27,9 +30,9 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View dialogView = inflater.inflate(R.layout.dialog_fragment_equipment_more, null);
         ButterKnife.bind(this, dialogView);
-/*
-        nameTextView.setText(getArguments().getString(Equipment.NAME));
-        descriptionTextView.setText(getArguments().getString(Equipment.DESCRIPTION));*/
+
+        nameTextView.setText(getArguments().getString(NAME));
+        descriptionTextView.setText(getArguments().getString(DESCRIPTION));
         closeButton.setOnClickListener(this);
         return dialogView;
     }

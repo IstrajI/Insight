@@ -1,7 +1,5 @@
 package com.npgames.insight.application;
 
-import android.util.DisplayMetrics;
-
 public class ScreenUtils {
 
     private static int screenWidthParam;

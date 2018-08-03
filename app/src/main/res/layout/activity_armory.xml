@@ -6,15 +6,31 @@
     android:layout_height="match_parent"
     app:layout_constraintVertical_chainStyle="packed">
 
-    <FrameLayout
-        android:id="@+id/frame_layout_stats_panel_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/spacing_8">
-    </FrameLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/armory_top_panel_constraint_layout"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/gamebook_menu_button"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/gamebook_stats_top_panel_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/menu_btn_4_xxx" />
+
+        <com.npgames.insight.ui.book.top_panel.TopPanelView
+            android:id="@+id/gamebook_stats_top_panel_view"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/spacing_16"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/gamebook_menu_button"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_armory_equipment"
@@ -23,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_armory_continue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_layout_stats_panel_container"/>
+        app:layout_constraintTop_toBottomOf="@+id/armory_top_panel_constraint_layout"/>
 
     <Button
         android:layout_marginTop="@dimen/spacing_8"

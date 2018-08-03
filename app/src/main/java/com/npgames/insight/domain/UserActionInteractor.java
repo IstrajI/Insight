@@ -24,11 +24,7 @@ public class UserActionInteractor {
         return paragraphRepository.getNextParagraph(STATION_PARAGRAPH, availableHeight);
     }
 
-    public Paragraph loadSeachingParagraph(final int availableHeight) {
+    public Paragraph loadSearchingParagraph(final int availableHeight) {
         return paragraphRepository.getNextParagraph(paragraphRepository.getParagraphNumber() + SEARCHING_PARAGRAPH_INCREMENT, availableHeight);
     }
-
-
-
-
 }

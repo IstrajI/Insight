@@ -2,7 +2,7 @@ package com.npgames.insight.data.equipment;
 
 import android.content.Context;
 
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,10 @@ public class EquipmentRepository {
     EquipmentRepository(final Context context) {
         equipmentPreferences = EquipmentPreferences.getInstance(context);
         equipments = equipmentPreferences.loadEquipment();
+    }
+
+    public List<Equipment> getEquipments() {
+        return equipments;
     }
 
     public List<Equipment> getEquipmentsOwnedBy(final @Equipment.Owner String owner) {

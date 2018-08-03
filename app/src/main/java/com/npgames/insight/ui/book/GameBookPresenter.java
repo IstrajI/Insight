@@ -5,7 +5,6 @@ import android.text.TextPaint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.game.GamePreferences;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
@@ -58,7 +57,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     //----------------------------------------------------------------------------------------------
 
     public void onFindClick(final int availableHeight) {
-        final Paragraph searchingParagraph = userActionInteractor.loadSeachingParagraph(availableHeight);
+        final Paragraph searchingParagraph = userActionInteractor.loadSearchingParagraph(availableHeight);
 
         if (searchingParagraph == null) {
             getViewState().showFindFailed();
@@ -118,7 +117,11 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     }
 
     void applyAction() {
-        if (!paragraphRepository.getParagraph().wasActionPressed) {
+        //A bit of kostil logic here
+        if (gameInteractor.isMedBay(paragraphRepository.getParagraphNumber())) {
+            actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
+            getViewState().showStats(statsRepository.getStats());
+        } else if (!paragraphRepository.getParagraph().wasActionPressed) {
             paragraphRepository.getParagraph().wasActionPressed = true;
 
             actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
@@ -126,6 +129,10 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
 
             gameInteractor.enableJumpsDisableActions();
             getViewState().updateParagraph(paragraphRepository.getParagraph());
+        }
+
+        if (gameInteractor.isDead()) {
+            getViewState().showDeathScreen();
         }
     }
 }

@@ -5,16 +5,14 @@ import android.util.SparseArray;
 
 import com.npgames.insight.data.game.GamePreferences;
 import com.npgames.insight.data.keywords.KeyWordsPreferences;
-import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.keywords.KeyWordsRepository;
+import com.npgames.insight.data.paragraph.ParagraphRepository;
 import com.npgames.insight.data.stats.StatsRepository;
 
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.Callable;
 
 public class ActionsInteractor {
@@ -22,6 +20,7 @@ public class ActionsInteractor {
     private final StatsRepository statsRepository;
     private final EquipmentRepository equipmentRepository;
     private final KeyWordsRepository keyWordsRepository;
+    private final ParagraphRepository paragraphRepository;
 
     private final SparseArray<Callable<Void>> actions = new SparseArray<>();
 
@@ -30,6 +29,7 @@ public class ActionsInteractor {
         statsRepository = StatsRepository.getInstance(context);
         equipmentRepository = EquipmentRepository.getInstance(context);
         keyWordsRepository = KeyWordsRepository.getInstance(context);
+        paragraphRepository = ParagraphRepository.getInstance(context);
 
         actions.put(500, this::paragraph37Action);
         actions.put(5, this::paragraph5Action);
@@ -102,6 +102,16 @@ public class ActionsInteractor {
         return null;
     }
 
+    private Void paragraph54Action() {
+        final Stats changedStats = Stats.builder()
+                .setHp(5)
+                .setTime(-1)
+                .build();
+        statsRepository.updateStats(changedStats);
+
+        return null;
+    }
+
     private Void paragraph59Action() {
         //TODO: complex logic
         final Stats changedStats = Stats.builder()
@@ -170,11 +180,14 @@ public class ActionsInteractor {
     }
 
     private Void paragraph100Action() {
-        final Stats changedStats = Stats.builder()
-                .setHp(-2)
-                .build();
-        statsRepository.updateStats(changedStats);
-        //TODO: - TIME if NOT FIRST TIME
+        final Stats.Builder changedStats = Stats.builder()
+                .setHp(-2);
+
+        if (paragraphRepository.isParagraphVisited(100)) {
+            changedStats.setTime(-1);
+        }
+
+        statsRepository.updateStats(changedStats.build());
         return null;
     }
 

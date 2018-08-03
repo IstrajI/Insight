@@ -5,24 +5,24 @@ import android.content.Context;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.model.Stats;
-import com.npgames.insight.data.model.equipment.Equipment;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.stats.StatsRepository;
-
-import java.util.List;
+import com.npgames.insight.domain.EquipmentInteractor;
 
 public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
     private EquipmentRepository equipmentRepository;
     private StatsRepository statsRepository;
+    private EquipmentInteractor equipmentInteractor;
 
     ArmoryPresenter(final Context context) {
         equipmentRepository = EquipmentRepository.getInstance(context);
         statsRepository = StatsRepository.getInstance(context);
+
+        equipmentInteractor = new EquipmentInteractor(context);
     }
 
-
-    void loadEquipmentsOwnedBy(final @Equipment.Owner String owner) {
-        final List<Equipment> equipments = equipmentRepository.getEquipmentsOwnedBy(owner);
-        getViewState().showEquipment(equipments);
+    public void loadEquipment() {
+        getViewState().showEquipment(equipmentRepository.getEquipments());
     }
 
     void loadStatsPlayerStats() {
@@ -31,26 +31,16 @@ public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
     }
 
     void takeOnEquipment(final Equipment equipmentOn) {
-/*        playerRepository.takeOnEquipment(equipmentOn);
-        final Stats stats = playerRepository.getStats();
-        getViewState().showStats(stats);*/
+        equipmentInteractor.takeOnEquipment(equipmentOn);
+
+        final Stats stats = statsRepository.getStats();
+        getViewState().showStats(stats);
     }
 
     void takeOffEquipment(final Equipment equipmentOff) {
-/*        playerRepository.takeOffEquipment(equipmentOff);
-        final Stats stats = playerRepository.getStats();
-        getViewState().showStats(stats);*/
-    }
+        equipmentInteractor.takeOffEquipment(equipmentOff);
 
-    //TODO: wrong logic
-    /*void obtainWearEquipmentStatus() {
-        final List<Equipment> equipments = playerRepository.loadEquipmentsOwnedBy(Equipment.Owner.PLAYER);
-        for (int i = 0; i < equipments.size(); i++) {
-            if (player.canWearEquipment(equipments.get(i))) {
-                getViewState().updateWearEquipmentStatus(i, true);
-                continue;
-            }
-            getViewState().updateWearEquipmentStatus(i, false);
-        }
-    }*/
+        final Stats stats = statsRepository.getStats();
+        getViewState().showStats(stats);
+    }
 }

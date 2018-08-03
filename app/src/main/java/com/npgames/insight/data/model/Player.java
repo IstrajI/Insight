@@ -1,7 +1,5 @@
 package com.npgames.insight.data.model;
 
-import com.npgames.insight.data.model.equipment.Equipment;
-
 import java.util.List;
 import java.util.Set;
 

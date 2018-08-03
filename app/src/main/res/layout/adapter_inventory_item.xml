@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_view_inventory_item"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_equipment_item"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:src="@drawable/blaster"/>
+</android.support.constraint.ConstraintLayout>

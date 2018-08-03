@@ -1,6 +1,4 @@
-package com.npgames.insight.data.model.equipment;
-
-import com.npgames.insight.data.model.Stats;
+package com.npgames.insight.data.model;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,17 +11,20 @@ public class Equipment {
     private String name;
     private String description;
     private boolean isEnabled;
+    private boolean canWear;
 
     public Equipment() {
-        this(TYPE.NONE, Stats.builder().build(), Stats.builder().build(), Owner.NONE);
+        this(TYPE.NONE, Stats.builder().build(), Stats.builder().build(), Owner.NONE, "", "");
     }
 
-    public Equipment(final @TYPE String type, final Stats takeOnStatsChanger, final Stats takeOffStatsChanger, final @Owner String ownedBy) {
+    public Equipment(final @TYPE String type, final Stats takeOnStatsChanger, final Stats takeOffStatsChanger, final @Owner String ownedBy, final String name, final String description) {
         this.type = type;
         this.takeOnStatsChanger = takeOnStatsChanger;
         this.takeOffStatsChanger = takeOffStatsChanger;
         this.ownedBy = ownedBy;
         this.isEnabled = true;
+        this.name = name;
+        this.description = description;
     }
 
     public String getType() {
@@ -46,6 +47,29 @@ public class Equipment {
         this.isEnabled = isEnabled;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Stats getTakeOnStatsChanger() {
+        return takeOnStatsChanger;
+    }
+
+    public Stats getTakeOffStatsChanger() {
+        return takeOffStatsChanger;
+    }
+
+    public void setCanWear(final boolean canWear) {
+        this.canWear = canWear;
+    }
+
+    public boolean getCanWear() {
+        return canWear;
+    }
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface Owner {

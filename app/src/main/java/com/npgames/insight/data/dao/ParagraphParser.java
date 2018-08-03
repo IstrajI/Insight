@@ -1,19 +1,15 @@
 package com.npgames.insight.data.dao;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
-import com.npgames.insight.data.model.Jump;
 
 import java.util.ArrayList;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

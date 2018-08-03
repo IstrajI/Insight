@@ -31,7 +31,7 @@
     <string name="armory_equipment_aid_kit_title">Аптечка</string>
     <string name="armory_equipment_open_space_eqpt_title">Снаряжение для выхода в открытый космос</string>
 
-        <!-- Description -->
+    <!-- Description -->
     <string name="armory_equipment_blaster_description">Бластер достаточно скорострелен, но имеет не слишком высокую убойную мощность (–1 Ловкость).</string>
     <string name="armory_equipment_beam_description">Лучемёт более громоздкое оружие, его придется носить за спиной. Зато он стреляет целым веером лазерных лучей  (–2 Ловкости).</string>
     <string name="armory_equipment_grenade_description">Боевые гранаты использовать запрещено, но есть свето-шумовые. Разместив на поясе, уменьшите Ловкость на 1 за каждую.</string>

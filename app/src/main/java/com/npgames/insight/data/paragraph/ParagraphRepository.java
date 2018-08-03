@@ -6,6 +6,7 @@ import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class ParagraphRepository {
     private final ParagraphPreferences paragraphPreferences;
     private int currentParagraph;
     private Set<String> specialVisitedParagraphs;
+    private List<String> watchingParagraphs = Arrays.asList("100", "60", "34");
 
     public static ParagraphRepository getInstance(final Context context) {
         if (paragraphRepository == null) {
@@ -32,6 +34,7 @@ public class ParagraphRepository {
 
         paragraphPreferences = ParagraphPreferences.getInstance(context);
         currentParagraph = paragraphPreferences.loadCurrentParagraphNumber();
+        specialVisitedParagraphs = paragraphPreferences.loadSpecialVisitedParagraphs();
     }
 
     private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
@@ -60,12 +63,14 @@ public class ParagraphRepository {
     }
 
     public Paragraph getNextParagraph(final int paragraphNumber, final int availableHeight) {
+        if (isWathcingParagraphs(paragraphNumber)) {
+            addSpecialVisitedParagraphs(paragraphNumber);
+        }
+
         paragraph = loadParagraph(paragraphNumber, availableHeight);
         paragraph.wasActionPressed = false;
         return paragraph;
     }
-
-
 
     public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
         paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
@@ -77,6 +82,17 @@ public class ParagraphRepository {
 
     //---------------------------- Visited Paragraphs ----------------------------------------------
     //----------------------------------------------------------------------------------------------
+    public Set<String> getSpecialVisitedParagraphs() {
+        return specialVisitedParagraphs;
+    }
+
+    public boolean isParagraphVisited(final int paragraphNumber) {
+        return specialVisitedParagraphs.contains(String.valueOf(paragraphNumber));
+    }
+
+    public void addSpecialVisitedParagraphs(final int paragraphNumber) {
+        specialVisitedParagraphs.add(String.valueOf(paragraphNumber));
+    }
 
     public Set<String> loadSpecialVisitedParagraphs() {
         return paragraphPreferences.loadSpecialVisitedParagraphs();
@@ -86,9 +102,12 @@ public class ParagraphRepository {
         paragraphPreferences.saveSpecialVisitedParagraphs(specialVisitedParagraphs);
     }
 
+    public boolean isWathcingParagraphs(final int paragraphNumber) {
+        return watchingParagraphs.contains(String.valueOf(paragraphNumber));
+    }
+
     //---------------------------- Was Action Pressed ----------------------------------------------
     //----------------------------------------------------------------------------------------------
-
     private boolean loadWasActionPressed() {
         return paragraphPreferences.loadWasActionPressed();
     }
