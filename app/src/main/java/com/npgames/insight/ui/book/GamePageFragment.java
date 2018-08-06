@@ -45,7 +45,7 @@ public class GamePageFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_adapter_page_item, null);
         ButterKnife.bind(this, view);
 
-        GamePageAdapter blocksAdapter = new GamePageAdapter();
+        GamePageAdapter blocksAdapter = new GamePageAdapter(getResources());
         blocksAdapter.setOnItemClickListener(onItemClickListener);
 
         pageRecyclerView.setAdapter(blocksAdapter);

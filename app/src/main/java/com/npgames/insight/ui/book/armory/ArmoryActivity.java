@@ -13,6 +13,7 @@ import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
+import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 
 import java.util.List;
@@ -92,6 +93,16 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 armoryPresenter.takeOffEquipment(equipmentOff);
                 break;
         }
+    }
+
+    @Override
+    public void onItemPress(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
+
+    }
+
+    @Override
+    public void onItemRelease(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
+
     }
 
     @Override

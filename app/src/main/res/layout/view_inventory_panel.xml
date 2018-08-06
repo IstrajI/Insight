@@ -7,6 +7,6 @@
     <RecyclerView
         android:id="@+id/inventory_panel_items_recycler_view"
         android:layout_width="40dp"
-        android:layout_hegith="match_parent"/>
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

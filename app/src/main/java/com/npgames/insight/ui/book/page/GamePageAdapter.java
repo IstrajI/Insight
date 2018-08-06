@@ -1,8 +1,11 @@
 package com.npgames.insight.ui.book.page;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,6 +31,10 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
     private List<BlockArea> blocks;
     private View.OnClickListener onPageClickListener;
+
+    public GamePageAdapter(final Resources resources) {
+        this.resources = resources;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -61,7 +68,17 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             case BlockArea.BlockType.BUTTON:
                 final ButtonViewHolder buttonViewHolder = (ButtonViewHolder) holder;
                 buttonViewHolder.jumpButton.setText(blocks.get(position).content);
-                buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
+
+                buttonViewHolder.jumpButton2.setText(blocks.get(position).content);
+                buttonViewHolder.jumpButton4.setText(blocks.get(position).content);
+                if (((BlockButton)blocks.get(position)).isEnable()) {
+                    buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
+                    buttonViewHolder.jumpButton.setBackground(resources.getDrawable(R.drawable.action_button_new99_trans13));
+                } else {
+                    buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
+                    buttonViewHolder.jumpButton.setBackground(resources.getDrawable(R.drawable.action_button_new99_trans13disabled));
+                }
+
 
                 break;
 
@@ -104,14 +121,43 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
-    class ButtonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ButtonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener{
         @BindView(R.id.adapter_game_page_button_jump_button)
-        protected Button jumpButton;
+        protected TextView jumpButton;
+
+        @BindView(R.id.adapter_game_page_button_jump_button2)
+        protected TextView jumpButton2;
+
+        @BindView(R.id.adapter_game_page_button_jump_button4)
+        protected TextView jumpButton4;
 
         public ButtonViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            jumpButton.setOnClickListener(this);
+            //jumpButton.setOnClickListener(this);
+            jumpButton.setOnTouchListener(this);
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_CANCEL:
+                    Log.d("TestPish", "ActionUp");
+                    onItemClickListener.onItemRelease(view, getAdapterPosition(), GamePageAdapter.this);
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    Log.d("TestPish", "ActionDown");
+                    onItemClickListener.onItemPress(view, getAdapterPosition(), GamePageAdapter.this);
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    onItemClickListener.onItemClick(view, getAdapterPosition(), GamePageAdapter.this);
+                    break;
+
+            }
+
+            return true;
         }
 
         @Override
@@ -120,7 +166,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
-    class ActionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ActionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.adapter_game_page_action_button)
         protected Button actionButton;
 

@@ -143,6 +143,24 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     @Override
+    public void onItemPress(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
+        switch (view.getId()) {
+            case R.id.adapter_game_page_button_jump_button:
+                view.setBackground(getResources().getDrawable(R.drawable.action_button_new99_trans13pressed));
+                break;
+        }
+    }
+
+    @Override
+    public void onItemRelease(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
+        switch (view.getId()) {
+            case R.id.adapter_game_page_button_jump_button:
+                view.setBackground(getResources().getDrawable(R.drawable.action_button_new99_trans13));
+                break;
+        }
+    }
+
+    @Override
     public void updateParagraph(final Paragraph paragraph) {
         pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
