@@ -1,4 +1,4 @@
-package com.npgames.insight.ui.book.inventory;
+package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,7 +19,7 @@ public class InventoryPanelAdapter extends BaseRecyclerAdapter<InventoryPanelAda
     private List<Equipment> equipments;
     private Context context;
 
-    InventoryPanelAdapter(final Context context) {
+    public InventoryPanelAdapter(final Context context) {
         this.context = context;
     }
 

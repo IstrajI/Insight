@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpDelegate;
@@ -23,7 +24,7 @@ import com.npgames.insight.data.model.Stats;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TopPanelView extends FrameLayout {
+public class TopPanelView extends FrameLayout implements View.OnClickListener{
     @BindView(R.id.text_view_stats_panel_mem_bar)
     protected TextView amnTextView;
     @BindView(R.id.image_view_stats_panel_time_bar)
@@ -38,9 +39,10 @@ public class TopPanelView extends FrameLayout {
     protected TextView aurTextView;
     @BindView(R.id.stats_panel_button)
     protected Button statsPanelButton;
+    @BindView(R.id.top_panel_menu_button_image_view)
+    protected ImageView menuButtonImageView;
 
-    private MvpDelegate parentDelegate;
-
+    protected TopPanelClickListener topPanelClickListener;
     public TopPanelView(@NonNull Context context) {
         super(context);
         init(context, null);
@@ -77,6 +79,7 @@ public class TopPanelView extends FrameLayout {
         final ViewGroup layout = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.layout_stats_panel, this, true);
         ButterKnife.bind(layout, this);
         statsPanelButton.setOnClickListener(this::onTopMenuButtonClick);
+        menuButtonImageView.setOnClickListener(this);
     }
 
     public void setStats(final Stats stats) {
@@ -104,5 +107,22 @@ public class TopPanelView extends FrameLayout {
         this.openYposition = openYposition;
         this.closeYposition = openYposition - viewHeight / 2;
         isPositionsInited = true;
+    }
+
+    public void setClickListener(final TopPanelClickListener topPanelClickListener) {
+        this.topPanelClickListener = topPanelClickListener;
+    }
+
+    @Override
+    public void onClick(final View view) {
+        switch(view.getId()) {
+            case R.id.top_panel_menu_button_image_view:
+                topPanelClickListener.topPanelOnMenuClick();
+                break;
+        }
+    }
+
+    public interface TopPanelClickListener {
+        void topPanelOnMenuClick();
     }
 }

@@ -1,22 +1,23 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.arellomobile.mvp.MvpDelegate;
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.npgames.insight.R;
+import com.npgames.insight.data.model.Equipment;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BottomPanelView extends RelativeLayout implements IBottomPanelView, View.OnClickListener{
-
+public class BottomPanelView extends RelativeLayout implements View.OnClickListener{
     @BindView(R.id.button_bottom_panel_ui_top_center)
     protected View uiTopImage;
     @BindView(R.id.button_bottom_panel_find)
@@ -27,14 +28,11 @@ public class BottomPanelView extends RelativeLayout implements IBottomPanelView,
     protected ImageView medBayButton;
     @BindView(R.id.button_bottom_panel_armory)
     protected ImageView armoryButton;
+    @BindView(R.id.inventory_panel_items_recycler_view)
+    protected RecyclerView itemsRecyclerView;
 
-    @InjectPresenter
-    BottomPanelPresenter bottomPanelPresenter;
-
-    private OnClickListener onClickListener;
-
-    private MvpDelegate mParentDelegate;
-    private MvpDelegate<BottomPanelView> mMvpDelegate;
+    private InventoryPanelAdapter inventoryPanelAdapter;
+    private BottomPanelClickListener onClickListener;
 
     public BottomPanelView(Context context) {
         this(context, null);
@@ -58,63 +56,57 @@ public class BottomPanelView extends RelativeLayout implements IBottomPanelView,
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
         armoryButton.setOnClickListener(this);
+
+        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        inventoryPanelAdapter = new InventoryPanelAdapter(getContext());
+        itemsRecyclerView.setAdapter(inventoryPanelAdapter);
     }
 
-    public void init(final MvpDelegate parentDelegate, final OnClickListener onClickListener) {
-        mParentDelegate = parentDelegate;
+    public void addClickListener(final BottomPanelClickListener onClickListener) {
         this.onClickListener = onClickListener;
-
-        getMvpDelegate().onCreate();
-        getMvpDelegate().onAttach();
-
-        bottomPanelPresenter.changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
+        //bottomPanelPresenter.changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
     }
 
-    public MvpDelegate<BottomPanelView> getMvpDelegate() {
-        if (mMvpDelegate != null) {
-            return mMvpDelegate;
-        }
-
-        mMvpDelegate = new MvpDelegate<>(this);
-        mMvpDelegate.setParentDelegate(mParentDelegate, String.valueOf(getId()));
-        return mMvpDelegate;
-    }
-
-    @Override
     public void moveYTo(final float y) {
         setY(y);
         invalidate();
+    }
+
+    public void updateEquipment(final List<Equipment> equipments) {
+        inventoryPanelAdapter.update(equipments);
     }
 
     @Override
     public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.button_bottom_panel_ui_top_center:
-                bottomPanelPresenter.changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
+                onClickListener.bottomPanelClick();
+                        //changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
                 break;
 
             case R.id.button_bottom_panel_find:
-                onClickListener.onFind();
+                onClickListener.bottomPanelFindClick();
                 break;
 
             case R.id.button_bottom_panel_station:
-                onClickListener.onStation();
+                onClickListener.bottomPanelStationClick();
                 break;
 
             case R.id.button_bottom_panel_med_bay:
-                onClickListener.onMedBay();
+                onClickListener.bottomPanelMedBayClick();
                 break;
 
             case R.id.button_bottom_panel_armory:
-                onClickListener.onArmory();
+                onClickListener.bottomPanelArmoryClick();
                 break;
         }
     }
 
-    public interface OnClickListener {
-        void onFind();
-        void onStation();
-        void onMedBay();
-        void onArmory();
+    public interface BottomPanelClickListener {
+        void bottomPanelClick();
+        void bottomPanelFindClick();
+        void bottomPanelStationClick();
+        void bottomPanelMedBayClick();
+        void bottomPanelArmoryClick();
     }
 }

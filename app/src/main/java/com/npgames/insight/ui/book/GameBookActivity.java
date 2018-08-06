@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -15,22 +14,33 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.application.ScreenUtils;
+import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
+import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
+import com.npgames.insight.ui.book.bottom_new.BottomPanelView;
+import com.npgames.insight.ui.book.bottom_new.IBottomPanelView;
+import com.npgames.insight.ui.book.death.DeathDialogFragment;
+import com.npgames.insight.ui.book.inventory.InventoryPanelView;
+import com.npgames.insight.ui.book.inventory.InventoryPresenter;
+import com.npgames.insight.ui.book.inventory.InventoryView;
+import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
+import java.util.List;
+
 import butterknife.BindView;
 
-import static com.npgames.insight.ui.book.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
+import static com.npgames.insight.ui.book.death.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
-        GameBookView, com.npgames.insight.ui.book.bottom_new.BottomPanelView.OnClickListener {
-
+        GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
+        MenuDialogFragment.MenuDialogClickListener{
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
     @BindView(R.id.viewpager_gamebook_pages)
@@ -42,15 +52,20 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     @BindView(R.id.frame_layout_game_book_page_root)
     protected FrameLayout pageRootFrameLayout;
     @BindView(R.id.buttom_panel_game_book_actions)
-    protected com.npgames.insight.ui.book.bottom_new.BottomPanelView bottomPanelView;
+    protected BottomPanelView bottomPanelView;
 
     private int paragraphTextHeight;
+    private PagerAdapter pagerAdapter;
+
+    @InjectPresenter
+    BottomPanelPresenter bottomPanelPresenter;
+    @ProvidePresenter
+    BottomPanelPresenter provideBottomPanelPresenter() {
+        return new BottomPanelPresenter(getApplicationContext());
+    }
 
     @InjectPresenter
     GameBookPresenter gameBookPresenter;
-
-    private PagerAdapter pagerAdapter;
-
     @ProvidePresenter
     GameBookPresenter provideGameBookPresenter() {
         return new GameBookPresenter(getApplicationContext());
@@ -93,6 +108,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 chooseGameType();
             }
         });
+
+        bottomPanelView.addClickListener(this);
+        bottomPanelPresenter.initOpenClosePositions();
     }
 
     @Override
@@ -143,24 +161,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     @Override
-    public void onItemPress(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
-        switch (view.getId()) {
-            case R.id.adapter_game_page_button_jump_button:
-                view.setBackground(getResources().getDrawable(R.drawable.action_button_new99_trans13pressed));
-                break;
-        }
-    }
-
-    @Override
-    public void onItemRelease(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
-        switch (view.getId()) {
-            case R.id.adapter_game_page_button_jump_button:
-                view.setBackground(getResources().getDrawable(R.drawable.action_button_new99_trans13));
-                break;
-        }
-    }
-
-    @Override
     public void updateParagraph(final Paragraph paragraph) {
         pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
@@ -173,8 +173,14 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     @Override
+    public void menuDialogOnGoToMainMenuClick() {
+        finish();
+    }
+
+    @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         switch (requestCode) {
+
             case 1:
                 if (resultCode == RESULT_OK) {
                     final int dex = data.getIntExtra("DEX", 0);
@@ -185,18 +191,40 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 }
 
                 break;
+
             case 2:
                 if (resultCode == RESULT_OK) {
                     gameBookPresenter.loadGameParagraph(paragraphTextHeight, 40);
                 }
+
                 break;
         }
+    }
+
+    //---------------------------- Top Panel -------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    @Override
+    public void topPanelOnMenuClick() {
+        final DeathDialogFragment deathDialogFragment = new DeathDialogFragment();
+        deathDialogFragment.show(getSupportFragmentManager(), DEATH_DIALOG_FRAGMENT_TAG);
+    }
+
+    //---------------------------- User Bottom Panel General ---------------------------------------
+    //----------------------------------------------------------------------------------------------
+    @Override
+    public void moveYTo(float y) {
+
+    }
+
+    @Override
+    public void showPlayerEquipment(List<Equipment> equipmentList) {
+        bottomPanelView.updateEquipment(equipmentList);
     }
 
     //---------------------------- User Bottom Panel Actions ---------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override
-    public void onFind() {
+    public void bottomPanelFindClick() {
         gameBookPresenter.onFindClick(paragraphTextHeight);
     }
 
@@ -211,18 +239,23 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     @Override
-    public void onStation() {
+    public void bottomPanelStationClick() {
         gameBookPresenter.onStationClick(paragraphTextHeight);
     }
 
     @Override
-    public void onMedBay() {
+    public void bottomPanelMedBayClick() {
         gameBookPresenter.onMedBayClick(paragraphTextHeight);
     }
 
     @Override
-    public void onArmory() {
+    public void bottomPanelArmoryClick() {
         final Intent intent = new Intent(this, ArmoryActivity.class);
         startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void bottomPanelClick() {
+        bottomPanelPresenter.openCloseBottomPanel();
     }
 }

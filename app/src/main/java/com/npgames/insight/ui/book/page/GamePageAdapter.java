@@ -15,7 +15,6 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
-import com.npgames.insight.data.model.PageBlock;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 
 import java.util.List;
@@ -23,17 +22,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Влад on 24.10.2017.
- */
-
 public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder>{
 
     private List<BlockArea> blocks;
-    private View.OnClickListener onPageClickListener;
+    private final Drawable jumpPressedDrawable;
+    private final Drawable jumpEnabledDrawable;
+    private final Drawable jumpDisabledDrawable;
 
     public GamePageAdapter(final Resources resources) {
-        this.resources = resources;
+        jumpEnabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13);
+        jumpDisabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13disabled);
+        jumpPressedDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13pressed);
     }
 
     @Override
@@ -62,24 +61,17 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final String content = blocks.get(position).content;
         switch(holder.getItemViewType()) {
+
             case BlockArea.BlockType.TEXT:
                 ((TextViewHolder)holder).textTextView.setText(content);
                 break;
+
             case BlockArea.BlockType.BUTTON:
+                final BlockButton blockButton = (BlockButton) blocks.get(position);
                 final ButtonViewHolder buttonViewHolder = (ButtonViewHolder) holder;
-                buttonViewHolder.jumpButton.setText(blocks.get(position).content);
-
-                buttonViewHolder.jumpButton2.setText(blocks.get(position).content);
-                buttonViewHolder.jumpButton4.setText(blocks.get(position).content);
-                if (((BlockButton)blocks.get(position)).isEnable()) {
-                    buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
-                    buttonViewHolder.jumpButton.setBackground(resources.getDrawable(R.drawable.action_button_new99_trans13));
-                } else {
-                    buttonViewHolder.jumpButton.setEnabled(((BlockButton)blocks.get(position)).isEnable());
-                    buttonViewHolder.jumpButton.setBackground(resources.getDrawable(R.drawable.action_button_new99_trans13disabled));
-                }
-
-
+                buttonViewHolder.jumpButton.setText(blockButton.content);
+                buttonViewHolder.jumpButton.setEnabled(blockButton.isEnable());
+                buttonViewHolder.jumpButton.setBackground(blockButton.isEnable() ? jumpEnabledDrawable : jumpDisabledDrawable);
                 break;
 
             case BlockArea.BlockType.ACTION:
@@ -105,15 +97,11 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         return blocks.get(position);
     }
 
-    public void setOnPageClickListener(final View.OnClickListener onPageClickListener) {
-        this.onPageClickListener = onPageClickListener;
-    }
-
     class TextViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.adapter_game_page_text)
         protected TextView textTextView;
 
-        public TextViewHolder(final View itemView) {
+        TextViewHolder(final View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
@@ -121,20 +109,13 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
-    class ButtonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener{
+    class ButtonViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener{
         @BindView(R.id.adapter_game_page_button_jump_button)
         protected TextView jumpButton;
 
-        @BindView(R.id.adapter_game_page_button_jump_button2)
-        protected TextView jumpButton2;
-
-        @BindView(R.id.adapter_game_page_button_jump_button4)
-        protected TextView jumpButton4;
-
-        public ButtonViewHolder(final View itemView) {
+        ButtonViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            //jumpButton.setOnClickListener(this);
             jumpButton.setOnTouchListener(this);
         }
 
@@ -142,27 +123,18 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_CANCEL:
-                    Log.d("TestPish", "ActionUp");
-                    onItemClickListener.onItemRelease(view, getAdapterPosition(), GamePageAdapter.this);
+                    view.setBackground(jumpEnabledDrawable);
                     break;
 
                 case MotionEvent.ACTION_DOWN:
-                    Log.d("TestPish", "ActionDown");
-                    onItemClickListener.onItemPress(view, getAdapterPosition(), GamePageAdapter.this);
+                    view.setBackground(jumpPressedDrawable);
                     break;
 
                 case MotionEvent.ACTION_UP:
                     onItemClickListener.onItemClick(view, getAdapterPosition(), GamePageAdapter.this);
                     break;
-
             }
-
             return true;
-        }
-
-        @Override
-        public void onClick(final View v) {
-           onItemClickListener.onItemClick(v, getAdapterPosition(), GamePageAdapter.this);
         }
     }
 
@@ -183,8 +155,6 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     }
 
     class ImageViewHolder extends RecyclerView.ViewHolder {
-
-
         public ImageViewHolder(View itemView) {
             super(itemView);
 

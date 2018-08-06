@@ -17,6 +17,9 @@
     <string name="home_screen_achievements_title">Achievements</string>
     <string name="home_screen_about_title">About</string>
 
+    <!-- Menu -->
+    <string name="game_book_got_to_main_menu_title">В главное меню</string>
+
     <!-- Armory -->
     <string name="armory_take_out_title">Снять</string>
     <string name="armory_take_on_title">Надеть</string>
@@ -42,6 +45,11 @@
     <string name="armory_equipment_aid_kit_description">Аптечка (–1 Ловкость) — комплект для обработки ран на одно применение (восстановит 4 ЗДОРОВЬЯ). Грэм напоминает, что вы давно собирались пополнить запас аптечек, но всегда откладывали это на потом. Поэтому она у вас всего одна.</string>
     <string name="armory_equipment_open_space_eqpt_description">Снаряжение для выхода в открытый космос, представляющее собой реактивный ранец и дополнительный запас дыхательной смеси (–3 Ловкости).</string>
 
+    <!-- User Actions -->
+    <string name="game_book_find_action">Изучить</string>
+    <string name="game_book_station_action">Вернуться на станцию</string>
+    <string name="game_book_med_bay_action">Отправиться в лечебную капсулу</string>
+    <string name="game_book_armory_action">Зайти в оружейную</string>
 
     <!-- Create character -->
     <string name="create_character_hp_title">Здоровье</string>

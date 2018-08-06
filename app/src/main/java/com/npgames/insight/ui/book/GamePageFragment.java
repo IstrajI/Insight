@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.new_model.Page;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
@@ -29,7 +30,6 @@ public class GamePageFragment extends Fragment {
     private Page page;
     private static RecyclerViewListeners.OnItemClickListener onItemClickListener;
 
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         Log.d("TestPish", "GamePageFragment");
@@ -37,7 +37,6 @@ public class GamePageFragment extends Fragment {
 
         page = (Page) getArguments().getSerializable(PAGES);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,14 +50,6 @@ public class GamePageFragment extends Fragment {
         pageRecyclerView.setAdapter(blocksAdapter);
         pageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         blocksAdapter.update(page.blocks);
-
-        view.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("TestPish", "Height: IamRecycler " +view.getHeight());
-                Log.d("TestPish", "Height: IamMeasureInRecycler " +test.getHeight());
-            }
-        });
         return view;
     }
 

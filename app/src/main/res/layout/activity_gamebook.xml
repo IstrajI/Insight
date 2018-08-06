@@ -77,16 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:id="@+id/gamebook_menu_button"
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|left"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/gamebook_stats_top_panel_view"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:background="@drawable/menu_btn_4_xxx" />
-
                 <com.npgames.insight.ui.book.top_panel.TopPanelView
                     android:id="@+id/gamebook_stats_top_panel_view"
                     android:layout_width="match_parent"

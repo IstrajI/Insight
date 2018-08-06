@@ -1,4 +1,4 @@
-package com.npgames.insight.ui.book;
+package com.npgames.insight.ui.book.death;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

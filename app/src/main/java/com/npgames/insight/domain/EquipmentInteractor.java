@@ -4,17 +4,23 @@ import android.content.Context;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.stats.StatsRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EquipmentInteractor {
     final EquipmentRepository equipmentRepository;
     final StatsRepository statsRepository;
 
+    List<Equipment> equipments;
+
     private final int LOW_DEX_BORDER = 5;
 
     public EquipmentInteractor(final Context context) {
         equipmentRepository = EquipmentRepository.getInstance(context);
         statsRepository = StatsRepository.getInstance(context);
+
+        equipments = loadEquipment();
     }
 
     public void takeOnEquipment(final Equipment equipment) {
@@ -33,6 +39,18 @@ public class EquipmentInteractor {
         }
 
         return equipments;
+    }
+
+    public List<Equipment> getEquipmentsOwnedBy(final String owner) {
+        final List<Equipment> resultEquipments = new ArrayList<>();
+
+        for (final Equipment equipment: equipments) {
+            if (owner.equals(equipment.getOwnedBy())) {
+                resultEquipments.add(equipment);
+            }
+        }
+
+        return resultEquipments;
     }
 
     private boolean canWear(final Equipment equipment) {

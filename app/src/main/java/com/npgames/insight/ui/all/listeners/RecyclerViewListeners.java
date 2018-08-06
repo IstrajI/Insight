@@ -9,7 +9,5 @@ public class RecyclerViewListeners {
 
     public interface OnItemClickListener{
         void onItemClick(View view, int position, RecyclerView.Adapter adapter);
-        void onItemPress(View view, int adapterPosition, GamePageAdapter gamePageAdapter);
-        void onItemRelease(View view, int adapterPosition, GamePageAdapter gamePageAdapter);
     }
 }
