@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Insight.iml" filepath="$PROJECT_DIR$/Insight.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/awesomeandroid.iml" filepath="$PROJECT_DIR$/awesomeandroid.iml" />
+      <module fileurl="file://D:\Documents\Programming\Insight\Insight\awesomeandroid.iml" filepath="D:\Documents\Programming\Insight\Insight\awesomeandroid.iml" />
     </modules>
   </component>
 </project>

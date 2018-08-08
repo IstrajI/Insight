@@ -50,7 +50,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@drawable/top_background" />
+                android:background="@drawable/top_pattern_3" />
             <!--
             <ImageView
                 android:layout_width="120dp"
