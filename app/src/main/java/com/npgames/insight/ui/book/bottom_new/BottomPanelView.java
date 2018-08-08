@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -74,6 +75,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     public void updateEquipment(final List<Equipment> equipments) {
         inventoryPanelAdapter.update(equipments);
+        Log.d("TestPish", "equipments = "+ equipments.size());
     }
 
     @Override

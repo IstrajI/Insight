@@ -140,7 +140,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
     class ActionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.adapter_game_page_action_button)
-        protected Button actionButton;
+        protected TextView actionButton;
 
         public ActionsViewHolder(final View itemView) {
             super(itemView);

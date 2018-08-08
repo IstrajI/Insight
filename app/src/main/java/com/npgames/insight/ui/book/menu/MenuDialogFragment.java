@@ -1,6 +1,6 @@
 package com.npgames.insight.ui.book.menu;
 
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MenuDialogFragment extends DialogFragment implements View.OnClickListener{
+    public static String MENU_DIALOG_FRAGMENT_TAG = "MENU_DIALOG_FRAGMENT_TAG";
+
     @BindView(R.id.menu_dialog_go_to_main_menu_button)
     protected Button mainMenuButton;
 

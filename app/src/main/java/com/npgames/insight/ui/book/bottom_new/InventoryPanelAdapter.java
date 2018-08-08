@@ -11,12 +11,14 @@ import com.bumptech.glide.Glide;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class InventoryPanelAdapter extends BaseRecyclerAdapter<InventoryPanelAdapter.ViewHolder> {
-    private List<Equipment> equipments;
+    private List<Equipment> equipments = new ArrayList<>();
     private Context context;
 
     public InventoryPanelAdapter(final Context context) {
@@ -88,7 +90,7 @@ public class InventoryPanelAdapter extends BaseRecyclerAdapter<InventoryPanelAda
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.inventory_panel_items_recycler_view)
+        @BindView(R.id.image_view_inventory_item)
         ImageView equipmentImageView;
 
         ViewHolder(final @NonNull View itemView) {

@@ -80,7 +80,6 @@
                 <com.npgames.insight.ui.book.top_panel.TopPanelView
                     android:id="@+id/gamebook_stats_top_panel_view"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="@dimen/spacing_16"
                     android:layout_height="wrap_content"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintTop_toTopOf="parent"

@@ -96,16 +96,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     }
 
     @Override
-    public void onItemPress(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
-
-    }
-
-    @Override
-    public void onItemRelease(View view, int adapterPosition, GamePageAdapter gamePageAdapter) {
-
-    }
-
-    @Override
     public void onClick(final View v) {
         switch (v.getId()){
             case R.id.button_armory_continue:

@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
@@ -24,9 +25,6 @@ import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelView;
 import com.npgames.insight.ui.book.bottom_new.IBottomPanelView;
 import com.npgames.insight.ui.book.death.DeathDialogFragment;
-import com.npgames.insight.ui.book.inventory.InventoryPanelView;
-import com.npgames.insight.ui.book.inventory.InventoryPresenter;
-import com.npgames.insight.ui.book.inventory.InventoryView;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
@@ -37,6 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 
 import static com.npgames.insight.ui.book.death.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
+import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
@@ -97,7 +96,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             @Override
             public void onGlobalLayout() {
                 measuringTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                bottomPanelView.init(getMvpDelegate(), GameBookActivity.this);
                 gameBookPresenter.setDefaultBlockTextParams(measuringTextView.getLineSpacingExtra(),
                         measuringTextView.getLineSpacingMultiplier(),
                         measuringTextView.getPaint(),
@@ -111,6 +109,8 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         bottomPanelView.addClickListener(this);
         bottomPanelPresenter.initOpenClosePositions();
+        bottomPanelPresenter.loadPlayerEquipment();
+        statsTopPanelView.setClickListener(this);
     }
 
     @Override
@@ -205,8 +205,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //----------------------------------------------------------------------------------------------
     @Override
     public void topPanelOnMenuClick() {
-        final DeathDialogFragment deathDialogFragment = new DeathDialogFragment();
-        deathDialogFragment.show(getSupportFragmentManager(), DEATH_DIALOG_FRAGMENT_TAG);
+        final MenuDialogFragment menuDialogFragment = new MenuDialogFragment();
+        menuDialogFragment.setOnClickListener(this);
+        menuDialogFragment.show(getSupportFragmentManager(), MENU_DIALOG_FRAGMENT_TAG);
     }
 
     //---------------------------- User Bottom Panel General ---------------------------------------

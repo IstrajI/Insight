@@ -37,8 +37,6 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
     protected TextView dexTextView;
     @BindView(R.id.image_view_stats_panel_au_bar)
     protected TextView aurTextView;
-    @BindView(R.id.stats_panel_button)
-    protected Button statsPanelButton;
     @BindView(R.id.top_panel_menu_button_image_view)
     protected ImageView menuButtonImageView;
 
@@ -78,7 +76,6 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
     private void init(final Context context, final AttributeSet attrs) {
         final ViewGroup layout = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.layout_stats_panel, this, true);
         ButterKnife.bind(layout, this);
-        statsPanelButton.setOnClickListener(this::onTopMenuButtonClick);
         menuButtonImageView.setOnClickListener(this);
     }
 
