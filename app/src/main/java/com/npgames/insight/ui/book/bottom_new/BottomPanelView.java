@@ -1,12 +1,14 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -19,8 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BottomPanelView extends RelativeLayout implements View.OnClickListener{
-    @BindView(R.id.button_bottom_panel_ui_top_center)
-    protected View uiTopImage;
     @BindView(R.id.button_bottom_panel_find)
     protected ImageView findButton;
     @BindView(R.id.button_bottom_panel_station)
@@ -31,6 +31,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected ImageView armoryButton;
     @BindView(R.id.inventory_panel_items_recycler_view)
     protected RecyclerView itemsRecyclerView;
+    @BindView(R.id.button_bottom_panel_open_hide_inventory)
+    protected ImageView openHideButton;
 
     private InventoryPanelAdapter inventoryPanelAdapter;
     private BottomPanelClickListener onClickListener;
@@ -52,7 +54,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         final View rootLayout = LayoutInflater.from(context).inflate(R.layout.view_bottom_panel, this, true);
         ButterKnife.bind(this, rootLayout);
 
-        uiTopImage.setOnClickListener(this);
+        openHideButton.setOnClickListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
@@ -65,7 +67,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     public void addClickListener(final BottomPanelClickListener onClickListener) {
         this.onClickListener = onClickListener;
-        //bottomPanelPresenter.changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
     }
 
     public void moveYTo(final float y) {
@@ -81,9 +82,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     @Override
     public void onClick(final View v) {
         switch (v.getId()) {
-            case R.id.button_bottom_panel_ui_top_center:
+            case R.id.button_bottom_panel_open_hide_inventory:
                 onClickListener.bottomPanelClick();
-                        //changeYPosition(getY(), getHeight(), uiTopImage.getHeight());
                 break;
 
             case R.id.button_bottom_panel_find:

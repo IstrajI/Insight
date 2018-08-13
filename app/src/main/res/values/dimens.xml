@@ -9,6 +9,7 @@
 
     <dimen name="size_create_character_skill_points_squire">35dp</dimen>
 
-    <dimen name="size_bottom_panel_jumps_button">40dp</dimen>
+    <dimen name="size_bottom_panel_jumps_button">56dp</dimen>
+    <dimen name="size_bottom_panel_approximate_height">65dp</dimen>
 
 </resources>
