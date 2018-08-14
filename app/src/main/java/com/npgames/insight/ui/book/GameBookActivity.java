@@ -242,13 +242,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //---------------------------- User Bottom Panel General ---------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override
-    public void moveYTo(float y) {
+    public void moveYTo(final float y) {
         bottomPanelView.setY(y);
         bottomPanelView.invalidate();
     }
 
     @Override
-    public void showPlayerEquipment(List<Equipment> equipmentList) {
+    public void showPlayerEquipment(final List<Equipment> equipmentList) {
         bottomPanelView.updateEquipment(equipmentList);
     }
 

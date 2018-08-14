@@ -16,7 +16,9 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 
 import java.util.List;
@@ -43,9 +45,11 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             case 0:
                 final View textViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_text_item, parent, false);
                 return new TextViewHolder(textViewHolderLayout);
+
             case 1:
                 final View buttonViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_button_item, parent, false);
                 return new ButtonViewHolder(buttonViewHolderLayout);
+
             case 3:
                 final View actionViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_action_item, parent, false);
                 return new ActionsViewHolder(actionViewHolderLayout);
@@ -53,6 +57,11 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             case BlockArea.BlockType.CREATE_PLAYER_DEX:
                 final View createPlayerDexViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_create_player_dex_item, parent, false);
                 return new CreatePlayerDexViewHolder(createPlayerDexViewHolderLayout);
+
+            case BlockArea.BlockType.CREATE_PLAYER_PRC:
+                final View createPlayerPrcViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_create_player_prc_item, parent, false);
+                return new CreatePlayerPrcViewHolder(createPlayerPrcViewHolderLayout);
+
         }
         return null;
     }
@@ -95,7 +104,13 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
             case BlockArea.BlockType.CREATE_PLAYER_PRC:
                 final CreatePlayerPrcViewHolder createPlayerPrcViewHolder = (CreatePlayerPrcViewHolder) holder;
-                createPlayerPrcViewHolder.
+                createPlayerPrcViewHolder.prcPointsAmountTextView.setText(String.valueOf(((BlockCreatePlayerPrc) blocks.get(position)).getPrcPoints()));
+
+                break;
+
+            case BlockArea.BlockType.CREATE_PLAYER_BUTTONS:
+                final CreatePlayerButtonsViewHolder createPlayerButtonsViewHolder = (CreatePlayerButtonsViewHolder) holder;
+                break;
         }
     }
 
@@ -178,7 +193,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
-    class CreatePlayerDexViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class CreatePlayerDexViewHolder  implements View.OnClickListener {
         @BindView(R.id.create_player_dex_points_amount_text_view)
         protected TextView dexPointsAmountTextView;
         @BindView(R.id.create_player_dex_minus_button)
@@ -201,20 +216,44 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     }
 
     class CreatePlayerPrcViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.create_player_dex_points_amount_text_view)
+        @BindView(R.id.create_player_prc_points_amount_text_view)
         protected TextView prcPointsAmountTextView;
-        @BindView(R.id.create_player_dex_minus_button)
+        @BindView(R.id.create_player_prc_minus_button)
         protected Button prcMinusButton;
-        @BindView(R.id.create_player_dex_plus_button)
+        @BindView(R.id.create_player_prc_plus_button)
         protected Button prcPlusButton;
 
-        public CreatePlayerPrcViewHolder(@NonNull View itemView) {
+        public CreatePlayerPrcViewHolder(final @NonNull View itemView) {
             super(itemView);
+
+            ButterKnife.bind(this, itemView);
+            prcMinusButton.setOnClickListener(this);
+            prcPlusButton.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
+            onItemClickListener.onItemClick(view, getAdapterPosition(), GamePageAdapter.this);
+        }
+    }
 
+    class CreatePlayerButtonsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.create_player_buttons_reset_button)
+        protected Button resetButton;
+        @BindView(R.id.create_player_dex_ok_button)
+        protected Button okButton;
+
+        public CreatePlayerButtonsViewHolder(final View itemView) {
+            super(itemView);
+
+            ButterKnife.bind(this, itemView);
+            resetButton.setOnClickListener(this);
+            okButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View view) {
+            onItemClickListener.onItemClick(view, getAdapterPosition(), GamePageAdapter.this);
         }
     }
 }

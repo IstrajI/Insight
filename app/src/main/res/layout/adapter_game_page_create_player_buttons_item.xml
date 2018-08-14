@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/create_player_buttons_reset_button"
+        android:layout_width="@dimen/size_create_character_skill_points_squire"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/create_player_dex_ok_button"
+        android:text="Ok"
+        android:layout_width="@dimen/size_create_character_skill_points_squire"
+        android:layout_height="@dimen/size_create_character_skill_points_squire" />
+</LinearLayout>
