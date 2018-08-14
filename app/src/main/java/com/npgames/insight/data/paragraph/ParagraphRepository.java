@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
 import java.util.Arrays;
@@ -49,8 +52,16 @@ public class ParagraphRepository {
         }
 
         final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
+
+        if (paragraphNumber == 500) {
+            blockAreas.add(new BlockCreatePlayerDex());
+            blockAreas.add(new BlockCreatePlayerPrc());
+            blockAreas.add(new BlockCreatePlayerButtons());
+        }
+
         final Pagination pagination = new Pagination();
         final Paragraph paragraph = pagination.createParagraphModel(blockAreas, availableHeight);
+
         paragraph.paragraphNumber = paragraphNumber;
         return paragraph;
     }

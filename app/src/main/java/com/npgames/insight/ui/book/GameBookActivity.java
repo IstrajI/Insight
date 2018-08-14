@@ -32,6 +32,7 @@ import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
+import com.npgames.insight.ui.player.CreatePlayerPresenter;
 
 import java.util.List;
 
@@ -74,6 +75,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     GameBookPresenter provideGameBookPresenter() {
         return new GameBookPresenter(getApplicationContext());
     }
+
+    @InjectPresenter
+    CreatePlayerPresenter createPlayerPresenter;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -175,8 +179,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 }
                 break;
 
-            case R.id.adapter_game_page_action_button:
-                gameBookPresenter.applyAction();
+            //Create Player events
+            case R.id.create_player_dex_minus_button:
+                createPlayerPresenter.dexMinus();
+                break;
+            case R.id.create_player_dex_plus_button:
+                createPlayerPresenter.dexPlus();
+                break;
         }
     }
 

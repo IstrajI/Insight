@@ -32,7 +32,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public void update(final Paragraph paragraphModel) {
         this.paragraphModel = paragraphModel;
         notifyDataSetChanged();
-
     }
 
     public void setOnItemClickListener(final RecyclerViewListeners.OnItemClickListener clickListener) {
