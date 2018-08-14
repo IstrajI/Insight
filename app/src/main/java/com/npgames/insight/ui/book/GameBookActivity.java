@@ -1,10 +1,13 @@
 package com.npgames.insight.ui.book;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -29,6 +32,7 @@ import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
+import com.npgames.insight.ui.player.CreatePlayerPresenter;
 
 import java.util.List;
 
@@ -52,6 +56,8 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     protected FrameLayout pageRootFrameLayout;
     @BindView(R.id.buttom_panel_game_book_actions)
     protected BottomPanelView bottomPanelView;
+    @BindView(R.id.bottom_panel_actions_layout)
+    protected ConstraintLayout actionsFrameLayout;
 
     private int paragraphTextHeight;
     private PagerAdapter pagerAdapter;
@@ -69,6 +75,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     GameBookPresenter provideGameBookPresenter() {
         return new GameBookPresenter(getApplicationContext());
     }
+
+    @InjectPresenter
+    CreatePlayerPresenter createPlayerPresenter;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -107,8 +116,23 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             }
         });
 
+        bottomPanelView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            final float openPosition = bottomPanelView.getTop();
+            Log.d("TestPishGG", "resources = " +Resources.getSystem().getDisplayMetrics().heightPixels);
+            Log.d("TestPishGG", "resources = " +actionsFrameLayout.getHeight());
+            Log.d("TestPishGG", "resources = " +getResources().getDimension(R.dimen.spacing_8));
+            final float closePosition = Resources.getSystem().getDisplayMetrics().heightPixels -
+                                        actionsFrameLayout.getHeight()
+                                        + getResources().getDimension(R.dimen.spacing_8);
+            Log.d("TestPishGG", "openPos = " +openPosition +" closePos = " +closePosition);
+
+            bottomPanelPresenter.initOpenClosePositions(openPosition, closePosition);
+            bottomPanelPresenter.openCloseBottomPanel();
+        });
+
+
+
         bottomPanelView.addClickListener(this);
-        bottomPanelPresenter.initOpenClosePositions();
         bottomPanelPresenter.loadPlayerEquipment();
         statsTopPanelView.setClickListener(this);
     }
@@ -155,8 +179,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 }
                 break;
 
-            case R.id.adapter_game_page_action_button:
-                gameBookPresenter.applyAction();
+            //Create Player events
+            case R.id.create_player_dex_minus_button:
+                createPlayerPresenter.dexMinus();
+                break;
+            case R.id.create_player_dex_plus_button:
+                createPlayerPresenter.dexPlus();
+                break;
         }
     }
 
@@ -214,7 +243,8 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //----------------------------------------------------------------------------------------------
     @Override
     public void moveYTo(float y) {
-
+        bottomPanelView.setY(y);
+        bottomPanelView.invalidate();
     }
 
     @Override

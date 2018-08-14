@@ -11,6 +11,40 @@ public class CreatePlayerPresenter extends MvpPresenter<CreatePlayerView> {
     private int dex = Player.INIT_DEX;
     private int prc = Player.INIT_PRC;
 
+    public void dexMinus() {
+        //try to return points that wasn't belong to destributed points
+        if (pointsToDistribute < MAX_POINTS_TO_DISTRIBUTE || dex > Player.INIT_DEX) {
+            dex--;
+            pointsToDistribute++;
+        }
+    }
+
+    public void dexPlus() {
+        //no points to destribute
+        if (pointsToDistribute != 0) {
+            dex ++;
+            pointsToDistribute--;
+        }
+    }
+
+    public void prcMinus() {
+        //try to return points that wasn't belong to destributed points
+        if (pointsToDistribute < MAX_POINTS_TO_DISTRIBUTE || prc > Player.INIT_PRC) {
+            prc--;
+            pointsToDistribute++;
+        }
+    }
+
+    public void prcPlus() {
+        //no points to destribute
+        if (pointsToDistribute != 0) {
+            prc ++;
+            pointsToDistribute--;
+        }
+    }
+
+
+
     public void changeDexPoints(final int dexPoints) {
         if (pointsToDistribute - dexPoints < 0 || pointsToDistribute-dexPoints > MAX_POINTS_TO_DISTRIBUTE
                 || dex + dexPoints < Player.INIT_DEX) return;

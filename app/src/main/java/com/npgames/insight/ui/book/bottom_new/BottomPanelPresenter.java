@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -11,7 +12,7 @@ import com.npgames.insight.domain.EquipmentInteractor;
 public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
     private EquipmentInteractor equipmentInteractor;
 
-    private boolean isBottomPanelOpen = true;
+    private boolean isBottomPanelOpen;
     private float openYPosition;
     private float closeYPosition;
 
@@ -23,23 +24,15 @@ public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
         getViewState().showPlayerEquipment(equipmentInteractor.getEquipmentsOwnedBy(Equipment.Owner.PLAYER));
     }
 
-    public void changeYPosition(final float currentY, final float height, final float topUiHeight) {
-        if (openYPosition == 0 && closeYPosition == 0) {
-            initStatesYPositions(currentY, height, topUiHeight);
-        }
-
+    public void openCloseBottomPanel() {
+        Log.d("TestPish", "Clicked; closeY= " +closeYPosition +" openY = " +openYPosition);
         getViewState().moveYTo(isBottomPanelOpen ? closeYPosition : openYPosition);
         isBottomPanelOpen = !isBottomPanelOpen;
     }
 
-    private void initStatesYPositions(final float currentY, final float height, final float topUiHeight) {
-        openYPosition = currentY;
-        closeYPosition = currentY + height - topUiHeight / 2;
-    }
-
-    public void openCloseBottomPanel() {
-    }
-
-    public void initOpenClosePositions() {
+    public void initOpenClosePositions(final float openY, final float closeY) {
+        openYPosition = openY;
+        closeYPosition = closeY;
+         isBottomPanelOpen = true;
     }
 }

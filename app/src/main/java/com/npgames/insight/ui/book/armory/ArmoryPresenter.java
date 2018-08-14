@@ -2,6 +2,7 @@ package com.npgames.insight.ui.book.armory;
 
 import android.content.Context;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.model.Stats;
@@ -9,6 +10,7 @@ import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.stats.StatsRepository;
 import com.npgames.insight.domain.EquipmentInteractor;
 
+@InjectViewState
 public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
     private EquipmentRepository equipmentRepository;
     private StatsRepository statsRepository;

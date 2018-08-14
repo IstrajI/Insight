@@ -1,82 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="160dp">
 
-    <ImageView
-        android:id="@+id/button_bottom_panel_ui_top_center"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/top"
-        android:scaleType="centerInside"
-        android:contentDescription="@null"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/button_bottom_panel_find"
-        android:layout_width="@dimen/size_bottom_panel_jumps_button"
-        android:layout_height="@dimen/size_bottom_panel_jumps_button"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginLeft="@dimen/spacing_8"
-        android:layout_marginRight="@dimen/spacing_8"
-        android:contentDescription="@string/game_book_find_action"
-        android:background="@drawable/actions_left_find_button_2_xxx"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_station"
-        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center" />
-
-    <ImageView
-        android:id="@+id/button_bottom_panel_station"
-        android:layout_width="@dimen/size_bottom_panel_jumps_button"
-        android:layout_height="@dimen/size_bottom_panel_jumps_button"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginLeft="@dimen/spacing_8"
-        android:layout_marginRight="@dimen/spacing_8"
-        android:contentDescription="@string/game_book_station_action"
-        android:background="@drawable/actions_center_station_button_2_xxx"
-        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_find"
-        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_med_bay"
-        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center" />
-
-
-    <ImageView
-        android:id="@+id/button_bottom_panel_med_bay"
-        android:layout_width="@dimen/size_bottom_panel_jumps_button"
-        android:layout_height="@dimen/size_bottom_panel_jumps_button"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginLeft="@dimen/spacing_8"
-        android:layout_marginRight="@dimen/spacing_8"
-        android:contentDescription="@string/game_book_med_bay_action"
-        android:background="@drawable/actions_center_med_bay_button_2_xxx"
-        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_station"
-        app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_armory"
-        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center" />
-
-    <ImageView
-        android:id="@+id/button_bottom_panel_armory"
-        android:layout_width="@dimen/size_bottom_panel_jumps_button"
-        android:layout_height="@dimen/size_bottom_panel_jumps_button"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginLeft="@dimen/spacing_8"
-        android:layout_marginRight="@dimen/spacing_8"
-        android:contentDescription="@string/game_book_armory_action"
-        android:background="@drawable/actions_right_armory_button_4_xxx"
-        app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_med_bay"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_ui_top_center" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/inventory_panel_items_recycler_view"
-        app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_find"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_8"
+        android:layout_height="@dimen/height_equipment_item"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="40dp"/>
+        android:background="@drawable/bottom_equipment2">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/inventory_panel_items_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottom_panel_actions_layout"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/bottom_panel_3"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/button_bottom_panel_find"
+            android:layout_width="@dimen/size_bottom_panel_jumps_button"
+            android:layout_height="@dimen/size_bottom_panel_jumps_button"
+            android:padding="8dp"
+            android:src="@drawable/actions_left_find_button_2_xxx"
+            android:contentDescription="@string/game_book_find_action"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_station"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/button_bottom_panel_station"
+            android:layout_width="@dimen/size_bottom_panel_jumps_button"
+            android:layout_height="@dimen/size_bottom_panel_jumps_button"
+            android:padding="8dp"
+            android:src="@drawable/actions_center_station_button_2_xxx"
+            android:contentDescription="@string/game_book_station_action"
+            app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_find"
+            app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_med_bay"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/button_bottom_panel_med_bay"
+            android:layout_width="@dimen/size_bottom_panel_jumps_button"
+            android:layout_height="@dimen/size_bottom_panel_jumps_button"
+            android:padding="8dp"
+            android:src="@drawable/actions_center_med_bay_button_2_xxx"
+            android:contentDescription="@string/game_book_med_bay_action"
+            app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_station"
+            app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_armory"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/button_bottom_panel_armory"
+            android:layout_width="@dimen/size_bottom_panel_jumps_button"
+            android:layout_height="@dimen/size_bottom_panel_jumps_button"
+            android:padding="8dp"
+            android:src="@drawable/actions_right_armory_button_4_xxx"
+            android:contentDescription="@string/game_book_armory_action"
+            app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_med_bay"
+            app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_open_hide_inventory"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/button_bottom_panel_open_hide_inventory"
+            android:layout_width="@dimen/size_bottom_panel_jumps_button"
+            android:layout_height="@dimen/size_bottom_panel_jumps_button"
+            android:layout_marginBottom="@dimen/spacing_8"
+            android:layout_marginLeft="@dimen/spacing_8"
+            android:layout_marginRight="@dimen/spacing_8"
+            android:background="#00000000"
+            app:layout_constraintLeft_toRightOf="@+id/button_bottom_panel_armory"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

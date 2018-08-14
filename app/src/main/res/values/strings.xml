@@ -10,12 +10,12 @@
     <string name="stats_panel_prc_title">ТОЧ</string>
 
     <!-- Home Screen -->
-    <string name="home_screen_continue_title">Continue</string>
-    <string name="home_screen_new_game_title">New game</string>
-    <string name="home_screen_settings_title">Settings</string>
-    <string name="home_screen_rules_title">Rules</string>
-    <string name="home_screen_achievements_title">Achievements</string>
-    <string name="home_screen_about_title">About</string>
+    <string name="home_screen_continue_title">пРОДОЛЖИТЬ</string>
+    <string name="home_screen_new_game_title">нОВАЯ ИГРА</string>
+    <string name="home_screen_settings_title">нАСТРОЙКИ</string>
+    <string name="home_screen_rules_title">пРАВИЛА</string>
+    <string name="home_screen_achievements_title">дОСТИЖЕНИЯ</string>
+    <string name="home_screen_about_title">аВТОРЫ</string>
 
     <!-- Menu -->
     <string name="game_book_got_to_main_menu_title">В главное меню</string>

@@ -3,6 +3,8 @@ package com.npgames.insight.ui.home;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.npgames.insight.R;
 import com.npgames.insight.ui.ActivityNavigator;
@@ -13,9 +15,9 @@ import butterknife.BindView;
 
 public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickListener {
     @BindView(R.id.button_home_continue)
-    protected Button continueButton;
+    protected TextView continueButton;
     @BindView(R.id.button_home_new_game)
-    protected Button newGameButton;
+    protected TextView newGameButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

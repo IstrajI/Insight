@@ -6,7 +6,10 @@ import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
 import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.data.equipment.EquipmentRepository;
 import com.npgames.insight.data.keywords.KeyWordsRepository;
@@ -68,6 +71,15 @@ public class GameInteractor {
     public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
         checkJumpStatus(nextParagraph);
+
+        if (paragraphNumber == 500) {
+            final List<BlockArea> blockAreas = nextParagraph.getBlockAreas();
+            final BlockCreatePlayerDex blockCreatePlayerDex = ((BlockCreatePlayerDex) blockAreas.get(blockAreas.size() - 3));
+            final BlockCreatePlayerPrc blockCreatePlayerPrc = ((BlockCreatePlayerPrc) blockAreas.get(blockAreas.size() - 2));
+            final BlockCreatePlayerButtons blockCreatePlayerButtons = ((BlockCreatePlayerButtons) blockAreas.get(blockAreas.size() - 1));
+            blockCreatePlayerDex.setDexPoints(statsRepository.getStats().getDex());
+            blockCreatePlayerPrc.setPrcPoints(statsRepository.getStats().getPrc());
+        }
 
         return nextParagraph;
     }
