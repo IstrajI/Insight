@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,14 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.MvpDelegate;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
-import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
-import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
-import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
+import com.npgames.insight.ui.book.ICreatePlayer;
+import com.npgames.insight.ui.player.CreatePlayerDexView;
+import com.npgames.insight.ui.player.CreatePlayerPrcView;
 
 import java.util.List;
 
@@ -27,13 +27,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder>{
+    private MvpDelegate mvpDelegate;
 
     private List<BlockArea> blocks;
+
     private final Drawable jumpPressedDrawable;
     private final Drawable jumpEnabledDrawable;
     private final Drawable jumpDisabledDrawable;
+    private View.OnClickListener clickListener;
+    private ICreatePlayer createPlayerListener;
 
-    public GamePageAdapter(final Resources resources) {
+    public GamePageAdapter(final Resources resources, final MvpDelegate mvpDelegate) {
+        this.mvpDelegate = mvpDelegate;
         jumpEnabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13);
         jumpDisabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13disabled);
         jumpPressedDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13pressed);
@@ -55,12 +60,13 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
                 return new ActionsViewHolder(actionViewHolderLayout);
 
             case BlockArea.BlockType.CREATE_PLAYER_DEX:
-                final View createPlayerDexViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_create_player_dex_item, parent, false);
-                return new CreatePlayerDexViewHolder(createPlayerDexViewHolderLayout);
-
+                final CreatePlayerDexView createPlayerDexView = new CreatePlayerDexView(parent.getContext());
+                createPlayerDexView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                return new CreatePlayerDexViewHolder(createPlayerDexView);
+/*
             case BlockArea.BlockType.CREATE_PLAYER_PRC:
                 final View createPlayerPrcViewHolderLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_game_page_create_player_prc_item, parent, false);
-                return new CreatePlayerPrcViewHolder(createPlayerPrcViewHolderLayout);
+                return new CreatePlayerPrcViewHolder(createPlayerPrcViewHolderLayout);*/
 
         }
         return null;
@@ -98,13 +104,11 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
             case BlockArea.BlockType.CREATE_PLAYER_DEX:
                 final CreatePlayerDexViewHolder createPlayerDexViewHolder = (CreatePlayerDexViewHolder) holder;
-                createPlayerDexViewHolder.dexPointsAmountTextView.setText(String.valueOf(((BlockCreatePlayerDex) blocks.get(position)).getDexPoints()));
-
+                //createPlayerDexViewHolder.bind();
                 break;
 
             case BlockArea.BlockType.CREATE_PLAYER_PRC:
                 final CreatePlayerPrcViewHolder createPlayerPrcViewHolder = (CreatePlayerPrcViewHolder) holder;
-                createPlayerPrcViewHolder.prcPointsAmountTextView.setText(String.valueOf(((BlockCreatePlayerPrc) blocks.get(position)).getPrcPoints()));
 
                 break;
 
@@ -126,6 +130,14 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
     public BlockArea getItemAt(final int position) {
         return blocks.get(position);
+    }
+
+    public void setClickListener(View.OnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public void setCreatePlayerListener(final ICreatePlayer createPlayerListener) {
+        this.createPlayerListener = createPlayerListener;
     }
 
     class TextViewHolder extends RecyclerView.ViewHolder {
@@ -186,27 +198,24 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     }
 
     class ImageViewHolder extends RecyclerView.ViewHolder {
-        public ImageViewHolder(View itemView) {
+        public ImageViewHolder(final View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
         }
     }
 
-    class CreatePlayerDexViewHolder  implements View.OnClickListener {
-        @BindView(R.id.create_player_dex_points_amount_text_view)
-        protected TextView dexPointsAmountTextView;
-        @BindView(R.id.create_player_dex_minus_button)
-        protected Button dexMinusButton;
-        @BindView(R.id.create_player_dex_plus_button)
-        protected Button dexPlusButton;
+    class CreatePlayerDexViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CreatePlayerDexViewHolder(final View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this, itemView);
-            dexMinusButton.setOnClickListener(this);
-            dexPlusButton.setOnClickListener(this);
+            final CreatePlayerDexView createPlayerDexView = ((CreatePlayerDexView) itemView);
+            createPlayerDexView.addDelegate(mvpDelegate);
+            createPlayerDexView.setClickListener(clickListener);
+            createPlayerDexView.setCreatePlayerListener(createPlayerListener);
+            ((CreatePlayerDexView) itemView).addDelegate(mvpDelegate);
+
         }
 
         @Override
@@ -215,25 +224,11 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
-    class CreatePlayerPrcViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.create_player_prc_points_amount_text_view)
-        protected TextView prcPointsAmountTextView;
-        @BindView(R.id.create_player_prc_minus_button)
-        protected Button prcMinusButton;
-        @BindView(R.id.create_player_prc_plus_button)
-        protected Button prcPlusButton;
-
+    class CreatePlayerPrcViewHolder extends RecyclerView.ViewHolder {
         public CreatePlayerPrcViewHolder(final @NonNull View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this, itemView);
-            prcMinusButton.setOnClickListener(this);
-            prcPlusButton.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(final View view) {
-            onItemClickListener.onItemClick(view, getAdapterPosition(), GamePageAdapter.this);
+            ((CreatePlayerPrcView) itemView).addDelegate(mvpDelegate);
         }
     }
 

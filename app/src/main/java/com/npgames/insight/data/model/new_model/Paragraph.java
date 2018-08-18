@@ -47,20 +47,13 @@ public class Paragraph {
         return blockJumps;
     }
 
-    public List<BlockAction> getActions() {
-        final List<BlockArea> blockAreas = getBlockAreas();
-        final List<BlockAction> blockActions = new ArrayList();
-
-        for (final BlockArea blockArea: blockAreas) {
-            if (blockArea.type == BlockArea.BlockType.ACTION) {
-                blockActions.add((BlockAction) blockArea);
+    public boolean hasActions() {
+        for (final BlockArea blockArea: getBlockAreas()) {
+            if (blockArea.type == BlockArea.BlockType.ACTION || blockArea.type == BlockArea.BlockType.CREATE_PLAYER_DEX) {
+                return true;
             }
         }
 
-        return blockActions;
-    }
-
-    public boolean hasActions() {
-        return getActions().size() > 0;
+        return false;
     }
 }

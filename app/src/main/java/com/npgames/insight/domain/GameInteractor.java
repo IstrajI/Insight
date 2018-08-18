@@ -72,7 +72,7 @@ public class GameInteractor {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
         checkJumpStatus(nextParagraph);
 
-        if (paragraphNumber == 500) {
+        if (paragraphNumber == 501) {
             final List<BlockArea> blockAreas = nextParagraph.getBlockAreas();
             final BlockCreatePlayerDex blockCreatePlayerDex = ((BlockCreatePlayerDex) blockAreas.get(blockAreas.size() - 3));
             final BlockCreatePlayerPrc blockCreatePlayerPrc = ((BlockCreatePlayerPrc) blockAreas.get(blockAreas.size() - 2));

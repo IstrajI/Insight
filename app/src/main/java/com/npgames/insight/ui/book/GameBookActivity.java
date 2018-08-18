@@ -43,7 +43,7 @@ import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FR
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
-        MenuDialogFragment.MenuDialogClickListener{
+        MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer{
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
     @BindView(R.id.viewpager_gamebook_pages)
@@ -76,16 +76,15 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         return new GameBookPresenter(getApplicationContext());
     }
 
-    @InjectPresenter
-    CreatePlayerPresenter createPlayerPresenter;
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamebook);
 
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), getMvpDelegate());
         pagerAdapter.setOnItemClickListener(this);
+        pagerAdapter.setClickListener(this);
+        pagerAdapter.setCreatePlayerConsumeCallback(this);
         pagesViewPager.setAdapter(pagerAdapter);
 
         final DisplayMetrics metrics = new DisplayMetrics();
@@ -179,15 +178,25 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 }
                 break;
 
-            //Create Player events
-            case R.id.create_player_dex_minus_button:
-                createPlayerPresenter.dexMinus();
-                break;
-            case R.id.create_player_dex_plus_button:
-                createPlayerPresenter.dexPlus();
+            case R.id.adapter_game_page_action_button:
+                gameBookPresenter.applyAction();
                 break;
         }
     }
+
+    @Override
+    public void onClick(final View view) {
+        switch(view.getId()) {
+            case R.id.create_player_dex_minus_button:
+            case R.id.create_player_dex_plus_button:
+            case R.id.create_player_prc_minus_button:
+            case R.id.create_player_prc_plus_button:
+            case R.id.create_player_ok_button:
+                gameBookPresenter.loadStats();
+                break;
+        }
+    }
+
 
     @Override
     public void updateParagraph(final Paragraph paragraph) {
@@ -228,6 +237,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
                 break;
         }
+    }
+
+    //---------------------------- CreatePlayer ----------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    @Override
+    public void onFinish() {
+        gameBookPresenter.applyAction();
     }
 
     //---------------------------- Top Panel -------------------------------------------------------

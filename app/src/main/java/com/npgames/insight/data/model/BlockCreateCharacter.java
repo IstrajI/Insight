@@ -1,6 +1,7 @@
 package com.npgames.insight.data.model;
 import java.io.Serializable;
 
+/*
 public class BlockCreateCharacter extends BlockArea implements Serializable {
     private int height;
 
@@ -13,3 +14,4 @@ public class BlockCreateCharacter extends BlockArea implements Serializable {
         return 210;
     }
 }
+*/

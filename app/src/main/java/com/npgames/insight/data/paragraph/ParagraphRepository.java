@@ -53,7 +53,7 @@ public class ParagraphRepository {
 
         final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
 
-        if (paragraphNumber == 500) {
+        if (paragraphNumber == 501) {
             blockAreas.add(new BlockCreatePlayerDex());
             blockAreas.add(new BlockCreatePlayerPrc());
             blockAreas.add(new BlockCreatePlayerButtons());

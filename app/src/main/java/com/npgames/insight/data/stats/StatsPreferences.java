@@ -15,6 +15,8 @@ public class StatsPreferences {
     private final String PLAYER_TIME = "PLAYER_TIME";
     private final String PLAYER_AMN = "PLAYER_AMN";
 
+    private final String POINTS_TO_DISTRIBUTE = "POINTS_TO_DISTRIBUTE";
+
     private static StatsPreferences statsPreferences;
     private SharedPreferences sharedPreferences;
 
@@ -54,4 +56,12 @@ public class StatsPreferences {
     }
 
 
+    public int loadPointsToDistribute() {
+        return sharedPreferences.getInt(POINTS_TO_DISTRIBUTE, 4);
+    }
+
+    public void savePointsToDistribute(final int pointsToDistribute) {
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(POINTS_TO_DISTRIBUTE, pointsToDistribute);
+    }
 }

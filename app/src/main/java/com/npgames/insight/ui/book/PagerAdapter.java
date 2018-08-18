@@ -4,23 +4,29 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
+import android.view.View;
 
+import com.arellomobile.mvp.MvpDelegate;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
+    private MvpDelegate mvpDelegate;
     private Paragraph paragraphModel;
-    private RecyclerViewListeners.OnItemClickListener clickListener;
+    private RecyclerViewListeners.OnItemClickListener itemClickListener;
+    private View.OnClickListener clickListener;
+    private ICreatePlayer createPlayerConsumeCallback;
 
-    public PagerAdapter(final FragmentManager fm) {
+    public PagerAdapter(final FragmentManager fm, final MvpDelegate mvpDelegate) {
         super(fm);
 
+        this.mvpDelegate = mvpDelegate;
         paragraphModel = new Paragraph();
     }
 
     @Override
     public Fragment getItem(final int position) {
-        return GamePageFragment.newInstance(paragraphModel.pages.get(position), clickListener);
+        return GamePageFragment.newInstance(paragraphModel.pages.get(position), itemClickListener, mvpDelegate, clickListener, createPlayerConsumeCallback);
     }
 
     @Override
@@ -34,12 +40,20 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(final RecyclerViewListeners.OnItemClickListener clickListener) {
-        this.clickListener = clickListener;
+    public void setOnItemClickListener(final RecyclerViewListeners.OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(final Object object) {
         return POSITION_NONE;
+    }
+
+    public void setClickListener(final View.OnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public void setCreatePlayerConsumeCallback(ICreatePlayer createPlayerConsumeCallback) {
+        this.createPlayerConsumeCallback = createPlayerConsumeCallback;
     }
 }

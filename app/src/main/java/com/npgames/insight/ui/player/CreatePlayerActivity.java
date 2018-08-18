@@ -15,7 +15,7 @@ import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView, View.OnClickListener {
+public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlayerView{
     @BindView(R.id.text_view_game_paragraph_text)
     protected TextView overviewTextView;
     @BindView(R.id.text_view_create_character_skill_info)
@@ -34,9 +34,6 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
     @BindView(R.id.button_create_character_continue)
     protected Button continueButton;
 
-    @InjectPresenter
-    CreatePlayerPresenter createPlayerPresenter;
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +42,6 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
 
     @Override
     protected void bindViews() {
-        continueButton.setOnClickListener(this);
 
         overviewTextView.setText(getResources().getString(R.string.create_character_overview));
         skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_hp));
@@ -53,6 +49,7 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
         Log.d("TestPish", "onBindViewFinished");
     }
 
+/*
     @OnClick({R.id.button_create_character_dex_points_plus,
             R.id.button_create_character_prc_points_plus,
             R.id.button_create_character_prc_points_minus,
@@ -78,6 +75,7 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
                 break;
         }
     }
+*/
 
     @OnClick({R.id.button_create_character_hp_more,
             R.id.button_create_character_aur_more,
@@ -130,14 +128,5 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
     public void changeContinueStatus(final boolean status) {
         if (continueButton.isEnabled() == status) return;
         continueButton.setEnabled(status);
-    }
-
-    @Override
-    public void onClick(final View v) {
-        switch(v.getId()) {
-            case R.id.button_create_character_continue:
-                createPlayerPresenter.requestPoints();
-                break;
-        }
     }
 }

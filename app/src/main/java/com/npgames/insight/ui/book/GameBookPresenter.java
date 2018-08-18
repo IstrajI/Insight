@@ -116,6 +116,10 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         getViewState().showStats(statsRepository.getStats());
     }
 
+    public void loadStats() {
+        getViewState().showStats(statsRepository.getStats());
+    }
+
     void applyAction() {
         //A bit of kostil logic here
         if (gameInteractor.isMedBay(paragraphRepository.getParagraphNumber())) {

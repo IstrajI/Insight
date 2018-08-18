@@ -10,9 +10,13 @@ public class StatsRepository {
     private final StatsPreferences statsPreferences;
     private Stats stats;
 
+    private int pointsToDistribute;
+
     StatsRepository(final Context context) {
         statsPreferences = StatsPreferences.getInstance(context);
         stats = statsPreferences.loadStats();
+
+        pointsToDistribute = statsPreferences.loadPointsToDistribute();
     }
 
     public static StatsRepository getInstance(final Context context){
@@ -55,5 +59,15 @@ public class StatsRepository {
                 .setPrc(Player.INIT_PRC)
                 .setHp(Player.INIT_HP)
                 .build();
+}
+
+    //It would be better to create separate repository for this
+    //Create Player
+    public int getDistributePointsAmount() {
+        return pointsToDistribute;
+    }
+
+    public void setPointsToDistribute(final int pointsToDistribute) {
+        this.pointsToDistribute = pointsToDistribute;
     }
 }
