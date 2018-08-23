@@ -87,8 +87,10 @@ public class ActionsInteractor {
     }
 
     private Void paragraph37Action() {
+
+        //here is invalidate value
         final Stats changedStats = Stats.builder()
-                .setHp(-50)
+                .setHp(-5)
                 .build();
 
         statsRepository.updateStats(changedStats);

@@ -1,6 +1,7 @@
 package com.npgames.insight.domain;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
@@ -18,6 +19,8 @@ import com.npgames.insight.data.stats.StatsRepository;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import static com.npgames.insight.data.paragraph.ParagraphRepository.FIRST_PARAGRAPH_NUMBER;
+
 public class GameInteractor {
     private final StatsRepository statsRepository;
     private final EquipmentRepository equipmentRepository;
@@ -26,7 +29,6 @@ public class GameInteractor {
     private final GameRepository gameRepository;
     private final SparseArray<Callable> jumpStateChecker = new SparseArray<>();
 
-    private final int FIRST_PARAGRAPH_NUMBER = 500;
 
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
@@ -98,8 +100,19 @@ public class GameInteractor {
         }
     }
 
-    public boolean isDead() {
-        return statsRepository.getStats().getHp() <= 0;
+    public boolean onDeath() {
+        final boolean isDead = statsRepository.getStats().getHp() <= 0;
+        Log.d("TestPish", "isDead points = " +statsRepository.getStats().getHp());
+
+        if (isDead) {
+            statsRepository.resetStats();
+            equipmentRepository.resetEquipment();
+            keyWordsRepository.resetKeyWords();
+            paragraphRepository.resetSpecialVisitedParagraphs();
+            paragraphRepository.resetParagraphNumber();
+        }
+
+        return isDead;
     }
 
     public boolean isMedBay(final int paragraphNumber) {

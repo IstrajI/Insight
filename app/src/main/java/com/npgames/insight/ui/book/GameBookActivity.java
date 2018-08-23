@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -43,7 +44,8 @@ import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FR
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
-        MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer{
+        MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener{
+
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
     @BindView(R.id.viewpager_gamebook_pages)
@@ -138,6 +140,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void showStats(final Stats stats) {
+        Log.d("TestPishGG", "pishHP " +stats.getHp());
         statsTopPanelView.setStats(stats);
     }
 
@@ -205,9 +208,24 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     @Override
+    public void refreshParagraph(Paragraph paragraph) {
+        pagerAdapter.update(paragraph);
+    }
+
+    @Override
+    public void onClose() {
+        this.finish();
+    }
+
+    @Override
     public void showDeathScreen() {
         final DeathDialogFragment deathDialogFragment = new DeathDialogFragment();
+        deathDialogFragment.setOnDeathDialogListener(this);
         deathDialogFragment.show(getSupportFragmentManager(), DEATH_DIALOG_FRAGMENT_TAG);
+    }
+
+    public void deathDialogListener() {
+        this.finish();
     }
 
     @Override
@@ -242,8 +260,8 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //---------------------------- CreatePlayer ----------------------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override
-    public void onFinish() {
-        gameBookPresenter.applyAction();
+    public void allPointsDistributed() {
+        gameBookPresenter.createPlayerFinished();
     }
 
     //---------------------------- Top Panel -------------------------------------------------------

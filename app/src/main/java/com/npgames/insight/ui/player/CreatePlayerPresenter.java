@@ -79,6 +79,4 @@ public class CreatePlayerPresenter extends MvpPresenter<ICreatePlayerView> {
 
         loadCreatePanelData();
     }
-
-
 }

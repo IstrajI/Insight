@@ -14,6 +14,7 @@ import com.arellomobile.mvp.MvpDelegate;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
+import com.npgames.insight.ui.book.GameBookActivity;
 import com.npgames.insight.ui.book.ICreatePlayer;
 
 import butterknife.BindView;
@@ -63,6 +64,8 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
     public CreatePlayerDexView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+
+
     }
 
     private void init() {
@@ -75,6 +78,7 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
         dexPlusButton.setOnClickListener(this);
         okButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
+        createPlayerListener = ((GameBookActivity)getContext());
     }
 
     @Override
@@ -135,7 +139,7 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
     public void stateNoPointsToDistribute() {
         prcPlusButton.setEnabled(false);
         dexPlusButton.setEnabled(false);
-        createPlayerListener.onFinish();
+        createPlayerListener.allPointsDistributed();
     }
 
     @Override
@@ -189,9 +193,5 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
 
     public void setClickListener(View.OnClickListener clickListener) {
         this.clickListener = clickListener;
-    }
-
-    public void setCreatePlayerListener(final ICreatePlayer createPlayerListener) {
-        this.createPlayerListener = createPlayerListener;
     }
 }

@@ -7,4 +7,7 @@
 
     <!-- Base color -->
     <color name="white">#FFFFFF</color>
+
+    <color name="death_dialog_go_to_main_menu_text_default_color">#eebdbc</color>
+    <color name="death_dialog_go_to_main_menu_text_action_color">#ec2a27</color>
 </resources>

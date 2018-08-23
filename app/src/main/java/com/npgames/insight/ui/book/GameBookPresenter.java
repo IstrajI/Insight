@@ -2,6 +2,7 @@ package com.npgames.insight.ui.book;
 
 import android.content.Context;
 import android.text.TextPaint;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -24,6 +25,8 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     private ParagraphRepository paragraphRepository;
     private GameInteractor gameInteractor;
     private UserActionInteractor userActionInteractor;
+
+
 
     GameBookPresenter(final Context context) {
         userActionInteractor = new UserActionInteractor(context);
@@ -122,6 +125,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
 
     void applyAction() {
         //A bit of kostil logic here
+        Log.d("TestPishGG", "paragraphRepository.getParagraph() " +paragraphRepository.getParagraph().wasActionPressed);
         if (gameInteractor.isMedBay(paragraphRepository.getParagraphNumber())) {
             actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
             getViewState().showStats(statsRepository.getStats());
@@ -132,11 +136,18 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
             getViewState().showStats(statsRepository.getStats());
 
             gameInteractor.enableJumpsDisableActions();
-            getViewState().updateParagraph(paragraphRepository.getParagraph());
+            getViewState().refreshParagraph(paragraphRepository.getParagraph());
         }
 
-        if (gameInteractor.isDead()) {
+        if (gameInteractor.onDeath()) {
             getViewState().showDeathScreen();
         }
+    }
+
+    void createPlayerFinished() {
+        paragraphRepository.getParagraph().wasActionPressed = true;
+
+        gameInteractor.enableJumpsDisableActions();
+        getViewState().refreshParagraph(paragraphRepository.getParagraph());
     }
 }

@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -193,6 +194,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
         @Override
         public void onClick(final View v) {
+            Log.d("TestPishGG", "ActionClick ");
             onItemClickListener.onItemClick(v, getAdapterPosition(), GamePageAdapter.this);
         }
     }
@@ -213,7 +215,6 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             final CreatePlayerDexView createPlayerDexView = ((CreatePlayerDexView) itemView);
             createPlayerDexView.addDelegate(mvpDelegate);
             createPlayerDexView.setClickListener(clickListener);
-            createPlayerDexView.setCreatePlayerListener(createPlayerListener);
             ((CreatePlayerDexView) itemView).addDelegate(mvpDelegate);
 
         }

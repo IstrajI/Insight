@@ -10,10 +10,12 @@ import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class ParagraphRepository {
+    public static final int FIRST_PARAGRAPH_NUMBER = 500;
     private static ParagraphRepository paragraphRepository;
     private final Resources resources;
     private Paragraph paragraph;
@@ -117,6 +119,10 @@ public class ParagraphRepository {
         return watchingParagraphs.contains(String.valueOf(paragraphNumber));
     }
 
+    public void resetSpecialVisitedParagraphs() {
+        specialVisitedParagraphs = Collections.emptySet();
+    }
+
     //---------------------------- Was Action Pressed ----------------------------------------------
     //----------------------------------------------------------------------------------------------
     private boolean loadWasActionPressed() {
@@ -139,5 +145,9 @@ public class ParagraphRepository {
 
     private int loadSavedParagraphNumber() {
         return paragraphPreferences.loadCurrentParagraphNumber();
+    }
+
+    public void resetParagraphNumber() {
+        currentParagraph = FIRST_PARAGRAPH_NUMBER;
     }
 }
