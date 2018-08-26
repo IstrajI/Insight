@@ -27,7 +27,6 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     private UserActionInteractor userActionInteractor;
 
 
-
     GameBookPresenter(final Context context) {
         userActionInteractor = new UserActionInteractor(context);
         actionsInteractor = new ActionsInteractor(context);
@@ -125,14 +124,13 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
 
     void applyAction() {
         //A bit of kostil logic here
-        Log.d("TestPishGG", "paragraphRepository.getParagraph() " +paragraphRepository.getParagraph().wasActionPressed);
-        if (gameInteractor.isMedBay(paragraphRepository.getParagraphNumber())) {
-            actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
+        final int paragraphNumber = paragraphRepository.getParagraph().paragraphNumber;
+        if (gameInteractor.isMedBay(paragraphNumber)) {
+            actionsInteractor.applyAction(paragraphNumber);
             getViewState().showStats(statsRepository.getStats());
         } else if (!paragraphRepository.getParagraph().wasActionPressed) {
             paragraphRepository.getParagraph().wasActionPressed = true;
-
-            actionsInteractor.applyAction(paragraphRepository.getParagraphNumber());
+            actionsInteractor.applyAction(paragraphNumber);
             getViewState().showStats(statsRepository.getStats());
 
             gameInteractor.enableJumpsDisableActions();
@@ -144,10 +142,10 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         }
     }
 
-    void createPlayerFinished() {
-        paragraphRepository.getParagraph().wasActionPressed = true;
+    public void disableJumps() {
+        paragraphRepository.getParagraph().wasActionPressed = false;
 
-        gameInteractor.enableJumpsDisableActions();
+        gameInteractor.disableJumps();
         getViewState().refreshParagraph(paragraphRepository.getParagraph());
     }
 }

@@ -76,7 +76,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     public void updateEquipment(final List<Equipment> equipments) {
         inventoryPanelAdapter.update(equipments);
-        Log.d("TestPish", "equipments = "+ equipments.size());
     }
 
     @Override

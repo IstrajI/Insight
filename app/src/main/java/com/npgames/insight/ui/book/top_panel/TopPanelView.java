@@ -69,7 +69,6 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("testPish", "" +getY() +" , " +getBottom());
         initStates(getY(), getHeight());
     }
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -33,7 +32,6 @@ import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
-import com.npgames.insight.ui.player.CreatePlayerPresenter;
 
 import java.util.List;
 
@@ -119,13 +117,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         bottomPanelView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             final float openPosition = bottomPanelView.getTop();
-            Log.d("TestPishGG", "resources = " +Resources.getSystem().getDisplayMetrics().heightPixels);
-            Log.d("TestPishGG", "resources = " +actionsFrameLayout.getHeight());
-            Log.d("TestPishGG", "resources = " +getResources().getDimension(R.dimen.spacing_8));
             final float closePosition = Resources.getSystem().getDisplayMetrics().heightPixels -
                                         actionsFrameLayout.getHeight()
                                         + getResources().getDimension(R.dimen.spacing_8);
-            Log.d("TestPishGG", "openPos = " +openPosition +" closePos = " +closePosition);
 
             bottomPanelPresenter.initOpenClosePositions(openPosition, closePosition);
             bottomPanelPresenter.openCloseBottomPanel();
@@ -140,7 +134,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void showStats(final Stats stats) {
-        Log.d("TestPishGG", "pishHP " +stats.getHp());
         statsTopPanelView.setStats(stats);
     }
 
@@ -261,7 +254,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //----------------------------------------------------------------------------------------------
     @Override
     public void allPointsDistributed() {
-        gameBookPresenter.createPlayerFinished();
+        gameBookPresenter.applyAction();
+    }
+
+    @Override
+    public void outOfAllPointsDistributed() {
+        gameBookPresenter.disableJumps();
     }
 
     //---------------------------- Top Panel -------------------------------------------------------

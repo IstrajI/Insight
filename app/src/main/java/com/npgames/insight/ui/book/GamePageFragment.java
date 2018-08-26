@@ -37,7 +37,6 @@ public class GamePageFragment extends Fragment {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        Log.d("TestPish", "GamePageFragment");
         super.onCreate(savedInstanceState);
 
         page = (Page) getArguments().getSerializable(PAGES);

@@ -25,7 +25,6 @@ public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
     }
 
     public void openCloseBottomPanel() {
-        Log.d("TestPish", "Clicked; closeY= " +closeYPosition +" openY = " +openYPosition);
         getViewState().moveYTo(isBottomPanelOpen ? closeYPosition : openYPosition);
         isBottomPanelOpen = !isBottomPanelOpen;
     }

@@ -62,7 +62,6 @@ public class ParagraphParser {
                 final int actionBlockCode = Integer.parseInt(actionMatcher.group(1));
 
                 final String actionBlockText = actionMatcher.group(2);
-                Log.d("TestPish", "myCheck = " +actionBlockText);
                 clickBlock = new BlockAction(actionBlockText, actionBlockCode);
 
                 actionFound = actionMatcher.find();

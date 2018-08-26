@@ -64,8 +64,6 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
     public CreatePlayerDexView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-
-
     }
 
     private void init() {
@@ -86,6 +84,8 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
         super.onAttachedToWindow();
         createPlayerPresenter.loadCreatePanelData();
     }
+
+
 
     @Override
     public void onClick(final View view) {
@@ -136,16 +136,24 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
     }
 
     @Override
+    public void onPointsHaveBeenDistributeListener() {
+        createPlayerListener.allPointsDistributed();
+    }
+
+    @Override
     public void stateNoPointsToDistribute() {
         prcPlusButton.setEnabled(false);
         dexPlusButton.setEnabled(false);
-        createPlayerListener.allPointsDistributed();
+        prcMinusButton.setEnabled(true);
+        dexMinusButton.setEnabled(true);
     }
 
     @Override
     public void stateMaxPointsToDistribute() {
         prcMinusButton.setEnabled(false);
         dexMinusButton.setEnabled(false);
+        prcPlusButton.setEnabled(true);
+        prcPlusButton.setEnabled(true);
     }
 
     @Override
@@ -154,6 +162,11 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
         prcMinusButton.setEnabled(true);
         dexMinusButton.setEnabled(true);
         dexPlusButton.setEnabled(true);
+    }
+
+    @Override
+    public void notMaxPoints() {
+        createPlayerListener.outOfAllPointsDistributed();
     }
 
     @Override
@@ -172,6 +185,8 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
 
         getMvpDelegate().onSaveInstanceState();
         getMvpDelegate().onDetach();
+
+        createPlayerPresenter.savePoints();
     }
 
     public MvpDelegate<CreatePlayerDexView> getMvpDelegate() {

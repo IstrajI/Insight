@@ -5,57 +5,57 @@ import android.content.Context;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.model.Player;
+import com.npgames.insight.data.paragraph.ParagraphRepository;
 import com.npgames.insight.data.stats.StatsRepository;
 import com.npgames.insight.domain.CreatePlayerInteractor;
 
 @InjectViewState
 public class CreatePlayerPresenter extends MvpPresenter<ICreatePlayerView> {
     private final int MAX_POINTS_TO_DISTRIBUTE = 4;
-    private int pointsToDistribute = MAX_POINTS_TO_DISTRIBUTE;
 
     private CreatePlayerInteractor createPlayerInteractor;
+    private ParagraphRepository paragraphRepository;
 
     CreatePlayerPresenter(final Context context) {
         createPlayerInteractor = new CreatePlayerInteractor(context);
+        paragraphRepository = ParagraphRepository.getInstance(context);
     }
 
 
     public void loadCreatePanelData() {
-        getViewState().showPointsToDistribute(pointsToDistribute);
-
-        getViewState().stateMaxPointsToDistribute();
+        determinateViewState();
+        getViewState().showDexPoints(createPlayerInteractor.getDex());
+        getViewState().showPrcPoints(createPlayerInteractor.getPrc());
     }
 
     public void dexMinus() {
         final int resultDex = createPlayerInteractor.dexMinus();
         getViewState().showDexPoints(resultDex);
-        checkPointsAmount();
+        minusCheck();
     }
 
     public void dexPlus() {
         final int resultDex = createPlayerInteractor.dexPlus();
         getViewState().showDexPoints(resultDex);
-        checkPointsAmount();
+        plusCheck();
     }
 
     public void prcMinus() {
         final int resultPrc = createPlayerInteractor.prcMinus();
         getViewState().showPrcPoints(resultPrc);
-        checkPointsAmount();
+        minusCheck();
     }
 
     public void prcPlus() {
         final int resultPrc = createPlayerInteractor.prcPlus();
         getViewState().showPrcPoints(resultPrc);
-        checkPointsAmount();
+        plusCheck();
     }
 
-    private void checkPointsAmount() {
-        final int pointsToDistribute = createPlayerInteractor.getPointsToDistribute();
-
-        if (pointsToDistribute == 0) {
+    public void determinateViewState() {
+        if (createPlayerInteractor.getPointsToDistribute() == 0) {
             getViewState().stateNoPointsToDistribute();
-        } else if (pointsToDistribute == MAX_POINTS_TO_DISTRIBUTE){
+        } else if (createPlayerInteractor.getPointsToDistribute() == MAX_POINTS_TO_DISTRIBUTE) {
             getViewState().stateMaxPointsToDistribute();
         } else {
             getViewState().stateSomePointsToDistribute();
@@ -70,13 +70,40 @@ public class CreatePlayerPresenter extends MvpPresenter<ICreatePlayerView> {
         }
     }
 
+
+    boolean maxWasReached = false;
+
+    public void plusCheck() {
+        if (createPlayerInteractor.getPointsToDistribute() == 0) {
+            getViewState().onPointsHaveBeenDistributeListener();
+            maxWasReached = true;
+        }
+
+        determinateViewState();
+    }
+
+    public void minusCheck() {
+        if (createPlayerInteractor.getPointsToDistribute() != MAX_POINTS_TO_DISTRIBUTE
+                && maxWasReached) {
+            maxWasReached = false;
+            getViewState().notMaxPoints();
+        }
+
+        determinateViewState();
+    }
+
+
     public void addPointsToPlayer() {
         createPlayerInteractor.addPointsToPlayer();
     }
 
     public void resetPoints() {
-        pointsToDistribute = MAX_POINTS_TO_DISTRIBUTE;
+        //pointsToDistribute = MAX_POINTS_TO_DISTRIBUTE;
 
         loadCreatePanelData();
+    }
+
+    public void savePoints() {
+        createPlayerInteractor.saveDistributedPoints();
     }
 }

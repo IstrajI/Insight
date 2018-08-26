@@ -50,6 +50,11 @@ public class GameInteractor {
         statsRepository.resetStats();
         equipmentRepository.resetEquipment();
         keyWordsRepository.resetKeyWords();
+        paragraphRepository.resetParagraphNumber();
+        paragraphRepository.resetSpecialVisitedParagraphs();
+        paragraphRepository.resetDistributedDexPoints();
+        paragraphRepository.resetDistributedPrcPoints();
+        paragraphRepository.resetPointsToDistribute();
 
         return nextParagraph(FIRST_PARAGRAPH_NUMBER, availableHeight);
     }
@@ -102,7 +107,6 @@ public class GameInteractor {
 
     public boolean onDeath() {
         final boolean isDead = statsRepository.getStats().getHp() <= 0;
-        Log.d("TestPish", "isDead points = " +statsRepository.getStats().getHp());
 
         if (isDead) {
             statsRepository.resetStats();
@@ -129,6 +133,16 @@ public class GameInteractor {
 
             if (blockArea.type == BlockArea.BlockType.BUTTON) {
                 ((BlockButton) blockArea).setEnable(true);
+            }
+        }
+    }
+
+    public void disableJumps() {
+        final List<BlockArea> blockAreas = paragraphRepository.getParagraph().getBlockAreas();
+
+        for (final BlockArea blockArea : blockAreas) {
+            if (blockArea.type == BlockArea.BlockType.BUTTON) {
+                ((BlockButton) blockArea).setEnable(false);
             }
         }
     }

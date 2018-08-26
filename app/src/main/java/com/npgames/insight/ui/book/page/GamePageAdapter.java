@@ -194,7 +194,6 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
         @Override
         public void onClick(final View v) {
-            Log.d("TestPishGG", "ActionClick ");
             onItemClickListener.onItemClick(v, getAdapterPosition(), GamePageAdapter.this);
         }
     }

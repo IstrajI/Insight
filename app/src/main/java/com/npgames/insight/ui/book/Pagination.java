@@ -47,7 +47,6 @@ public class Pagination {
         if (block.type == BlockArea.BlockType.TEXT) {
             paginateText(block, pages, remainingHeight);
         } else {
-            Log.d("TestPish", "here");
             transferToNewPage(pages, block);
         }
     }

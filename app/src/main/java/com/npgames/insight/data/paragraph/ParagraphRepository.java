@@ -2,6 +2,8 @@ package com.npgames.insight.data.paragraph;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
+
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
@@ -25,6 +27,10 @@ public class ParagraphRepository {
     private Set<String> specialVisitedParagraphs;
     private List<String> watchingParagraphs = Arrays.asList("100", "60", "34");
 
+    private int distributedDexPoints;
+    private int distributedPrcPoints;
+    private int pointsTodistribute;
+
     public static ParagraphRepository getInstance(final Context context) {
         if (paragraphRepository == null) {
             paragraphRepository = new ParagraphRepository(context);
@@ -34,12 +40,17 @@ public class ParagraphRepository {
     }
 
     ParagraphRepository(final Context context) {
+        Log.d("TestPish","constructor");
         resources = context.getResources();
         packageName = context.getPackageName();
 
         paragraphPreferences = ParagraphPreferences.getInstance(context);
         currentParagraph = paragraphPreferences.loadCurrentParagraphNumber();
         specialVisitedParagraphs = paragraphPreferences.loadSpecialVisitedParagraphs();
+
+        distributedDexPoints = loadDistributedDexPoints();
+        distributedPrcPoints = loadDistributedPrcPoints();
+        pointsTodistribute = loadPointsToDistribute();
     }
 
     private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
@@ -135,10 +146,6 @@ public class ParagraphRepository {
 
     //---------------------------- Current Paragraph -----------------------------------------------
     //----------------------------------------------------------------------------------------------
-    public int getParagraphNumber() {
-        return currentParagraph;
-    }
-
     public void saveParagraphNumber() {
         paragraphPreferences.saveCurrentParagraphNumber(paragraph.paragraphNumber);
     }
@@ -149,5 +156,74 @@ public class ParagraphRepository {
 
     public void resetParagraphNumber() {
         currentParagraph = FIRST_PARAGRAPH_NUMBER;
+    }
+
+    //---------------------------- Create Player ---------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //---------------------------- Dex -------------------------------------------------------------
+    public int getDistributedDexPoints() {
+        return distributedDexPoints;
+    }
+
+    public void updateDistributedDexPoints(final int diff) {
+        distributedDexPoints += diff;
+    }
+
+    public void saveDistributedDexPoints() {
+        paragraphPreferences.saveDistributedDexPoints(distributedDexPoints);
+    }
+
+    private int loadDistributedDexPoints() {
+        return paragraphPreferences.loadDistributedDexPoints();
+    }
+
+    public void resetDistributedDexPoints() {
+        Log.d("TestPish", "reset");
+        distributedDexPoints = 0;
+        //paragraphPreferences.saveDistributedDexPoints(0);
+    }
+
+    //---------------------------- PRC -------------------------------------------------------------
+    public int getDistributedPrcPoints() {
+        return distributedPrcPoints;
+    }
+
+    public void updateDistributedPrcPoints(final int diff) {
+        distributedPrcPoints += diff;
+    }
+
+    public void saveDistributedPrcPoints() {
+        paragraphPreferences.saveDistributedPrcPoints(distributedPrcPoints);
+    }
+
+    private int loadDistributedPrcPoints() {
+        return paragraphPreferences.loadDistributedPrcPoints();
+    }
+
+    public void resetDistributedPrcPoints() {
+        distributedPrcPoints = 0;
+        //paragraphPreferences.saveDistributedPrcPoints(0);
+    }
+
+    //---------------------------- D points --------------------------------------------------------
+    public int getPointsToDistribute() {
+        return pointsTodistribute;
+    }
+
+    public void updatePointsToDistribute(final int diff) {
+        pointsTodistribute += diff;
+    }
+
+    private int loadPointsToDistribute() {
+        return paragraphPreferences.loadPointsToDistribute();
+    }
+
+    public void savePointsToDistribute() {
+        paragraphPreferences.savePointsToDistribute(pointsTodistribute);
+    }
+
+    public void resetPointsToDistribute() {
+        pointsTodistribute = 4;
+        //paragraphPreferences.savePointsToDistribute(4);
     }
 }

@@ -31,7 +31,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        Log.d("TestPish", "pagerAdaptersize = " +paragraphModel.pages.size());
         return paragraphModel.pages.size();
     }
 

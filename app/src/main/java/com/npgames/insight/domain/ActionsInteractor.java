@@ -1,6 +1,7 @@
 package com.npgames.insight.domain;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.npgames.insight.data.game.GamePreferences;

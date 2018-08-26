@@ -45,8 +45,6 @@ public class CreatePlayerActivity extends BaseMvpActivity implements CreatePlaye
 
         overviewTextView.setText(getResources().getString(R.string.create_character_overview));
         skillInfoTextView.setText(getResources().getString(R.string.create_character_skill_info_hp));
-
-        Log.d("TestPish", "onBindViewFinished");
     }
 
 /*
