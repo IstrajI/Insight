@@ -187,7 +187,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case R.id.create_player_dex_plus_button:
             case R.id.create_player_prc_minus_button:
             case R.id.create_player_prc_plus_button:
-            case R.id.create_player_ok_button:
                 gameBookPresenter.loadStats();
                 break;
         }

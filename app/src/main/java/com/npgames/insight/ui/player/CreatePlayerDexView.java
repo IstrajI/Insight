@@ -33,12 +33,6 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
     protected Button prcPlusButton;
     @BindView(R.id.create_player_prc_points_amount_text_view)
     protected TextView prcAmountTextView;
-    @BindView(R.id.create_player_distribute_points_text_view)
-    protected TextView pointsToDistributeTextView;
-    @BindView(R.id.create_player_ok_button)
-    protected Button okButton;
-    @BindView(R.id.create_player_reset_button)
-    protected Button resetButton;
 
     private MvpDelegate<CreatePlayerDexView> mvpDelegate;
     private MvpDelegate parentDelegate;
@@ -74,8 +68,6 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
         prcPlusButton.setOnClickListener(this);
         dexMinusButton.setOnClickListener(this);
         dexPlusButton.setOnClickListener(this);
-        okButton.setOnClickListener(this);
-        resetButton.setOnClickListener(this);
         createPlayerListener = ((GameBookActivity)getContext());
     }
 
@@ -110,13 +102,6 @@ public class CreatePlayerDexView extends FrameLayout implements View.OnClickList
                 createPlayerPresenter.prcPlus();
                 clickListener.onClick(view);
                 break;
-
-            case R.id.create_player_ok_button:
-                createPlayerPresenter.addPointsToPlayer();
-                break;
-
-            case R.id.button_create_character_reset:
-                createPlayerPresenter.resetPoints();
         }
     }
 

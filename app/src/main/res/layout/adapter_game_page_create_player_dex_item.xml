@@ -1,90 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="20dp"
-    android:orientation="vertical">
+    android:background="@drawable/create_player_panel">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/create_player_dex_points_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/stats_panel_dex_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_dex_minus_button" />
+
+    <Button
+        android:id="@+id/create_player_dex_minus_button"
+        android:layout_width="60dp"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:text="-"
+        app:layout_constraintLeft_toRightOf="@+id/create_player_dex_points_title"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_dex_points_amount_text_view" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/create_player_dex_points_amount_text_view"
+        android:layout_width="@dimen/size_create_character_skill_points_squire"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        app:layout_constraintLeft_toRightOf="@+id/create_player_dex_minus_button"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_dex_plus_button" />
+
+    <Button
+        android:id="@+id/create_player_dex_plus_button"
+        android:layout_width="60dp"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:text="+"
+        app:layout_constraintLeft_toRightOf="@+id/create_player_dex_points_amount_text_view"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/text_view_stats_panel_prc_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:text="@string/stats_panel_prc_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/create_player_prc_minus_button"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_prc_minus_button"
+        app:layout_constraintBottom_toBottomOf="@+id/create_player_prc_minus_button"/>
 
-        <TextView
-            android:id="@+id/create_player_dex_points_title"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"
-            android:text="@string/stats_panel_dex_title" />
+    <Button
+        android:id="@+id/create_player_prc_minus_button"
+        android:layout_width="60dp"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:text="-"
+        app:layout_constraintTop_toBottomOf="@+id/create_player_dex_minus_button"
+        app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_prc_title"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_prc_points_amount_text_view" />
 
-        <Button
-            android:id="@+id/create_player_dex_minus_button"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"
-            android:text="-" />
+    <TextView
+        android:id="@+id/create_player_prc_points_amount_text_view"
+        android:layout_width="@dimen/size_create_character_skill_points_squire"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/create_player_prc_minus_button"
+        app:layout_constraintLeft_toRightOf="@+id/create_player_prc_minus_button"
+        app:layout_constraintRight_toLeftOf="@+id/create_player_prc_plus_button"
+        app:layout_constraintBottom_toBottomOf="@+id/create_player_prc_minus_button"/>
 
-        <TextView
-            android:id="@+id/create_player_dex_points_amount_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_create_character_skill_points_squire" />
-
-        <Button
-            android:id="@+id/create_player_dex_plus_button"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"
-            android:text="+" />
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_view_stats_panel_prc_title"
-            android:text="@string/stats_panel_prc_title"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"/>
-
-        <Button
-            android:id="@+id/create_player_prc_minus_button"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"
-            android:text="-" />
-
-        <TextView
-            android:id="@+id/create_player_prc_points_amount_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_create_character_skill_points_squire"/>
-
-        <Button
-            android:id="@+id/create_player_prc_plus_button"
-            android:text="+"
-            android:layout_width="@dimen/size_create_character_skill_points_squire"
-            android:layout_height="@dimen/size_create_character_skill_points_squire" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/create_player_distribute_points_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/create_player_ok_button"
-            android:layout_width="wrap_content"
-            android:text="ok"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:text="reset"
-            android:id="@+id/create_player_reset_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/create_player_prc_plus_button"
+        android:layout_width="60dp"
+        android:layout_height="@dimen/size_create_character_skill_points_squire"
+        android:text="+"
+        app:layout_constraintTop_toTopOf="@+id/create_player_prc_minus_button"
+        app:layout_constraintLeft_toRightOf="@+id/create_player_prc_points_amount_text_view"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
