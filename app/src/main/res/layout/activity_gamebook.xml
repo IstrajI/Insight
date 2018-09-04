@@ -110,7 +110,7 @@
 
         <com.npgames.insight.ui.book.bottom_new.BottomPanelView
             android:id="@+id/buttom_panel_game_book_actions"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:gravity="bottom|center_horizontal" />
