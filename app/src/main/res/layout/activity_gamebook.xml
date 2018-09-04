@@ -44,9 +44,12 @@
                 android:background="@drawable/background_bottom" />
 
             <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="top"
                 android:layout_width="match_parent"
+                android:scaleType="fitStart"
                 android:layout_height="wrap_content"
-                android:background="@drawable/top_pattern_3" />
+                android:src="@drawable/test_back" />
 
         </FrameLayout>
 

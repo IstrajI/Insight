@@ -31,8 +31,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected ImageView armoryButton;
     @BindView(R.id.inventory_panel_items_recycler_view)
     protected RecyclerView itemsRecyclerView;
-/*    @BindView(R.id.button_bottom_panel_open_hide_inventory)
-    protected ImageView openHideButton;*/
+    @BindView(R.id.button_bottom_panel_open_hide_inventory)
+    protected Button openHideButton;
 
     private InventoryPanelAdapter inventoryPanelAdapter;
     private BottomPanelClickListener onClickListener;
@@ -54,7 +54,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         final View rootLayout = LayoutInflater.from(context).inflate(R.layout.view_bottom_panel, this, true);
         ButterKnife.bind(this, rootLayout);
 
-        //openHideButton.setOnClickListener(this);
+        openHideButton.setOnClickListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
@@ -75,15 +75,16 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     }
 
     public void updateEquipment(final List<Equipment> equipments) {
+        Log.d("TestPishGG", "Eqipmentsize = " +equipments.size());
         inventoryPanelAdapter.update(equipments);
     }
 
     @Override
     public void onClick(final View v) {
         switch (v.getId()) {
-/*            case R.id.button_bottom_panel_open_hide_inventory:
+            case R.id.button_bottom_panel_open_hide_inventory:
                 onClickListener.bottomPanelClick();
-                break;*/
+                break;
 
             case R.id.button_bottom_panel_find:
                 onClickListener.bottomPanelFindClick();

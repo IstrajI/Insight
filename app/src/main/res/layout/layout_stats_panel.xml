@@ -10,7 +10,7 @@
         android:id="@+id/top_panel_menu_button_image_view"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/menu_btn_4_xxx"
+        android:src="@drawable/menu_button_reworked"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/top_panel_new"
+            android:background="@drawable/stats_panel_reworked"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

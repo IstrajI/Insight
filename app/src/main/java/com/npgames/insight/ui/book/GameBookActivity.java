@@ -122,7 +122,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                                         + getResources().getDimension(R.dimen.spacing_8);
 
             bottomPanelPresenter.initOpenClosePositions(openPosition, closePosition);
-            //bottomPanelPresenter.openCloseBottomPanel();
+            bottomPanelPresenter.openCloseBottomPanel();
         });
 
 
