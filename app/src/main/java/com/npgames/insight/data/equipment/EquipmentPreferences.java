@@ -60,7 +60,7 @@ public class EquipmentPreferences {
         final @Equipment.Owner String beamOwner = preferences.getString(TYPE.BEAM, String.valueOf(Equipment.Owner.PLAYER));
         final String beamName = resources.getString(R.string.armory_equipment_beam_title);
         final String beamDescription = resources.getString(R.string.armory_equipment_beam_description);
-        equipments.add(new Equipment(TYPE.BEAM, beamTakeOnStatsChanger, beamTakeOffStatsChanger, beamOwner, beamName, beamOwner));
+        equipments.add(new Equipment(TYPE.BEAM, beamTakeOnStatsChanger, beamTakeOffStatsChanger, beamOwner, beamName, beamDescription));
 
         //Blaster
         final Stats blasterTakeOnStatsChanger = Stats.builder().setDex(-1).build();
@@ -98,7 +98,7 @@ public class EquipmentPreferences {
         final Stats powerShieldTakeOnStatsChanger = Stats.builder().setPrc(-2).build();
         final Stats powerShieldTakeOffStatsChanger = Stats.builder().setPrc(2).build();
         final @Equipment.Owner String powerShieldOwner = preferences.getString(TYPE.POWER_SHIELD, String.valueOf(Equipment.Owner.ARRMORY));
-        final String powerShieldName = resources.getString(R.string.armory_equipment_open_space_eqpt_title);
+        final String powerShieldName = resources.getString(R.string.armory_equipment_power_shield_title);
         final String powerShieldDescription = resources.getString(R.string.armory_equipment_power_shield_description);
         equipments.add(new Equipment(TYPE.POWER_SHIELD, powerShieldTakeOnStatsChanger, powerShieldTakeOffStatsChanger, powerShieldOwner, powerShieldName, powerShieldDescription));
 

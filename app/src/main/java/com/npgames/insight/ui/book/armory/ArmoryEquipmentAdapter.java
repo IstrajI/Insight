@@ -60,7 +60,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                 break;
 
             case Equipment.TYPE.BEAM:
-                image = R.drawable.powershiled_6;
+                image = R.drawable.laser_2;
                 break;
 
             case Equipment.TYPE.ELECTROSHOCK:
@@ -76,11 +76,11 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                 break;
 
             case Equipment.TYPE.GRENADE:
-                image = R.drawable.granade_orange;
+                image = R.drawable.grenade_1;
                 break;
 
             case Equipment.TYPE.FlAK_JACKET:
-                image = R.drawable.powershiled_7;
+                image = R.drawable.jaket;
                 break;
 
             case Equipment.TYPE.POWER_SHIELD:
