@@ -8,4 +8,6 @@ import java.util.List;
 public interface IBottomPanelView extends MvpView{
     void moveYTo(float y);
     void showPlayerEquipment(final List<Equipment> equipmentList);
+    void onOpenBottomPanel();
+    void onCloseBottomPanel();
 }

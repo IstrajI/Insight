@@ -1,7 +1,9 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -33,6 +35,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected RecyclerView itemsRecyclerView;
     @BindView(R.id.button_bottom_panel_open_hide_inventory)
     protected Button openHideButton;
+    @BindView(R.id.bottom_panel_actions_layout)
+    protected ConstraintLayout actionsLayout;
 
     private InventoryPanelAdapter inventoryPanelAdapter;
     private BottomPanelClickListener onClickListener;
@@ -104,6 +108,15 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public void onOpen() {
+        final Drawable openStateDrawawble = getResources().getDrawable(R.drawable.top_reworked_open_pos);
+        actionsLayout.setBackground(openStateDrawawble);
+    }
+
+    public void onClose() {
+        final Drawable closeStateDrawable = getResources().getDrawable(R.drawable.top_reworked_2);
+        actionsLayout.setBackground(closeStateDrawable);
+    }
     public interface BottomPanelClickListener {
         void bottomPanelClick();
         void bottomPanelFindClick();

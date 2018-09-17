@@ -320,4 +320,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void bottomPanelClick() {
         bottomPanelPresenter.openCloseBottomPanel();
     }
+
+    public void onOpenBottomPanel() {
+        bottomPanelView.onOpen();
+    }
+
+    public void onCloseBottomPanel() {
+        bottomPanelView.onClose();
+    }
 }

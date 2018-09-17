@@ -27,6 +27,12 @@ public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
     public void openCloseBottomPanel() {
         getViewState().moveYTo(isBottomPanelOpen ? closeYPosition : openYPosition);
         isBottomPanelOpen = !isBottomPanelOpen;
+
+        if (isBottomPanelOpen) {
+            getViewState().onOpenBottomPanel();
+        } else {
+            getViewState().onCloseBottomPanel();
+        }
     }
 
     public void initOpenClosePositions(final float openY, final float closeY) {
