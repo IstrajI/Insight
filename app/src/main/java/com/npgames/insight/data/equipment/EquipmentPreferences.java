@@ -100,7 +100,7 @@ public class EquipmentPreferences {
         final @Equipment.Owner String powerShieldOwner = preferences.getString(TYPE.POWER_SHIELD, String.valueOf(Equipment.Owner.ARRMORY));
         final String powerShieldName = resources.getString(R.string.armory_equipment_open_space_eqpt_title);
         final String powerShieldDescription = resources.getString(R.string.armory_equipment_power_shield_description);
-        equipments.add(new Equipment(TYPE.OPEN_SPACE_EQUIPMENT, powerShieldTakeOnStatsChanger, powerShieldTakeOffStatsChanger, powerShieldOwner, powerShieldName, powerShieldDescription));
+        equipments.add(new Equipment(TYPE.POWER_SHIELD, powerShieldTakeOnStatsChanger, powerShieldTakeOffStatsChanger, powerShieldOwner, powerShieldName, powerShieldDescription));
 
         //Targeter Shield
         final Stats targeterTakeOnStatsChanger = Stats.builder().setPrc(-2).build();

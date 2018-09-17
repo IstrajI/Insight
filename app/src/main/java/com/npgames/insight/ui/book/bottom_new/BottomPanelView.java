@@ -1,12 +1,14 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.ui.book.page.GamePageAdapter;
 
 import java.util.List;
 
@@ -50,15 +53,45 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         init(context, attrs);
     }
 
+    /*final Drawable armoryPressedDrawable = getResources().getDrawable(R.drawable.action_armory_pressed);
+    final Drawable armoryDefaultState = getResources().getDrawable(R.drawable.action_armory_7);
+
+    private OnTouchListener armoryTouchListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            final ImageView armoryImageView = (ImageView) view;
+
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_CANCEL:
+                    Log.d("TestPishGg","ActionCalncel");
+                    armoryImageView.setImageDrawable(armoryDefaultState);
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    Log.d("TestPishGg","ActionDown");
+                    armoryImageView.setImageDrawable(armoryPressedDrawable);
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    Log.d("TestPishGg","ActionUp");
+                    //onClickListener.bottomPanelArmoryClick();
+                    break;
+            }
+            return true;
+        }
+    };*/
+
     private void init(final Context context, final AttributeSet attrs) {
         final View rootLayout = LayoutInflater.from(context).inflate(R.layout.view_bottom_panel, this, true);
         ButterKnife.bind(this, rootLayout);
+
+        //armoryButton.setOnTouchListener(armoryTouchListener);
 
         openHideButton.setOnClickListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
-        armoryButton.setOnClickListener(this);
+        //armoryButton.setOnClickListener(this);
 
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         inventoryPanelAdapter = new InventoryPanelAdapter(getContext());
@@ -99,7 +132,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
                 break;
 
             case R.id.button_bottom_panel_armory:
-                onClickListener.bottomPanelArmoryClick();
                 break;
         }
     }

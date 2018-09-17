@@ -56,23 +56,23 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
 
         switch (equipment.getType()) {
             case Equipment.TYPE.BLASTER:
-                image = R.drawable.blaster_orange;
+                image = R.drawable.blaster3;
                 break;
 
             case Equipment.TYPE.BEAM:
-                image = R.drawable.laset_orange;
+                image = R.drawable.powershiled_6;
                 break;
 
             case Equipment.TYPE.ELECTROSHOCK:
-                image = R.drawable.helmet4_xxx;
+                image = R.drawable.shoker_2;
                 break;
 
             case Equipment.TYPE.AID_KIT:
-                image = R.drawable.aidkit_xxx;
+                image = R.drawable.medkit_3;
                 break;
 
             case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
-                image = R.drawable.helmet3_xxx;
+                image = R.drawable.helmet_11_xxx;
                 break;
 
             case Equipment.TYPE.GRENADE:
@@ -80,15 +80,15 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                 break;
 
             case Equipment.TYPE.FlAK_JACKET:
-                image = R.drawable.targetter_2xxx;
+                image = R.drawable.powershiled_7;
                 break;
 
             case Equipment.TYPE.POWER_SHIELD:
-                image = R.drawable.targetter_2xxx;
+                image = R.drawable.powershiled_8 ;
                 break;
 
             case Equipment.TYPE.TARGETTER:
-                image = R.drawable.targetter_xxx;
+                image = R.drawable.targetter_4_xxx;
                 break;
         }
 

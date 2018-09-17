@@ -39,7 +39,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/game_book_find_action"
-                android:src="@drawable/actions_left_find_button_2_xxx"
+                android:src="@drawable/action_find_2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_station"
@@ -67,7 +67,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/game_book_med_bay_action"
-                android:src="@drawable/actions_center_med_bay_button_2_xxx"
+                android:src="@drawable/action_armory_5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_armory"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,8 +78,9 @@
                 android:layout_height="@dimen/size_bottom_panel_jumps_button"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:clickable="true"
                 android:contentDescription="@string/game_book_armory_action"
-                android:src="@drawable/actions_right_armory_button_4_xxx"
+                android:src="@drawable/armory_state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

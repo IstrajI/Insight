@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/image_view_equipment_item_picture"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_equipment_item"
+        android:layout_height="wrap_content"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
         android:src="@drawable/blaster"/>
