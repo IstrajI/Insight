@@ -17,85 +17,130 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InventoryPanelAdapter extends BaseRecyclerAdapter<InventoryPanelAdapter.ViewHolder> {
+public class InventoryPanelAdapter {
     private List<Equipment> equipments = new ArrayList<>();
     private Context context;
 
-    public InventoryPanelAdapter(final Context context) {
-        this.context = context;
+    private int leftItemPosition;
+    private int middleItemPosition;
+    private int rightItemPosition;
+
+    private InventoryPanelListener listener;
+
+    InventoryPanelAdapter(final InventoryPanelListener inventoryPanelListener) {
+        listener = inventoryPanelListener;
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(final @NonNull ViewGroup viewGroup, final int i) {
-        final View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_inventory_item,  viewGroup, false);
-        return new ViewHolder(view);
+    public void goLeft() {
+        if (leftItemPosition > 0) {
+            leftItemPosition--;
+            middleItemPosition--;
+            rightItemPosition--;
+
+            final int leftImage = getDrawable(leftItemPosition);
+            final int middleImage = getDrawable(middleItemPosition);
+            final int rightImage = getDrawable(rightItemPosition);
+
+            listener.updatePanel(leftImage, middleImage, rightImage);
+        } else {
+            listener.blockLeftButtom();
+        }
     }
 
-    @Override
-    public void onBindViewHolder(final @NonNull ViewHolder viewHolder, final int i) {
+    public void goRight() {
+        if (rightItemPosition < equipments.size() - 1) {
+            leftItemPosition++;
+            middleItemPosition++;
+            rightItemPosition++;
+
+            final int leftImage = getDrawable(leftItemPosition);
+            final int middleImage = getDrawable(middleItemPosition);
+            final int rightImage = getDrawable(rightItemPosition);
+
+            listener.updatePanel(leftImage, middleImage, rightImage);
+        } else {
+            listener.blockRightButton();
+        }
+    }
+
+    private int getDrawable(final int itemPosition) {
+        if (itemPosition > equipments.size()) {
+            return -1;
+        }
+
         int image = R.drawable.blaster;
-        final Equipment equipment = equipments.get(i);
+        final Equipment equipment = equipments.get(itemPosition);
 
         switch (equipment.getType()) {
             case Equipment.TYPE.BLASTER:
-                image = R.drawable.blaster;
+                image = R.drawable.blaster3;
                 break;
 
             case Equipment.TYPE.BEAM:
-                image = R.drawable.laset_orange;
+                image = R.drawable.laser_2;
                 break;
 
             case Equipment.TYPE.ELECTROSHOCK:
-                image = R.drawable.blaster_black;
+                image = R.drawable.shoker_2;
                 break;
 
             case Equipment.TYPE.AID_KIT:
-                image = R.drawable.heal_orange;
+                image = R.drawable.medkit_3;
                 break;
 
             case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
-                image = R.drawable.blaster_orange;
+                image = R.drawable.helmet_11_xxx;
                 break;
 
             case Equipment.TYPE.GRENADE:
-                image = R.drawable.granade_orange;
+                image = R.drawable.grenade_1;
                 break;
 
             case Equipment.TYPE.FlAK_JACKET:
-                image = R.drawable.flack_jakcet_black;
+                image = R.drawable.jaket;
                 break;
 
             case Equipment.TYPE.POWER_SHIELD:
-                image = R.drawable.flack_jakcet_orange;
+                image = R.drawable.powershiled_8;
                 break;
 
             case Equipment.TYPE.TARGETTER:
-                image = R.drawable.flack_jakcet_black;
+                image = R.drawable.targetter_4_xxx;
                 break;
         }
 
-        Glide.with(context).load(image).into(viewHolder.equipmentImageView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return equipments.size();
+        return image;
     }
 
     public void update(final List<Equipment> equipments) {
         this.equipments.clear();
         this.equipments.addAll(equipments);
-        notifyDataSetChanged();
+
+        leftItemPosition = 0;
+        middleItemPosition = 1;
+        rightItemPosition = 2;
+
+        final int leftImage = getDrawable(leftItemPosition);
+        final int middleImage = getDrawable(middleItemPosition);
+        final int rightImage = getDrawable(rightItemPosition);
+
+        listener.updatePanel(leftImage, middleImage, rightImage);
+
+/*        if (equipments.size() >= 3) {
+            leftItemPosition = 0;
+            middleItemPosition = 1;
+            rightItemPosition = 2;
+        } else if (equipments.size() >= 2){
+            leftItemPosition = 0;
+            middleItemPosition = 1;
+        } else if (equipments.size() >= 1) {
+            leftItemPosition = 0;
+        }*/
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.image_view_inventory_item)
-        ImageView equipmentImageView;
-
-        ViewHolder(final @NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    public interface InventoryPanelListener {
+        void updatePanel(final int leftItem, final int middleItem, final int rightItem);
+        void blockLeftButtom();
+        void blockRightButton();
     }
 }

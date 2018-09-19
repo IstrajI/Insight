@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <FrameLayout
-        android:id="@+id/test"
+        android:id="@+id/bottom_panel_actions_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -16,9 +16,9 @@
             android:id="@+id/bottom_panel_actions_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_chainStyle="packed"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/top_reworked_2">
+            android:background="@drawable/top_reworked_2"
+            app:layout_constraintHorizontal_chainStyle="packed">
 
             <ImageView
                 android:id="@+id/button_bottom_panel_find"
@@ -26,9 +26,9 @@
                 android:layout_height="@dimen/size_bottom_panel_jumps_button"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:contentDescription="@string/game_book_find_action"
-                android:src="@drawable/action_find_2"
+                android:src="@drawable/action_find_state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_station"
@@ -40,9 +40,9 @@
                 android:layout_height="@dimen/size_bottom_panel_jumps_button"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:contentDescription="@string/game_book_station_action"
-                android:src="@drawable/actions_center_station_button_2_xxx"
+                android:src="@drawable/action_station_state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_med_bay"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,9 +54,9 @@
                 android:layout_height="@dimen/size_bottom_panel_jumps_button"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:contentDescription="@string/game_book_med_bay_action"
-                android:src="@drawable/action_armory_5"
+                android:src="@drawable/action_medbay_state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_armory"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,38 +66,91 @@
                 android:layout_width="@dimen/size_bottom_panel_jumps_button"
                 android:layout_height="@dimen/size_bottom_panel_jumps_button"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:clickable="true"
                 android:contentDescription="@string/game_book_armory_action"
-                android:src="@drawable/armory_state"
+                android:src="@drawable/action_armory_state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
         <Button
-            android:layout_gravity="bottom"
             android:id="@+id/button_bottom_panel_open_hide_inventory"
             android:layout_width="match_parent"
             android:layout_height="33dp"
+            android:layout_gravity="bottom"
             android:background="@android:color/transparent"
-            app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_station"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_bottom_panel_station" />
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_equipment_item"
-        android:layout_margin="@dimen/spacing_8"
-        android:background="@drawable/inventory_reworked"
+    <android.support.constraint.ConstraintLayout
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test">
+        app:layout_constraintTop_toBottomOf="@+id/bottom_panel_actions_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/inventory_panel_items_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/bottom_panel_inventory_left_button_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/inventory_left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/bottom_panel_inventory_left"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/bottom_panel_inventory_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/inventory_middle">
+
+            <ImageView
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/bottom_panel_middle_item_image_view"
+                android:id="@+id/bottom_panel_left_item_image_view"
+                android:src="@drawable/blaster3"
+                android:padding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/bottom_panel_middle_item_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/laser_2"
+                android:padding="8dp"
+                app:layout_constraintLeft_toRightOf="@+id/bottom_panel_left_item_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/bottom_panel_right_item_image_view"/>
+
+
+            <ImageView
+                android:id="@+id/bottom_panel_right_item_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/laser_2"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="8dp"
+                app:layout_constraintLeft_toRightOf="@+id/bottom_panel_middle_item_image_view"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/bottom_panel_right_button_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/inventory_right"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/bottom_panel_inventory_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
