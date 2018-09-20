@@ -105,7 +105,7 @@ public class InventoryPanelAdapter {
                 break;
 
             case Equipment.TYPE.TARGETTER:
-                image = R.drawable.targetter_4_xxx;
+                image = R.drawable.powershiled_8;
                 break;
         }
 
