@@ -1,21 +1,12 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
+
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
-import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class InventoryPanelAdapter {
     private List<Equipment> equipments = new ArrayList<>();
@@ -43,7 +34,7 @@ public class InventoryPanelAdapter {
 
             listener.updatePanel(leftImage, middleImage, rightImage);
         } else {
-            listener.blockLeftButtom();
+            listener.blockLeftButton();
         }
     }
 
@@ -140,7 +131,7 @@ public class InventoryPanelAdapter {
 
     public interface InventoryPanelListener {
         void updatePanel(final int leftItem, final int middleItem, final int rightItem);
-        void blockLeftButtom();
+        void blockLeftButton();
         void blockRightButton();
     }
 }

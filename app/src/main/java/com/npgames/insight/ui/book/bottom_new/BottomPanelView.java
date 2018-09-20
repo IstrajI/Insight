@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BottomPanelView extends RelativeLayout implements View.OnClickListener, InventoryPanelAdapter.InventoryPanelListener {
+public class BottomPanelView extends RelativeLayout implements View.OnClickListener, InventoryPanelAdapter.InventoryPanelListener, View.OnTouchListener {
     @BindView(R.id.button_bottom_panel_find)
     protected ImageView findButton;
     @BindView(R.id.button_bottom_panel_station)
@@ -37,6 +38,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected Button openHideButton;
     @BindView(R.id.bottom_panel_actions_layout)
     protected ConstraintLayout actionsLayout;
+    @BindView(R.id.bottom_panel_inventory)
+    protected ConstraintLayout inventoryConstraintLayout;
 
     @BindView(R.id.bottom_panel_inventory_left_button_image_view)
     protected ImageView inventoryMoveLeftButtonImageView;
@@ -52,6 +55,46 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     private InventoryPanelAdapter inventoryPanelAdapter;
     private BottomPanelClickListener onClickListener;
+    private boolean isPanelOpen = false;
+
+
+    private final OnTouchListener inventoryNavigationLeftButtonListener = (view, motionEvent) -> {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                final Drawable inventoryBackgroundLeftActive = getResources().getDrawable(R.drawable.inventory_middle);
+                inventoryConstraintLayout.setBackground(inventoryBackgroundLeftActive);
+
+                final Drawable inventoryLeftButton = getResources().getDrawable(R.drawable.inventory_left_active);
+                inventoryMoveLeftButtonImageView.setBackground(inventoryLeftButton);
+                break;
+
+            case MotionEvent.ACTION_UP:
+                view.performClick();
+                inventoryPanelAdapter.goLeft();
+                break;
+
+        }
+        return true;
+    };
+
+    private final OnTouchListener inventoryNavigationRightButtonListener = (view, motionEvent) -> {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                final Drawable inventoryBackgroundRightActive = getResources().getDrawable(R.drawable.inventory_middle);
+                inventoryConstraintLayout.setBackground(inventoryBackgroundRightActive);
+
+                final Drawable inventoryRightButton = getResources().getDrawable(R.drawable.inventory_right_active);
+                inventoryMoveRightButtonImageView.setBackground(inventoryRightButton);
+                break;
+
+            case MotionEvent.ACTION_UP:
+                Log.d("TestPish", "Right: PressingUp");
+                view.performClick();
+                inventoryPanelAdapter.goRight();
+                break;
+        }
+        return true;
+    };
 
     public BottomPanelView(Context context) {
         this(context, null);
@@ -72,9 +115,9 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
         inventoryPanelAdapter = new InventoryPanelAdapter(this);
 
-        inventoryMoveLeftButtonImageView.setOnClickListener(this);
-        inventoryMoveRightButtonImageView.setOnClickListener(this);
-        openHideButton.setOnClickListener(this);
+        inventoryMoveLeftButtonImageView.setOnTouchListener(inventoryNavigationLeftButtonListener);
+        inventoryMoveRightButtonImageView.setOnTouchListener(inventoryNavigationRightButtonListener);
+        openHideButton.setOnTouchListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
@@ -97,10 +140,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     @Override
     public void onClick(final View v) {
         switch (v.getId()) {
-            case R.id.button_bottom_panel_open_hide_inventory:
-                onClickListener.bottomPanelClick();
-                break;
-
             case R.id.button_bottom_panel_find:
                 onClickListener.bottomPanelFindClick();
                 break;
@@ -115,29 +154,20 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
             case R.id.button_bottom_panel_armory:
                 break;
-
-            case R.id.bottom_panel_right_button_image_view:
-                inventoryPanelAdapter.goRight();
-                break;
-
-            case R.id.bottom_panel_inventory_left_button_image_view:
-                inventoryPanelAdapter.goLeft();
-                break;
         }
-    }
-
-    public void onOpen() {
-        final Drawable openStateDrawawble = getResources().getDrawable(R.drawable.top_reworked_open_pos);
-        actionsLayout.setBackground(openStateDrawawble);
-    }
-
-    public void onClose() {
-        final Drawable closeStateDrawable = getResources().getDrawable(R.drawable.top_reworked_2);
-        actionsLayout.setBackground(closeStateDrawable);
     }
 
     @Override
     public void updatePanel(final int leftItem, final int middleItem, final int rightItem) {
+/*        final Drawable inventoryBackgroundDefault = getResources().getDrawable(R.drawable.inventory_middle);
+        inventoryConstraintLayout.setBackground(inventoryBackgroundDefault);*/
+
+        final Drawable inventoryBackgroundLeftDefault = getResources().getDrawable(R.drawable.inventory_left_button);
+        inventoryMoveLeftButtonImageView.setBackground(inventoryBackgroundLeftDefault);
+
+        final Drawable inventoryBackgroundRightDefault = getResources().getDrawable(R.drawable.inventory_right_button);
+        inventoryMoveRightButtonImageView.setBackground(inventoryBackgroundRightDefault);
+
         if (leftItem != -1) {
             inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));
         }
@@ -152,13 +182,60 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     }
 
     @Override
-    public void blockLeftButtom() {
+    public void blockLeftButton() {
         inventoryLeftItemImageView.setEnabled(false);
     }
 
     @Override
     public void blockRightButton() {
         inventoryRightItemImageView.setEnabled(false);
+    }
+
+    public void onOpen() {
+        final Drawable openStateDrawable = getResources().getDrawable(R.drawable.open_inventory_button_state);
+        actionsLayout.setBackground(openStateDrawable);
+        isPanelOpen = true;
+    }
+
+    public void onClose() {
+        final Drawable closeStateDrawable = getResources().getDrawable(R.drawable.close_inventory_button_state);
+        actionsLayout.setBackground(closeStateDrawable);
+        isPanelOpen = false;
+    }
+
+    @Override
+    public boolean onTouch(final View view, final MotionEvent motionEvent) {
+        Log.d("TestingEvents", "" +motionEvent.getAction());
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_CANCEL:
+                if (isPanelOpen) {
+                    final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_2);
+                    actionsLayout.setBackground(openHideButtonDefaultOpenState);
+                } else {
+                    final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_open_pos);
+                    actionsLayout.setBackground(openHideButtonDefaultState);
+                }
+                break;
+
+            case MotionEvent.ACTION_DOWN:
+
+
+                if (isPanelOpen) {
+                    final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_2_open_active);
+                    actionsLayout.setBackground(openHideButtonDefaultOpenState);
+                } else {
+                    final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_open_pos_active);
+                    actionsLayout.setBackground(openHideButtonDefaultState);
+                }
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+                onClickListener.bottomPanelClick();
+                break;
+        }
+
+        return true;
     }
 
     public interface BottomPanelClickListener {

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/top_reworked_2"
+            android:background="@drawable/open_inventory_button_state"
             app:layout_constraintHorizontal_chainStyle="packed">
 
             <ImageView
@@ -97,12 +97,14 @@
             android:id="@+id/bottom_panel_inventory_left_button_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/inventory_left"
+
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/bottom_panel_inventory_left"/>
+            app:layout_constraintRight_toLeftOf="@+id/bottom_panel_inventory"/>
+
+        <!-- android:src="@drawable/inventory_left_button"-->
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/bottom_panel_inventory_left"
+            android:id="@+id/bottom_panel_inventory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -143,13 +145,14 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
+        <!-- android:src="@drawable/inventory_right_button" -->
         <ImageView
             android:id="@+id/bottom_panel_right_button_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/inventory_right"
+
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/bottom_panel_inventory_left"
+            app:layout_constraintLeft_toRightOf="@+id/bottom_panel_inventory"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
