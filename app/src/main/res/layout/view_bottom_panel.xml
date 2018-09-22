@@ -47,7 +47,6 @@
                 app:layout_constraintRight_toLeftOf="@+id/button_bottom_panel_med_bay"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <ImageView
                 android:id="@+id/button_bottom_panel_med_bay"
                 android:layout_width="@dimen/size_bottom_panel_jumps_button"
@@ -87,31 +86,24 @@
     </FrameLayout>
 
     <android.support.constraint.ConstraintLayout
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/bottom_panel_actions_panel"
+        app:layout_constraintRight_toRightOf="@+id/bottom_panel_actions_panel"
         app:layout_constraintTop_toBottomOf="@+id/bottom_panel_actions_panel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/bottom_panel_inventory_left_button_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/bottom_panel_inventory"/>
 
         <!-- android:src="@drawable/inventory_left_button"-->
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/bottom_panel_inventory"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:background="#c6130e0e"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@drawable/inventory_middle">
+            app:layout_constraintLeft_toLeftOf="parent">
 
             <ImageView
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -145,12 +137,23 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
-        <!-- android:src="@drawable/inventory_right_button" -->
+
+        <ImageView
+            android:id="@+id/bottom_panel_inventory_left_button_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:src="@drawable/inventory_wire_left"
+            app:layout_constraintTop_toTopOf="@+id/bottom_panel_inventory"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_panel_inventory"
+            app:layout_constraintLeft_toLeftOf="@+id/bottom_panel_inventory"/>
+
         <ImageView
             android:id="@+id/bottom_panel_right_button_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:paddingRight="1dp"
+            android:src="@drawable/inventory_wire_right"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/bottom_panel_inventory"
             app:layout_constraintTop_toTopOf="parent" />
