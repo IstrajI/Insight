@@ -58,42 +58,48 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     private boolean isPanelOpen = false;
 
 
-    private final OnTouchListener inventoryNavigationLeftButtonListener = (view, motionEvent) -> {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                final Drawable inventoryBackgroundLeftActive = getResources().getDrawable(R.drawable.inventory_middle);
-                inventoryConstraintLayout.setBackground(inventoryBackgroundLeftActive);
+    private final OnTouchListener inventoryNavigationLeftButtonListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    final Drawable inventoryBackgroundLeftActive = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_middle_left_active);
+                    inventoryConstraintLayout.setBackground(inventoryBackgroundLeftActive);
 
-                final Drawable inventoryLeftButton = getResources().getDrawable(R.drawable.inventory_left_active);
-                inventoryMoveLeftButtonImageView.setBackground(inventoryLeftButton);
-                break;
+/*                    final Drawable inventoryLeftButton = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_left_active);
+                    inventoryMoveLeftButtonImageView.setBackground(inventoryLeftButton);*/
+                    break;
 
-            case MotionEvent.ACTION_UP:
-                view.performClick();
-                inventoryPanelAdapter.goLeft();
-                break;
+                case MotionEvent.ACTION_UP:
+                    view.performClick();
+                    inventoryPanelAdapter.goLeft();
+                    break;
 
+            }
+            return false;
         }
-        return true;
     };
 
-    private final OnTouchListener inventoryNavigationRightButtonListener = (view, motionEvent) -> {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                final Drawable inventoryBackgroundRightActive = getResources().getDrawable(R.drawable.inventory_middle);
-                inventoryConstraintLayout.setBackground(inventoryBackgroundRightActive);
+    private final OnTouchListener inventoryNavigationRightButtonListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    final Drawable inventoryBackgroundRightActive = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_middle_right_active);
+                    inventoryConstraintLayout.setBackground(inventoryBackgroundRightActive);
 
-                final Drawable inventoryRightButton = getResources().getDrawable(R.drawable.inventory_right_active);
-                inventoryMoveRightButtonImageView.setBackground(inventoryRightButton);
-                break;
+/*                    final Drawable inventoryRightButton = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_right_active);
+                    inventoryMoveRightButtonImageView.setBackground(inventoryRightButton);*/
+                    break;
 
-            case MotionEvent.ACTION_UP:
-                Log.d("TestPish", "Right: PressingUp");
-                view.performClick();
-                inventoryPanelAdapter.goRight();
-                break;
+                case MotionEvent.ACTION_UP:
+                    Log.d("TestPish", "Right: PressingUp");
+                    view.performClick();
+                    inventoryPanelAdapter.goRight();
+                    break;
+            }
+            return false;
         }
-        return true;
     };
 
     public BottomPanelView(Context context) {
@@ -159,14 +165,14 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void updatePanel(final int leftItem, final int middleItem, final int rightItem) {
-/*        final Drawable inventoryBackgroundDefault = getResources().getDrawable(R.drawable.inventory_middle);
-        inventoryConstraintLayout.setBackground(inventoryBackgroundDefault);*/
+        final Drawable inventoryBackgroundDefault = getResources().getDrawable(R.drawable.inventory_middle);
+        inventoryConstraintLayout.setBackground(inventoryBackgroundDefault);
 
-        final Drawable inventoryBackgroundLeftDefault = getResources().getDrawable(R.drawable.inventory_left_button);
+/*        final Drawable inventoryBackgroundLeftDefault = getResources().getDrawable(R.drawable.inventory_left);
         inventoryMoveLeftButtonImageView.setBackground(inventoryBackgroundLeftDefault);
 
-        final Drawable inventoryBackgroundRightDefault = getResources().getDrawable(R.drawable.inventory_right_button);
-        inventoryMoveRightButtonImageView.setBackground(inventoryBackgroundRightDefault);
+        final Drawable inventoryBackgroundRightDefault = getResources().getDrawable(R.drawable.inventory_left);
+        inventoryMoveRightButtonImageView.setBackground(inventoryBackgroundRightDefault);*/
 
         if (leftItem != -1) {
             inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));

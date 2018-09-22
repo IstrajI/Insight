@@ -25,11 +25,6 @@
                 android:background="@drawable/background2"
                 android:scaleType="fitCenter" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/background4"
-                android:scaleType="fitCenter" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -37,11 +32,7 @@
                 android:background="@drawable/main_background" />
 
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/background_bottom" />
+
 
             <ImageView
                 android:layout_marginTop="8dp"
