@@ -25,14 +25,10 @@
                 android:background="@drawable/background2"
                 android:scaleType="fitCenter" />
 
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/main_background" />
-
-
-
 
             <ImageView
                 android:layout_marginTop="8dp"
@@ -41,6 +37,14 @@
                 android:scaleType="fitStart"
                 android:layout_height="wrap_content"
                 android:src="@drawable/test_back" />
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_bottom" />
 
         </FrameLayout>
 

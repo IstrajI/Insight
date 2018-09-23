@@ -45,6 +45,10 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected ImageView inventoryMoveLeftButtonImageView;
     @BindView(R.id.bottom_panel_right_button_image_view)
     protected ImageView inventoryMoveRightButtonImageView;
+    @BindView(R.id.bottom_panel_inventory_left_wire_image_view)
+    protected ImageView inventoryLeftWireImageView;
+    @BindView(R.id.bottom_panel_right_wire_image_view)
+    protected ImageView inventoryRightWireImageView;
 
     @BindView(R.id.bottom_panel_left_item_image_view)
     protected ImageView inventoryLeftItemImageView;
@@ -63,20 +67,28 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    final Drawable inventoryBackgroundLeftActive = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_middle_left_active);
-                    inventoryConstraintLayout.setBackground(inventoryBackgroundLeftActive);
+                    final Drawable inventoryWireLeftActive = getResources().getDrawable(R.drawable.inventory_wire_left_active);
+                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeftActive);
 
-/*                    final Drawable inventoryLeftButton = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_left_active);
-                    inventoryMoveLeftButtonImageView.setBackground(inventoryLeftButton);*/
+                    final Drawable inventoryLeftButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_left_active);
+                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonActiveDrawable);
                     break;
 
                 case MotionEvent.ACTION_UP:
                     view.performClick();
                     inventoryPanelAdapter.goLeft();
-                    break;
 
+                case MotionEvent.ACTION_CANCEL:
+
+                    final Drawable inventoryWireLeft = getResources().getDrawable(R.drawable.inventory_wire_left);
+                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeft);
+
+                    final Drawable inventoryLeftButtonDrawable = getResources().getDrawable(R.drawable.inventory_left);
+                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonDrawable);
+
+                    break;
             }
-            return false;
+            return true;
         }
     };
 
@@ -85,20 +97,28 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    final Drawable inventoryBackgroundRightActive = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_middle_right_active);
-                    inventoryConstraintLayout.setBackground(inventoryBackgroundRightActive);
+                    final Drawable inventoryLeftWireActiveDrawable = getResources().getDrawable(R.drawable.inventory_wire_right_active);
+                    inventoryRightWireImageView.setImageDrawable(inventoryLeftWireActiveDrawable);
 
-/*                    final Drawable inventoryRightButton = BottomPanelView.this.getResources().getDrawable(R.drawable.inventory_right_active);
-                    inventoryMoveRightButtonImageView.setBackground(inventoryRightButton);*/
+                    final Drawable inventoryRightButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_right_active);
+                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonActiveDrawable);
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    Log.d("TestPish", "Right: PressingUp");
                     view.performClick();
                     inventoryPanelAdapter.goRight();
+
+                case MotionEvent.ACTION_CANCEL:
+                    final Drawable inventoryRightWireeDrawable = getResources().getDrawable(R.drawable.inventory_wire_right);
+                    inventoryRightWireImageView.setImageDrawable(inventoryRightWireeDrawable);
+
+                    final Drawable inventoryRightButtonDrawable = getResources().getDrawable(R.drawable.inventory_right);
+                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonDrawable);
+
+
                     break;
             }
-            return false;
+            return true;
         }
     };
 
@@ -121,8 +141,9 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
         inventoryPanelAdapter = new InventoryPanelAdapter(this);
 
-        //inventoryMoveLeftButtonImageView.setOnTouchListener(inventoryNavigationLeftButtonListener);
-        //inventoryMoveRightButtonImageView.setOnTouchListener(inventoryNavigationRightButtonListener);
+        inventoryMoveLeftButtonImageView.setOnTouchListener(inventoryNavigationLeftButtonListener);
+        inventoryMoveRightButtonImageView.setOnTouchListener(inventoryNavigationRightButtonListener);
+
         openHideButton.setOnTouchListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
@@ -165,17 +186,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void updatePanel(final int leftItem, final int middleItem, final int rightItem) {
-/*        final Drawable inventoryBackgroundDefault = getResources().getDrawable(R.drawable.inventory_middle);
-        inventoryConstraintLayout.setBackground(inventoryBackgroundDefault);*/
-
-/*
-        final Drawable inventoryBackgroundLeftDefault = getResources().getDrawable(R.drawable.inventory_left_button);
-        inventoryMoveLeftButtonImageView.setBackground(inventoryBackgroundLeftDefault);
-
-        final Drawable inventoryBackgroundRightDefault = getResources().getDrawable(R.drawable.inventory_right_button);
-        inventoryMoveRightButtonImageView.setBackground(inventoryBackgroundRightDefault);
-*/
-
         if (leftItem != -1) {
             inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));
         }
