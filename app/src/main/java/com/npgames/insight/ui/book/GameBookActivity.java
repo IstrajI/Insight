@@ -27,6 +27,7 @@ import com.npgames.insight.ui.book.armory.ArmoryActivity;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelView;
 import com.npgames.insight.ui.book.bottom_new.IBottomPanelView;
+import com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog;
 import com.npgames.insight.ui.book.death.DeathDialogFragment;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
@@ -37,6 +38,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG;
+import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
 import static com.npgames.insight.ui.book.death.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
 import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
 
@@ -213,7 +216,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void showDeathScreen() {
         final DeathDialogFragment deathDialogFragment = new DeathDialogFragment();
         deathDialogFragment.setOnDeathDialogListener(this);
-        deathDialogFragment.show(getSupportFragmentManager(), DEATH_DIALOG_FRAGMENT_TAG);
+        deathDialogFragment.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
     }
 
     public void deathDialogListener() {
@@ -287,7 +290,14 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //----------------------------------------------------------------------------------------------
     @Override
     public void bottomPanelFindClick() {
-        gameBookPresenter.onFindClick(paragraphTextHeight);
+        final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_find_evidence_text));
+        bottomActionConfirmDialog.setArguments(bundle);
+
+        bottomActionConfirmDialog.show(getSupportFragmentManager(), BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
+        //gameBookPresenter.onFindClick(paragraphTextHeight);
     }
 
     @Override
@@ -302,18 +312,42 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void bottomPanelStationClick() {
-        gameBookPresenter.onStationClick(paragraphTextHeight);
+        final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_station_text));
+        bottomActionConfirmDialog.setArguments(bundle);
+
+        bottomActionConfirmDialog.show(getSupportFragmentManager(), BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
+
+/*        gameBookPresenter.onStationClick(paragraphTextHeight);*/
     }
 
     @Override
     public void bottomPanelMedBayClick() {
-        gameBookPresenter.onMedBayClick(paragraphTextHeight);
+        final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_med_bay_text));
+        bottomActionConfirmDialog.setArguments(bundle);
+
+        bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
+
+/*        gameBookPresenter.onMedBayClick(paragraphTextHeight);*/
     }
 
     @Override
     public void bottomPanelArmoryClick() {
-        final Intent intent = new Intent(this, ArmoryActivity.class);
-        startActivityForResult(intent, 1);
+        final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_armory_text));
+        bottomActionConfirmDialog.setArguments(bundle);
+
+        bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
+
+/*        final Intent intent = new Intent(this, ArmoryActivity.class);
+        startActivityForResult(intent, 1);*/
     }
 
     @Override

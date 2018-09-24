@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <TextView
+        android:id="@+id/bottom_action_confirm_dialog_title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="пРОДОЛЖИТЬ?"
+        android:textAppearance="@style/D"
+        app:layout_constraintLeft_toRightOf="@+id/guideline_left"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bottom_action_confirm_dialog_body_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:text="Возвращение на станцию отнимет у вас одну единицу времени."
+        app:layout_constraintLeft_toRightOf="@+id/guideline_left"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_text_view" />
+
+
+    <Button
+        android:id="@+id/bottom_action_confirm_dialog_deny_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ОТМЕНА"
+        android:textAppearance="@style/D"
+        app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_accept_button"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
+
+    <Button
+        android:id="@+id/bottom_action_confirm_dialog_accept_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ОК"
+        android:textAppearance="@style/D"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+</android.support.constraint.ConstraintLayout>

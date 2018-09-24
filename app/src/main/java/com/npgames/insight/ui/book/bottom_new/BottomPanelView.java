@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BottomPanelView extends RelativeLayout implements View.OnClickListener, InventoryPanelAdapter.InventoryPanelListener, View.OnTouchListener {
+public class BottomPanelView extends RelativeLayout implements View.OnClickListener, InventoryPanelAdapter.InventoryPanelListener {
     @BindView(R.id.button_bottom_panel_find)
     protected ImageView findButton;
     @BindView(R.id.button_bottom_panel_station)
@@ -61,67 +61,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     private BottomPanelClickListener onClickListener;
     private boolean isPanelOpen = false;
 
-
-    private final OnTouchListener inventoryNavigationLeftButtonListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    final Drawable inventoryWireLeftActive = getResources().getDrawable(R.drawable.inventory_wire_left_active);
-                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeftActive);
-
-                    final Drawable inventoryLeftButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_left_active);
-                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonActiveDrawable);
-                    break;
-
-                case MotionEvent.ACTION_UP:
-                    view.performClick();
-                    inventoryPanelAdapter.goLeft();
-
-                case MotionEvent.ACTION_CANCEL:
-
-                    final Drawable inventoryWireLeft = getResources().getDrawable(R.drawable.inventory_wire_left);
-                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeft);
-
-                    final Drawable inventoryLeftButtonDrawable = getResources().getDrawable(R.drawable.inventory_left);
-                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonDrawable);
-
-                    break;
-            }
-            return true;
-        }
-    };
-
-    private final OnTouchListener inventoryNavigationRightButtonListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    final Drawable inventoryLeftWireActiveDrawable = getResources().getDrawable(R.drawable.inventory_wire_right_active);
-                    inventoryRightWireImageView.setImageDrawable(inventoryLeftWireActiveDrawable);
-
-                    final Drawable inventoryRightButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_right_active);
-                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonActiveDrawable);
-                    break;
-
-                case MotionEvent.ACTION_UP:
-                    view.performClick();
-                    inventoryPanelAdapter.goRight();
-
-                case MotionEvent.ACTION_CANCEL:
-                    final Drawable inventoryRightWireeDrawable = getResources().getDrawable(R.drawable.inventory_wire_right);
-                    inventoryRightWireImageView.setImageDrawable(inventoryRightWireeDrawable);
-
-                    final Drawable inventoryRightButtonDrawable = getResources().getDrawable(R.drawable.inventory_right);
-                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonDrawable);
-
-
-                    break;
-            }
-            return true;
-        }
-    };
-
     public BottomPanelView(Context context) {
         this(context, null);
     }
@@ -143,8 +82,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
         inventoryMoveLeftButtonImageView.setOnTouchListener(inventoryNavigationLeftButtonListener);
         inventoryMoveRightButtonImageView.setOnTouchListener(inventoryNavigationRightButtonListener);
+        openHideButton.setOnTouchListener(inventoryButtonListener);
 
-        openHideButton.setOnTouchListener(this);
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
         medBayButton.setOnClickListener(this);
@@ -180,6 +119,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
                 break;
 
             case R.id.button_bottom_panel_armory:
+                onClickListener.bottomPanelArmoryClick();
                 break;
         }
     }
@@ -210,49 +150,11 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     }
 
     public void onOpen() {
-        final Drawable openStateDrawable = getResources().getDrawable(R.drawable.top_reworked_open_pos);
-        actionsLayout.setBackground(openStateDrawable);
         isPanelOpen = true;
     }
 
     public void onClose() {
-        final Drawable closeStateDrawable = getResources().getDrawable(R.drawable.top_reworked_2);
-        actionsLayout.setBackground(closeStateDrawable);
         isPanelOpen = false;
-    }
-
-    @Override
-    public boolean onTouch(final View view, final MotionEvent motionEvent) {
-        Log.d("TestingEvents", "" +motionEvent.getAction());
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_CANCEL:
-                if (isPanelOpen) {
-                    final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_2);
-                    actionsLayout.setBackground(openHideButtonDefaultOpenState);
-                } else {
-                    final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_open_pos_active_v4);
-                    actionsLayout.setBackground(openHideButtonDefaultState);
-                }
-                break;
-
-            case MotionEvent.ACTION_DOWN:
-
-                if (isPanelOpen) {
-                    final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_open_pos_active_v4);
-                    actionsLayout.setBackground(openHideButtonDefaultOpenState);
-                } else {
-                    final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_close_pos_active);
-                    actionsLayout.setBackground(openHideButtonDefaultState);
-                }
-
-                break;
-
-            case MotionEvent.ACTION_UP:
-                onClickListener.bottomPanelClick();
-                break;
-        }
-
-        return true;
     }
 
     public interface BottomPanelClickListener {
@@ -262,4 +164,94 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         void bottomPanelMedBayClick();
         void bottomPanelArmoryClick();
     }
+
+    private final OnTouchListener inventoryNavigationLeftButtonListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    final Drawable inventoryWireLeftActive = getResources().getDrawable(R.drawable.inventory_wire_left_active);
+                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeftActive);
+
+                    final Drawable inventoryLeftButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_left_active);
+                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonActiveDrawable);
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    view.performClick();
+                    inventoryPanelAdapter.goLeft();
+
+                case MotionEvent.ACTION_CANCEL:
+                    final Drawable inventoryWireLeft = getResources().getDrawable(R.drawable.inventory_wire_left);
+                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeft);
+
+                    final Drawable inventoryLeftButtonDrawable = getResources().getDrawable(R.drawable.inventory_left);
+                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonDrawable);
+
+                    break;
+            }
+            return true;
+        }
+    };
+
+    private final OnTouchListener inventoryNavigationRightButtonListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    final Drawable inventoryLeftWireActiveDrawable = getResources().getDrawable(R.drawable.inventory_wire_right_active);
+                    inventoryRightWireImageView.setImageDrawable(inventoryLeftWireActiveDrawable);
+
+                    final Drawable inventoryRightButtonActiveDrawable = getResources().getDrawable(R.drawable.inventory_right_active);
+                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonActiveDrawable);
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    view.performClick();
+                    inventoryPanelAdapter.goRight();
+
+                case MotionEvent.ACTION_CANCEL:
+                    final Drawable inventoryRightWireeDrawable = getResources().getDrawable(R.drawable.inventory_wire_right);
+                    inventoryRightWireImageView.setImageDrawable(inventoryRightWireeDrawable);
+
+                    final Drawable inventoryRightButtonDrawable = getResources().getDrawable(R.drawable.inventory_right);
+                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonDrawable);
+
+                    break;
+            }
+            return true;
+        }
+    };
+
+    private final OnTouchListener inventoryButtonListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    onClickListener.bottomPanelClick();
+                    view.performClick();
+
+                case MotionEvent.ACTION_CANCEL:
+                    if (isPanelOpen) {
+                        final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_open_pos);
+                        actionsLayout.setBackground(openHideButtonDefaultOpenState);
+                    } else {
+                        final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_2);
+                        actionsLayout.setBackground(openHideButtonDefaultState);
+                    }
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    if (isPanelOpen) {
+                        final Drawable openHideButtonDefaultOpenState = getResources().getDrawable(R.drawable.top_reworked_open_pos_active_v4);
+                        actionsLayout.setBackground(openHideButtonDefaultOpenState);
+                    } else {
+                        final Drawable openHideButtonDefaultState = getResources().getDrawable(R.drawable.top_reworked_close_pos_active);
+                        actionsLayout.setBackground(openHideButtonDefaultState);
+                    }
+                    break;
+            }
+            return true;
+        }
+    };
 }
