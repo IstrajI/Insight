@@ -33,21 +33,22 @@
         app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_text_view" />
 
 
-    <Button
+    <ImageView
         android:id="@+id/bottom_action_confirm_dialog_deny_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ОТМЕНА"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:src="@drawable/confirm_dialog_button"
+        android:scaleType="fitXY"
+        android:text="@string/stats_panel_am_title"
         android:textAppearance="@style/D"
         app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_accept_button"
         app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
 
-    <Button
+    <TextView
         android:id="@+id/bottom_action_confirm_dialog_accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ОК"
-        android:textAppearance="@style/D"
+        android:text="@string/stats_panel_am_title"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
 
