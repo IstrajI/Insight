@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/confirm_dialog_button"
             android:gravity="center"
@@ -76,7 +76,7 @@
         <TextView
             android:id="@+id/bottom_action_confirm_dialog_accept_button_text_view"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:background="@drawable/confirm_dialog_button"
             android:gravity="center"
             android:text="  ок  "
