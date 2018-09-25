@@ -11,47 +11,79 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
-    <TextView
-        android:id="@+id/bottom_action_confirm_dialog_title_text_view"
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="пРОДОЛЖИТЬ?"
-        android:textAppearance="@style/D"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/confirm_dialog_top_panel_left"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
+        app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_title_layout"
+        app:layout_constraintTop_toTopOf="@+id/bottom_action_confirm_dialog_title_layout"/>
+
+    <FrameLayout
+        android:id="@+id/bottom_action_confirm_dialog_title_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/confirm_dialog_top_panel_right"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/bottom_action_confirm_dialog_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:fontFamily="@font/d_cell"
+            android:text="пРОДОЛЖИТЬ?"
+            android:textSize="20sp" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/bottom_action_confirm_dialog_body_text_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:background="#e50e1609"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="Возвращение на станцию отнимет у вас одну единицу времени."
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout" />
 
-
-    <ImageView
-        android:id="@+id/bottom_action_confirm_dialog_deny_button"
-        android:layout_width="100dp"
-        android:layout_height="38dp"
-        android:src="@drawable/confirm_dialog_button"
-        android:scaleType="fitXY"
-        android:text="@string/stats_panel_am_title"
-        android:textAppearance="@style/D"
-        app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_accept_button"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
-
-    <TextView
-        android:id="@+id/bottom_action_confirm_dialog_accept_button"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/stats_panel_am_title"
+        android:background="@drawable/confirm_dialog_bottom_panel"
+        app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view">
 
+        <TextView
+            android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/confirm_dialog_button"
+            android:gravity="center"
+            android:text="оТМЕНА"
+            android:textAppearance="@style/D"
+            app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_accept_button_text_view"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/bottom_action_confirm_dialog_accept_button_text_view"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/confirm_dialog_button"
+            android:gravity="center"
+            android:text="  ок  "
+            android:textAppearance="@style/D"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_right"

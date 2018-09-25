@@ -40,12 +40,14 @@ import butterknife.BindView;
 
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
+import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.REQUEST_CODE;
 import static com.npgames.insight.ui.book.death.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
 import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
-        MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener{
+        MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener,
+        BottomActionConfirmDialog.BottomActionConfirmListener {
 
     public enum GameType {NEW_GAME, CONTINUE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
@@ -288,16 +290,24 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     //---------------------------- User Bottom Panel Actions ---------------------------------------
     //----------------------------------------------------------------------------------------------
+
+    public final int FIND_CLICK_REQUEST_CODE = 1;
+    public final int STATION_CLICK_REQUEST_CODE = 2;
+    public final int MED_BAY_CLICK_REQUEST_CODE = 3;
+    public final int ARMORY_CLICK_REQUEST_CODE = 4;
+
     @Override
     public void bottomPanelFindClick() {
         final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
 
         final Bundle bundle = new Bundle();
         bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_find_evidence_text));
+        bundle.putInt(REQUEST_CODE, FIND_CLICK_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
+        bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
-        //gameBookPresenter.onFindClick(paragraphTextHeight);
+
     }
 
     @Override
@@ -316,11 +326,11 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         final Bundle bundle = new Bundle();
         bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_station_text));
+        bundle.putInt(REQUEST_CODE, STATION_CLICK_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
+        bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
-
-/*        gameBookPresenter.onStationClick(paragraphTextHeight);*/
     }
 
     @Override
@@ -329,7 +339,9 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         final Bundle bundle = new Bundle();
         bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_med_bay_text));
+        bundle.putInt(REQUEST_CODE, MED_BAY_CLICK_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
+        bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
 
@@ -342,12 +354,11 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         final Bundle bundle = new Bundle();
         bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_armory_text));
+        bundle.putInt(REQUEST_CODE, ARMORY_CLICK_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
+        bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
-
-/*        final Intent intent = new Intent(this, ArmoryActivity.class);
-        startActivityForResult(intent, 1);*/
     }
 
     @Override
@@ -361,5 +372,42 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     public void onCloseBottomPanel() {
         bottomPanelView.onClose();
+    }
+
+    @Override
+    public void onConfirm(final int requestCode) {
+        switch (requestCode) {
+            case FIND_CLICK_REQUEST_CODE:
+                findConfirmed();
+                break;
+            case STATION_CLICK_REQUEST_CODE:
+                stationConfirmed();
+                break;
+
+            case MED_BAY_CLICK_REQUEST_CODE:
+                medBayConfirmed();
+                break;
+
+            case ARMORY_CLICK_REQUEST_CODE:
+                armoryConfirmed();
+                break;
+        }
+    }
+
+    public void findConfirmed() {
+        gameBookPresenter.onFindClick(paragraphTextHeight);
+    }
+
+    public void stationConfirmed() {
+        gameBookPresenter.onStationClick(paragraphTextHeight);
+    }
+
+    public void medBayConfirmed() {
+        gameBookPresenter.onMedBayClick(paragraphTextHeight);
+    }
+
+    public void armoryConfirmed() {
+        final Intent intent = new Intent(this, ArmoryActivity.class);
+        startActivityForResult(intent, 1);
     }
 }

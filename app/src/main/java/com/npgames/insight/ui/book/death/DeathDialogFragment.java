@@ -69,8 +69,7 @@ public class DeathDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().setCancelable(false);
         getDialog().setCanceledOnTouchOutside(false);
         getDialog().setOnKeyListener((dialogInterface, i, keyEvent) -> {
