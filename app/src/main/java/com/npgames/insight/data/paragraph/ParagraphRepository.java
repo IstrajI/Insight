@@ -82,7 +82,10 @@ public class ParagraphRepository {
     public Paragraph getSavedParagraph(final int availableHeight) {
         final int currentParagraphNumber = loadSavedParagraphNumber();
         paragraph = loadParagraph(currentParagraphNumber, availableHeight);
+
         paragraph.wasActionPressed = loadWasActionPressed();
+
+
         return paragraph;
     }
 
@@ -91,9 +94,14 @@ public class ParagraphRepository {
             addSpecialVisitedParagraphs(paragraphNumber);
         }
 
-        paragraph = loadParagraph(paragraphNumber, availableHeight);
-        paragraph.wasActionPressed = false;
-        return paragraph;
+        final Paragraph loadedParagraph = loadParagraph(paragraphNumber, availableHeight);
+
+        if (loadedParagraph != null) {
+            paragraph = loadedParagraph;
+            paragraph.wasActionPressed = loadWasActionPressed();
+        }
+
+        return loadedParagraph;
     }
 
     public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
