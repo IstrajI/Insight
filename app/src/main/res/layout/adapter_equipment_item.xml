@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="@dimen/spacing_8"
+              android:layout_margin="4dp"
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
@@ -16,13 +16,22 @@
         android:minLines="2"
         android:textSize="12sp"/>
 
-    <ImageView
-        android:id="@+id/image_view_equipment_item_picture"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        android:src="@drawable/blaster"/>
+        android:background="@drawable/pish">
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/image_view_equipment_item_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/blaster"/>
+    </FrameLayout>
 
     <Button
         android:id="@+id/button_equipment_take_on"
