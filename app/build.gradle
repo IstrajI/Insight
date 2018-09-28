@@ -52,5 +52,5 @@ dependencies {
     implementation 'com.github.bluejamesbond:textjustify-android:2.1.6'
 
     implementation 'com.uncopt:android.justified:1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

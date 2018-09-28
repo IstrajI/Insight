@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="4dp"
-              android:gravity="center_horizontal"
-              android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/text_view_equipment_item_name"
@@ -14,23 +14,31 @@
         android:gravity="center_horizontal"
         android:maxLines="2"
         android:minLines="2"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/pish">
+        android:id="@+id/equipment_item_picturelayout"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_equipment_item_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintDimensionRatio="H,1:1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/item_background">
 
         <ImageView
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:id="@+id/image_view_equipment_item_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:scaleType="centerInside"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/blaster"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/blaster" />
     </FrameLayout>
 
     <Button
@@ -38,12 +46,18 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="@string/armory_take_on_title"
-        android:textSize="8sp"/>
+        android:textSize="8sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_item_picturelayout" />
 
     <Button
+        app:layout_constraintTop_toBottomOf="@+id/button_equipment_take_on"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/button_equipment_take_out"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="@string/armory_take_out_title"
-        android:textSize="8sp"/>
-</LinearLayout>
+        android:textSize="8sp" />
+</android.support.constraint.ConstraintLayout>
