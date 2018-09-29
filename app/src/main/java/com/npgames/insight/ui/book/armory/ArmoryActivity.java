@@ -68,7 +68,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
     @Override
     public void onItemClick(final View view, final int position, final RecyclerView.Adapter adapter) {
         switch(view.getId()) {
-            case R.id.text_view_equipment_item_name:
+            case R.id.equipment_item_title_text_view:
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
 
@@ -83,7 +83,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
                 equipmentMoreDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
                 break;
 
-            case R.id.button_equipment_take_on:
+/*            case R.id.button_equipment_take_on:
                 final Equipment equipmentOn = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 armoryPresenter.takeOnEquipment(equipmentOn);
                 break;
@@ -91,7 +91,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.button_equipment_take_out:
                 final Equipment equipmentOff = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
                 armoryPresenter.takeOffEquipment(equipmentOff);
-                break;
+                break;*/
         }
     }
 

@@ -39,9 +39,9 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
-        holder.textView.setText(equipment.getName());
+        holder.textView.setText(equipment.getName().toUpperCase());
 
-        if (Equipment.Owner.ARRMORY.equals(equipment.getOwnedBy()) && equipment.getCanWear()) {
+/*        if (Equipment.Owner.ARRMORY.equals(equipment.getOwnedBy()) && equipment.getCanWear()) {
             holder.takeOnButton.setEnabled(true);
             holder.takeOutButton.setEnabled(false);
         } else if (Equipment.Owner.PLAYER.equals(equipment.getOwnedBy())) {
@@ -50,7 +50,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         } else {
             holder.takeOnButton.setEnabled(false);
             holder.takeOutButton.setEnabled(false);
-        }
+        }*/
 
         int image = R.drawable.blaster;
 
@@ -111,20 +111,20 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @BindView(R.id.text_view_equipment_item_name)
+        @BindView(R.id.equipment_item_title_text_view)
         protected TextView textView;
-        @BindView(R.id.button_equipment_take_on)
+/*        @BindView(R.id.button_equipment_take_on)
         protected Button takeOnButton;
         @BindView(R.id.button_equipment_take_out)
-        protected Button takeOutButton;
+        protected Button takeOutButton;*/
         @BindView(R.id.image_view_equipment_item_picture)
         protected ImageView pictureImageView;
 
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            takeOnButton.setOnClickListener(this);
-            takeOutButton.setOnClickListener(this);
+/*            takeOnButton.setOnClickListener(this);
+            takeOutButton.setOnClickListener(this);*/
             pictureImageView.setOnClickListener(this);
             textView.setOnClickListener(this);
         }
@@ -132,17 +132,17 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         @Override
         public void onClick(final View v) {
             switch (v.getId()) {
-                case R.id.text_view_equipment_item_name:
+                //case R.id.text_view_equipment_item_name:
                 case R.id.image_view_equipment_item_picture:
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
                     break;
-                case R.id.button_equipment_take_on:
+/*                case R.id.button_equipment_take_on:
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
 
                     break;
                 case R.id.button_equipment_take_out:
                     onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
-                    break;
+                    break;*/
             }
         }
     }
