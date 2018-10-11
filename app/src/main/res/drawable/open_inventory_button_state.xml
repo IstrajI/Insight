@@ -16,5 +16,4 @@
     <item android:state_focused="false" android:state_pressed="false" >
         <nine-patch android:src="@drawable/top_reworked_open_pos"/>
     </item>
-
 </selector>
