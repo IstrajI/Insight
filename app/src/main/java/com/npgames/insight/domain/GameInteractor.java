@@ -47,15 +47,8 @@ public class GameInteractor {
     }
 
     public Paragraph startNewGame(final int availableHeight) {
-        statsRepository.resetStats();
-        equipmentRepository.resetEquipment();
-        keyWordsRepository.resetKeyWords();
-        paragraphRepository.resetParagraphNumber();
-        paragraphRepository.resetSpecialVisitedParagraphs();
-        paragraphRepository.resetDistributedDexPoints();
-        paragraphRepository.resetDistributedPrcPoints();
-        paragraphRepository.resetPointsToDistribute();
-
+        clearGameSettings();
+        gameRepository.saveContinueGameAvailable(true);
         return nextParagraph(FIRST_PARAGRAPH_NUMBER, availableHeight);
     }
 
@@ -230,5 +223,19 @@ public class GameInteractor {
         }
 
         return null;
+    }
+
+    public void clearGameSettings() {
+        statsRepository.resetStats();
+        equipmentRepository.resetEquipment();
+        keyWordsRepository.resetKeyWords();
+        paragraphRepository.resetParagraphNumber();
+        paragraphRepository.resetSpecialVisitedParagraphs();
+        paragraphRepository.resetDistributedDexPoints();
+        paragraphRepository.resetDistributedPrcPoints();
+        paragraphRepository.resetPointsToDistribute();
+        paragraphRepository.resetWasActionPressed();
+
+        gameRepository.saveContinueGameAvailable(false);
     }
 }

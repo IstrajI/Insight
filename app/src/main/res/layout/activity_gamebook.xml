@@ -30,22 +30,15 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/main_background" />
 
+    <!--
             <ImageView
-                android:layout_marginTop="8dp"
-                android:layout_gravity="top"
                 android:layout_width="match_parent"
-                android:scaleType="fitStart"
                 android:layout_height="wrap_content"
-                android:src="@drawable/test_back" />
-
-            <ImageView
-                android:layout_marginTop="8dp"
                 android:layout_gravity="bottom"
-                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
-                android:layout_height="wrap_content"
                 android:src="@drawable/background_bottom" />
-
+-->
         </FrameLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,19 +48,43 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <com.npgames.insight.ui.book.top_panel.TopPanelView
-                    android:id="@+id/gamebook_stats_top_panel_view"
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/gamebook_stats_top_panel_laoyout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintLeft_toRightOf="@+id/gamebook_menu_button"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/gamebook_stats_top_panel_left_button_image_view"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:background="@drawable/top_background_left_button_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+
+                    <ImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/gamebook_stats_top_panel_left_button_image_view"
+                        android:id="@+id/gamebook_stats_top_panel_main_background_image_view"
+                        android:background="@drawable/top_background_test_1"
+                        android:layout_marginRight="16dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp" />
+
+                    <com.npgames.insight.ui.book.top_panel.TopPanelView
+                        android:id="@+id/gamebook_stats_top_panel_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
 
             <FrameLayout
                 android:id="@+id/frame_layout_game_book_page_root"

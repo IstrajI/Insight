@@ -152,6 +152,10 @@ public class ParagraphRepository {
         paragraphPreferences.saveWasActionPressed(paragraph.wasActionPressed);
     }
 
+    public void resetWasActionPressed() {
+        paragraphPreferences.saveWasActionPressed(false);
+    }
+
     //---------------------------- Current Paragraph -----------------------------------------------
     //----------------------------------------------------------------------------------------------
     public void saveParagraphNumber() {

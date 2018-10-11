@@ -2,6 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="#b2000000"
     android:layout_height="match_parent">
 
     <android.support.constraint.Guideline
@@ -12,13 +14,15 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <FrameLayout
+        app:layout_constraintVertical_chainStyle="packed"
         android:id="@+id/equipment_more_item_picture_layout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/armory_info_top"
+        android:background="@drawable/armory_item_top_2"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/equipment_more_title_text_view">
 
         <ImageView
             android:id="@+id/equipment_more_item_picture_image_view"
@@ -27,22 +31,65 @@
             android:layout_gravity="center" />
     </FrameLayout>
 
+
     <TextView
-        android:id="@+id/equipment_more_description_text_view"
+        android:id="@+id/equipment_more_title_text_view"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@+id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/equipment_more_item_picture_layout"
-        android:background="@drawable/armory_info_middle"/>
+        app:layout_constraintBottom_toTopOf="@+id/equipment_more_title_layout"
+        android:background="@drawable/armory_item_middle_2"/>
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/equipment_more_title_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@+id/guideline_right"
-        android:src="@drawable/armory_info_bottom"
-        app:layout_constraintTop_toBottomOf="@+id/equipment_more_description_text_view"/>
+        app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/equipment_more_discard_button_image_view"
+        android:background="#c6130e0e">
+
+        <TextView
+            android:padding="16dp"
+            android:id="@+id/equipment_more_description_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/equipment_more_discard_button_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/items_more_bottom_panel_discard"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/equipment_more_discard_button_image_view"
+        app:layout_constraintRight_toRightOf="@+id/guideline_right"
+        android:background="@drawable/items_more_bottom_panel_out"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout">
+
+        <TextView
+            android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:background="@drawable/confirm_dialog_button"
+            android:gravity="center"
+            android:text="оК"
+            android:textAppearance="@style/D"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_right"

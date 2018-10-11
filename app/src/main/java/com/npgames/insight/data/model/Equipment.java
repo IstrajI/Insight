@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model;
 
+import com.npgames.insight.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -86,7 +88,7 @@ public class Equipment {
         String BEAM = "BEAM";
         String BLASTER = "BLASTER";
         String ELECTROSHOCK = "ELECTROSHOCK";
-        String FlAK_JACKET = "FLACK_JACKET";
+        String FLAK_JACKET = "FLACK_JACKET";
         String GRENADE = "GRENADE";
         String GRENADE_1 = "GRENADE_1";
         String GRENADE_2 = "GRENADE_2";
@@ -94,5 +96,49 @@ public class Equipment {
         String OPEN_SPACE_EQUIPMENT = "OPEN_SPACE_EQUIPMENT";
         String POWER_SHIELD = "POWER_SHIELD";
         String TARGETTER = "TARGETTER";
+    }
+
+    public int getDrawable() {
+        int image = R.drawable.blaster;
+
+        switch (type) {
+            case Equipment.TYPE.BLASTER:
+                image = R.drawable.blaster3;
+                break;
+
+            case Equipment.TYPE.BEAM:
+                image = R.drawable.laser_2;
+                break;
+
+            case Equipment.TYPE.ELECTROSHOCK:
+                image = R.drawable.shoker_2;
+                break;
+
+            case Equipment.TYPE.AID_KIT:
+                image = R.drawable.medkit_3;
+                break;
+
+            case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
+                image = R.drawable.helmet_11_xxx;
+                break;
+
+            case Equipment.TYPE.GRENADE:
+                image = R.drawable.grenade_1;
+                break;
+
+            case Equipment.TYPE.FLAK_JACKET:
+                image = R.drawable.jaket;
+                break;
+
+            case Equipment.TYPE.POWER_SHIELD:
+                image = R.drawable.powershiled_8;
+                break;
+
+            case Equipment.TYPE.TARGETTER:
+                image = R.drawable.powershiled_8;
+                break;
+        }
+
+        return image;
     }
 }

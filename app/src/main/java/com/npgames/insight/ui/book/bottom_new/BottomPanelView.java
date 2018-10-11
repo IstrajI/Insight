@@ -2,13 +2,8 @@ package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
-import com.npgames.insight.ui.book.page.GamePageAdapter;
+import com.npgames.insight.ui.book.armory.EquipmentDialogFragment;
 
 import java.util.List;
 
@@ -58,7 +53,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected ImageView inventoryRightItemImageView;
 
     private InventoryPanelAdapter inventoryPanelAdapter;
-    private BottomPanelClickListener onClickListener;
+    private BottomPanelListener onClickListener;
     private boolean isPanelOpen = false;
 
     public BottomPanelView(Context context) {
@@ -90,7 +85,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         armoryButton.setOnClickListener(this);
     }
 
-    public void addClickListener(final BottomPanelClickListener onClickListener) {
+    public void addClickListener(final BottomPanelListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
@@ -124,29 +119,68 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    OnClickListener onLeftClickListener = new OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            onClickListener.bottomPanelShowItemInfo(inventoryPanelAdapter.getLeftItemPosition());
+        }
+    };
+
+    OnClickListener onMiddleClickListener = new OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            onClickListener.bottomPanelShowItemInfo(inventoryPanelAdapter.getMiddleItemPosition());
+        }
+    };
+
+    OnClickListener onRightClickListener = new OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            onClickListener.bottomPanelShowItemInfo(inventoryPanelAdapter.getRightItemPosition());
+        }
+    };
+
     @Override
     public void updatePanel(final int leftItem, final int middleItem, final int rightItem) {
-        if (leftItem != -1) {
-            inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));
-        }
+        inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));
+        inventoryLeftItemImageView.setOnClickListener(onLeftClickListener);
 
-        if (middleItem != -1) {
-            inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(middleItem));
-        }
+        inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(middleItem));
+        inventoryMiddleItemImageView.setOnClickListener(onMiddleClickListener);
 
-        if (rightItem != -1) {
-            inventoryRightItemImageView.setImageDrawable(getResources().getDrawable(rightItem));
-        }
+        inventoryRightItemImageView.setImageDrawable(getResources().getDrawable(rightItem));
+        inventoryRightItemImageView.setOnClickListener(onRightClickListener);
     }
 
     @Override
     public void blockLeftButton() {
-        inventoryLeftItemImageView.setEnabled(false);
+        inventoryMoveLeftButtonImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_left_inactive));
+        inventoryLeftWireImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_wire_left_inactive));
+        inventoryMoveLeftButtonImageView.setEnabled(false);
     }
 
     @Override
     public void blockRightButton() {
-        inventoryRightItemImageView.setEnabled(false);
+        inventoryMoveRightButtonImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_right_inactive));
+        inventoryRightWireImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_wire_right_inactive));
+        inventoryMoveRightButtonImageView.setEnabled(false);
+
+    }
+
+    @Override
+    public void unblockLeftButton() {
+        inventoryMoveLeftButtonImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_left));
+        inventoryLeftWireImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_wire_left));
+
+        inventoryMoveLeftButtonImageView.setEnabled(true);
+    }
+
+    @Override
+    public void unblockRightButton() {
+        inventoryMoveRightButtonImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_right));
+        inventoryRightWireImageView.setImageDrawable(getResources().getDrawable(R.drawable.inventory_wire_right));
+
+        inventoryMoveRightButtonImageView.setEnabled(true);
     }
 
     public void onOpen() {
@@ -157,12 +191,13 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         isPanelOpen = false;
     }
 
-    public interface BottomPanelClickListener {
+    public interface BottomPanelListener {
         void bottomPanelClick();
         void bottomPanelFindClick();
         void bottomPanelStationClick();
         void bottomPanelMedBayClick();
         void bottomPanelArmoryClick();
+        void bottomPanelShowItemInfo(final Equipment equipment);
     }
 
     private final OnTouchListener inventoryNavigationLeftButtonListener = new OnTouchListener() {
@@ -180,14 +215,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
                 case MotionEvent.ACTION_UP:
                     view.performClick();
                     inventoryPanelAdapter.goLeft();
-
-                case MotionEvent.ACTION_CANCEL:
-                    final Drawable inventoryWireLeft = getResources().getDrawable(R.drawable.inventory_wire_left);
-                    inventoryLeftWireImageView.setImageDrawable(inventoryWireLeft);
-
-                    final Drawable inventoryLeftButtonDrawable = getResources().getDrawable(R.drawable.inventory_left);
-                    inventoryMoveLeftButtonImageView.setImageDrawable(inventoryLeftButtonDrawable);
-
                     break;
             }
             return true;
@@ -209,14 +236,6 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
                 case MotionEvent.ACTION_UP:
                     view.performClick();
                     inventoryPanelAdapter.goRight();
-
-                case MotionEvent.ACTION_CANCEL:
-                    final Drawable inventoryRightWireeDrawable = getResources().getDrawable(R.drawable.inventory_wire_right);
-                    inventoryRightWireImageView.setImageDrawable(inventoryRightWireeDrawable);
-
-                    final Drawable inventoryRightButtonDrawable = getResources().getDrawable(R.drawable.inventory_right);
-                    inventoryMoveRightButtonImageView.setImageDrawable(inventoryRightButtonDrawable);
-
                     break;
             }
             return true;

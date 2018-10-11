@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
@@ -23,34 +24,46 @@ public class InventoryPanelAdapter {
     }
 
     public void goLeft() {
-        if (leftItemPosition > 0) {
-            leftItemPosition--;
-            middleItemPosition--;
-            rightItemPosition--;
+        leftItemPosition--;
+        middleItemPosition--;
+        rightItemPosition--;
 
-            final int leftImage = getDrawable(leftItemPosition);
-            final int middleImage = getDrawable(middleItemPosition);
-            final int rightImage = getDrawable(rightItemPosition);
+        final int leftImage = getDrawable(leftItemPosition);
+        final int middleImage = getDrawable(middleItemPosition);
+        final int rightImage = getDrawable(rightItemPosition);
 
-            listener.updatePanel(leftImage, middleImage, rightImage);
-        } else {
-            listener.blockLeftButton();
-        }
+        listener.updatePanel(leftImage, middleImage, rightImage);
+
+        checkVisualState();
     }
 
     public void goRight() {
-        if (rightItemPosition < equipments.size() - 1) {
-            leftItemPosition++;
-            middleItemPosition++;
-            rightItemPosition++;
+        leftItemPosition++;
+        middleItemPosition++;
+        rightItemPosition++;
 
-            final int leftImage = getDrawable(leftItemPosition);
-            final int middleImage = getDrawable(middleItemPosition);
-            final int rightImage = getDrawable(rightItemPosition);
+        final int leftImage = getDrawable(leftItemPosition);
+        final int middleImage = getDrawable(middleItemPosition);
+        final int rightImage = getDrawable(rightItemPosition);
 
-            listener.updatePanel(leftImage, middleImage, rightImage);
+        listener.updatePanel(leftImage, middleImage, rightImage);
+
+        checkVisualState();
+    }
+
+    private void checkVisualState() {
+        Log.d("TestPish", "leftItemPosition = " +leftItemPosition);
+
+        if (leftItemPosition == 0) {
+            listener.blockLeftButton();
         } else {
+            listener.unblockLeftButton();
+        }
+
+        if (rightItemPosition == equipments.size() - 1){
             listener.blockRightButton();
+        } else {
+            listener.unblockRightButton();
         }
     }
 
@@ -87,7 +100,7 @@ public class InventoryPanelAdapter {
                 image = R.drawable.grenade_1;
                 break;
 
-            case Equipment.TYPE.FlAK_JACKET:
+            case Equipment.TYPE.FLAK_JACKET:
                 image = R.drawable.jaket;
                 break;
 
@@ -117,21 +130,26 @@ public class InventoryPanelAdapter {
 
         listener.updatePanel(leftImage, middleImage, rightImage);
 
-/*        if (equipments.size() >= 3) {
-            leftItemPosition = 0;
-            middleItemPosition = 1;
-            rightItemPosition = 2;
-        } else if (equipments.size() >= 2){
-            leftItemPosition = 0;
-            middleItemPosition = 1;
-        } else if (equipments.size() >= 1) {
-            leftItemPosition = 0;
-        }*/
+        checkVisualState();
+    }
+
+    public Equipment getLeftItemPosition() {
+        return equipments.get(leftItemPosition);
+    }
+
+    public Equipment getRightItemPosition() {
+        return equipments.get(rightItemPosition);
+    }
+
+    public Equipment getMiddleItemPosition() {
+        return equipments.get(middleItemPosition);
     }
 
     public interface InventoryPanelListener {
         void updatePanel(final int leftItem, final int middleItem, final int rightItem);
         void blockLeftButton();
         void blockRightButton();
+        void unblockLeftButton();
+        void unblockRightButton();
     }
 }

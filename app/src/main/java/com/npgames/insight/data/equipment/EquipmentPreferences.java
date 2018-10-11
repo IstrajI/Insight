@@ -81,10 +81,10 @@ public class EquipmentPreferences {
         //FlakJacket
         final Stats flakJacketTakeOnStatsChanger = Stats.builder().setDex(-2).build();
         final Stats flakJacketTakeOffStatsChanger = Stats.builder().setDex(2).build();
-        final @Equipment.Owner String flakJacketOwner = preferences.getString(TYPE.FlAK_JACKET, String.valueOf(Equipment.Owner.ARRMORY));
+        final @Equipment.Owner String flakJacketOwner = preferences.getString(TYPE.FLAK_JACKET, String.valueOf(Equipment.Owner.ARRMORY));
         final String flakJacketName = resources.getString(R.string.armory_equipment_flak_jacket_title);
         final String flakJacketDescription = resources.getString(R.string.armory_equipment_flak_jacket_description);
-        equipments.add(new Equipment(TYPE.FlAK_JACKET, flakJacketTakeOnStatsChanger, flakJacketTakeOffStatsChanger, flakJacketOwner, flakJacketName, flakJacketDescription));
+        equipments.add(new Equipment(TYPE.FLAK_JACKET, flakJacketTakeOnStatsChanger, flakJacketTakeOffStatsChanger, flakJacketOwner, flakJacketName, flakJacketDescription));
 
         //OpenSpaceEqpt
         final Stats openSpaceEqptTakeOnStatsChanger = Stats.builder().setDex(-3).build();

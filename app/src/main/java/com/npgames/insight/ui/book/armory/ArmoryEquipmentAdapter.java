@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,7 +78,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                 image = R.drawable.grenade_1;
                 break;
 
-            case Equipment.TYPE.FlAK_JACKET:
+            case Equipment.TYPE.FLAK_JACKET:
                 image = R.drawable.jaket;
                 break;
 

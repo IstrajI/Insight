@@ -7,7 +7,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -24,6 +23,7 @@ import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
+import com.npgames.insight.ui.book.armory.EquipmentDialogFragment;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelView;
 import com.npgames.insight.ui.book.bottom_new.IBottomPanelView;
@@ -41,11 +41,10 @@ import butterknife.BindView;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.REQUEST_CODE;
-import static com.npgames.insight.ui.book.death.DeathDialogFragment.DEATH_DIALOG_FRAGMENT_TAG;
 import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
-        GameBookView, IBottomPanelView, BottomPanelView.BottomPanelClickListener, TopPanelView.TopPanelClickListener,
+        GameBookView, IBottomPanelView, BottomPanelView.BottomPanelListener, TopPanelView.TopPanelClickListener,
         MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener,
         BottomActionConfirmDialog.BottomActionConfirmListener {
 
@@ -307,7 +306,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
-
     }
 
     @Override
@@ -359,6 +357,17 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         bottomActionConfirmDialog.setConfirmationListener(this);
 
         bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
+    }
+
+
+    @Override
+    public void bottomPanelShowItemInfo(final Equipment equipment) {
+        final String name = equipment.getName();
+        final String description = equipment.getDescription();
+        final int drawable = equipment.getDrawable();
+
+        final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(name, description, drawable);
+        equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class GamePreferences {
 
     private static final String PREFERENCES_NAME = "gamePreferences";
     private final String ACHIEVEMENTS = "ACHIEVEMENTS";
+    private final String CONTINUE_GAME_AVAILABLE = "CONTINUE_GAME_AVAILABLE";
 
     private Set<String> achievements;
 
@@ -31,6 +32,19 @@ public class GamePreferences {
             gamePreferences = new GamePreferences();
         }
         return gamePreferences;
+    }
+
+
+    //---------------------------- Continue Game Available -----------------------------------------
+    //----------------------------------------------------------------------------------------------
+    boolean loadContinueGameAvailable() {
+        return sharedPreferences.getBoolean(CONTINUE_GAME_AVAILABLE, false);
+    }
+
+    void saveContinueGameAvailable(final boolean continueGameAvailable) {
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(CONTINUE_GAME_AVAILABLE, continueGameAvailable);
+        editor.apply();
     }
 
     //---------------------------- Achievements ----------------------------------------------------

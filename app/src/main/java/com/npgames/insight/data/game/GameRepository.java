@@ -36,4 +36,14 @@ public class GameRepository {
     public void saveAchievements() {
         gamePreferences.saveAchievements(achievements);
     }
+
+    //---------------------------- Continue Game Available -----------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public boolean getContinueGameAvailable() {
+        return gamePreferences.loadContinueGameAvailable();
+    }
+
+    public void saveContinueGameAvailable(final boolean continueGameAvailable) {
+        gamePreferences.saveContinueGameAvailable(continueGameAvailable);
+    }
 }

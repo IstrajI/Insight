@@ -139,7 +139,9 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         }
 
         if (gameInteractor.onDeath()) {
+            gameInteractor.clearGameSettings();
             getViewState().showDeathScreen();
+
         }
     }
 
