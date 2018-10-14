@@ -51,7 +51,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@+id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_text_view"
-        app:layout_constraintBottom_toTopOf="@+id/equipment_more_discard_button_image_view"
+        app:layout_constraintBottom_toTopOf="@+id/equipment_more_bottom_panel_discard_image_view"
         android:background="#c6130e0e">
 
         <TextView
@@ -62,14 +62,43 @@
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/equipment_more_discard_button_image_view"
+        android:id="@+id/equipment_more_bottom_panel_discard_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/items_more_bottom_panel_discard_3"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"/>
+
+    <ImageView
+        android:id="@+id/equipment_more_bottom_panel_middle_space_image_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/items_more_bottom_panel_test"
+        android:background="@drawable/items_more_bottom_panel_middle_space_3"
         app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-        app:layout_constraintRight_toRightOf="@+id/guideline_right"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintLeft_toRightOf="@+id/equipment_more_bottom_panel_discard_image_view"
+        app:layout_constraintRight_toLeftOf="@+id/equipment_more_bottom_panel_close_layout"/>
+
+    <FrameLayout
+        android:id="@+id/equipment_more_bottom_panel_close_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/items_more_bottom_panel_right_3"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout"
+        app:layout_constraintRight_toRightOf="@+id/guideline_right">
+
+        <TextView
+            android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:background="@drawable/confirm_dialog_button"
+            android:gravity="center"
+            android:text="оК"
+            android:textAppearance="@style/D"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </FrameLayout>
 
     <!--
 
@@ -90,17 +119,7 @@
         android:background="@drawable/items_more_bottom_panel_out"
         app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout">
 
-        <TextView
-            android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
-            android:layout_width="80dp"
-            android:layout_height="28dp"
-            android:background="@drawable/confirm_dialog_button"
-            android:gravity="center"
-            android:text="оК"
-            android:textAppearance="@style/D"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </android.support.constraint.ConstraintLayout>
 
