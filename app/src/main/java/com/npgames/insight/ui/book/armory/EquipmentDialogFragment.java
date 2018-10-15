@@ -33,6 +33,8 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
     protected ImageView itemPictureImageView;
     @BindView(R.id.equipment_more_title_text_view)
     protected TextView titleTextView;
+    @BindView(R.id.bottom_action_confirm_dialog_deny_button_text_view)
+    protected TextView buttonTextView;
 
     public static EquipmentDialogFragment createEquipmentDialogFragment(final String name, final String description, final int drawableID) {
         final Bundle bundle = new Bundle();
@@ -76,6 +78,11 @@ public class EquipmentDialogFragment extends DialogFragment implements View.OnCl
 
             return true;
         });
+
+        buttonTextView.setOnClickListener(view1 -> {
+            getDialog().cancel();
+        });
+
     }
 
     @Override

@@ -67,6 +67,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/items_more_bottom_panel_discard_3"
         app:layout_constraintTop_toBottomOf="@+id/equipment_more_title_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"/>
 
     <ImageView
