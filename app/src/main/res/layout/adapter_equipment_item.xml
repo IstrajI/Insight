@@ -42,8 +42,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view_equipment_item_picture">
 
-
-
         <TextView
             android:layout_margin="4dp"
             android:id="@+id/equipment_item_title_text_view"
@@ -59,7 +57,7 @@
             android:layout_width="match_parent"
             android:background="@drawable/armory_item_text"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="2dp">
 
             <TextView
                 android:id="@+id/equipment_item_wear_button_text_view"

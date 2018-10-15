@@ -1,9 +1,11 @@
 package com.npgames.insight.ui.book.armory;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -56,6 +58,14 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
         armoryEquipmentAdapter = new ArmoryEquipmentAdapter(getApplicationContext());
         armoryRecyclerView.setAdapter(armoryEquipmentAdapter);
 
+        statsTopPanel.post(() -> {
+            final int recyclerViewPadding = statsTopPanel.getHeight() + (int) (getResources().getDimension(R.dimen.spacing_8) * Resources.getSystem().getDisplayMetrics().density);
+            Log.d("TestPish", "topPadding = " +recyclerViewPadding);
+            armoryRecyclerView.setPadding(0, recyclerViewPadding,0,0);
+            equipmentLayoutManager.scrollToPositionWithOffset(0, 0);
+            //armoryRecyclerView.smoothScrollToPosition(recyclerViewPadding);
+        });
+
         armoryEquipmentAdapter.setOnItemClickListener(this);
         continueButton.setOnClickListener(this);
 
@@ -72,15 +82,12 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView, Recyc
             case R.id.image_view_equipment_item_picture:
                 final Equipment equipment = ((ArmoryEquipmentAdapter) adapter).getEquipmentByPosition(position);
 
-                final Bundle equipmentMoreBundle = new Bundle();
                 final String equipmentName = equipment.getName();
                 final String equipmentDescription = equipment.getDescription();
+                final int equipmentDrawable = equipment.getDrawable();
 
-                equipmentMoreBundle.putString(EquipmentDialogFragment.NAME, equipmentName);
-                equipmentMoreBundle.putString(EquipmentDialogFragment.DESCRIPTION, equipmentDescription);
-
-                equipmentMoreDialogFragment.setArguments(equipmentMoreBundle);
-                equipmentMoreDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
+                final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(equipmentName, equipmentDescription, equipmentDrawable);
+                equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
                 break;
 
 /*            case R.id.button_equipment_take_on:
