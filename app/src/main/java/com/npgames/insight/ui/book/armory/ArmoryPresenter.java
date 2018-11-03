@@ -32,15 +32,16 @@ public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
         getViewState().showStats(stats);
     }
 
-    void takeOnEquipment(final Equipment equipmentOn) {
-        equipmentInteractor.takeOnEquipment(equipmentOn);
+    public void takeOnOffEquipment(final Equipment equipment) {
+        switch (equipment.getOwnedBy()) {
+            case Equipment.Owner.ARRMORY:
+                equipmentInteractor.takeOnEquipment(equipment);
+                break;
 
-        final Stats stats = statsRepository.getStats();
-        getViewState().showStats(stats);
-    }
-
-    void takeOffEquipment(final Equipment equipmentOff) {
-        equipmentInteractor.takeOffEquipment(equipmentOff);
+            case Equipment.Owner.PLAYER:
+                equipmentInteractor.takeOffEquipment(equipment);
+                break;
+        }
 
         final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);

@@ -85,6 +85,7 @@ public class BottomActionConfirmDialog extends DialogFragment {
                 case MotionEvent.ACTION_UP:
                     view.performClick();
                     confirmListener.onConfirm(getArguments().getInt(REQUEST_CODE));
+                    dismiss();
 
                 case MotionEvent.ACTION_CANCEL:
                     final Drawable defaultAcceptButton = getResources().getDrawable(R.drawable.confirm_dialog_button);

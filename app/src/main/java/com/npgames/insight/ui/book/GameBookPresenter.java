@@ -2,7 +2,6 @@ package com.npgames.insight.ui.book;
 
 import android.content.Context;
 import android.text.TextPaint;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -71,11 +70,15 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     }
 
     public void onMedBayClick(final int availableHeight) {
-        userActionInteractor.loadMedBay(availableHeight);
+        loadGameParagraph(availableHeight, userActionInteractor.getMedBayNumber());
     }
 
     public void onStationClick(final int availableHeight) {
-        userActionInteractor.loadStation(availableHeight);
+        loadGameParagraph(availableHeight, userActionInteractor.getStationNumber());
+    }
+
+    public void onArmoryClick(final int availableHeight) {
+        loadGameParagraph(availableHeight, userActionInteractor.getArmoryNumber());
     }
 
     //---------------------------- Game Modes ------------------------------------------------------

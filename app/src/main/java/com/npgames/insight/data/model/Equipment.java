@@ -98,11 +98,48 @@ public class Equipment {
         String TARGETTER = "TARGETTER";
     }
 
+    public int pish() {
+        int image;
+
+        switch (type) {
+            case Equipment.TYPE.BLASTER:
+                return getBlasterDrawable(ownedBy);
+
+            case Equipment.TYPE.BEAM:
+                return getBeamDrawable(ownedBy);
+
+            case Equipment.TYPE.ELECTROSHOCK:
+                return getElectroshockDrawable(ownedBy);
+
+            case Equipment.TYPE.AID_KIT:
+                return getAidKitDrawable(ownedBy);
+
+            case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
+                return getOpenSpaceEquipmentDrawable(ownedBy);
+
+            case Equipment.TYPE.GRENADE:
+                return getGrenadeDrawable(ownedBy);
+
+            case Equipment.TYPE.FLAK_JACKET:
+                return getFlakJacketDrawable(ownedBy);
+
+            case Equipment.TYPE.POWER_SHIELD:
+                return getPowerShieldDrawable(ownedBy);
+
+            case Equipment.TYPE.TARGETTER:
+                return getTargetterDrawable(ownedBy);
+
+            default:
+                return getTargetterDrawable(ownedBy);
+        }
+    }
+
     public int getDrawable() {
         int image = R.drawable.blaster;
 
         switch (type) {
             case Equipment.TYPE.BLASTER:
+
                 image = R.drawable.blaster3;
                 break;
 
@@ -140,5 +177,104 @@ public class Equipment {
         }
 
         return image;
+    }
+
+    private int getBlasterDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.blaster3;
+            case Owner.PLAYER:
+                return R.drawable.blaster3_taked_on;
+            default:
+                return R.drawable.blaster3;
+        }
+    }
+
+    private int getBeamDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.laser_2;
+            case Owner.PLAYER:
+                return R.drawable.laser_taked_on_test;
+            default:
+                return R.drawable.laser_2;
+        }
+    }
+
+    private int getElectroshockDrawable(final String ownedBy) {
+        switch (ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.shoker_2;
+            case Owner.PLAYER:
+                return R.drawable.shoker_2_take_on;
+            default:
+                return R.drawable.shoker_2;
+        }
+    }
+
+    private int getAidKitDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.medkit_3;
+            case Owner.PLAYER:
+                return R.drawable.medkit_3_take_on;
+            default:
+                return R.drawable.medkit_3;
+        }
+    }
+
+    private int getOpenSpaceEquipmentDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.helmet_11_xxx;
+            case Owner.PLAYER:
+                return R.drawable.helmet_11_xxx_take_on;
+            default:
+                return R.drawable.helmet_11_xxx;
+        }
+    }
+
+    private int getGrenadeDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.grenade_1;
+            case Owner.PLAYER:
+                return R.drawable.grenade_1_taked_on;
+            default:
+                return R.drawable.grenade_1;
+        }
+    }
+
+    private int getFlakJacketDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.jaket;
+            case Owner.PLAYER:
+                return R.drawable.jaket_taked_on;
+            default:
+                return R.drawable.jaket;
+        }
+    }
+
+    private int getPowerShieldDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.powershiled_7;
+            case Owner.PLAYER:
+                return R.drawable.powershiled_7_taked_on;
+            default:
+                return R.drawable.powershiled_7;
+        }
+    }
+
+    private int getTargetterDrawable(final String ownedBy) {
+        switch(ownedBy) {
+            case Owner.ARRMORY:
+                return R.drawable.powershiled_7;
+            case Owner.PLAYER:
+                return R.drawable.powershiled_7_taked_on;
+            default:
+                return R.drawable.powershiled_7;
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ParagraphPreferences{
@@ -35,7 +36,7 @@ public class ParagraphPreferences{
     //----------------------------------------------------------------------------------------------
 
     Set<String> loadSpecialVisitedParagraphs() {
-        return preferences.getStringSet(SPECIAL_VISITED_PARAGRAPHS, Collections.emptySet());
+        return preferences.getStringSet(SPECIAL_VISITED_PARAGRAPHS, new HashSet<>());
     }
 
     void saveSpecialVisitedParagraphs(final Set<String> specialVisitedParagraphs) {

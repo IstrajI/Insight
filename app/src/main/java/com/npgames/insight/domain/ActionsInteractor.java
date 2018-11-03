@@ -43,7 +43,7 @@ public class ActionsInteractor {
         actions.put(67, this::paragraph67Action);
         actions.put(75, this::paragraph75Action);
         actions.put(81, this::paragraph81Action);
-        actions.put(87, this::paragraph87Action);
+        //actions.put(87, this::paragraph87Action);
         actions.put(97, this::paragraph97Action);
         actions.put(100, this::paragraph100Action);
         actions.put(104, this::paragraph104Action);
@@ -91,7 +91,7 @@ public class ActionsInteractor {
 
         //here is invalidate value
         final Stats changedStats = Stats.builder()
-                .setHp(-30)
+                .setHp(-99)
                 .build();
 
         statsRepository.updateStats(changedStats);
@@ -158,14 +158,14 @@ public class ActionsInteractor {
         return null;
     }
 
-    private Void paragraph87Action() {
+/*    private Void paragraph87Action() {
         final Stats changedStats = Stats.builder()
                 .setTime(-1)
                 .build();
         statsRepository.updateStats(changedStats);
 
         return null;
-    }
+    }*/
 
     private Void paragraph97Action() {
         final Stats changedStats = Stats.builder()

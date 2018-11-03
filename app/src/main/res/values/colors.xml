@@ -7,7 +7,12 @@
 
     <!-- Base color -->
     <color name="white">#FFFFFF</color>
+    <color name="red">#c42623</color>
+    <color name="green">#59995a</color>
 
     <color name="death_dialog_go_to_main_menu_text_default_color">#eebdbc</color>
-    <color name="death_dialog_go_to_main_menu_text_action_color">#ec2a27</color>
+    <color name="death_dialog_go_to_main_menu_text_action_color">@color/red</color>
+
+    <color name="top_panel_view_stats_minus_color">@color/red</color>
+    <color name="top_panel_view_stats_plus_color">@color/green</color>
 </resources>

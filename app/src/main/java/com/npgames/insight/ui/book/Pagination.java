@@ -61,12 +61,19 @@ public class Pagination {
         if (textBlock.content.length() == 0) return pages;
         final int lastPageIndex = pages.size() - 1;
 
-        if (textBlock.getViewHeight() > pageHeight) {
+        final int he = textBlock.getViewHeight();
+
+        if (he > pageHeight) {
             final String suitedText = calculateRemainedText((BlockText) textBlock, pageHeight);
             pages.get(lastPageIndex).blocks.add(new BlockText(suitedText));
 
             final int beginIndex = suitedText.length();
             final String nextPageText = textBlock.content.substring(beginIndex);
+
+            if (nextPageText.equals(StringUtills.emptyString)) {
+                return pages;
+            }
+
             final BlockText nextPageBlock = new BlockText(nextPageText);
             pages.add(new Page());
             return paginateText(nextPageBlock, pages, pageMaxHeight);

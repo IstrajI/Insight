@@ -62,6 +62,13 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <style name="D.Negative">
+        <item name="android:textColor">#ff0000</item>
+    </style>
+
+    <style name="D.Positive">
+        <item name="android:textColor">@color/top_panel_view_stats_plus_color</item>
+    </style>
     <style name="E" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/e_glasstown_nbp</item>
         <item name="android:textSize">16dp</item>

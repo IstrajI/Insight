@@ -160,12 +160,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case R.id.adapter_game_page_button_jump_button:
                 try {
                     final int nextParagraph = Integer.parseInt(((GamePageAdapter) adapter).getItemAt(position).content);
-                    if (nextParagraph == 0) {
-                        Intent intent = new Intent(this, CreatePlayerActivity.class);
-                        startActivityForResult(intent, 1);
-                        return;
-                    }
-                    if (nextParagraph == 100) {
+                    if (nextParagraph == 1000) {
                         Intent armoryIntent = new Intent(this, ArmoryActivity.class);
                         startActivityForResult(armoryIntent, 2);
                         return;
@@ -416,7 +411,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     public void armoryConfirmed() {
-        final Intent intent = new Intent(this, ArmoryActivity.class);
-        startActivityForResult(intent, 1);
+        gameBookPresenter.onArmoryClick(paragraphTextHeight);
     }
 }

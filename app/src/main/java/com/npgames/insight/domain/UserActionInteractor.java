@@ -11,6 +11,7 @@ public class UserActionInteractor {
     private final int MED_BAY_PARAGRAPH = 54;
     private final int STATION_PARAGRAPH = 95;
     private final int SEARCHING_PARAGRAPH_INCREMENT = 10;
+    private final int ARMORY_PARAGRAPH = 100;
 
     private ParagraphRepository paragraphRepository;
     private StatsRepository statsRepository;
@@ -20,12 +21,16 @@ public class UserActionInteractor {
         statsRepository = StatsRepository.getInstance(context);
     }
 
-    public Paragraph loadMedBay(final int availableHeight) {
-        return paragraphRepository.getNextParagraph(MED_BAY_PARAGRAPH, availableHeight);
+    public int getMedBayNumber() {
+        return MED_BAY_PARAGRAPH;
     }
 
-    public Paragraph loadStation(final int availableHeight) {
-        return paragraphRepository.getNextParagraph(STATION_PARAGRAPH, availableHeight);
+    public int getStationNumber() {
+        return STATION_PARAGRAPH;
+    }
+
+    public int getArmoryNumber() {
+        return ARMORY_PARAGRAPH;
     }
 
     public Paragraph loadSearchingParagraph(final int availableHeight) {

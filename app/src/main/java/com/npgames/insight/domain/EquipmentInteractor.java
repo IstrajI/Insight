@@ -24,10 +24,12 @@ public class EquipmentInteractor {
     }
 
     public void takeOnEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.PLAYER);
         statsRepository.updateStats(equipment.getTakeOnStatsChanger());
     }
 
     public void takeOffEquipment(final Equipment equipment) {
+        equipment.setOwnedBy(Equipment.Owner.ARRMORY);
         statsRepository.updateStats(equipment.getTakeOffStatsChanger());
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 
+import com.npgames.insight.application.Constants;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
@@ -13,6 +14,7 @@ import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.book.Pagination;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,15 +56,8 @@ public class ParagraphRepository {
     }
 
     private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
-        final String paragraphResName = ParagraphParser.formatParagraphResName(paragraphNumber);
-        final int paragraphResId = resources.getIdentifier(paragraphResName, "string", packageName);
-        final String paragraphString;
 
-        try {
-             paragraphString = resources.getString(paragraphResId);
-        } catch (Resources.NotFoundException ex) {
-            return null;
-        }
+        final String paragraphString = getParagraphStringOrEmpty(paragraphNumber);
 
         final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
 
@@ -108,6 +103,17 @@ public class ParagraphRepository {
         paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
     }
 
+    public String getParagraphStringOrEmpty(final int paragraphNumber) {
+        final String paragraphResName = ParagraphParser.formatParagraphResName(paragraphNumber);
+        final int paragraphResId = resources.getIdentifier(paragraphResName, "string", packageName);
+
+        try {
+            return resources.getString(paragraphResId);
+        } catch (Resources.NotFoundException ex) {
+            return "";
+        }
+    }
+
     public Paragraph getParagraph() {
         return paragraph;
     }
@@ -139,7 +145,7 @@ public class ParagraphRepository {
     }
 
     public void resetSpecialVisitedParagraphs() {
-        specialVisitedParagraphs = Collections.emptySet();
+        specialVisitedParagraphs = new HashSet<>();
     }
 
     //---------------------------- Was Action Pressed ----------------------------------------------

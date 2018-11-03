@@ -17,6 +17,7 @@ import com.npgames.insight.data.keywords.KeyWordsRepository;
 import com.npgames.insight.data.paragraph.ParagraphRepository;
 import com.npgames.insight.data.stats.StatsRepository;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import static com.npgames.insight.data.paragraph.ParagraphRepository.FIRST_PARAGRAPH_NUMBER;
@@ -49,7 +50,7 @@ public class GameInteractor {
     public Paragraph startNewGame(final int availableHeight) {
         clearGameSettings();
         gameRepository.saveContinueGameAvailable(true);
-        return nextParagraph(FIRST_PARAGRAPH_NUMBER, availableHeight);
+        return nextParagraph(59, availableHeight);
     }
 
     public void saveGame() {
@@ -57,6 +58,7 @@ public class GameInteractor {
         gameRepository.saveAchievements();
         keyWordsRepository.saveKeyWords();
         paragraphRepository.saveParagraphNumber();
+        paragraphRepository.saveSpecialVisitedParagraphs();
         paragraphRepository.saveWasActionPressed();
         statsRepository.saveStats();
     }
@@ -94,7 +96,18 @@ public class GameInteractor {
             }
 
         } else {
+            checkParagraphExists();
             checkJumpsConditions();
+        }
+    }
+
+    private void checkParagraphExists() {
+        final Paragraph paragraph = paragraphRepository.getParagraph();
+
+        for (final BlockButton jump: paragraph.getJumps() ) {
+            if (paragraphRepository.getParagraphStringOrEmpty(jump.getParagraphNumber()).equals("")) {
+                jump.setEnable(false);
+            }
         }
     }
 

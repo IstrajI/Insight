@@ -3,28 +3,26 @@ package com.npgames.insight.ui.book.top_panel;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.MvpDelegate;
 import com.npgames.insight.R;
-import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.model.Stats;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TopPanelView extends FrameLayout implements View.OnClickListener{
+public class TopPanelView extends FrameLayout implements View.OnClickListener {
     @BindView(R.id.text_view_stats_panel_mem_bar)
     protected TextView amnTextView;
     @BindView(R.id.image_view_stats_panel_time_bar)
@@ -40,7 +38,14 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
     @BindView(R.id.top_panel_menu_button_image_view)
     protected ImageView menuButtonImageView;
 
+    private Animation inAnimation;
+    private Animation outAnimation;
+
+    private Stats stats;
+
+
     protected TopPanelClickListener topPanelClickListener;
+
     public TopPanelView(@NonNull Context context) {
         super(context);
         init(context, null);
@@ -69,7 +74,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        initStates(getY(), getHeight());
+        //initStates(getY(), getHeight());
     }
 
     private void init(final Context context, final AttributeSet attrs) {
@@ -78,31 +83,71 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
         menuButtonImageView.setOnClickListener(this);
     }
 
-    public void setStats(final Stats stats) {
-        amnTextView.setText(String.valueOf(stats.getAmn()));
-        timeTextView.setText(String.valueOf(stats.getTime()));
-        hpTextView.setText(String.valueOf(stats.getHp()));
-        prcTextView.setText(String.valueOf(stats.getPrc()));
-        dexTextView.setText(String.valueOf(stats.getDex()));
-        aurTextView.setText(String.valueOf(stats.getAur()));
+    public void setStats(final Stats newStats) {
+        if (stats == null) {
+            setStats2(newStats);
+        } else {
+            updateStats(newStats);
+        }
+
     }
 
-    public void onTopMenuButtonClick(final View view) {
-        setY(isOpen ? closeYposition : openYposition);
-        invalidate();
-        isOpen = !isOpen;
+    public void setStats2(final Stats newStats) {
+        amnTextView.setText(String.valueOf(newStats.getAmn()));
+        aurTextView.setText(String.valueOf(newStats.getAur()));
+        timeTextView.setText(String.valueOf(newStats.getTime()));
+        dexTextView.setText(String.valueOf(newStats.getDex()));
+        hpTextView.setText(String.valueOf(newStats.getHp()));
+        prcTextView.setText(String.valueOf(newStats.getPrc()));
+
+        this.stats = Stats.builder()
+                .setTime(newStats.getTime())
+                .setAmn(newStats.getAmn())
+                .setAur(newStats.getAur())
+                .setDex(newStats.getDex())
+                .setHp(newStats.getHp())
+                .setPrc(newStats.getPrc())
+                .build();
     }
 
-    private float openYposition;
-    private float closeYposition;
-    private boolean isOpen = true;
-    private boolean isPositionsInited = false;
+    public void updateStats(final Stats newStats) {
+        updateStatView(amnTextView, newStats.getAmn(), stats.getAmn());
+        updateStatView(timeTextView, newStats.getTime(), stats.getTime());
+        updateStatView(dexTextView, newStats.getDex(), stats.getDex());
+        updateStatView(hpTextView, newStats.getHp(), stats.getHp());
+        updateStatView(prcTextView, newStats.getPrc(), stats.getPrc());
+        updateStatView(aurTextView, newStats.getAur(), stats.getAur());
 
-    void initStates(final float openYposition, final int viewHeight) {
-        if (isPositionsInited) return;
-        this.openYposition = openYposition;
-        this.closeYposition = openYposition - viewHeight / 2;
-        isPositionsInited = true;
+        this.stats = Stats.builder()
+                .setTime(newStats.getTime())
+                .setAmn(newStats.getAmn())
+                .setAur(newStats.getAur())
+                .setDex(newStats.getDex())
+                .setHp(newStats.getHp())
+                .setPrc(newStats.getPrc())
+                .build();
+    }
+
+    private void updateStatView(final TextView statView, final int newValue, final int oldValue) {
+        final int difference = newValue - oldValue;
+
+        if (difference != 0) {
+
+            if (difference > 0) {
+                statView.setTextAppearance(getContext(), R.style.D_Positive);
+                statView.setText("+" +String.valueOf(difference));
+            } else {
+                statView.setTextAppearance(getContext(), R.style.D_Negative);
+                statView.setText(String.valueOf(difference));
+            }
+
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(() -> {
+                statView.setTextAppearance(getContext(), R.style.D);
+                statView.setText(String.valueOf(newValue));
+            }, 700);
+
+        }
     }
 
     public void setClickListener(final TopPanelClickListener topPanelClickListener) {
@@ -111,7 +156,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener{
 
     @Override
     public void onClick(final View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.top_panel_menu_button_image_view:
                 topPanelClickListener.topPanelOnMenuClick();
                 break;

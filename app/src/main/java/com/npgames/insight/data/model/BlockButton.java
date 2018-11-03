@@ -8,10 +8,13 @@ import static com.npgames.insight.data.model.BlockArea.BlockType.BUTTON;
 public class BlockButton extends BlockArea implements Serializable{
     private int height;
     private boolean isEnable;
+    private int paragraphNumber;
+
     public BlockButton(final String content){
         this.type = BUTTON;
         this.content = content;
         this.isEnable = true;
+        this.paragraphNumber = Integer.parseInt(content);
     }
 
     @Override
@@ -25,5 +28,9 @@ public class BlockButton extends BlockArea implements Serializable{
 
     public boolean isEnable() {
         return this.isEnable;
+    }
+
+    public int getParagraphNumber() {
+        return paragraphNumber;
     }
 }

@@ -29,7 +29,7 @@ public class ParagraphParser {
         final Pattern jumpsPattern = Pattern.compile("\\#(\\d+)\\#");
         final Matcher jumpsMatcher = jumpsPattern.matcher(paragraphText);
 
-        final Pattern actionPattern = Pattern.compile("\\^(\\d+)\\|?(.+)\\^");
+        final Pattern actionPattern = Pattern.compile("\\^(.+)\\^");
         final Matcher actionMatcher = actionPattern.matcher(paragraphText);
 
         int lastMatchEndPosition = 0;
@@ -59,10 +59,8 @@ public class ParagraphParser {
                 matchStartPosition = actionMatcher.start();
                 matchEndPosition = actionMatcher.end();
 
-                final int actionBlockCode = Integer.parseInt(actionMatcher.group(1));
-
-                final String actionBlockText = actionMatcher.group(2);
-                clickBlock = new BlockAction(actionBlockText, actionBlockCode);
+                final String actionBlockText = actionMatcher.group(1);
+                clickBlock = new BlockAction(actionBlockText);
 
                 actionFound = actionMatcher.find();
             }
