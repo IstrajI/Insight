@@ -43,49 +43,19 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
+
         holder.textView.setText(equipment.getName().toUpperCase());
+        holder.pictureImageView.setImageDrawable(resources.getDrawable(equipment.getDrawable()));
 
-        int image = R.drawable.blaster;
-
-        switch (equipment.getType()) {
-            case Equipment.TYPE.BLASTER:
-                image = R.drawable.blaster3;
-                break;
-
-            case Equipment.TYPE.BEAM:
-                image = R.drawable.laser_2;
-                break;
-
-            case Equipment.TYPE.ELECTROSHOCK:
-                image = R.drawable.shoker_2;
-                break;
-
-            case Equipment.TYPE.AID_KIT:
-                image = R.drawable.medkit_3;
-                break;
-
-            case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
-                image = R.drawable.helmet_11_xxx;
-                break;
-
-            case Equipment.TYPE.GRENADE:
-                image = R.drawable.grenade_1;
-                break;
-
-            case Equipment.TYPE.FLAK_JACKET:
-                image = R.drawable.jaket;
-                break;
-
-            case Equipment.TYPE.POWER_SHIELD:
-                image = R.drawable.powershiled_8 ;
-                break;
-
-            case Equipment.TYPE.TARGETTER:
-                image = R.drawable.targetter_4_xxx;
-                break;
+        if (equipment.getOwnedBy().equals(Equipment.Owner.ARRMORY)) {
+            holder.wearButtonTextView.setText("НАДЕТЬ");
+            holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish));
+            holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text));
+        } else if (equipment.getOwnedBy().equals(Equipment.Owner.PLAYER)) {
+            holder.wearButtonTextView.setText("СНЯТЬ");
+            holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish_taked_on));
+            holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text_taked_on));
         }
-
-        holder.pictureImageView.setImageDrawable(resources.getDrawable(image));
     }
 
     @Override
@@ -107,7 +77,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
         return equipments.get(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.equipment_item_title_text_view)
         protected TextView textView;
         @BindView(R.id.image_view_equipment_item_picture)
@@ -136,26 +106,8 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
 
                 case R.id.equipment_item_wear_button_text_view:
                     final Equipment clickedEquipment = equipments.get(getAdapterPosition());
-                    if (clickedEquipment.getOwnedBy().equals(Equipment.Owner.PLAYER)) {
-                        wearButtonTextView.setText("Надеть");
-                        pictureImageView.setImageDrawable(resources.getDrawable(R.drawable.laser_2));
-                        itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish));
-                        itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text));
-                    } else if (clickedEquipment.getOwnedBy().equals(Equipment.Owner.ARRMORY)) {
-                        wearButtonTextView.setText("Снять");
-                        pictureImageView.setImageDrawable(resources.getDrawable(R.drawable.laser_taked_on_test));
-                        itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish_taked_on));
-                        itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text_taked_on));
-                    }
-
                     wearable.takeOnOffEquipment(clickedEquipment);
-/*                case R.id.button_equipment_take_on:
-                    onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
-
-                    break;
-                case R.id.button_equipment_take_out:
-                    onItemClickListener.onItemClick(v, getAdapterPosition(), ArmoryEquipmentAdapter.this);
-                    break;*/
+                    notifyItemChanged(getAdapterPosition());
             }
         }
     }

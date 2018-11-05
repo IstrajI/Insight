@@ -119,14 +119,18 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             }
         });
 
-        bottomPanelView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            final float openPosition = bottomPanelView.getTop();
-            final float closePosition = Resources.getSystem().getDisplayMetrics().heightPixels -
-                                        actionsFrameLayout.getHeight()
-                                        + getResources().getDimension(R.dimen.spacing_8);
+        bottomPanelView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                final float openPosition = bottomPanelView.getTop();
+                final float closePosition = Resources.getSystem().getDisplayMetrics().heightPixels -
+                        actionsFrameLayout.getHeight()
+                        + GameBookActivity.this.getResources().getDimension(R.dimen.spacing_8);
 
-            bottomPanelPresenter.initOpenClosePositions(openPosition, closePosition);
-            bottomPanelPresenter.openCloseBottomPanel();
+                bottomPanelPresenter.initOpenClosePositions(openPosition, closePosition);
+                bottomPanelPresenter.openCloseBottomPanel();
+                bottomPanelView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
         });
 
 
@@ -162,6 +166,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                     final int nextParagraph = Integer.parseInt(((GamePageAdapter) adapter).getItemAt(position).content);
                     if (nextParagraph == 1000) {
                         Intent armoryIntent = new Intent(this, ArmoryActivity.class);
+                        armoryIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivityForResult(armoryIntent, 2);
                         return;
                     }
@@ -371,6 +376,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     }
 
     public void onOpenBottomPanel() {
+        bottomPanelPresenter.loadPlayerEquipment();
         bottomPanelView.onOpen();
     }
 

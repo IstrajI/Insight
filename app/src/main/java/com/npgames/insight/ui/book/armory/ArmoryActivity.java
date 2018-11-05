@@ -16,15 +16,18 @@ import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
+import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 
 import java.util.List;
 
 import butterknife.BindView;
 
+import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
+
 
 public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
-        View.OnClickListener, ArmoryEquipmentAdapter.Wearable {
+        View.OnClickListener, ArmoryEquipmentAdapter.Wearable, TopPanelView.TopPanelClickListener, MenuDialogFragment.MenuDialogClickListener {
 
     @BindView(R.id.recycler_view_armory_equipment)
     protected RecyclerView armoryRecyclerView;
@@ -66,6 +69,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
             equipmentLayoutManager.scrollToPositionWithOffset(0, 0);
             //armoryRecyclerView.smoothScrollToPosition(recyclerViewPadding);
         });
+        statsTopPanel.setClickListener(this);
 
         armoryEquipmentAdapter.setWearable(this);
         continueButton.setOnClickListener(this);
@@ -99,7 +103,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
     @Override
     public void takeOnOffEquipment(final Equipment equipment) {
         armoryPresenter.takeOnOffEquipment(equipment);
-        //showStatsDifference(Stats.builder().build());
     }
 
     @Override
@@ -110,5 +113,17 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
 
         final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(equipmentName, equipmentDescription, equipmentDrawable);
         equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
+    }
+
+    @Override
+    public void topPanelOnMenuClick() {
+        final MenuDialogFragment menuDialogFragment = new MenuDialogFragment();
+        menuDialogFragment.setOnClickListener(this);
+        menuDialogFragment.show(getSupportFragmentManager(), MENU_DIALOG_FRAGMENT_TAG);
+    }
+
+    @Override
+    public void menuDialogOnGoToMainMenuClick() {
+        finish();
     }
 }

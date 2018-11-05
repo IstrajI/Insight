@@ -9,6 +9,10 @@
     <string name="stats_panel_dex_title">ЛОВ</string>
     <string name="stats_panel_prc_title">ТОЧ</string>
 
+
+    <!-- Bottom Panel -->
+    <string name="bottom_panel_empty_inventory_title">иНВЕНТАРЬ ПУСТ</string>
+
     <!-- Home Screen -->
     <string name="home_screen_continue_title">пРОДОЛЖИТЬ</string>
     <string name="home_screen_new_game_title">нОВАЯ ИГРА</string>

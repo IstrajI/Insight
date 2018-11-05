@@ -49,7 +49,7 @@ public class EquipmentPreferences {
         //Aid Kit
         final Stats aidKitTakeOnStatsChanger = Stats.builder().setDex(-1).build();
         final Stats aidKitTakeOffStatsChanger = Stats.builder().setDex(1).build();
-        final @Equipment.Owner String aidKitOwner = preferences.getString(TYPE.AID_KIT, String.valueOf(Equipment.Owner.PLAYER));
+        final @Equipment.Owner String aidKitOwner = preferences.getString(TYPE.AID_KIT, String.valueOf(Equipment.Owner.ARRMORY));
         final String aidKitName = resources.getString(R.string.armory_equipment_aid_kit_title);
         final String aidKitDescription = resources.getString(R.string.armory_equipment_aid_kit_description);
         equipments.add(new Equipment(TYPE.AID_KIT, aidKitTakeOnStatsChanger, aidKitTakeOffStatsChanger, aidKitOwner, aidKitName, aidKitDescription));
@@ -57,7 +57,7 @@ public class EquipmentPreferences {
         //Beam
         final Stats beamTakeOnStatsChanger = Stats.builder().setDex(-2).build();
         final Stats beamTakeOffStatsChanger = Stats.builder().setDex(2).build();
-        final @Equipment.Owner String beamOwner = preferences.getString(TYPE.BEAM, String.valueOf(Equipment.Owner.PLAYER));
+        final @Equipment.Owner String beamOwner = preferences.getString(TYPE.BEAM, String.valueOf(Equipment.Owner.ARRMORY));
         final String beamName = resources.getString(R.string.armory_equipment_beam_title);
         final String beamDescription = resources.getString(R.string.armory_equipment_beam_description);
         equipments.add(new Equipment(TYPE.BEAM, beamTakeOnStatsChanger, beamTakeOffStatsChanger, beamOwner, beamName, beamDescription));

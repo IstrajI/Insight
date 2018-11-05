@@ -54,8 +54,8 @@ public class EquipmentInteractor {
 
 
 
-        //return resultEquipments;
-        return equipments;
+        return resultEquipments;
+        //return equipments;
     }
 
     private boolean canWear(final Equipment equipment) {

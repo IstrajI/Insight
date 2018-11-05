@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
@@ -51,6 +52,8 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     protected ImageView inventoryMiddleItemImageView;
     @BindView(R.id.bottom_panel_right_item_image_view)
     protected ImageView inventoryRightItemImageView;
+    @BindView(R.id.bottom_panel_empty_inventory_text_view)
+    protected TextView inventoryNoItemsTextView;
 
     private InventoryPanelAdapter inventoryPanelAdapter;
     private BottomPanelListener onClickListener;
@@ -98,6 +101,14 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         inventoryPanelAdapter.update(equipments);
     }
 
+    public void showEmptyInventoryMessage() {
+        inventoryNoItemsTextView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideEmptyInventoryMessage() {
+        inventoryNoItemsTextView.setVisibility(View.GONE);
+    }
+
     @Override
     public void onClick(final View v) {
         switch (v.getId()) {
@@ -141,16 +152,33 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     };
 
     @Override
-    public void updatePanel(final int leftItem, final int middleItem, final int rightItem) {
-        inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftItem));
+    public void updatePanelLeft(int leftDrawable) {
+        inventoryLeftItemImageView.setVisibility(View.VISIBLE);
+        inventoryLeftItemImageView.setImageDrawable(getResources().getDrawable(leftDrawable));
         inventoryLeftItemImageView.setOnClickListener(onLeftClickListener);
+    }
 
-        inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(middleItem));
+    @Override
+    public void updatePanelMiddle(int middleDrawable) {
+        inventoryMiddleItemImageView.setVisibility(View.VISIBLE);
+        inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(middleDrawable));
         inventoryMiddleItemImageView.setOnClickListener(onMiddleClickListener);
+    }
 
-        inventoryRightItemImageView.setImageDrawable(getResources().getDrawable(rightItem));
+    @Override
+    public void updatePanelRight(int rightDrawable) {
+        inventoryRightItemImageView.setVisibility(View.VISIBLE);
+        inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(rightDrawable));
         inventoryRightItemImageView.setOnClickListener(onRightClickListener);
     }
+
+    @Override
+    public void resetPanelDrawables() {
+        inventoryLeftItemImageView.setVisibility(View.INVISIBLE);
+        inventoryMiddleItemImageView.setVisibility(View.INVISIBLE);
+        inventoryRightItemImageView.setVisibility(View.INVISIBLE);
+    }
+
 
     @Override
     public void blockLeftButton() {

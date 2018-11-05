@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.data.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +29,9 @@ public class InventoryPanelAdapter {
         middleItemPosition--;
         rightItemPosition--;
 
-        final int leftImage = getDrawable(leftItemPosition);
-        final int middleImage = getDrawable(middleItemPosition);
-        final int rightImage = getDrawable(rightItemPosition);
-
-        listener.updatePanel(leftImage, middleImage, rightImage);
+        listener.updatePanelLeft(getDrawable(leftItemPosition));
+        listener.updatePanelMiddle(getDrawable(middleItemPosition));
+        listener.updatePanelRight(getDrawable(rightItemPosition));
 
         checkVisualState();
     }
@@ -42,25 +41,21 @@ public class InventoryPanelAdapter {
         middleItemPosition++;
         rightItemPosition++;
 
-        final int leftImage = getDrawable(leftItemPosition);
-        final int middleImage = getDrawable(middleItemPosition);
-        final int rightImage = getDrawable(rightItemPosition);
-
-        listener.updatePanel(leftImage, middleImage, rightImage);
+        listener.updatePanelLeft(getDrawable(leftItemPosition));
+        listener.updatePanelMiddle(getDrawable(middleItemPosition));
+        listener.updatePanelRight(getDrawable(rightItemPosition));
 
         checkVisualState();
     }
 
     private void checkVisualState() {
-        Log.d("TestPish", "leftItemPosition = " +leftItemPosition);
-
         if (leftItemPosition == 0) {
             listener.blockLeftButton();
         } else {
             listener.unblockLeftButton();
         }
 
-        if (rightItemPosition == equipments.size() - 1){
+        if (rightItemPosition == equipments.size() - 1 || rightItemPosition == 0){
             listener.blockRightButton();
         } else {
             listener.unblockRightButton();
@@ -120,15 +115,30 @@ public class InventoryPanelAdapter {
         this.equipments.clear();
         this.equipments.addAll(equipments);
 
-        leftItemPosition = 0;
-        middleItemPosition = 1;
-        rightItemPosition = 2;
+        this.leftItemPosition = 0;
+        this.middleItemPosition = 0;
+        this.rightItemPosition = 0;
 
-        final int leftImage = getDrawable(leftItemPosition);
-        final int middleImage = getDrawable(middleItemPosition);
-        final int rightImage = getDrawable(rightItemPosition);
+        listener.resetPanelDrawables();
 
-        listener.updatePanel(leftImage, middleImage, rightImage);
+        if (equipments.size() > 0) {
+            leftItemPosition = 0;
+            listener.updatePanelLeft(this.equipments.get(leftItemPosition).getDrawable());
+
+            listener.hideEmptyInventoryMessage();
+        } else {
+            listener.showEmptyInventoryMessage();
+        }
+
+        if (equipments.size() > 1) {
+            middleItemPosition = 1;
+            listener.updatePanelMiddle(this.equipments.get(middleItemPosition).getDrawable());
+        }
+
+        if (equipments.size() > 2) {
+            rightItemPosition = 2;
+            listener.updatePanelRight(this.equipments.get(rightItemPosition).getDrawable());
+        }
 
         checkVisualState();
     }
@@ -146,7 +156,13 @@ public class InventoryPanelAdapter {
     }
 
     public interface InventoryPanelListener {
-        void updatePanel(final int leftItem, final int middleItem, final int rightItem);
+        //void updatePanel(final int leftItem, final int middleItem, final int rightItem);
+        void updatePanelLeft(final int leftDrawable);
+        void updatePanelMiddle(final int middleDrawable);
+        void updatePanelRight(final int rightDrawable);
+        void showEmptyInventoryMessage();
+        void hideEmptyInventoryMessage();
+        void resetPanelDrawables();
         void blockLeftButton();
         void blockRightButton();
         void unblockLeftButton();
