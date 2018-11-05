@@ -18,6 +18,8 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     protected TextView continueButton;
     @BindView(R.id.button_home_new_game)
     protected TextView newGameButton;
+    @BindView(R.id.button_home_about)
+    protected TextView aboutGameButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     protected void bindViews(){
         continueButton.setOnClickListener(this);
         newGameButton.setOnClickListener(this);
+        aboutGameButton.setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +43,10 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
             case R.id.button_home_new_game:
                 ActivityNavigator.startGameBookActivity(this, GameBookActivity.GameType.NEW_GAME);
                 break;
+            case R.id.button_home_about:
+                ActivityNavigator.startAuthorsActivity(this);
+                break;
+
         }
     }
 }

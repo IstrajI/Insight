@@ -62,6 +62,6 @@ public class EquipmentInteractor {
         final int playerDex = statsRepository.getStats().getDex();
         final int equipmentDexChange = equipment.getTakeOnStatsChanger().getDex();
 
-        return playerDex + equipmentDexChange >= LOW_DEX_BORDER;
+        return playerDex + equipmentDexChange >= LOW_DEX_BORDER || Equipment.Owner.PLAYER.equals(equipment.getOwnedBy());
     }
 }

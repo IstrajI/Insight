@@ -32,7 +32,6 @@ import com.npgames.insight.ui.book.death.DeathDialogFragment;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
-import com.npgames.insight.ui.player.CreatePlayerActivity;
 
 import java.util.List;
 
@@ -364,7 +363,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void bottomPanelShowItemInfo(final Equipment equipment) {
         final String name = equipment.getName();
         final String description = equipment.getDescription();
-        final int drawable = equipment.getDrawable();
+        final int drawable = equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR);
 
         final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(name, description, drawable);
         equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);

@@ -168,7 +168,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
     @Override
     public void updatePanelRight(int rightDrawable) {
         inventoryRightItemImageView.setVisibility(View.VISIBLE);
-        inventoryMiddleItemImageView.setImageDrawable(getResources().getDrawable(rightDrawable));
+        inventoryRightItemImageView.setImageDrawable(getResources().getDrawable(rightDrawable));
         inventoryRightItemImageView.setOnClickListener(onRightClickListener);
     }
 

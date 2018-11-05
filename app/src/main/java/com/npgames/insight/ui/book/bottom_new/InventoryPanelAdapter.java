@@ -1,11 +1,8 @@
 package com.npgames.insight.ui.book.bottom_new;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
-import com.npgames.insight.data.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +26,9 @@ public class InventoryPanelAdapter {
         middleItemPosition--;
         rightItemPosition--;
 
-        listener.updatePanelLeft(getDrawable(leftItemPosition));
-        listener.updatePanelMiddle(getDrawable(middleItemPosition));
-        listener.updatePanelRight(getDrawable(rightItemPosition));
+        listener.updatePanelLeft(equipments.get(leftItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
+        listener.updatePanelMiddle(equipments.get(middleItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
+        listener.updatePanelRight(equipments.get(rightItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
 
         checkVisualState();
     }
@@ -41,9 +38,9 @@ public class InventoryPanelAdapter {
         middleItemPosition++;
         rightItemPosition++;
 
-        listener.updatePanelLeft(getDrawable(leftItemPosition));
-        listener.updatePanelMiddle(getDrawable(middleItemPosition));
-        listener.updatePanelRight(getDrawable(rightItemPosition));
+        listener.updatePanelLeft(equipments.get(leftItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
+        listener.updatePanelMiddle(equipments.get(middleItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
+        listener.updatePanelRight(equipments.get(rightItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
 
         checkVisualState();
     }
@@ -62,55 +59,6 @@ public class InventoryPanelAdapter {
         }
     }
 
-    private int getDrawable(final int itemPosition) {
-        if (itemPosition > equipments.size()) {
-            return -1;
-        }
-
-        int image = R.drawable.blaster;
-        final Equipment equipment = equipments.get(itemPosition);
-
-        switch (equipment.getType()) {
-            case Equipment.TYPE.BLASTER:
-                image = R.drawable.blaster3;
-                break;
-
-            case Equipment.TYPE.BEAM:
-                image = R.drawable.laser_2;
-                break;
-
-            case Equipment.TYPE.ELECTROSHOCK:
-                image = R.drawable.shoker_2;
-                break;
-
-            case Equipment.TYPE.AID_KIT:
-                image = R.drawable.medkit_3;
-                break;
-
-            case Equipment.TYPE.OPEN_SPACE_EQUIPMENT:
-                image = R.drawable.helmet_11_xxx;
-                break;
-
-            case Equipment.TYPE.GRENADE:
-                image = R.drawable.grenade_1;
-                break;
-
-            case Equipment.TYPE.FLAK_JACKET:
-                image = R.drawable.jaket;
-                break;
-
-            case Equipment.TYPE.POWER_SHIELD:
-                image = R.drawable.powershiled_8;
-                break;
-
-            case Equipment.TYPE.TARGETTER:
-                image = R.drawable.powershiled_8;
-                break;
-        }
-
-        return image;
-    }
-
     public void update(final List<Equipment> equipments) {
         this.equipments.clear();
         this.equipments.addAll(equipments);
@@ -123,7 +71,7 @@ public class InventoryPanelAdapter {
 
         if (equipments.size() > 0) {
             leftItemPosition = 0;
-            listener.updatePanelLeft(this.equipments.get(leftItemPosition).getDrawable());
+            listener.updatePanelLeft(this.equipments.get(leftItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
 
             listener.hideEmptyInventoryMessage();
         } else {
@@ -132,12 +80,12 @@ public class InventoryPanelAdapter {
 
         if (equipments.size() > 1) {
             middleItemPosition = 1;
-            listener.updatePanelMiddle(this.equipments.get(middleItemPosition).getDrawable());
+            listener.updatePanelMiddle(this.equipments.get(middleItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
         }
 
         if (equipments.size() > 2) {
             rightItemPosition = 2;
-            listener.updatePanelRight(this.equipments.get(rightItemPosition).getDrawable());
+            listener.updatePanelRight(this.equipments.get(rightItemPosition).getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR));
         }
 
         checkVisualState();

@@ -22,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentAdapter.ViewHolder> {
-
     private List<Equipment> equipments;
     private Context context;
     private Wearable wearable;
@@ -43,11 +42,14 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
-
         holder.textView.setText(equipment.getName().toUpperCase());
-        holder.pictureImageView.setImageDrawable(resources.getDrawable(equipment.getDrawable()));
+        holder.pictureImageView.setImageDrawable(resources.getDrawable(equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.DEFAULT)));
 
-        if (equipment.getOwnedBy().equals(Equipment.Owner.ARRMORY)) {
+        if (!equipment.getCanWear()) {
+            holder.wearButtonTextView.setText("НАДЕТЬ");
+            holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_disabled));
+            holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text_disabled));
+        } else if (equipment.getOwnedBy().equals(Equipment.Owner.ARRMORY) ) {
             holder.wearButtonTextView.setText("НАДЕТЬ");
             holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish));
             holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text));
@@ -93,7 +95,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             super(itemView);
             ButterKnife.bind(this, itemView);
             pictureImageView.setOnClickListener(this);
-            textView.setOnClickListener(this);
+            itemBottomBackgroundLayout.setOnClickListener(this);
             wearButtonTextView.setOnClickListener(this);
         }
 

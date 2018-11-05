@@ -45,5 +45,11 @@ public class ArmoryPresenter extends MvpPresenter<ArmoryView>{
 
         final Stats stats = statsRepository.getStats();
         getViewState().showStats(stats);
+
+        checkPish();
+    }
+
+    public void checkPish() {
+        getViewState().showEquipment(equipmentInteractor.loadEquipment());
     }
 }

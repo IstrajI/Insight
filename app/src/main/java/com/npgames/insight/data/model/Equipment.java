@@ -98,7 +98,29 @@ public class Equipment {
         String TARGETTER = "TARGETTER";
     }
 
-    public int getDrawable() {
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DRAWABLE_COLOR_MODEL {
+        String USE_BLUE_COLOR = "USE_BLUE_COLOR";
+        String USE_GREEN_COLOR = "USE_GREEN_COLOR";
+        String DEFAULT = "DEFAULT";
+    }
+
+    public int getDrawable(final @DRAWABLE_COLOR_MODEL String drawableColorModel) {
+        final @Owner String ownedBy;
+        switch(drawableColorModel) {
+            case DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR:
+                ownedBy = Owner.ARRMORY;
+                break;
+
+            case DRAWABLE_COLOR_MODEL.USE_GREEN_COLOR:
+                ownedBy = Owner.ARRMORY;
+                break;
+
+            case DRAWABLE_COLOR_MODEL.DEFAULT:
+            default:
+                ownedBy = this.ownedBy;
+        }
+
         switch (type) {
             case Equipment.TYPE.BLASTER:
                 return getBlasterDrawable(ownedBy);
@@ -135,7 +157,7 @@ public class Equipment {
     private int getBlasterDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.blaster3;
+                return canWear ? R.drawable.blaster3 : R.drawable.blaster3_disabled;
             case Owner.PLAYER:
                 return R.drawable.blaster3_taked_on;
             default:
@@ -146,29 +168,29 @@ public class Equipment {
     private int getBeamDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.laser_2;
+                return canWear ? R.drawable.laser_2 : R.drawable.laser_2_disabled;
             case Owner.PLAYER:
                 return R.drawable.laser_taked_on_test;
             default:
-                return R.drawable.laser_2;
+                return R.drawable.blaster3_disabled;
         }
     }
 
     private int getElectroshockDrawable(final String ownedBy) {
         switch (ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.shoker_2;
+                return canWear ? R.drawable.shoker_2: R.drawable.shoker_2_disabled;
             case Owner.PLAYER:
                 return R.drawable.shoker_2_take_on;
             default:
-                return R.drawable.shoker_2;
+                return R.drawable.blaster3_disabled2;
         }
     }
 
     private int getAidKitDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.medkit_3;
+                return canWear ? R.drawable.medkit_3 : R.drawable.medkit_3_disabled;
             case Owner.PLAYER:
                 return R.drawable.medkit_3_take_on;
             default:
@@ -179,7 +201,7 @@ public class Equipment {
     private int getOpenSpaceEquipmentDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.helmet_11_xxx;
+                return canWear ? R.drawable.helmet_11_xxx : R.drawable.helmet_disabled;
             case Owner.PLAYER:
                 return R.drawable.helmet_11_xxx_take_on;
             default:
@@ -190,7 +212,7 @@ public class Equipment {
     private int getGrenadeDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.grenade_1;
+                return canWear ? R.drawable.grenade_1 : R.drawable.grenade_1_disabled;
             case Owner.PLAYER:
                 return R.drawable.grenade_1_taked_on;
             default:
@@ -201,7 +223,7 @@ public class Equipment {
     private int getFlakJacketDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.jaket;
+                return canWear ? R.drawable.jaket: R.drawable.jaket_disabled;
             case Owner.PLAYER:
                 return R.drawable.jaket_taked_on;
             default:
@@ -212,7 +234,7 @@ public class Equipment {
     private int getPowerShieldDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.powershiled_7;
+                return canWear ? R.drawable.powershiled_7: R.drawable.powershiled_disabled;
             case Owner.PLAYER:
                 return R.drawable.powershiled_7_taked_on;
             default:
@@ -223,7 +245,7 @@ public class Equipment {
     private int getTargetterDrawable(final String ownedBy) {
         switch(ownedBy) {
             case Owner.ARRMORY:
-                return R.drawable.powershiled_7;
+                return canWear ? R.drawable.powershiled_7 : R.drawable.powershiled_disabled;
             case Owner.PLAYER:
                 return R.drawable.powershiled_7_taked_on;
             default:

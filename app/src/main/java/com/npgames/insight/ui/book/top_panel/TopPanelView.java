@@ -1,12 +1,16 @@
 package com.npgames.insight.ui.book.top_panel;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.transition.Fade;
+import android.support.transition.Transition;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,12 +145,24 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 statView.setText(String.valueOf(difference));
             }
 
-            final Handler handler2 = new Handler();
-            handler2.postDelayed(() -> {
-                statView.setTextAppearance(getContext(), R.style.D);
-                statView.setText(String.valueOf(newValue));
-            }, 700);
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    statView.setTextAppearance(getContext(), R.style.D);
+                    statView.setText(String.valueOf(newValue));
+                }
+            };
 
+            final Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(700);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                handler.sendMessage(handler.obtainMessage());
+            });
+
+            thread.start();
         }
     }
 

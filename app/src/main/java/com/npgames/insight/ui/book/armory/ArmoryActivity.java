@@ -15,7 +15,6 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
-import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 
@@ -109,7 +108,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
     public void showDetailedInfo(final Equipment equipment) {
         final String equipmentName = equipment.getName();
         final String equipmentDescription = equipment.getDescription();
-        final int equipmentDrawable = equipment.getDrawable();
+        final int equipmentDrawable = equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR);
 
         final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(equipmentName, equipmentDescription, equipmentDrawable);
         equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
