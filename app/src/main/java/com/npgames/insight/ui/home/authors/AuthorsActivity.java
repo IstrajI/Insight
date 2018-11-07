@@ -7,10 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import com.npgames.insight.R;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 
-public class AuthorsActivity extends AppCompatActivity {
+public class AuthorsActivity extends BaseMvpActivity {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authors);
+    }
+
+    @Override
+    protected void bindViews() {
+
     }
 }

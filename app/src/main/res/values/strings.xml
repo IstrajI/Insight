@@ -14,12 +14,12 @@
     <string name="bottom_panel_empty_inventory_title">иНВЕНТАРЬ ПУСТ</string>
 
     <!-- Home Screen -->
-    <string name="home_screen_continue_title">пРОДОЛЖИТЬ</string>
-    <string name="home_screen_new_game_title">нОВАЯ ИГРА</string>
-    <string name="home_screen_settings_title">нАСТРОЙКИ</string>
-    <string name="home_screen_rules_title">пРАВИЛА</string>
-    <string name="home_screen_achievements_title">дОСТИЖЕНИЯ</string>
-    <string name="home_screen_about_title">аВТОРЫ</string>
+    <string name="home_screen_continue_title">ПРОДОЛЖИТЬ</string>
+    <string name="home_screen_new_game_title">НОВАЯ ИГРА</string>
+    <string name="home_screen_settings_title">НАСТРОЙКИ</string>
+    <string name="home_screen_rules_title">ПРАВИЛА</string>
+    <string name="home_screen_achievements_title">ДОСТИЖЕНИЯ</string>
+    <string name="home_screen_about_title">АВТОРЫ</string>
 
     <!-- Menu -->
     <string name="game_book_got_to_main_menu_title">В главное меню</string>

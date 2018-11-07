@@ -59,7 +59,7 @@
 
     <style name="D" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/d_cell</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="D.Negative">
@@ -68,6 +68,10 @@
 
     <style name="D.Positive">
         <item name="android:textColor">@color/top_panel_view_stats_plus_color</item>
+    </style>
+
+    <style name="D.Disabled">
+        <item name="android:textColor">@color/disabled_text_color</item>
     </style>
     <style name="E" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/e_glasstown_nbp</item>

@@ -96,7 +96,6 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             ButterKnife.bind(this, itemView);
             pictureImageView.setOnClickListener(this);
             itemBottomBackgroundLayout.setOnClickListener(this);
-            wearButtonTextView.setOnClickListener(this);
         }
 
         @Override
@@ -106,7 +105,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
                     wearable.showDetailedInfo(equipments.get(getAdapterPosition()));
                     break;
 
-                case R.id.equipment_item_wear_button_text_view:
+                case R.id.equipment_item_bottom_background_layout:
                     final Equipment clickedEquipment = equipments.get(getAdapterPosition());
                     wearable.takeOnOffEquipment(clickedEquipment);
                     notifyItemChanged(getAdapterPosition());

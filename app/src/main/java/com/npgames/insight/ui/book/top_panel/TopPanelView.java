@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -145,24 +146,25 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 statView.setText(String.valueOf(difference));
             }
 
-            final Handler handler = new Handler() {
+            Animation animation = new AlphaAnimation(getContext(), null);
+            animation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void handleMessage(Message msg) {
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
                     statView.setTextAppearance(getContext(), R.style.D);
                     statView.setText(String.valueOf(newValue));
                 }
-            };
 
-            final Thread thread = new Thread(() -> {
-                try {
-                    Thread.sleep(700);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                @Override
+                public void onAnimationRepeat(Animation animation) {
                 }
-                handler.sendMessage(handler.obtainMessage());
             });
-
-            thread.start();
+            animation.setDuration(700);
+            statView.setAnimation(animation);
+            animation.start();
         }
     }
 
