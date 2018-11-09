@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -93,6 +94,8 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         final DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ScreenUtils.init(metrics.widthPixels, metrics.heightPixels);
+
+        Log.d("TestPish", "" +getResources().getDisplayMetrics().density);
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="j_continue">Продолжить</string>
+    <string name="j_continue">ПРОДОЛЖИТЬ</string>
     <!-- intro -->
     <!-- 500 -->
     <string-array name="j500_t">

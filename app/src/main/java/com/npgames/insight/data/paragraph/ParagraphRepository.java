@@ -42,7 +42,6 @@ public class ParagraphRepository {
     }
 
     ParagraphRepository(final Context context) {
-        Log.d("TestPish","constructor");
         resources = context.getResources();
         packageName = context.getPackageName();
 
@@ -196,7 +195,6 @@ public class ParagraphRepository {
     }
 
     public void resetDistributedDexPoints() {
-        Log.d("TestPish", "reset");
         distributedDexPoints = 0;
         //paragraphPreferences.saveDistributedDexPoints(0);
     }

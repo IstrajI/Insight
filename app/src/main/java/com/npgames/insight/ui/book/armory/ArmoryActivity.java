@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -31,7 +32,7 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
     @BindView(R.id.recycler_view_armory_equipment)
     protected RecyclerView armoryRecyclerView;
     @BindView(R.id.button_armory_continue)
-    protected Button continueButton;
+    protected TextView continueButton;
 
     private EquipmentDialogFragment equipmentMoreDialogFragment;
     @BindView(R.id.gamebook_stats_top_panel_view)
@@ -63,7 +64,6 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
 
         statsTopPanel.post(() -> {
             final int recyclerViewPadding = statsTopPanel.getHeight() + (int) (getResources().getDimension(R.dimen.spacing_8) * Resources.getSystem().getDisplayMetrics().density);
-            Log.d("TestPish", "topPadding = " + recyclerViewPadding);
             armoryRecyclerView.setPadding(0, recyclerViewPadding, 0, 0);
             equipmentLayoutManager.scrollToPositionWithOffset(0, 0);
             //armoryRecyclerView.smoothScrollToPosition(recyclerViewPadding);

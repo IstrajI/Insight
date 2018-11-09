@@ -93,14 +93,12 @@ public class ParagraphPreferences{
     public int loadPointsToDistribute() {
         final int MAX_POINTS_TO_DISTRIBUTE = 4;
         final int pointsToDistribute = preferences.getInt(POINTS_TO_DISTRIBUTE, MAX_POINTS_TO_DISTRIBUTE);
-        Log.d("TestPish", "load preferences pointsToD = "+pointsToDistribute);
         return pointsToDistribute;
     }
 
     public void savePointsToDistribute(final int pointsToDistribute) {
         final SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(POINTS_TO_DISTRIBUTE, pointsToDistribute);
-        Log.d("TestPish", "save preferences pointsToD = "+pointsToDistribute);
         editor.apply();
     }
 }

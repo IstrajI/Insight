@@ -43,7 +43,7 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Equipment equipment = equipments.get(position);
         holder.textView.setText(equipment.getName().toUpperCase());
-        holder.pictureImageView.setImageDrawable(resources.getDrawable(equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.DEFAULT)));
+        holder.pictureImageView.setImageResource(equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.DEFAULT));
 
         if (!equipment.getCanWear()) {
             holder.wearButtonTextView.setText("НАДЕТЬ");
