@@ -50,7 +50,7 @@ public class GameInteractor {
     public Paragraph startNewGame(final int availableHeight) {
         clearGameSettings();
         gameRepository.saveContinueGameAvailable(true);
-        return nextParagraph(59, availableHeight);
+        return nextParagraph(500, availableHeight);
     }
 
     public void saveGame() {
@@ -70,6 +70,11 @@ public class GameInteractor {
         return nextParagraph;
     }
 
+    public boolean isContinueGameAvailable() {
+        Log.d("TestPish", "currentSavedParagraph = " +paragraphRepository.loadSavedParagraphNumber());
+        return (paragraphRepository.loadSavedParagraphNumber() != 500);
+    }
+
     public Paragraph nextParagraph(final int paragraphNumber, final int availableHeight) {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
         checkJumpStatus(nextParagraph);
@@ -81,6 +86,14 @@ public class GameInteractor {
             final BlockCreatePlayerButtons blockCreatePlayerButtons = ((BlockCreatePlayerButtons) blockAreas.get(blockAreas.size() - 1));
             blockCreatePlayerDex.setDexPoints(statsRepository.getStats().getDex());
             blockCreatePlayerPrc.setPrcPoints(statsRepository.getStats().getPrc());
+        }
+
+        final int MED_BAY_PARAGRAPH = 54;
+        if (nextParagraph.paragraphNumber == MED_BAY_PARAGRAPH) {
+            for (BlockAction blockAction : nextParagraph.getActions()) {
+                final int MAX_HP = 22;
+                blockAction.setEnable(statsRepository.getStats().getHp() < MAX_HP);
+            }
         }
 
         return nextParagraph;

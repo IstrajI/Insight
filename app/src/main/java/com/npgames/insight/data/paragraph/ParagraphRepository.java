@@ -167,7 +167,7 @@ public class ParagraphRepository {
         paragraphPreferences.saveCurrentParagraphNumber(paragraph.paragraphNumber);
     }
 
-    private int loadSavedParagraphNumber() {
+    public int loadSavedParagraphNumber() {
         return paragraphPreferences.loadCurrentParagraphNumber();
     }
 

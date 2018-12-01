@@ -47,6 +47,18 @@ public class Paragraph {
         return blockJumps;
     }
 
+    public List<BlockAction> getActions() {
+        final List<BlockAction> blockActions = new ArrayList<>();
+
+        for (final BlockArea blockArea: getBlockAreas()) {
+            if (blockArea.type == BlockArea.BlockType.ACTION) {
+                blockActions.add((BlockAction) blockArea);
+            }
+        }
+
+        return blockActions;
+    }
+
     public boolean hasActions() {
         for (final BlockArea blockArea: getBlockAreas()) {
             if (blockArea.type == BlockArea.BlockType.ACTION || blockArea.type == BlockArea.BlockType.CREATE_PLAYER_DEX) {

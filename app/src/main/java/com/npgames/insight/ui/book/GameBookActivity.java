@@ -95,13 +95,42 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ScreenUtils.init(metrics.widthPixels, metrics.heightPixels);
 
-        Log.d("TestPish", "" +getResources().getDisplayMetrics().density);
+        Log.d("TestPish", "GameBook: onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.d("TestPish", "GameBook: onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("TestPish", "GameBook: onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("TestPish", "GameBook: onPause");
+        gameBookPresenter.saveGame();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("TestPish", "GameBook: onStop");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        gameBookPresenter.saveGame();
+        Log.d("TestPish", "GameBook: onDestroy");
+
+        //gameBookPresenter.saveGame();
     }
 
     @Override

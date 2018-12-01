@@ -2,9 +2,13 @@ package com.npgames.insight.ui.book;
 
 import android.content.Context;
 import android.text.TextPaint;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.npgames.insight.data.model.BlockAction;
+import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
@@ -131,7 +135,13 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         final int paragraphNumber = paragraphRepository.getParagraph().paragraphNumber;
         if (gameInteractor.isMedBay(paragraphNumber)) {
             actionsInteractor.applyAction(paragraphNumber);
+
+            for (final BlockAction blockAction : paragraphRepository.getParagraph().getActions()) {
+                blockAction.setEnable(actionsInteractor.isMedBayActionActive());
+            }
+
             getViewState().showStats(statsRepository.getStats());
+            getViewState().refreshParagraph(paragraphRepository.getParagraph());
         } else if (!paragraphRepository.getParagraph().wasActionPressed) {
             paragraphRepository.getParagraph().wasActionPressed = true;
             actionsInteractor.applyAction(paragraphNumber);

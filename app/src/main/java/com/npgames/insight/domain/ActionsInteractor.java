@@ -38,6 +38,7 @@ public class ActionsInteractor {
         actions.put(32, this::paragraph32Action);
         actions.put(37, this::paragraph37Action);
         actions.put(49, this::paragraph49Action);
+        actions.put(54, this::paragraph54Action);
         actions.put(59, this::paragraph59Action);
         actions.put(60, this::paragraph60Action);
         actions.put(67, this::paragraph67Action);
@@ -50,6 +51,11 @@ public class ActionsInteractor {
         actions.put(116, this::paragraph116Action);
         actions.put(327, this::paragraph327Action);
         actions.put(193, this::paragraph193Action);
+    }
+
+
+    public boolean isMedBayActionActive() {
+        return statsRepository.getStats().getHp() < 22;
     }
 
     public void applyAction(final int paragraphNumber) {
