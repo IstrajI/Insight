@@ -48,7 +48,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener,
         BottomActionConfirmDialog.BottomActionConfirmListener {
 
-    public enum GameType {NEW_GAME, CONTINUE}
+    public enum GameType {NEW_GAME, CONTINUE, NONE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
     @BindView(R.id.viewpager_gamebook_pages)
     protected ViewPager pagesViewPager;
@@ -173,12 +173,14 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void showStats(final Stats stats) {
+        Log.d("TestPish", "Call");
         statsTopPanelView.setStats(stats);
     }
 
     private void chooseGameType() {
         final GameType gameType = (GameType) getIntent().getSerializableExtra(GAME_TYPE_KEY);
         switch (gameType) {
+            case NONE:
             case CONTINUE:
                 gameBookPresenter.continueGame(paragraphTextHeight);
                 break;
@@ -186,7 +188,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case NEW_GAME:
                 gameBookPresenter.newGame(paragraphTextHeight);
                 break;
+
+
         }
+
+        final Intent intent = new Intent(getIntent());
+        intent.putExtra(GAME_TYPE_KEY, GameType.NONE);
+        setIntent(intent);
     }
 
     @Override

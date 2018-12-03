@@ -4,14 +4,18 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.transition.Fade;
 import android.support.transition.Transition;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +52,12 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
     private Stats stats;
 
+    final String HP = "HP";
+    final String AUR = "AUR";
+    final String DEX = "DEX";
+    final String PRC = "PRC";
+    final String TIME = "TIME";
+    final String AMN = "AMN";
 
     protected TopPanelClickListener topPanelClickListener;
 
@@ -76,6 +86,41 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         setWillNotDraw(false);
     }
 
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable("superState", super.onSaveInstanceState());
+        bundle.putInt(HP, stats.getHp());
+        bundle.putInt(AUR, stats.getAur());
+        bundle.putInt(DEX, stats.getDex());
+        bundle.putInt(PRC, stats.getPrc());
+        bundle.putInt(TIME, stats.getTime());
+        bundle.putInt(AMN, stats.getAmn());
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            final Bundle bundle = (Bundle) state;
+            this.stats = Stats.builder()
+                    .setHp(bundle.getInt(HP))
+                    .setPrc(bundle.getInt(PRC))
+                    .setAur(bundle.getInt(AUR))
+                    .setDex(bundle.getInt(DEX))
+                    .setTime(bundle.getInt(TIME))
+                    .setAmn(bundle.getInt(AMN))
+                    .build();
+
+
+            setStats2(this.stats);
+            state = bundle.getParcelable("superState");
+        }
+
+        super.onRestoreInstanceState(state);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -88,13 +133,17 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         menuButtonImageView.setOnClickListener(this);
     }
 
+
+
     public void setStats(final Stats newStats) {
+        Log.d("TestPish", "setStats");
         if (stats == null) {
+            Log.d("TestPish", "stats == null");
             setStats2(newStats);
         } else {
+            Log.d("TestPish", "else");
             updateStats(newStats);
         }
-
     }
 
     public void setStats2(final Stats newStats) {
