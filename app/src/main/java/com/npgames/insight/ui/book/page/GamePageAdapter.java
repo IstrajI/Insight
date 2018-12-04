@@ -35,6 +35,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
     private final Drawable jumpPressedDrawable;
     private final Drawable jumpEnabledDrawable;
     private final Drawable jumpDisabledDrawable;
+
     private View.OnClickListener clickListener;
     private ICreatePlayer createPlayerListener;
 
@@ -43,6 +44,8 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         jumpEnabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13);
         jumpDisabledDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13disabled);
         jumpPressedDrawable = resources.getDrawable(R.drawable.action_button_new99_trans13pressed);
+
+
     }
 
     @Override
