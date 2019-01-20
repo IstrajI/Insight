@@ -79,5 +79,5 @@
     <string name="action_confirm_dialog_station_text">Вернуться на станцию</string>
     <string name="action_confirm_dialog_med_bay_text">Отправится в лечебную капсулу</string>
     <string name="action_confirm_dialog_armory_text">Посещение оружейной комнаты отнимет у вас одну единицу времени</string>
-
+    <string name="action_confirm_dialog_pause_dialog">Выйти в главное меню</string>
 </resources>

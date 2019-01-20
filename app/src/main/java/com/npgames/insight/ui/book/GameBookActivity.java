@@ -109,8 +109,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     @Override
     protected void onResume() {
         super.onResume();
-
-        Log.d("TestPish", "GameBook: onResume");
+        ((InsightApplication)getApplication()).setMusic(R.raw.background_deep_space);
     }
 
     @Override
@@ -189,8 +188,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case NEW_GAME:
                 gameBookPresenter.newGame(paragraphTextHeight);
                 break;
-
-
         }
 
         final Intent intent = new Intent(getIntent());
@@ -309,9 +306,15 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     //----------------------------------------------------------------------------------------------
     @Override
     public void topPanelOnMenuClick() {
-        final MenuDialogFragment menuDialogFragment = new MenuDialogFragment();
-        menuDialogFragment.setOnClickListener(this);
-        menuDialogFragment.show(getSupportFragmentManager(), MENU_DIALOG_FRAGMENT_TAG);
+        final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_med_bay_text));
+        bundle.putInt(REQUEST_CODE, MED_BAY_CLICK_REQUEST_CODE);
+        bottomActionConfirmDialog.setArguments(bundle);
+
+        bottomActionConfirmDialog.setConfirmationListener(this);
+        bottomActionConfirmDialog.show(getSupportFragmentManager(), BOTTOM_ACTION_CONFIRM_DIALOG_TAG);
     }
 
     //---------------------------- User Bottom Panel General ---------------------------------------

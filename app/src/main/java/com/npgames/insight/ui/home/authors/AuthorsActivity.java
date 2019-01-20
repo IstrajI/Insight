@@ -1,8 +1,6 @@
 package com.npgames.insight.ui.home.authors;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import com.npgames.insight.R;
 import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
@@ -20,7 +18,7 @@ public class AuthorsActivity extends BaseMvpActivity {
     protected void onResume() {
         super.onResume();
 
-        ((InsightApplication) getApplication()).setMusic(R.raw.background_deep_space);
+        ((InsightApplication) getApplication()).setMusic(R.raw.main_menu_sound);
     }
 
     @Override
