@@ -21,6 +21,7 @@ import com.npgames.insight.application.ScreenUtils;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
+import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
