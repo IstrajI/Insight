@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Equipment;
-import com.npgames.insight.ui.book.armory.EquipmentDialogFragment;
 
 import java.util.List;
 
@@ -81,6 +80,7 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
         inventoryMoveLeftButtonImageView.setOnTouchListener(inventoryNavigationLeftButtonListener);
         inventoryMoveRightButtonImageView.setOnTouchListener(inventoryNavigationRightButtonListener);
         openHideButton.setOnTouchListener(inventoryButtonListener);
+        findButton.setEnabled(false);
 
         findButton.setOnClickListener(this);
         stationButton.setOnClickListener(this);
@@ -217,6 +217,41 @@ public class BottomPanelView extends RelativeLayout implements View.OnClickListe
 
     public void onClose() {
         isPanelOpen = false;
+    }
+
+    public void setAvailableAllActionsState() {
+        findButton.setEnabled(true);
+        armoryButton.setEnabled(true);
+        medBayButton.setEnabled(true);
+        stationButton.setEnabled(true);
+    }
+
+    public void setAvailableFindActionsState() {
+        findButton.setEnabled(true);
+        armoryButton.setEnabled(false);
+        medBayButton.setEnabled(false);
+        stationButton.setEnabled(false);
+    }
+
+    public void setDisabledAllActionState() {
+        findButton.setEnabled(false);
+        armoryButton.setEnabled(false);
+        medBayButton.setEnabled(false);
+        stationButton.setEnabled(false);
+    }
+
+    public void setDisabledArmoryActionsState() {
+        findButton.setEnabled(true);
+        armoryButton.setEnabled(false);
+        medBayButton.setEnabled(true);
+        stationButton.setEnabled(true);
+    }
+
+    public void setDisabledMedBayActionsState() {
+        findButton.setEnabled(true);
+        armoryButton.setEnabled(true);
+        medBayButton.setEnabled(false);
+        stationButton.setEnabled(true);
     }
 
     public interface BottomPanelListener {

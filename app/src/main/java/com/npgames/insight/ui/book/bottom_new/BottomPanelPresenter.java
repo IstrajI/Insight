@@ -6,6 +6,7 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.model.Equipment;
+import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.domain.EquipmentInteractor;
 
 @InjectViewState
@@ -40,4 +41,29 @@ public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
         closeYPosition = closeY;
          isBottomPanelOpen = true;
     }
+
+    public void setAvailableActionsState(final @Paragraph.AvailableActions String availableState) {
+        switch (availableState) {
+            case Paragraph.AvailableActions.AVAILABLE_ALL:
+                getViewState().showAvailableAllActionsState();
+                break;
+
+            case Paragraph.AvailableActions.AVAILABLE_FIND:
+                getViewState().showAvailableFindActionsState();
+                break;
+
+            case Paragraph.AvailableActions.DISABLED_ALL:
+                getViewState().showDisabledAllActionsState();
+                break;
+
+            case Paragraph.AvailableActions.DISABLED_ARMORY:
+                getViewState().showDisabledArmoryActionsState();
+                break;
+
+            case Paragraph.AvailableActions.DISABLED_MEDBAY:
+                getViewState().disableMedBayActionsState();
+                break;
+        }
+    }
+
 }

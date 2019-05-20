@@ -19,6 +19,7 @@
     <string name="home_screen_settings_title">НАСТРОЙКИ</string>
     <string name="home_screen_rules_title">ПРАВИЛА</string>
     <string name="home_screen_achievements_title">ДОСТИЖЕНИЯ</string>
+    <string name="home_screen_directory_title">БАЗА ДАННЫХ</string>
     <string name="home_screen_about_title">АВТОРЫ</string>
 
     <!-- Menu -->
@@ -79,5 +80,5 @@
     <string name="action_confirm_dialog_station_text">Вернуться на станцию</string>
     <string name="action_confirm_dialog_med_bay_text">Отправится в лечебную капсулу</string>
     <string name="action_confirm_dialog_armory_text">Посещение оружейной комнаты отнимет у вас одну единицу времени</string>
-    <string name="action_confirm_dialog_pause_dialog">Выйти в главное меню</string>
+    <string name="action_confirm_dialog_go_to_main_menu">Выйти в главное меню</string>
 </resources>

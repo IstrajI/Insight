@@ -1,19 +1,13 @@
 package com.npgames.insight.ui.book.top_panel;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.transition.Fade;
-import android.support.transition.Transition;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -114,7 +108,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                     .build();
 
 
-            setStats2(this.stats);
+            setStatsWithoutAnimation(this.stats);
             state = bundle.getParcelable("superState");
         }
 
@@ -136,17 +130,20 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
 
     public void setStats(final Stats newStats) {
-        Log.d("TestPish", "setStats");
+        Log.d("TestPish", "updatePlayerStatsWithoutAnimation");
         if (stats == null) {
             Log.d("TestPish", "stats == null");
-            setStats2(newStats);
+            setStatsWithoutAnimation(newStats);
         } else {
             Log.d("TestPish", "else");
             updateStats(newStats);
         }
     }
 
-    public void setStats2(final Stats newStats) {
+    public void setStatsWithoutAnimation(final Stats newStats) {
+        Log.d("TestGG", "dex" +newStats.getDex());
+        Log.d("TestGG", "prc" +newStats.getPrc());
+
         amnTextView.setText(String.valueOf(newStats.getAmn()));
         aurTextView.setText(String.valueOf(newStats.getAur()));
         timeTextView.setText(String.valueOf(newStats.getTime()));
@@ -184,7 +181,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
     private void updateStatView(final TextView statView, final int newValue, final int oldValue) {
         final int difference = newValue - oldValue;
-
+        Log.d("TestPish", ""+difference);
         if (difference != 0) {
 
             if (difference > 0) {

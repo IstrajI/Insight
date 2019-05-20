@@ -43,6 +43,17 @@ public class EquipmentInteractor {
         return equipments;
     }
 
+    public void dropEquipment(final String equipmentType) {
+
+        for (final Equipment equipment: equipments) {
+            if (equipment.getType().equals(equipmentType)) {
+                equipment.setOwnedBy(Equipment.Owner.TRASH);
+                statsRepository.updateStats(equipment.getTakeOffStatsChanger());
+            }
+        }
+        equipmentRepository.saveEquipment();
+    }
+
     public List<Equipment> getEquipmentsOwnedBy(final String owner) {
         final List<Equipment> resultEquipments = new ArrayList<>();
 
@@ -62,6 +73,17 @@ public class EquipmentInteractor {
         final int playerDex = statsRepository.getStats().getDex();
         final int equipmentDexChange = equipment.getTakeOnStatsChanger().getDex();
 
-        return playerDex + equipmentDexChange >= LOW_DEX_BORDER || Equipment.Owner.PLAYER.equals(equipment.getOwnedBy());
+        final boolean isStatsSatisfied = playerDex + equipmentDexChange >= LOW_DEX_BORDER || Equipment.Owner.PLAYER.equals(equipment.getOwnedBy());
+        final boolean isTargetterCheckPassed = additionalCheckForTargetter(equipment);
+
+        return isStatsSatisfied && isTargetterCheckPassed;
+    }
+
+    private boolean additionalCheckForTargetter(final Equipment equipment) {
+        if (Equipment.TYPE.TARGETTER.equals(equipment.getType())) {
+            return equipmentRepository.isOwnedBy(Equipment.TYPE.BLASTER, Equipment.Owner.PLAYER);
+        } else {
+            return true;
+        }
     }
 }

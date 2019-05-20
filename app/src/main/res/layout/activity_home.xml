@@ -62,6 +62,18 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/button_home_directory"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/home_main_button_drawable"
+            android:gravity="center"
+            android:text="@string/home_screen_directory_title"
+            android:enabled="true"
+            android:textAppearance="@style/D"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/button_home_achievements"
             android:layout_width="200dp"
             android:layout_height="50dp"

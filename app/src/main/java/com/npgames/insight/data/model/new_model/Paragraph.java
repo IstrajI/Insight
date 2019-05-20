@@ -4,6 +4,8 @@ import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,19 @@ import java.util.List;
  */
 
 public class Paragraph {
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AvailableActions {
+        String DISABLED_ALL = "DISABLED_ALL";
+        String AVAILABLE_ALL = "AVAILABLE_ALL";
+        String AVAILABLE_FIND = "AVAILABLE_FIND";
+        String DISABLED_ARMORY = "DISABLED_ARMORY";
+        String DISABLED_MEDBAY = "DISABLED_MEDBAY";
+    }
+
     public int paragraphNumber;
     public boolean wasActionPressed;
     public final List<Page> pages;
+    public @AvailableActions String availableState;
 
     public Paragraph() {
         pages = new ArrayList<>();
@@ -38,7 +50,7 @@ public class Paragraph {
         final List<BlockArea> blockAreas = getBlockAreas();
         final List<BlockButton> blockJumps = new ArrayList();
 
-        for (final BlockArea blockArea: blockAreas) {
+        for (final BlockArea blockArea : blockAreas) {
             if (blockArea.type == BlockArea.BlockType.BUTTON) {
                 blockJumps.add((BlockButton) blockArea);
             }
@@ -50,7 +62,7 @@ public class Paragraph {
     public List<BlockAction> getActions() {
         final List<BlockAction> blockActions = new ArrayList<>();
 
-        for (final BlockArea blockArea: getBlockAreas()) {
+        for (final BlockArea blockArea : getBlockAreas()) {
             if (blockArea.type == BlockArea.BlockType.ACTION) {
                 blockActions.add((BlockAction) blockArea);
             }
@@ -60,7 +72,7 @@ public class Paragraph {
     }
 
     public boolean hasActions() {
-        for (final BlockArea blockArea: getBlockAreas()) {
+        for (final BlockArea blockArea : getBlockAreas()) {
             if (blockArea.type == BlockArea.BlockType.ACTION || blockArea.type == BlockArea.BlockType.CREATE_PLAYER_DEX) {
                 return true;
             }

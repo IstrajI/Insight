@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.npgames.insight.data.directory.DirectoryItem;
 import com.npgames.insight.ui.book.GameBookActivity;
+import com.npgames.insight.ui.directory.DirectoryActivity;
+import com.npgames.insight.ui.home.HomeScreenActivity;
 import com.npgames.insight.ui.home.authors.AuthorsActivity;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
 
@@ -24,6 +27,11 @@ public final class ActivityNavigator {
 
     public static void startAuthorsActivity(@NonNull final Context context) {
         final Intent intent = new Intent(context, AuthorsActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startDirectoryActivity(final Context context) {
+        final Intent intent = new Intent(context, DirectoryActivity.class);
         context.startActivity(intent);
     }
 }

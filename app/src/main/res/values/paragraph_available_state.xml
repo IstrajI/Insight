@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="DISABLED_ALL">
+        <item>5</item>
+        <item>26</item>
+        <item>37</item>
+        <item>59</item>
+        <item>60</item>
+        <item>67</item>
+        <item>87</item>
+        <item>93</item>
+        <item>97</item>
+        <item>104</item>
+        <item>302</item>
+        <item>500</item>
+        <item>501</item>
+        <item>502</item>
+        <item>503</item>
+        <item>504</item>
+    </integer-array>
+
+    <integer-array name="AVAILABLE_FIND">
+        <item>1</item>
+        <item>18</item>
+        <item>23</item>
+        <item>29</item>
+        <item>40</item>
+        <item>65</item>
+        <item>75</item>
+        <item>81</item>
+        <item>86</item>
+        <item>90</item>
+        <item>102</item>
+        <item>108</item>
+        <item>301</item>
+    </integer-array>
+
+    <integer-array name="DISABLED_ARMORY">
+        <item>100</item>
+    </integer-array>
+
+    <integer-array name="DISABLED_MEDBAY">
+        <item>54</item>
+    </integer-array>
+</resources>

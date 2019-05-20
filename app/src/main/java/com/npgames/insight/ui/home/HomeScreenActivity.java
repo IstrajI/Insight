@@ -28,6 +28,8 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     protected TextView newGameButton;
     @BindView(R.id.button_home_about)
     protected TextView aboutGameButton;
+    @BindView(R.id.button_home_directory)
+    protected TextView homeDirectoryButton;
     private boolean serviceBound;
     @InjectPresenter
     HomeScreenPresenter homeScreenPresenter;
@@ -77,6 +79,7 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
         continueButton.setOnClickListener(this);
         newGameButton.setOnClickListener(this);
         aboutGameButton.setOnClickListener(this);
+        homeDirectoryButton.setOnClickListener(this);
     }
 
     @Override
@@ -92,6 +95,9 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
                 ActivityNavigator.startAuthorsActivity(this);
                 break;
 
+            case R.id.button_home_directory:
+                ActivityNavigator.startDirectoryActivity(this);
+                break;
         }
     }
 

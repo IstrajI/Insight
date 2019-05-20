@@ -6,6 +6,7 @@ import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
+import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
 
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -67,15 +68,35 @@ public class ParagraphParser {
 
             final String substringText = paragraphText.substring(lastMatchEndPosition, matchStartPosition);
 
-            final String textBlockText = cutExtremalSpaces(substringText);
-            final BlockText textBlock = new BlockText(textBlockText);
-            paragraphBlocks.add(textBlock);
-            paragraphBlocks.add(clickBlock);
+            //Kostil
+            final Pattern createPanelPattern = Pattern.compile("\\$create_panel\\$");
+            final Matcher createPanelMatcher = createPanelPattern.matcher(paragraphText);
+
+            boolean createPanelFound = createPanelMatcher.find();
+            if (createPanelFound) {
+                Log.d("TestPish", "found");
+                final int createPanelStartPosition = createPanelMatcher.start();
+                final int createPanelEndPosition = createPanelMatcher.end();
+
+                final String firstBlockText = cutExtremalSpaces(substringText.substring(0, createPanelStartPosition));
+                final String secondBlockText = cutExtremalSpaces(substringText.substring(createPanelEndPosition));
+
+                paragraphBlocks.add(new BlockText(firstBlockText));
+                paragraphBlocks.add(new BlockCreatePlayerDex());
+                paragraphBlocks.add(new BlockText(secondBlockText));
+                paragraphBlocks.add(clickBlock);
+            } else {
+
+                final String textBlockText = cutExtremalSpaces(substringText);
+                final BlockText textBlock = new BlockText(textBlockText);
+                paragraphBlocks.add(textBlock);
+                paragraphBlocks.add(clickBlock);
+            }
 
             lastMatchEndPosition = matchEndPosition;
         }
 
-        final String tail = paragraphText.substring(lastMatchEndPosition, paragraphText.length());
+        final String tail = paragraphText.substring(lastMatchEndPosition);
 
         if (tail.length() != 0) {
             final BlockText textBlock = new BlockText(tail);

@@ -1,6 +1,6 @@
 ext.versions = [
 
-        androidGradlePlugin     : '2.3.0',
+        androidGradlePlugin     : '3.3.1',
         gradleVersionsPlugin    : '0.14.0',
         buildTools              : '25.0.2',
         compileSdk              : 25,
