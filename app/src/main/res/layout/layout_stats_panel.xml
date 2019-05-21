@@ -194,6 +194,7 @@
                 android:id="@+id/text_view_stats_panel_mem_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:gravity="start|center_vertical"
                 android:textAppearance="@style/D"
                 app:layout_constraintBottom_toBottomOf="parent"

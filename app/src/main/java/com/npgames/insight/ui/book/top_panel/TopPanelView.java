@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.top_panel;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.transition.Fade;
 import android.support.transition.Transition;
+import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,8 @@ import android.widget.TextView;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
+import com.npgames.insight.ui.InsightApplication;
+import com.npgames.insight.ui.book.GameBookActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -131,6 +135,8 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         final ViewGroup layout = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.layout_stats_panel, this, true);
         ButterKnife.bind(layout, this);
         menuButtonImageView.setOnClickListener(this);
+        amnTextView.setOnClickListener(this);
+
     }
 
 
@@ -226,6 +232,27 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.top_panel_menu_button_image_view:
                 topPanelClickListener.topPanelOnMenuClick();
+                break;
+
+            case R.id.text_view_stats_panel_mem_bar:
+                StatsInfoDialog statsInfoDialog = new StatsInfoDialog();
+                statsInfoDialog.show(((FragmentActivity)getContext()).getSupportFragmentManager(), StatsInfoDialog.STATS_INFO_DIALOG_TAG);
+                Log.d("TestPish", "clickPerformedTHIS");
+                break;
+
+            case R.id.image_view_stats_panel_time_bar:
+                break;
+
+            case R.id.image_view_stats_panel_hp_bar:
+                break;
+
+            case R.id.image_view_stats_panel_prc_bar:
+                break;
+
+            case R.id.image_view_stats_panel_dex_bar:
+                break;
+
+            case R.id.image_view_stats_panel_au_bar:
                 break;
         }
     }
