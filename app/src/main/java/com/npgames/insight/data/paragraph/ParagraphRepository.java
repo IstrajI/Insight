@@ -7,6 +7,7 @@ import android.util.Log;
 import com.npgames.insight.application.Constants;
 import com.npgames.insight.data.dao.ParagraphParser;
 import com.npgames.insight.data.model.BlockArea;
+import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerButtons;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerDex;
 import com.npgames.insight.data.model.create_player.BlockCreatePlayerPrc;
@@ -33,6 +34,11 @@ public class ParagraphRepository {
     private int distributedPrcPoints;
     private int pointsTodistribute;
 
+    private int[] disabledAllParagraphs;
+    private int[] availableFindParagraphs;
+    private int[] disabledArmoryParagraphs;
+    private int[] disabledMedBayParagraphs;
+
     public static ParagraphRepository getInstance(final Context context) {
         if (paragraphRepository == null) {
             paragraphRepository = new ParagraphRepository(context);
@@ -52,19 +58,27 @@ public class ParagraphRepository {
         distributedDexPoints = loadDistributedDexPoints();
         distributedPrcPoints = loadDistributedPrcPoints();
         pointsTodistribute = loadPointsToDistribute();
+
+        final int disabledAllResId = resources.getIdentifier("DISABLED_ALL", "array", packageName);
+        disabledAllParagraphs = resources.getIntArray(disabledAllResId);
+
+        final int availableFindResId = resources.getIdentifier("AVAILABLE_FIND", "array", packageName);
+        availableFindParagraphs = resources.getIntArray(availableFindResId);
+
+        final int disabledArmoryResId = resources.getIdentifier("DISABLED_ARMORY", "array", packageName);
+        disabledArmoryParagraphs = resources.getIntArray(disabledArmoryResId);
+
+        final int disabledMedBayResId = resources.getIdentifier("DISABLED_MEDBAY", "array", packageName);
+        disabledMedBayParagraphs = resources.getIntArray(disabledMedBayResId);
+
+        resources.getIntArray(disabledAllResId);
     }
 
     private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
 
         final String paragraphString = getParagraphStringOrEmpty(paragraphNumber);
 
-        final List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
-
-        if (paragraphNumber == 501) {
-            blockAreas.add(new BlockCreatePlayerDex());
-            blockAreas.add(new BlockCreatePlayerPrc());
-            blockAreas.add(new BlockCreatePlayerButtons());
-        }
+        List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
 
         final Pagination pagination = new Pagination();
         final Paragraph paragraph = pagination.createParagraphModel(blockAreas, availableHeight);
@@ -78,28 +92,28 @@ public class ParagraphRepository {
         paragraph = loadParagraph(currentParagraphNumber, availableHeight);
 
         paragraph.wasActionPressed = loadWasActionPressed();
-
+        paragraph.availableState = getParagraphsAvailableActions(paragraph.paragraphNumber);
 
         return paragraph;
     }
 
     public Paragraph getNextParagraph(final int paragraphNumber, final int availableHeight) {
-        if (isWathcingParagraphs(paragraphNumber)) {
-            addSpecialVisitedParagraphs(paragraphNumber);
-        }
-
         final Paragraph loadedParagraph = loadParagraph(paragraphNumber, availableHeight);
 
         if (loadedParagraph != null) {
             paragraph = loadedParagraph;
             paragraph.wasActionPressed = loadWasActionPressed();
+            paragraph.availableState = getParagraphsAvailableActions(paragraphNumber);
         }
 
         return loadedParagraph;
     }
 
+
     public void changeJumpsButtonStatus(final int jumpPosition, final boolean isEnabled) {
-        paragraph.getJumps().get(jumpPosition).setEnable(isEnabled);
+        final BlockButton blockButton = paragraph.getJumps().get(jumpPosition);
+        blockButton.setEnable(isEnabled);
+        Log.d("TestPishGG", "blockButton " +blockButton.getParagraphNumber() + " status =" +blockButton.getParagraphNumber());
     }
 
     public String getParagraphStringOrEmpty(final int paragraphNumber) {
@@ -115,6 +129,31 @@ public class ParagraphRepository {
 
     public Paragraph getParagraph() {
         return paragraph;
+    }
+
+    private @Paragraph.AvailableActions String getParagraphsAvailableActions(final int paragraphNumber) {
+        if (paragraphNumber != 0) {
+            if (isParagraphIncludedIn(availableFindParagraphs, paragraphNumber)) {
+                return Paragraph.AvailableActions.AVAILABLE_FIND;
+            } else if (isParagraphIncludedIn(disabledAllParagraphs, paragraphNumber)) {
+                return Paragraph.AvailableActions.DISABLED_ALL;
+            } else if (isParagraphIncludedIn(disabledArmoryParagraphs, paragraphNumber)) {
+                return Paragraph.AvailableActions.DISABLED_ARMORY;
+            } else if (isParagraphIncludedIn(disabledMedBayParagraphs, paragraphNumber)) {
+                return Paragraph.AvailableActions.DISABLED_MEDBAY;
+            } else {
+                return Paragraph.AvailableActions.AVAILABLE_ALL;
+            }
+        }
+
+        return Paragraph.AvailableActions.AVAILABLE_ALL;
+    }
+
+    private boolean isParagraphIncludedIn(final int[] arrayToCheck, final int paragraphNumber) {
+        for (int i = 0; i < arrayToCheck.length; i++) {
+            if (paragraphNumber == arrayToCheck[i]) return true;
+        }
+        return false;
     }
 
     //---------------------------- Visited Paragraphs ----------------------------------------------
@@ -241,5 +280,11 @@ public class ParagraphRepository {
     public void resetPointsToDistribute() {
         pointsTodistribute = 4;
         //paragraphPreferences.savePointsToDistribute(4);
+    }
+
+    public void checkSpecialParagraph(final int paragraphNumber) {
+        if (isWathcingParagraphs(paragraphNumber)) {
+            addSpecialVisitedParagraphs(paragraphNumber);
+        }
     }
 }

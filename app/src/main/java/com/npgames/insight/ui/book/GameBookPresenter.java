@@ -7,8 +7,6 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.model.BlockAction;
-import com.npgames.insight.data.model.BlockArea;
-import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
@@ -130,8 +128,13 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         getViewState().showStats(statsRepository.getStats());
     }
 
+    public void updatePlayerStatsWithoutAnimation() {
+        getViewState().setStatsWithoutAnimation(statsRepository.getStats());
+    }
+
     void applyAction() {
         //A bit of kostil logic here
+        Log.d("TestPish2", "applyAction");
         final int paragraphNumber = paragraphRepository.getParagraph().paragraphNumber;
         if (gameInteractor.isMedBay(paragraphNumber)) {
             actionsInteractor.applyAction(paragraphNumber);
@@ -147,7 +150,9 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
             actionsInteractor.applyAction(paragraphNumber);
             getViewState().showStats(statsRepository.getStats());
 
+            Log.d("TestPish2", "secondShit");
             gameInteractor.enableJumpsDisableActions();
+            gameInteractor.checkJumpStatus(paragraphRepository.getParagraph());
             getViewState().refreshParagraph(paragraphRepository.getParagraph());
         }
 
@@ -163,5 +168,9 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
 
         gameInteractor.disableJumps();
         getViewState().refreshParagraph(paragraphRepository.getParagraph());
+    }
+
+    public void clearWasActionPressed() {
+        paragraphRepository.resetWasActionPressed();
     }
 }

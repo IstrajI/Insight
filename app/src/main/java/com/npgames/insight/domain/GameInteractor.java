@@ -79,14 +79,14 @@ public class GameInteractor {
         final Paragraph nextParagraph = paragraphRepository.getNextParagraph(paragraphNumber, availableHeight);
         checkJumpStatus(nextParagraph);
 
-        if (paragraphNumber == 501) {
+/*        if (paragraphNumber == 501) {
             final List<BlockArea> blockAreas = nextParagraph.getBlockAreas();
             final BlockCreatePlayerDex blockCreatePlayerDex = ((BlockCreatePlayerDex) blockAreas.get(blockAreas.size() - 3));
             final BlockCreatePlayerPrc blockCreatePlayerPrc = ((BlockCreatePlayerPrc) blockAreas.get(blockAreas.size() - 2));
             final BlockCreatePlayerButtons blockCreatePlayerButtons = ((BlockCreatePlayerButtons) blockAreas.get(blockAreas.size() - 1));
             blockCreatePlayerDex.setDexPoints(statsRepository.getStats().getDex());
             blockCreatePlayerPrc.setPrcPoints(statsRepository.getStats().getPrc());
-        }
+        }*/
 
         final int MED_BAY_PARAGRAPH = 54;
         if (nextParagraph.paragraphNumber == MED_BAY_PARAGRAPH) {
@@ -96,10 +96,34 @@ public class GameInteractor {
             }
         }
 
+        final int ARMORY_PARAGRAPH = 100;
+        if (nextParagraph.paragraphNumber == ARMORY_PARAGRAPH) {
+            boolean isArmoryJumpsEnabled = false;
+            final boolean isParagraphVisited = paragraphRepository.isParagraphVisited(nextParagraph.paragraphNumber);
+
+            for (BlockAction blockAction : nextParagraph.getActions()) {
+                if (isParagraphVisited) {
+                    Log.d("TestPish", "setting true");
+                    blockAction.setEnable(true);
+                    isArmoryJumpsEnabled = false;
+                } else {
+                    Log.d("TestPish", "setting false");
+                    blockAction.setEnable(false);
+                    isArmoryJumpsEnabled = true;
+                }
+            }
+
+            for (final BlockButton jump: nextParagraph.getJumps()) {
+                jump.setEnable(isArmoryJumpsEnabled);
+            }
+        }
+
+        paragraphRepository.checkSpecialParagraph(nextParagraph.paragraphNumber);
+
         return nextParagraph;
     }
 
-    private void checkJumpStatus(final Paragraph paragraph) {
+    public void checkJumpStatus(final Paragraph paragraph) {
         if (paragraph.hasActions() && !paragraph.wasActionPressed
                 //A bit of kost'il here
                 && !isMedBay(paragraph.paragraphNumber)) {
@@ -217,18 +241,25 @@ public class GameInteractor {
 
     private Callable paragraph67JumpConditions() {
 
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.BLASTER, Equipment.Owner.PLAYER)) {
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.BLASTER, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }
 
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.BEAM, Equipment.Owner.PLAYER)) {
-            paragraphRepository.changeJumpsButtonStatus(1, false);
-        }
-
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.POWER_SHIELD, Equipment.Owner.PLAYER)) {
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.BEAM, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(2, false);
         }
 
+        //и повершилд активен
+
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.POWER_SHIELD, Equipment.Owner.PLAYER) &&
+            equipmentRepository.getEquipmentByType(Equipment.TYPE.POWER_SHIELD).getEnabled()) {
+            paragraphRepository.changeJumpsButtonStatus(3, false);
+        }
+
+        Log.d("TestPishGG", "electroshocker" +equipmentRepository.isOwnedBy(Equipment.TYPE.ELECTROSHOCK, Equipment.Owner.PLAYER));
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.ELECTROSHOCK, Equipment.Owner.PLAYER)) {
+            paragraphRepository.changeJumpsButtonStatus(4, false);
+        }
         return null;
     }
 

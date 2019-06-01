@@ -189,13 +189,7 @@ public class ActionsInteractor {
     }
 
     private Void paragraph100Action() {
-        final Stats.Builder changedStats = Stats.builder()
-                .setHp(-2);
-
-        if (paragraphRepository.isParagraphVisited(100)) {
-            changedStats.setTime(-1);
-        }
-
+        final Stats.Builder changedStats = Stats.builder().setTime(-1);
         statsRepository.updateStats(changedStats.build());
         return null;
     }

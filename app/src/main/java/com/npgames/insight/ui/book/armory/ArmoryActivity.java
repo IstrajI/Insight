@@ -5,9 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -16,6 +14,7 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
+import com.npgames.insight.ui.book.equipmentDialog.EquipmentDialogFragment;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
 
@@ -109,9 +108,10 @@ public class ArmoryActivity extends BaseMvpActivity implements ArmoryView,
         final String equipmentName = equipment.getName();
         final String equipmentDescription = equipment.getDescription();
         final int equipmentDrawable = equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR);
+        final @Equipment.TYPE String equipmentType = equipment.getType();
 
-        final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(equipmentName, equipmentDescription, equipmentDrawable);
-        equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
+        final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(equipmentName, equipmentDescription, equipmentDrawable, equipmentType, false);
+        equipmentDialogFragment.show(getSupportFragmentManager(), EquipmentDialogFragment.TAG);
     }
 
     @Override

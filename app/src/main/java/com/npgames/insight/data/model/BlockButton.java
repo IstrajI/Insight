@@ -1,5 +1,7 @@
 package com.npgames.insight.data.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 import static com.npgames.insight.data.model.BlockArea.BlockType.BUTTON;
@@ -23,6 +25,7 @@ public class BlockButton extends BlockArea implements Serializable{
     }
 
     public void setEnable(final boolean isEnable) {
+        Log.d("TestPishCheck", "number" +paragraphNumber +" isEnable = " +isEnable);
         this.isEnable = isEnable;
     }
 

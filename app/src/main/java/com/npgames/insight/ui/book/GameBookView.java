@@ -15,4 +15,5 @@ public interface GameBookView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void showStats(final Stats stats);
     void showDeathScreen();
+    void setStatsWithoutAnimation(final Stats stats);
 }

@@ -25,7 +25,7 @@ import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
-import com.npgames.insight.ui.book.armory.EquipmentDialogFragment;
+import com.npgames.insight.ui.book.equipmentDialog.EquipmentDialogFragment;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
 import com.npgames.insight.ui.book.bottom_new.BottomPanelView;
 import com.npgames.insight.ui.book.bottom_new.IBottomPanelView;
@@ -42,12 +42,11 @@ import butterknife.BindView;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.REQUEST_CODE;
-import static com.npgames.insight.ui.book.menu.MenuDialogFragment.MENU_DIALOG_FRAGMENT_TAG;
 
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelListener, TopPanelView.TopPanelClickListener,
         MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener,
-        BottomActionConfirmDialog.BottomActionConfirmListener {
+        BottomActionConfirmDialog.BottomActionConfirmListener, EquipmentDialogFragment.EquipmentDialogFragmentInterface {
 
     public enum GameType {NEW_GAME, CONTINUE, NONE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
@@ -96,7 +95,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ScreenUtils.init(metrics.widthPixels, metrics.heightPixels);
 
-        Log.d("TestPish", "GameBook: onCreate");
+
     }
 
     @Override
@@ -202,6 +201,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                 try {
                     final int nextParagraph = Integer.parseInt(((GamePageAdapter) adapter).getItemAt(position).content);
                     if (nextParagraph == 1000) {
+                        gameBookPresenter.clearWasActionPressed();
                         Intent armoryIntent = new Intent(this, ArmoryActivity.class);
                         armoryIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivityForResult(armoryIntent, 2);
@@ -238,6 +238,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void updateParagraph(final Paragraph paragraph) {
         pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
+        bottomPanelPresenter.setAvailableActionsState(paragraph.availableState);
     }
 
     @Override
@@ -284,10 +285,15 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
             case 2:
                 if (resultCode == RESULT_OK) {
                     gameBookPresenter.loadGameParagraph(paragraphTextHeight, 40);
+                    gameBookPresenter.updatePlayerStatsWithoutAnimation();
                 }
 
                 break;
         }
+    }
+
+    public void setStatsWithoutAnimation(final Stats stats) {
+        statsTopPanelView.setStatsWithoutAnimation(stats);
     }
 
     //---------------------------- CreatePlayer ----------------------------------------------------
@@ -309,7 +315,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         final BottomActionConfirmDialog bottomActionConfirmDialog = new BottomActionConfirmDialog();
 
         final Bundle bundle = new Bundle();
-        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_med_bay_text));
+        bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_go_to_main_menu));
         bundle.putInt(REQUEST_CODE, MED_BAY_CLICK_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
 
@@ -337,6 +343,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public final int STATION_CLICK_REQUEST_CODE = 2;
     public final int MED_BAY_CLICK_REQUEST_CODE = 3;
     public final int ARMORY_CLICK_REQUEST_CODE = 4;
+    public final int MAIN_MENU_REQUEST_CODE = 5;
 
     @Override
     public void bottomPanelFindClick() {
@@ -408,9 +415,11 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         final String name = equipment.getName();
         final String description = equipment.getDescription();
         final int drawable = equipment.getDrawable(Equipment.DRAWABLE_COLOR_MODEL.USE_BLUE_COLOR);
+        final @Equipment.TYPE String type = equipment.getType();
 
-        final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(name, description, drawable);
-        equipmentDialogFragment.show(getFragmentManager(), EquipmentDialogFragment.TAG);
+        final EquipmentDialogFragment equipmentDialogFragment = EquipmentDialogFragment.createEquipmentDialogFragment(name, description, drawable, type, true);
+        equipmentDialogFragment.setEquipmentDialogFragment(this);
+        equipmentDialogFragment.show(getSupportFragmentManager(), EquipmentDialogFragment.TAG);
     }
 
     @Override
@@ -425,6 +434,38 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     public void onCloseBottomPanel() {
         bottomPanelView.onClose();
+    }
+
+    @Override
+    public void showAvailableAllActionsState() {
+        bottomPanelView.setAvailableAllActionsState();
+    }
+
+    @Override
+    public void showAvailableFindActionsState() {
+        bottomPanelView.setAvailableFindActionsState();
+    }
+
+    @Override
+    public void showDisabledAllActionsState() {
+        bottomPanelView.setDisabledAllActionState();
+    }
+
+    @Override
+    public void showDisabledArmoryActionsState() {
+        bottomPanelView.setDisabledArmoryActionsState();
+    }
+
+    @Override
+    public void disableMedBayActionsState() {
+        bottomPanelView.setDisabledMedBayActionsState();
+    }
+
+
+    @Override
+    public void onItemDropped() {
+        bottomPanelPresenter.loadPlayerEquipment();
+        gameBookPresenter.loadStats();
     }
 
     @Override
@@ -443,6 +484,10 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
             case ARMORY_CLICK_REQUEST_CODE:
                 armoryConfirmed();
+                break;
+
+            case MAIN_MENU_REQUEST_CODE:
+                menuDialogOnGoToMainMenuClick();
                 break;
         }
     }

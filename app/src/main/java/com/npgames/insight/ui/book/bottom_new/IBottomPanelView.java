@@ -10,4 +10,10 @@ public interface IBottomPanelView extends MvpView{
     void showPlayerEquipment(final List<Equipment> equipmentList);
     void onOpenBottomPanel();
     void onCloseBottomPanel();
+
+    void showAvailableAllActionsState();
+    void showAvailableFindActionsState();
+    void showDisabledAllActionsState();
+    void showDisabledArmoryActionsState();
+    void disableMedBayActionsState();
 }

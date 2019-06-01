@@ -57,6 +57,12 @@ public class ArmoryEquipmentAdapter extends BaseRecyclerAdapter<ArmoryEquipmentA
             holder.wearButtonTextView.setText("СНЯТЬ");
             holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_test_pish_taked_on));
             holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text_taked_on));
+        } else if (equipment.getOwnedBy().equals(Equipment.Owner.TRASH)) {
+            holder.wearButtonTextView.setText("УТЕРЯН");
+            holder.wearButtonTextView.setEnabled(false);
+            holder.itemBottomBackgroundLayout.setBackground(resources.getDrawable(R.drawable.armory_item_dropped));
+            holder.itemWearButtonLayout.setBackground(resources.getDrawable(R.drawable.armory_item_text_taked_on));
+
         }
     }
 

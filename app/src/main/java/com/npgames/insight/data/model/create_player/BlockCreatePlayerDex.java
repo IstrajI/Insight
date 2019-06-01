@@ -11,7 +11,7 @@ public class BlockCreatePlayerDex extends BlockArea {
 
     @Override
     public int getViewHeight() {
-        return 210;
+        return 450;
     }
 
     public int getDexPoints() {

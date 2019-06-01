@@ -11,6 +11,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -27,7 +34,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/confirm_dialog_top_panel_right"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/guideline_top"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view">
 
         <TextView
             android:id="@+id/bottom_action_confirm_dialog_title_text_view"
@@ -39,26 +47,37 @@
             android:textSize="20sp" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/bottom_action_confirm_dialog_body_text_view"
+    <ScrollView
+        android:id="@+id/bottom_action_confirm_dialog_body_layout_scroll_view"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:gravity="center_vertical"
-        android:background="#e50e1609"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:text="Возвращение на станцию отнимет у вас одну единицу времени."
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout" />
+        app:layout_constraintBottom_toTopOf="@+id/confirm_dialog_buttons_constraint_layout"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout" >
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:minHeight="80dp"
+            android:id="@+id/bottom_action_confirm_dialog_body_text_view"
+            android:background="#e50e1609"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Возвращение на станцию отнимет у вас одну единицу времени."/>
+    </ScrollView>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/confirm_dialog_buttons_constraint_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/confirm_dialog_bottom_panel"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_text_view">
+        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view">
 
         <TextView
             android:id="@+id/bottom_action_confirm_dialog_deny_button_text_view"
@@ -91,5 +110,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"/>
 
 </android.support.constraint.ConstraintLayout>

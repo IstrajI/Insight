@@ -29,8 +29,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
 
     //Moxy lib
-    implementation 'com.arello-mobile:moxy:1.5.1'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.1'
+    implementation 'com.arello-mobile:moxy:1.5.5'
+    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.5'
+    implementation 'com.arello-mobile:moxy-android:1.5.5'
 
     //ButterKnife lib
     implementation 'com.jakewharton:butterknife:8.5.1'
@@ -53,4 +54,7 @@ dependencies {
 
     implementation 'com.uncopt:android.justified:1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //MaterialTapTargetPrompt
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:2.14.0'
 }
