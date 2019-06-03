@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.npgames.insight"
         minSdkVersion 16
@@ -53,4 +54,7 @@ dependencies {
 
     implementation 'com.uncopt:android.justified:1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //MaterialTapTargetPrompt
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:2.14.0'
 }

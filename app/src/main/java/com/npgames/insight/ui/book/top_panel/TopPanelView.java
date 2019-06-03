@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +22,14 @@ import android.widget.TextView;
 
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
+import com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog;
+import com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog.MESSAGE;
+import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
 
 public class TopPanelView extends FrameLayout implements View.OnClickListener {
     @BindView(R.id.text_view_stats_panel_mem_bar)
@@ -40,6 +46,20 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
     protected TextView aurTextView;
     @BindView(R.id.top_panel_menu_button_image_view)
     protected ImageView menuButtonImageView;
+
+
+    @BindView(R.id.text_view_stats_panel_dex_title)
+    protected TextView dexTitleTextView;
+    @BindView(R.id.text_view_stats_panel_prc_title)
+    protected TextView prcTitleTextView;
+    @BindView(R.id.text_view_stats_panel_au_title)
+    protected TextView aurTitleTextView;
+    @BindView(R.id.text_view_stats_panel_hp_title)
+    protected TextView hpTitleTextView;
+    @BindView(R.id.text_view_stats_panel_time_title)
+    protected TextView timeTitleTextView;
+    @BindView(R.id.text_view_stats_panel_mem_title)
+    protected TextView amnTitleTextView;
 
     private Animation inAnimation;
     private Animation outAnimation;
@@ -125,9 +145,28 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         final ViewGroup layout = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.layout_stats_panel, this, true);
         ButterKnife.bind(layout, this);
         menuButtonImageView.setOnClickListener(this);
+
+        amnTitleTextView.setOnClickListener(this);
+        amnTextView.setOnClickListener(this);
+
+        dexTitleTextView.setOnClickListener(this);
+        dexTextView.setOnClickListener(this);
+
+        timeTextView.setOnClickListener(this);
+        timeTitleTextView.setOnClickListener(this);
+
+        hpTitleTextView.setOnClickListener(this);
+        hpTextView.setOnClickListener(this);
+
+        prcTitleTextView.setOnClickListener(this);
+        prcTextView.setOnClickListener(this);
+
+        dexTitleTextView.setOnClickListener(this);
+        dexTextView.setOnClickListener(this);
+
+        aurTitleTextView.setOnClickListener(this);
+        aurTextView.setOnClickListener(this);
     }
-
-
 
     public void setStats(final Stats newStats) {
         Log.d("TestPish", "updatePlayerStatsWithoutAnimation");
@@ -223,6 +262,89 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.top_panel_menu_button_image_view:
                 topPanelClickListener.topPanelOnMenuClick();
+                break;
+
+            case R.id.text_view_stats_panel_mem_bar:
+            case R.id.text_view_stats_panel_mem_title:
+                final InfoDialog memInfoDialog= new InfoDialog();
+                memInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), StatsInfoDialog.STATS_INFO_DIALOG_TAG);
+                final Bundle memBundle = new Bundle();
+                memBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_amn));
+                memInfoDialog.setArguments(memBundle);
+                break;
+/*
+                new MaterialTapTargetPrompt.Builder((Activity) getContext())
+                        .setTarget(R.id.text_view_stats_panel_mem_bar)
+                        .setSecondaryText(R.string.test)
+                        .setPromptBackground(new TipPromptBackground())
+                        .show();
+*/
+
+
+
+/*                final int width = amnTextView.getWidth();
+                final int height = amnTextView.getHeight();
+                final int left = amnTextView.getLeft();
+                final int top = amnTextView.getTop();
+                final int text = amnTextView.getText();*/
+
+/*                final StatsInfoDialog statsInfoDialog = new StatsInfoDialog();
+                final Bundle bundle = new Bundle();
+                bundle.putInt("WIDTH", amnTextView.getWidth());
+                bundle.putInt("HEIGHT", amnTextView.getHeight());
+                bundle.putFloat("X", amnTextView.getX());
+                bundle.putFloat("Y", amnTextView.getY());
+                bundle.putString("TEXT", amnTextView.getText().toString());
+                bundle.putFloat("TEXT_SIZE", amnTextView.getTextSize());
+                statsInfoDialog.setArguments(bundle);
+                statsInfoDialog.show(((FragmentActivity)getContext()).getSupportFragmentManager(), StatsInfoDialog.STATS_INFO_DIALOG_TAG);
+
+                Log.d("TestPish", "clickPerformedTHIS");
+                break;*/
+
+            case R.id.image_view_stats_panel_time_bar:
+            case R.id.text_view_stats_panel_time_title:
+                final InfoDialog timeInfoDialog = new InfoDialog();
+                timeInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
+                final Bundle timeBundle = new Bundle();
+                timeBundle.putString(MESSAGE, getContext().getString(R.string.p501_t));
+                timeInfoDialog.setArguments(timeBundle);
+                break;
+
+            case R.id.image_view_stats_panel_hp_bar:
+            case R.id.text_view_stats_panel_hp_title:
+                final InfoDialog hpInfoDialog = new InfoDialog();
+                hpInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
+                final Bundle hpBundle = new Bundle();
+                hpBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_hp));
+                hpInfoDialog.setArguments(hpBundle);
+                break;
+
+            case R.id.image_view_stats_panel_prc_bar:
+            case R.id.text_view_stats_panel_prc_title:
+                final InfoDialog prcInfoDialog = new InfoDialog();
+                prcInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
+                final Bundle prcBundle = new Bundle();
+                prcBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_prc));
+                prcInfoDialog.setArguments(prcBundle);
+                break;
+
+            case R.id.image_view_stats_panel_dex_bar:
+            case R.id.text_view_stats_panel_dex_title:
+                final InfoDialog dexInfoDialog = new InfoDialog();
+                dexInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
+                final Bundle dexBundle = new Bundle();
+                dexBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_dex));
+                dexInfoDialog.setArguments(dexBundle);
+                break;
+
+            case R.id.image_view_stats_panel_au_bar:
+            case R.id.text_view_stats_panel_au_title:
+                final InfoDialog aurInfoDialog = new InfoDialog();
+                aurInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
+                final Bundle aurBundle = new Bundle();
+                aurBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_aur));
+                aurInfoDialog.setArguments(aurBundle);
                 break;
         }
     }
