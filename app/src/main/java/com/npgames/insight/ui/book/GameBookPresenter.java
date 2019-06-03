@@ -173,4 +173,9 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
     public void clearWasActionPressed() {
         paragraphRepository.resetWasActionPressed();
     }
+
+    public void removeGrenade() {
+        gameInteractor.removeGrenade();
+
+    }
 }

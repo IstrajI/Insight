@@ -208,6 +208,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                         return;
                     }
 
+                    //Use grenade
+                    if (nextParagraph == 327) {
+                        gameBookPresenter.removeGrenade();
+                        bottomPanelPresenter.loadPlayerEquipment();
+                    }
+
                     gameBookPresenter.loadGameParagraph(paragraphTextHeight, nextParagraph);
 
                 } catch(NumberFormatException ex) {

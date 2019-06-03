@@ -30,7 +30,6 @@ public class GameInteractor {
     private final GameRepository gameRepository;
     private final SparseArray<Callable> jumpStateChecker = new SparseArray<>();
 
-
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
         equipmentRepository = EquipmentRepository.getInstance(context);
@@ -294,5 +293,9 @@ public class GameInteractor {
         paragraphRepository.resetWasActionPressed();
 
         gameRepository.saveContinueGameAvailable(false);
+    }
+
+    public void removeGrenade() {
+        equipmentRepository.getEquipmentByType(Equipment.TYPE.GRENADE).setOwnedBy(Equipment.Owner.TRASH);
     }
 }
