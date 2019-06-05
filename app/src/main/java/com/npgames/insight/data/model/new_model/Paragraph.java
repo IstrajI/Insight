@@ -36,6 +36,10 @@ public class Paragraph {
         this.pages = pages;
     }
 
+    public boolean isEmpty() {
+        return pages == null || pages.isEmpty();
+    }
+
     public List<BlockArea> getBlockAreas() {
         final List<BlockArea> blockAreas = new ArrayList<>();
 

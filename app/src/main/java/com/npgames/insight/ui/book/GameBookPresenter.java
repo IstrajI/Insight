@@ -63,7 +63,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         getViewState().showStats(userActionInteractor.spendTime());
         final Paragraph searchingParagraph = userActionInteractor.loadSearchingParagraph(availableHeight);
 
-        if (searchingParagraph == null) {
+        if (searchingParagraph == null || searchingParagraph.isEmpty()) {
             getViewState().showFindFailed();
         } else {
             getViewState().showFindSuccess();

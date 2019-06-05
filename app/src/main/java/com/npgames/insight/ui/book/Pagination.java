@@ -10,6 +10,7 @@ import com.npgames.insight.data.model.new_model.Page;
 import com.npgames.insight.data.model.new_model.Paragraph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pagination {
@@ -17,6 +18,10 @@ public class Pagination {
     private int pageMaxHeight;
 
     public Paragraph createParagraphModel(final List<BlockArea> paragraphBlocks, int pageHeight) {
+        if (paragraphBlocks.isEmpty()) {
+            return new Paragraph(Collections.emptyList());
+        }
+
         pageHeight -=50;
         pageMaxHeight = pageHeight;
 
