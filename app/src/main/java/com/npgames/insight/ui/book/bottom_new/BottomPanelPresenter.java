@@ -42,8 +42,13 @@ public class BottomPanelPresenter extends MvpPresenter<IBottomPanelView>{
          isBottomPanelOpen = true;
     }
 
-    public void setAvailableActionsState(final @Paragraph.AvailableActions String availableState) {
-        switch (availableState) {
+    public void setAvailableActionsState(final Paragraph paragraph) {
+        if (paragraph.hasActions() && !paragraph.wasActionPressed) {
+            getViewState().showDisabledAllActionsState();
+            return;
+        }
+
+        switch (paragraph.availableState) {
             case Paragraph.AvailableActions.AVAILABLE_ALL:
                 getViewState().showAvailableAllActionsState();
                 break;

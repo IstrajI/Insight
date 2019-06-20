@@ -61,13 +61,15 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
 
     public void onFindClick(final int availableHeight) {
         getViewState().showStats(userActionInteractor.spendTime());
-        final Paragraph searchingParagraph = userActionInteractor.loadSearchingParagraph(availableHeight);
+        final int searchingParagraphNumber = userActionInteractor.getSearchingParagraphNumber();
 
-        if (searchingParagraph == null) {
-            getViewState().showFindFailed();
-        } else {
+
+        if (gameInteractor.isParagraphExists(searchingParagraphNumber)) {
+            final Paragraph paragraph = gameInteractor.nextParagraph(searchingParagraphNumber, availableHeight);
             getViewState().showFindSuccess();
-            getViewState().updateParagraph(searchingParagraph);
+            getViewState().updateParagraph(paragraph);
+        } else {
+            getViewState().showFindFailed();
         }
     }
 
@@ -154,6 +156,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
             gameInteractor.enableJumpsDisableActions();
             gameInteractor.checkJumpStatus(paragraphRepository.getParagraph());
             getViewState().refreshParagraph(paragraphRepository.getParagraph());
+            getViewState().checkAvailableBottomActionsState(paragraphRepository.getParagraph());
         }
 
         if (gameInteractor.onDeath()) {

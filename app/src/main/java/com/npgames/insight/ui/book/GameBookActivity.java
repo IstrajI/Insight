@@ -246,7 +246,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void updateParagraph(final Paragraph paragraph) {
         pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
-        bottomPanelPresenter.setAvailableActionsState(paragraph.availableState);
+
+        checkAvailableBottomActionsState(paragraph);
+    }
+
+    public void checkAvailableBottomActionsState(final Paragraph paragraph) {
+        bottomPanelPresenter.setAvailableActionsState(paragraph);
     }
 
     @Override

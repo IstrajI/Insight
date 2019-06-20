@@ -3,6 +3,8 @@ package com.npgames.insight.domain;
 import android.content.Context;
 import android.util.Log;
 import android.util.SparseArray;
+
+import com.npgames.insight.application.StringUtills;
 import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
@@ -147,6 +149,10 @@ public class GameInteractor {
         }
     }
 
+    public boolean isParagraphExists(final int paragraphNumber) {
+        return !StringUtills.isEmpty(paragraphRepository.getParagraphStringOrEmpty(paragraphNumber));
+    }
+
     public boolean onDeath() {
         final boolean isDead = statsRepository.getStats().getHp() <= 0;
 
@@ -211,7 +217,7 @@ public class GameInteractor {
     }
 
     private Callable paragraph32JumpConditions() {
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }
 
