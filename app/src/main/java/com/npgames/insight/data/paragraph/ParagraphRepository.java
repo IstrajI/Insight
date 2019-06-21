@@ -75,9 +75,9 @@ public class ParagraphRepository {
     }
 
     private Paragraph loadParagraph(final int paragraphNumber, final int availableHeight) {
-
+        Log.d("TestPish", "paragraphToLoad = " +paragraphNumber);
         final String paragraphString = getParagraphStringOrEmpty(paragraphNumber);
-
+        Log.d("TestPish", "paragraphString = " +paragraphString);
         List<BlockArea> blockAreas = ParagraphParser.parse(paragraphString);
 
         final Pagination pagination = new Pagination();
@@ -117,6 +117,7 @@ public class ParagraphRepository {
     }
 
     public String getParagraphStringOrEmpty(final int paragraphNumber) {
+        Log.d("TestPish", "here in getParagraphStringOrEmpty" +paragraphNumber);
         final String paragraphResName = ParagraphParser.formatParagraphResName(paragraphNumber);
         final int paragraphResId = resources.getIdentifier(paragraphResName, "string", packageName);
 

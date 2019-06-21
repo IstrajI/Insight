@@ -3,6 +3,8 @@ package com.npgames.insight.domain;
 import android.content.Context;
 import android.util.Log;
 import android.util.SparseArray;
+
+import com.npgames.insight.application.StringUtills;
 import com.npgames.insight.data.game.GameRepository;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
@@ -29,7 +31,6 @@ public class GameInteractor {
     private final ParagraphRepository paragraphRepository;
     private final GameRepository gameRepository;
     private final SparseArray<Callable> jumpStateChecker = new SparseArray<>();
-
 
     public GameInteractor(final Context context) {
         statsRepository = StatsRepository.getInstance(context);
@@ -148,6 +149,10 @@ public class GameInteractor {
         }
     }
 
+    public boolean isParagraphExists(final int paragraphNumber) {
+        return !StringUtills.isEmpty(paragraphRepository.getParagraphStringOrEmpty(paragraphNumber));
+    }
+
     public boolean onDeath() {
         final boolean isDead = statsRepository.getStats().getHp() <= 0;
 
@@ -203,16 +208,16 @@ public class GameInteractor {
 
     private Callable paragraph26JumpConditions() {
         if (statsRepository.getStats().getPrc() >= 7) {
-            paragraphRepository.changeJumpsButtonStatus(0, false);
-        } else {
             paragraphRepository.changeJumpsButtonStatus(1, false);
+        } else {
+            paragraphRepository.changeJumpsButtonStatus(0, false);
         }
 
         return null;
     }
 
     private Callable paragraph32JumpConditions() {
-        if (equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
+        if (!equipmentRepository.isOwnedBy(Equipment.TYPE.OPEN_SPACE_EQUIPMENT, Equipment.Owner.PLAYER)) {
             paragraphRepository.changeJumpsButtonStatus(0, false);
         }
 
@@ -294,5 +299,9 @@ public class GameInteractor {
         paragraphRepository.resetWasActionPressed();
 
         gameRepository.saveContinueGameAvailable(false);
+    }
+
+    public void removeGrenade() {
+        equipmentRepository.getEquipmentByType(Equipment.TYPE.GRENADE).setOwnedBy(Equipment.Owner.TRASH);
     }
 }

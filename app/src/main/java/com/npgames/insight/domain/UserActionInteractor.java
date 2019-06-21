@@ -1,7 +1,9 @@
 package com.npgames.insight.domain;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.npgames.insight.application.StringUtills;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.data.paragraph.ParagraphRepository;
@@ -33,8 +35,9 @@ public class UserActionInteractor {
         return ARMORY_PARAGRAPH;
     }
 
-    public Paragraph loadSearchingParagraph(final int availableHeight) {
-        return paragraphRepository.getNextParagraph(paragraphRepository.getParagraph().paragraphNumber + SEARCHING_PARAGRAPH_INCREMENT, availableHeight);
+    public int getSearchingParagraphNumber() {
+        Log.d("TestPish", "currentParagraph =" +paragraphRepository.getParagraph().paragraphNumber);
+        return paragraphRepository.getParagraph().paragraphNumber + SEARCHING_PARAGRAPH_INCREMENT;
     }
 
     public Stats spendTime() {

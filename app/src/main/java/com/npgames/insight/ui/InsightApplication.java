@@ -50,6 +50,7 @@ public class InsightApplication extends Application {
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
             }
 
             @Override

@@ -12,6 +12,7 @@ public interface GameBookView extends MvpView {
     void refreshParagraph(final Paragraph blocks);
     void showFindSuccess();
     void showFindFailed();
+    void checkAvailableBottomActionsState(Paragraph paragraph);
     @StateStrategyType(SkipStrategy.class)
     void showStats(final Stats stats);
     void showDeathScreen();

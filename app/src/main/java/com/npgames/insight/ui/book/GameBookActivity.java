@@ -2,6 +2,7 @@ package com.npgames.insight.ui.book;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
@@ -23,6 +24,7 @@ import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
 import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
+import com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.armory.ArmoryActivity;
 import com.npgames.insight.ui.book.equipmentDialog.EquipmentDialogFragment;
@@ -208,6 +210,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
                         return;
                     }
 
+                    //Use grenade
+                    if (nextParagraph == 327) {
+                        gameBookPresenter.removeGrenade();
+                        bottomPanelPresenter.loadPlayerEquipment();
+                    }
+
                     gameBookPresenter.loadGameParagraph(paragraphTextHeight, nextParagraph);
 
                 } catch(NumberFormatException ex) {
@@ -238,7 +246,12 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void updateParagraph(final Paragraph paragraph) {
         pagesViewPager.setCurrentItem(0);
         pagerAdapter.update(paragraph);
-        bottomPanelPresenter.setAvailableActionsState(paragraph.availableState);
+
+        checkAvailableBottomActionsState(paragraph);
+    }
+
+    public void checkAvailableBottomActionsState(final Paragraph paragraph) {
+        bottomPanelPresenter.setAvailableActionsState(paragraph);
     }
 
     @Override
@@ -360,12 +373,20 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @Override
     public void showFindSuccess() {
-        Toast.makeText(getApplicationContext(), "Find Success", Toast.LENGTH_SHORT).show();
+        final InfoDialog infoDialog = new InfoDialog();
+        final Bundle bundle = new Bundle();
+        bundle.putString(InfoDialog.MESSAGE, "Вы нашли скрытый параграф!");
+        infoDialog.setArguments(bundle);
+        infoDialog.show(getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
     }
 
     @Override
     public void showFindFailed() {
-        Toast.makeText(getApplicationContext(), "Find Failed", Toast.LENGTH_SHORT).show();
+        final InfoDialog infoDialog = new InfoDialog();
+        final Bundle bundle = new Bundle();
+        bundle.putString(InfoDialog.MESSAGE, "Поиск улик ничего не дал");
+        infoDialog.setArguments(bundle);
+        infoDialog.show(getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
     }
 
     @Override
