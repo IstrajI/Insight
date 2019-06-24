@@ -23,10 +23,10 @@
         android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/confirm_dialog_top_panel_left"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
-        app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_title_layout"
-        app:layout_constraintTop_toTopOf="@+id/bottom_action_confirm_dialog_title_layout"/>
+        app:layout_constraintTop_toTopOf="@+id/bottom_action_confirm_dialog_title_layout"
+        app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_title_layout"/>
 
     <FrameLayout
         android:id="@+id/bottom_action_confirm_dialog_title_layout"
@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/confirm_dialog_top_panel_right"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="@+id/guideline_top"
         app:layout_constraintBottom_toTopOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view">
 
         <TextView
@@ -53,13 +52,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_dialog_buttons_constraint_layout"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout" >
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_top" >
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:minHeight="80dp"
+            android:gravity="center"
             android:id="@+id/bottom_action_confirm_dialog_body_text_view"
             android:background="#e50e1609"
             android:paddingTop="16dp"
@@ -75,7 +75,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/confirm_dialog_bottom_panel"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view">
 
@@ -117,5 +116,4 @@
         android:layout_height="1dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8"/>
-
 </android.support.constraint.ConstraintLayout>

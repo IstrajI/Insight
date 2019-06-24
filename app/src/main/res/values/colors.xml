@@ -10,6 +10,11 @@
     <color name="red">#c42623</color>
     <color name="green">#59995a</color>
 
+    <color name="cornflower">#98CAE7</color>
+
+    <color name="athens_gray">#EBEFF2</color>
+    <color name="powder_blue">#BCD6E7</color>
+
     <color name="white_dark">#a4a4a5</color>
 
     <color name="death_dialog_go_to_main_menu_text_default_color">#eebdbc</color>
@@ -19,4 +24,9 @@
 
     <color name="top_panel_view_stats_minus_color">@color/red</color>
     <color name="top_panel_view_stats_plus_color">@color/green</color>
+
+    <color name="main_color_scheme_1_layer">@color/cornflower</color>
+
+    <color name="active_color_scheme_1_layer">@color/athens_gray</color>
+    <color name="active_color_scheme_2_layer">@color/powder_blue</color>
 </resources>

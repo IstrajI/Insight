@@ -4,6 +4,13 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,9 +19,11 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpDelegate;
 import com.npgames.insight.R;
+import com.npgames.insight.application.StringUtills;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
@@ -23,7 +32,11 @@ import com.npgames.insight.ui.book.ICreatePlayer;
 import com.npgames.insight.ui.player.CreatePlayerDexView;
 import com.npgames.insight.ui.player.CreatePlayerPrcView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,7 +104,8 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         switch(holder.getItemViewType()) {
 
             case BlockArea.BlockType.TEXT:
-                ((TextViewHolder)holder).textTextView.setText(content);
+                ((TextViewHolder)holder).textTextView.setText(formatLinks(content));
+                ((TextViewHolder)holder).textTextView.setMovementMethod(LinkMovementMethod.getInstance());
                 break;
 
             case BlockArea.BlockType.BUTTON:
@@ -110,6 +124,59 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
                 break;
         }
     }
+
+    private Spannable formatLinks(final String textToFormat) {
+        final String[] links = new String[]{"(атомарн)+\\S+\\s+(отпечат)+\\S+",
+                "(бластер)+\\S+",
+                "(гипервест)+\\S+",
+                "(гиперкосм)+\\S+",
+                "(грамор)+\\S+",
+                "(исин)+\\S+",
+                "(информационн)+\\S+\\s+(пол)+\\S+",
+                "(космобот)+\\S+",
+                "(космическ)+\\S+\\s+(пол(е|ё))+\\S+",
+                "(луч(е|ё)м(е|ё)т)+\\S+",
+                "(нипс)+\\S+",
+                "(охотник)+\\S+\\s+(за)+\\s+(голов)+\\S+",
+                "(перекр(е|ё)стк) +\\S+",
+                "(плазмоизлучател) +\\S+",
+                "(планетарн)+\\S+\\s+(маяк)+\\S+",
+                "(планетарн)+\\S+\\s+(маяк)+\\S+",};
+        Spannable formattedText = new SpannableString(textToFormat);
+
+        for (int i = 0; i < links.length; i++) {
+            final Pattern linkPattern = Pattern.compile(links[i], Pattern.CASE_INSENSITIVE);
+
+            formattedText = formatOneMatch(formattedText, linkPattern);
+        }
+
+        return formattedText;
+    }
+
+    private Spannable formatOneMatch(final Spannable text, final Pattern pattern) {
+        final Matcher matcher = pattern.matcher(text);
+
+        if (!matcher.find()) {
+            return text;
+        } else {
+            final int startPosition = matcher.start();
+            final int endPosition = matcher.end();
+
+            final Spannable tail = new SpannableString(TextUtils.substring(text, endPosition, text.length()));
+
+            text.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(final View widget) {
+                    Log.d("TestPish", "clickWasDone");
+                }
+            }, startPosition, endPosition, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            text.setSpan(formatOneMatch(tail, pattern), endPosition, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return text;
+        }
+    }
+
+
 
     @Override
     public int getItemCount() {

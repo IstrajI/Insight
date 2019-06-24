@@ -50,6 +50,7 @@
         android:layout_width="0dp"
         app:layout_constraintHeight_default="wrap"
         android:layout_height="0dp"
+        android:scrollbarThumbVertical="@color/active_color_scheme_2_layer"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
         app:layout_constraintTop_toTopOf="@+id/guideline_top"

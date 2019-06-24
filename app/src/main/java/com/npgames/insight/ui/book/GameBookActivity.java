@@ -96,8 +96,6 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         final DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ScreenUtils.init(metrics.widthPixels, metrics.heightPixels);
-
-
     }
 
     @Override
@@ -329,7 +327,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
         final Bundle bundle = new Bundle();
         bundle.putString(CONFIRMATION_TEXT, getString(R.string.action_confirm_dialog_go_to_main_menu));
-        bundle.putInt(REQUEST_CODE, MED_BAY_CLICK_REQUEST_CODE);
+        bundle.putInt(REQUEST_CODE, MAIN_MENU_REQUEST_CODE);
         bottomActionConfirmDialog.setArguments(bundle);
 
         bottomActionConfirmDialog.setConfirmationListener(this);
