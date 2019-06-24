@@ -7,6 +7,7 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.npgames.insight.data.model.BlockAction;
+import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.data.model.BlockText;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
@@ -138,6 +139,7 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
         //A bit of kostil logic here
         Log.d("TestPish2", "applyAction");
         final int paragraphNumber = paragraphRepository.getParagraph().paragraphNumber;
+        Log.d("TestPish", "actionWasPressed" +paragraphRepository.getParagraph().wasActionPressed);
         if (gameInteractor.isMedBay(paragraphNumber)) {
             actionsInteractor.applyAction(paragraphNumber);
 
@@ -157,6 +159,10 @@ public class GameBookPresenter extends MvpPresenter<GameBookView> {
             gameInteractor.checkJumpStatus(paragraphRepository.getParagraph());
             getViewState().refreshParagraph(paragraphRepository.getParagraph());
             getViewState().checkAvailableBottomActionsState(paragraphRepository.getParagraph());
+        }
+
+        for (BlockButton blockButton :paragraphRepository.getParagraph().getJumps()) {
+            Log.d("TestPish", "blockButton number" +blockButton.getParagraphNumber() +"state = " +blockButton.isEnable());
         }
 
         if (gameInteractor.onDeath()) {

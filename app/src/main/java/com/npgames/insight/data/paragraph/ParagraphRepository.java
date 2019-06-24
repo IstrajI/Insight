@@ -28,7 +28,7 @@ public class ParagraphRepository {
     private final ParagraphPreferences paragraphPreferences;
     private int currentParagraph;
     private Set<String> specialVisitedParagraphs;
-    private List<String> watchingParagraphs = Arrays.asList("100", "60", "34");
+    private List<String> watchingParagraphs = Arrays.asList("100", "60", "34", "40");
 
     private int distributedDexPoints;
     private int distributedPrcPoints;
@@ -102,7 +102,7 @@ public class ParagraphRepository {
 
         if (loadedParagraph != null) {
             paragraph = loadedParagraph;
-            paragraph.wasActionPressed = loadWasActionPressed();
+            paragraph.wasActionPressed = false;
             paragraph.availableState = getParagraphsAvailableActions(paragraphNumber);
         }
 

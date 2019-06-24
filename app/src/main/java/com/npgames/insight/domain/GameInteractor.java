@@ -125,15 +125,18 @@ public class GameInteractor {
     }
 
     public void checkJumpStatus(final Paragraph paragraph) {
+
+
         if (paragraph.hasActions() && !paragraph.wasActionPressed
                 //A bit of kost'il here
                 && !isMedBay(paragraph.paragraphNumber)) {
-
+            Log.d("TestPish", "checkJumpStatus if");
             for (final BlockButton jump: paragraphRepository.getParagraph().getJumps()) {
                 jump.setEnable(false);
             }
 
         } else {
+            Log.d("TestPish", "checkJumpStatus else");
             checkParagraphExists();
             checkJumpsConditions();
         }
@@ -142,10 +145,19 @@ public class GameInteractor {
     private void checkParagraphExists() {
         final Paragraph paragraph = paragraphRepository.getParagraph();
 
+        for (final BlockButton jump: paragraph.getJumps()) {
+            Log.d("TestPish", "jump number = " +jump.getParagraphNumber() +" s: " +jump.isEnable());
+        }
+
         for (final BlockButton jump: paragraph.getJumps() ) {
-            if (paragraphRepository.getParagraphStringOrEmpty(jump.getParagraphNumber()).equals("")) {
+            if (paragraphRepository.getParagraphStringOrEmpty(jump.getParagraphNumber()).equals("")
+                    && jump.getParagraphNumber() != 1000) {
                 jump.setEnable(false);
             }
+        }
+
+        for (final BlockButton jump: paragraph.getJumps()) {
+            Log.d("TestPish", "jump number = " +jump.getParagraphNumber() +" s: " +jump.isEnable());
         }
     }
 
