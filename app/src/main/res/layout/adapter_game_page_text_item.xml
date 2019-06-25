@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textColor="#c6d1d5"
+        android:fontFamily="@font/play_regular"
         android:textSize="18sp"/>
 </FrameLayout>

@@ -34,6 +34,7 @@ public class GamePageFragment extends Fragment {
     private static RecyclerViewListeners.OnItemClickListener onItemClickListener;
     private static View.OnClickListener onClickListener;
     private static ICreatePlayer onCreatePlayerConsumeCallback;
+    private static IDirectoryOpener directoryOpenerListener;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class GamePageFragment extends Fragment {
         blocksAdapter.setOnItemClickListener(onItemClickListener);
         blocksAdapter.setClickListener(onClickListener);
         blocksAdapter.setCreatePlayerListener(onCreatePlayerConsumeCallback);
+        blocksAdapter.setDirectoryOpenerListener(directoryOpenerListener);
 
         pageRecyclerView.setAdapter(blocksAdapter);
         pageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -62,7 +64,9 @@ public class GamePageFragment extends Fragment {
     public static GamePageFragment newInstance(final Page pages,
                                                final RecyclerViewListeners.OnItemClickListener itemClickListener,
                                                final MvpDelegate parentMvpDelegate,
-                                               final View.OnClickListener clickListener, ICreatePlayer createPlayerConsumeCallback) {
+                                               final View.OnClickListener clickListener, ICreatePlayer createPlayerConsumeCallback,
+                                               final IDirectoryOpener directoryOpener) {
+        directoryOpenerListener = directoryOpener;
         onItemClickListener = itemClickListener;
         onClickListener = clickListener;
         onCreatePlayerConsumeCallback = createPlayerConsumeCallback;

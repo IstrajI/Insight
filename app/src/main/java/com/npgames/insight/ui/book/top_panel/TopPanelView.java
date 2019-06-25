@@ -49,13 +49,13 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
 
     @BindView(R.id.text_view_stats_panel_dex_title)
-    protected TextView dexTitleTextView;
+    protected ImageView dexTitleTextView;
     @BindView(R.id.text_view_stats_panel_prc_title)
     protected TextView prcTitleTextView;
     @BindView(R.id.text_view_stats_panel_au_title)
     protected TextView aurTitleTextView;
     @BindView(R.id.text_view_stats_panel_hp_title)
-    protected TextView hpTitleTextView;
+    protected ImageView hpTitleTextView;
     @BindView(R.id.text_view_stats_panel_time_title)
     protected TextView timeTitleTextView;
     @BindView(R.id.text_view_stats_panel_mem_title)

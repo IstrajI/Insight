@@ -16,6 +16,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     private RecyclerViewListeners.OnItemClickListener itemClickListener;
     private View.OnClickListener clickListener;
     private ICreatePlayer createPlayerConsumeCallback;
+    private IDirectoryOpener directoryOpener;
 
     public PagerAdapter(final FragmentManager fm, final MvpDelegate mvpDelegate) {
         super(fm);
@@ -26,7 +27,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(final int position) {
-        return GamePageFragment.newInstance(paragraphModel.pages.get(position), itemClickListener, mvpDelegate, clickListener, createPlayerConsumeCallback);
+        return GamePageFragment.newInstance(paragraphModel.pages.get(position), itemClickListener, mvpDelegate, clickListener, createPlayerConsumeCallback, directoryOpener);
     }
 
     @Override
@@ -54,5 +55,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     public void setCreatePlayerConsumeCallback(ICreatePlayer createPlayerConsumeCallback) {
         this.createPlayerConsumeCallback = createPlayerConsumeCallback;
+    }
+
+    public void setDirectoryOpenerListener(final IDirectoryOpener directoryOpener) {
+        this.directoryOpener = directoryOpener;
     }
 }

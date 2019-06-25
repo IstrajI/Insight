@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.directory;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,9 @@ import com.npgames.insight.data.directory.DirectoryItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.DirectoryItemViewHolder> {
     private List<DirectoryItem> directoryItems = new ArrayList<>();
@@ -52,21 +56,34 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
     }
 
     public class DirectoryItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView titleTextView;
-        public TextView directoryTextView;
+        @BindView(R.id.directory_item_root)
+        protected ConstraintLayout rootLayout;
+        @BindView(R.id.directory_item_title_text_view)
+        protected TextView titleTextView;
+        @BindView(R.id.directory_item_content_text_view)
+        protected TextView directoryTextView;
+
 
         public DirectoryItemViewHolder(final @NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             titleTextView = itemView.findViewById(R.id.directory_item_title_text_view);
             directoryTextView = itemView.findViewById(R.id.directory_item_content_text_view);
-            titleTextView.setOnClickListener(this);
+            rootLayout.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View view) {
-            final DirectoryItem directoryItem = directoryItems.get(getAdapterPosition());
-            directoryItem.isOpen = !directoryItem.isOpen;
+        public void onClick(final View view) {
+            for (int i = 0; i < directoryItems.size(); i++) {
+                final DirectoryItem item = directoryItems.get(i);
+                item.isOpen = (i == getAdapterPosition()) && !item.isOpen;
+            }
             notifyDataSetChanged();
         }
+    }
+
+    public void openItem(final int directoryItemToOpen) {
+        directoryItems.get(directoryItemToOpen).isOpen = true;
+        notifyDataSetChanged();
     }
 }

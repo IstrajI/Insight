@@ -3,6 +3,7 @@ package com.npgames.insight.ui.directory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -21,6 +22,8 @@ public class DirectoryActivity extends BaseMvpActivity implements DirectoryView 
 
     private DirectoryAdapter directoryAdapter;
 
+    public static String DIRECTORY_ITEM_NUMBER_EXTRA = "DIRECTORY_ITEM_NUMBER_EXTRA";
+
     @InjectPresenter
     DirectoryPresenter directoryPresenter;
     @ProvidePresenter
@@ -38,6 +41,7 @@ public class DirectoryActivity extends BaseMvpActivity implements DirectoryView 
     protected void bindViews() {
         directoryAdapter = new DirectoryAdapter();
         listRecyclerView.setAdapter(directoryAdapter);
+
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         directoryPresenter.loadDirectory();
@@ -46,5 +50,12 @@ public class DirectoryActivity extends BaseMvpActivity implements DirectoryView 
     @Override
     public void showDirectory(final List<DirectoryItem> directoryItem) {
         directoryAdapter.updateItems(directoryItem);
+
+        final int directoryItemToOpen = getIntent().getIntExtra(DIRECTORY_ITEM_NUMBER_EXTRA, 0);
+
+        if (directoryItemToOpen != 0) {
+            directoryAdapter.openItem(directoryItemToOpen);
+            listRecyclerView.scrollToPosition(directoryItemToOpen);
+        }
     }
 }

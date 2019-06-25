@@ -36,6 +36,7 @@ import com.npgames.insight.ui.book.death.DeathDialogFragment;
 import com.npgames.insight.ui.book.menu.MenuDialogFragment;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 import com.npgames.insight.ui.book.top_panel.TopPanelView;
+import com.npgames.insight.ui.directory.DirectoryActivity;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirm
 public class GameBookActivity extends BaseMvpActivity implements RecyclerViewListeners.OnItemClickListener,
         GameBookView, IBottomPanelView, BottomPanelView.BottomPanelListener, TopPanelView.TopPanelClickListener,
         MenuDialogFragment.MenuDialogClickListener, View.OnClickListener, ICreatePlayer, DeathDialogFragment.IDeathDialogListener,
-        BottomActionConfirmDialog.BottomActionConfirmListener, EquipmentDialogFragment.EquipmentDialogFragmentInterface {
+        BottomActionConfirmDialog.BottomActionConfirmListener, EquipmentDialogFragment.EquipmentDialogFragmentInterface, IDirectoryOpener {
 
     public enum GameType {NEW_GAME, CONTINUE, NONE}
     public static String GAME_TYPE_KEY = "GameTypeKey";
@@ -70,6 +71,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
 
     @InjectPresenter
     BottomPanelPresenter bottomPanelPresenter;
+
     @ProvidePresenter
     BottomPanelPresenter provideBottomPanelPresenter() {
         return new BottomPanelPresenter(getApplicationContext());
@@ -88,6 +90,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         setContentView(R.layout.activity_gamebook);
 
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), getMvpDelegate());
+        pagerAdapter.setDirectoryOpenerListener(this);
         pagerAdapter.setOnItemClickListener(this);
         pagerAdapter.setClickListener(this);
         pagerAdapter.setCreatePlayerConsumeCallback(this);
@@ -307,6 +310,13 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
         statsTopPanelView.setStatsWithoutAnimation(stats);
     }
 
+
+    @Override
+    public void openDirectory(final int directoryNumber) {
+        final Intent directoryIntent = new Intent(this, DirectoryActivity.class);
+        directoryIntent.putExtra(DirectoryActivity.DIRECTORY_ITEM_NUMBER_EXTRA, directoryNumber);
+        startActivity(directoryIntent);
+    }
     //---------------------------- CreatePlayer ----------------------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override

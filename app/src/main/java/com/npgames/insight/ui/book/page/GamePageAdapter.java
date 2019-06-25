@@ -1,6 +1,7 @@
 package com.npgames.insight.ui.book.page;
 
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
 import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 import com.npgames.insight.ui.book.ICreatePlayer;
+import com.npgames.insight.ui.book.IDirectoryOpener;
 import com.npgames.insight.ui.player.CreatePlayerDexView;
 import com.npgames.insight.ui.player.CreatePlayerPrcView;
 
@@ -52,6 +54,7 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
 
     private View.OnClickListener clickListener;
     private ICreatePlayer createPlayerListener;
+    private IDirectoryOpener directoryOpenerListener;
 
     public GamePageAdapter(final Resources resources, final MvpDelegate mvpDelegate) {
         this.mvpDelegate = mvpDelegate;
@@ -125,7 +128,12 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         }
     }
 
+    public void setDirectoryOpenerListener(final IDirectoryOpener directoryOpener) {
+        directoryOpenerListener = directoryOpener;
+    }
+
     private Spannable formatLinks(final String textToFormat) {
+
         final String[] links = new String[]{"(атомарн)+\\S+\\s+(отпечат)+\\S+",
                 "(бластер)+\\S+",
                 "(гипервест)+\\S+",
@@ -141,19 +149,22 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
                 "(перекр(е|ё)стк) +\\S+",
                 "(плазмоизлучател) +\\S+",
                 "(планетарн)+\\S+\\s+(маяк)+\\S+",
-                "(планетарн)+\\S+\\s+(маяк)+\\S+",};
+                "(промышленно)+\\S+\\s+(освоени)+\\S+\\s+(астероид)+\\S+",
+                "(страж)+\\S+",
+                "(трассер)+\\S+",
+                "(энергетическ)+\\S+\\s+(зонтик)+\\S+\\s+"};
         Spannable formattedText = new SpannableString(textToFormat);
 
         for (int i = 0; i < links.length; i++) {
             final Pattern linkPattern = Pattern.compile(links[i], Pattern.CASE_INSENSITIVE);
 
-            formattedText = formatOneMatch(formattedText, linkPattern);
+            formattedText = formatOneMatch(formattedText, linkPattern, i);
         }
 
         return formattedText;
     }
 
-    private Spannable formatOneMatch(final Spannable text, final Pattern pattern) {
+    private Spannable formatOneMatch(final Spannable text, final Pattern pattern, final int directoryItemNumber) {
         final Matcher matcher = pattern.matcher(text);
 
         if (!matcher.find()) {
@@ -167,11 +178,12 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
             text.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(final View widget) {
-                    Log.d("TestPish", "clickWasDone");
+                    directoryOpenerListener.openDirectory(directoryItemNumber);
+
                 }
             }, startPosition, endPosition, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            text.setSpan(formatOneMatch(tail, pattern), endPosition, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(formatOneMatch(tail, pattern, directoryItemNumber), endPosition, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return text;
         }
     }
