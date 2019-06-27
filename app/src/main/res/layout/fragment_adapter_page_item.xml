@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:orientation="vertical"
+<FrameLayout android:orientation="vertical"
     android:id="@+id/frame_layout_page_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/text_view_game_book_measuring"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/spacing_16"
+        android:textColorLink="@color/main_color_scheme_1_layer"
+        android:textColorHighlight="@color/active_color_scheme_1_layer"
         android:fontFamily="@font/play_regular"
         android:textColor="@color/colorTextPrimary"
         android:textSize="18sp"/>

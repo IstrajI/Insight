@@ -2,6 +2,7 @@ package com.npgames.insight.ui.book.top_panel;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,6 +25,8 @@ import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog;
 import com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog;
+
+import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,15 +54,15 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
     @BindView(R.id.text_view_stats_panel_dex_title)
     protected ImageView dexTitleTextView;
     @BindView(R.id.text_view_stats_panel_prc_title)
-    protected TextView prcTitleTextView;
+    protected ImageView prcTitleTextView;
     @BindView(R.id.text_view_stats_panel_au_title)
-    protected TextView aurTitleTextView;
+    protected ImageView aurTitleTextView;
     @BindView(R.id.text_view_stats_panel_hp_title)
     protected ImageView hpTitleTextView;
     @BindView(R.id.text_view_stats_panel_time_title)
-    protected TextView timeTitleTextView;
+    protected ImageView timeTitleTextView;
     @BindView(R.id.text_view_stats_panel_mem_title)
-    protected TextView amnTitleTextView;
+    protected ImageView amnTitleTextView;
 
     private Animation inAnimation;
     private Animation outAnimation;

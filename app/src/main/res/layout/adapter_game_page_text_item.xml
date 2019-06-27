@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/adapter_game_page_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         android:textColor="#c6d1d5"
+        android:textColorLink="@color/main_color_scheme_2_layer"
+        android:textColorHighlight="@color/active_color_scheme_1_layer"
         android:fontFamily="@font/play_regular"
         android:textSize="18sp"/>
 </FrameLayout>

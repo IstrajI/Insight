@@ -9,6 +9,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.SpannedString;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -107,8 +108,9 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
         switch(holder.getItemViewType()) {
 
             case BlockArea.BlockType.TEXT:
-                ((TextViewHolder)holder).textTextView.setText(formatLinks(content));
-                ((TextViewHolder)holder).textTextView.setMovementMethod(LinkMovementMethod.getInstance());
+                final TextView textTextView = ((TextViewHolder)holder).textTextView;
+                textTextView.setText(formatLinks(content));
+                textTextView.setMovementMethod(LinkMovementMethod.getInstance());
                 break;
 
             case BlockArea.BlockType.BUTTON:
@@ -180,6 +182,12 @@ public class GamePageAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder
                 public void onClick(final View widget) {
                     directoryOpenerListener.openDirectory(directoryItemNumber);
 
+                }
+
+                @Override
+                public void updateDrawState(final TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setUnderlineText(false);
                 }
             }, startPosition, endPosition, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

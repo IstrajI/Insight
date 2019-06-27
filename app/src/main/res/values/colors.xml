@@ -11,8 +11,9 @@
     <color name="green">#59995a</color>
 
     <color name="cornflower">#98CAE7</color>
+    <color name="bermuda_gray">#6D8EA1</color>
 
-    <color name="athens_gray">#EBEFF2</color>
+    <color name="athens_gray">#EBEFF2</color>T
     <color name="powder_blue">#BCD6E7</color>
 
     <color name="white_dark">#a4a4a5</color>
@@ -26,6 +27,7 @@
     <color name="top_panel_view_stats_plus_color">@color/green</color>
 
     <color name="main_color_scheme_1_layer">@color/cornflower</color>
+    <color name="main_color_scheme_2_layer">@color/bermuda_gray</color>
 
     <color name="active_color_scheme_1_layer">@color/athens_gray</color>
     <color name="active_color_scheme_2_layer">@color/powder_blue</color>

@@ -12,191 +12,176 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/stats_panel_reworked"
-        app:layout_constraintLeft_toRightOf="@+id/top_panel_menu_button_image_view"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/top_panel_menu_button_image_view"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <!-- first row -->
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/top_row"
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_column_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_column_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_row_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingTop="@dimen/spacing_8"
-            android:paddingRight="8dp"
-            android:paddingBottom="4dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
-            <ImageView
-                android:id="@+id/text_view_stats_panel_dex_title"
-                android:layout_width="0dp"
-                android:background="@drawable/test_stats_frame"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_dex_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/text_view_stats_panel_dex_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:scaleType="center"
+            android:src="@drawable/stats_logo_agility_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/image_view_stats_panel_dex_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:paddingLeft="@dimen/spacing_8"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_dex_title"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_prc_title"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/image_view_stats_panel_dex_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_dex_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_column_1"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_dex_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_dex_title" />
 
-            <TextView
-                android:id="@+id/text_view_stats_panel_prc_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/stats_panel_prc_title"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_dex_bar"
-                app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_prc_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/text_view_stats_panel_prc_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:src="@drawable/stats_logo_prc_3"
+            app:layout_constraintStart_toEndOf="@+id/guideline_column_1"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/image_view_stats_panel_prc_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_prc_title"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_au_title"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/image_view_stats_panel_prc_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_prc_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_column_2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_prc_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_prc_title" />
 
-            <TextView
-                android:id="@+id/text_view_stats_panel_au_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/stats_panel_aur_title"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_prc_bar"
-                app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_au_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/text_view_stats_panel_au_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:src="@drawable/stats_logo_aur_2"
+            app:layout_constraintStart_toEndOf="@+id/guideline_column_2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/image_view_stats_panel_au_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_au_title"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/image_view_stats_panel_au_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_au_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_au_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_au_title" />
 
         <!-- second row -->
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/bottom_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingTop="4dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="@dimen/spacing_8"
-            android:textAppearance="@style/D"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/text_view_stats_panel_hp_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:src="@drawable/stats_logo_hp_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_row">
+            app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_dex_title" />
 
-            <ImageView
-                android:src="@drawable/heals_xxx"
-                android:id="@+id/text_view_stats_panel_hp_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_hp_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/image_view_stats_panel_hp_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_hp_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_column_1"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_hp_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_hp_title" />
 
-            <TextView
-                android:id="@+id/image_view_stats_panel_hp_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:paddingLeft="@dimen/spacing_8"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_hp_title"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_time_title"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/text_view_stats_panel_time_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:src="@drawable/stats_logo_time_3"
+            app:layout_constraintStart_toEndOf="@+id/guideline_column_1"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_prc_title" />
 
-            <TextView
-                android:id="@+id/text_view_stats_panel_time_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/stats_panel_time_title"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_hp_bar"
-                app:layout_constraintRight_toLeftOf="@+id/image_view_stats_panel_time_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/image_view_stats_panel_time_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_time_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_column_2"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_time_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_time_title" />
 
-            <TextView
-                android:id="@+id/image_view_stats_panel_time_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_time_title"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_mem_title"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/text_view_stats_panel_mem_title"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:src="@drawable/stats_logo_memory_2"
+            app:layout_constraintStart_toEndOf="@+id/guideline_column_2"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_au_title" />
 
-            <TextView
-                android:id="@+id/text_view_stats_panel_mem_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/stats_panel_am_title"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/image_view_stats_panel_time_bar"
-                app:layout_constraintRight_toLeftOf="@+id/text_view_stats_panel_mem_bar"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/text_view_stats_panel_mem_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_8"
+            android:paddingLeft="@dimen/spacing_8"
+            android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_stats_panel_mem_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_stats_panel_mem_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_stats_panel_mem_title" />
 
-            <TextView
-                android:id="@+id/text_view_stats_panel_mem_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/D"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/text_view_stats_panel_mem_title"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
