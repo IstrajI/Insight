@@ -2,7 +2,6 @@ package com.npgames.insight.ui.book;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -383,7 +381,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void showFindSuccess() {
         final InfoDialog infoDialog = new InfoDialog();
         final Bundle bundle = new Bundle();
-        bundle.putString(InfoDialog.MESSAGE, "Вы нашли скрытый параграф!");
+        bundle.putString(InfoDialog.INFO_DIALOG_MESSAGE, "Вы нашли скрытый параграф!");
         infoDialog.setArguments(bundle);
         infoDialog.show(getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
     }
@@ -392,7 +390,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     public void showFindFailed() {
         final InfoDialog infoDialog = new InfoDialog();
         final Bundle bundle = new Bundle();
-        bundle.putString(InfoDialog.MESSAGE, "Поиск улик ничего не дал");
+        bundle.putString(InfoDialog.INFO_DIALOG_MESSAGE, "Поиск улик ничего не дал");
         infoDialog.setArguments(bundle);
         infoDialog.show(getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
     }

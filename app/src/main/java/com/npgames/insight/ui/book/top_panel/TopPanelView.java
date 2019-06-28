@@ -2,7 +2,6 @@ package com.npgames.insight.ui.book.top_panel;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,15 +23,13 @@ import android.widget.TextView;
 import com.npgames.insight.R;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog;
-import com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog.MESSAGE;
-import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.CONFIRMATION_TEXT;
+import static com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog.INFO_DIALOG_ICON;
+import static com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog.INFO_DIALOG_MESSAGE;
+import static com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog.INFO_DIALOG_TITLE;
 
 public class TopPanelView extends FrameLayout implements View.OnClickListener {
     @BindView(R.id.text_view_stats_panel_mem_bar)
@@ -272,7 +269,9 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog memInfoDialog= new InfoDialog();
                 memInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), StatsInfoDialog.STATS_INFO_DIALOG_TAG);
                 final Bundle memBundle = new Bundle();
-                memBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_amn));
+                memBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_amn));
+                memBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_amn));
+                memBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_memory_2);
                 memInfoDialog.setArguments(memBundle);
                 break;
 /*
@@ -310,7 +309,11 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog timeInfoDialog = new InfoDialog();
                 timeInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
                 final Bundle timeBundle = new Bundle();
-                timeBundle.putString(MESSAGE, getContext().getString(R.string.p501_t));
+
+                timeBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_time));
+                timeBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_time_6);
+                timeBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.p501_t));
+
                 timeInfoDialog.setArguments(timeBundle);
                 break;
 
@@ -319,7 +322,10 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog hpInfoDialog = new InfoDialog();
                 hpInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
                 final Bundle hpBundle = new Bundle();
-                hpBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_hp));
+
+                hpBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_hp));
+                hpBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_hp_3);
+                hpBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_hp));
                 hpInfoDialog.setArguments(hpBundle);
                 break;
 
@@ -328,7 +334,10 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog prcInfoDialog = new InfoDialog();
                 prcInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
                 final Bundle prcBundle = new Bundle();
-                prcBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_prc));
+
+                prcBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_prc));
+                prcBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_prc_3);
+                prcBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_prc));
                 prcInfoDialog.setArguments(prcBundle);
                 break;
 
@@ -337,7 +346,11 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog dexInfoDialog = new InfoDialog();
                 dexInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
                 final Bundle dexBundle = new Bundle();
-                dexBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_dex));
+
+
+                dexBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_dex));
+                dexBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_agility_2);
+                dexBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_dex));
                 dexInfoDialog.setArguments(dexBundle);
                 break;
 
@@ -346,7 +359,10 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final InfoDialog aurInfoDialog = new InfoDialog();
                 aurInfoDialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), InfoDialog.INFO_DIALOG_TAG);
                 final Bundle aurBundle = new Bundle();
-                aurBundle.putString(MESSAGE, getContext().getString(R.string.create_character_skill_info_aur));
+
+                aurBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_aur));
+                aurBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_aur_2);
+                aurBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_aur));
                 aurInfoDialog.setArguments(aurBundle);
                 break;
         }

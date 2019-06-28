@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"/>
+        app:layout_constraintGuide_percent="0.3" />
 
     <ImageView
         android:layout_width="0dp"
@@ -26,48 +27,85 @@
         app:layout_constraintBottom_toBottomOf="@+id/bottom_action_confirm_dialog_title_layout"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/bottom_action_confirm_dialog_title_layout"
-        app:layout_constraintTop_toTopOf="@+id/bottom_action_confirm_dialog_title_layout"/>
+        app:layout_constraintTop_toTopOf="@+id/bottom_action_confirm_dialog_title_layout" />
 
     <FrameLayout
         android:id="@+id/bottom_action_confirm_dialog_title_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/confirm_dialog_top_panel_right"
-        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view">
+        app:layout_constraintBottom_toTopOf="@+id/bottom_action_confirm_dialog_body_layout_scroll_view"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_right">
+
         <TextView
             android:id="@+id/bottom_action_confirm_dialog_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:fontFamily="@font/d_cell"
-            android:text="пРОДОЛЖИТЬ?"
+            android:text="иНФОРМАЦИЯ"
+            android:padding="2dp"
             android:textSize="20sp" />
     </FrameLayout>
 
     <ScrollView
         android:id="@+id/bottom_action_confirm_dialog_body_layout_scroll_view"
         android:layout_width="0dp"
-        app:layout_constraintHeight_default="wrap"
         android:layout_height="0dp"
         android:scrollbarThumbVertical="@color/active_color_scheme_2_layer"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom"
+        app:layout_constraintHeight_default="wrap"
         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="@+id/guideline_top"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom">
+        app:layout_constraintTop_toTopOf="@+id/guideline_top">
 
-        <TextView
-            android:layout_height="wrap_content"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:minHeight="100dp"
-            android:id="@+id/bottom_action_confirm_dialog_body_text_view"
+            android:layout_height="0dp"
             android:background="#e50e1609"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:layout_weight="1.0"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="Возвращение на станцию отнимет у вас одну единицу времени."/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/info_dialog_icon_image_view"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:padding="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/stats_logo_time_4" />
+
+            <TextView
+                android:id="@+id/info_dialog_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/D"
+                app:layout_constraintBottom_toBottomOf="@+id/info_dialog_icon_image_view"
+                app:layout_constraintStart_toEndOf="@+id/info_dialog_icon_image_view"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/bottom_action_confirm_dialog_body_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:minHeight="100dp"
+                android:paddingLeft="16dp"
+                android:fontFamily="@font/play_regular"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:text="Возвращение на станцию отнимет у вас одну единицу времени."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_dialog_icon_image_view" />
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
     <android.support.constraint.ConstraintLayout
@@ -88,9 +126,9 @@
             android:gravity="center"
             android:text="ok"
             android:textAppearance="@style/D"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
@@ -105,6 +143,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7"/>
+        app:layout_constraintGuide_percent="0.7" />
 
 </android.support.constraint.ConstraintLayout>

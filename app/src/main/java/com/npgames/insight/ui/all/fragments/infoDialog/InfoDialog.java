@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.npgames.insight.R;
@@ -21,10 +22,16 @@ import butterknife.ButterKnife;
 
 public class InfoDialog extends DialogFragment {
     public static final String INFO_DIALOG_TAG = "INFO_DIALOG_TAG";
-    public static String MESSAGE = "MESSAGE";
+    public static String INFO_DIALOG_MESSAGE = "INFO_DIALOG_MESSAGE";
+    public static String INFO_DIALOG_ICON = "INFO_DIALOG_ICON";
+    public static String INFO_DIALOG_TITLE = "INFO_DIALOG_TITLE";
 
     @BindView(R.id.bottom_action_confirm_dialog_body_text_view)
     protected TextView bodyTextView;
+    @BindView(R.id.info_dialog_icon_image_view)
+    protected ImageView iconImageView;
+    @BindView(R.id.info_dialog_title_text_view)
+    protected TextView titleTextView;
     @BindView(R.id.bottom_action_confirm_dialog_deny_button_text_view)
     protected TextView denyButtonTextView;
 
@@ -49,8 +56,23 @@ public class InfoDialog extends DialogFragment {
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String bodyText = getArguments().getString(MESSAGE);
+        final String bodyText = getArguments().getString(INFO_DIALOG_MESSAGE);
         bodyTextView.setText(bodyText);
+
+        final int icon = getArguments().getInt(INFO_DIALOG_ICON, 0);
+        if (icon != 0) {
+            iconImageView.setImageDrawable(getResources().getDrawable(icon));
+        } else {
+            iconImageView.setVisibility(View.GONE);
+        }
+
+        final String title = getArguments().getString(INFO_DIALOG_TITLE, "");
+        if (!title.isEmpty()) {
+            titleTextView.setText(title);
+        } else {
+            titleTextView.setVisibility(View.GONE);
+        }
+
         denyButtonTextView.setOnTouchListener(denyButtonTouchListener);
 
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

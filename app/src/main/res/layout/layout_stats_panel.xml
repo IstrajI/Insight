@@ -50,7 +50,7 @@
             android:layout_height="24dp"
             android:padding="4dp"
             android:scaleType="center"
-            android:src="@drawable/stats_logo_agility_2"
+            android:src="@drawable/stats_logo_agility_5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,7 +142,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
             android:padding="4dp"
-            android:src="@drawable/stats_logo_time_3"
+            android:src="@drawable/stats_logo_time_6"
             app:layout_constraintStart_toEndOf="@+id/guideline_column_1"
             app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_prc_title" />
 
