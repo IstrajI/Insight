@@ -271,7 +271,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final Bundle memBundle = new Bundle();
                 memBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_amn));
                 memBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_amn));
-                memBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_memory_2);
+                memBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_memory_4);
                 memInfoDialog.setArguments(memBundle);
                 break;
 /*
@@ -312,7 +312,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
                 timeBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_time));
                 timeBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_time_6);
-                timeBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.p501_t));
+                timeBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_time));
 
                 timeInfoDialog.setArguments(timeBundle);
                 break;
@@ -336,7 +336,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final Bundle prcBundle = new Bundle();
 
                 prcBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_prc));
-                prcBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_prc_3);
+                prcBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_prc_4);
                 prcBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_prc));
                 prcInfoDialog.setArguments(prcBundle);
                 break;
@@ -349,7 +349,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
 
 
                 dexBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_dex));
-                dexBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_agility_2);
+                dexBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_agility_5);
                 dexBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_dex));
                 dexInfoDialog.setArguments(dexBundle);
                 break;
@@ -361,7 +361,7 @@ public class TopPanelView extends FrameLayout implements View.OnClickListener {
                 final Bundle aurBundle = new Bundle();
 
                 aurBundle.putString(INFO_DIALOG_TITLE, getContext().getString(R.string.character_skill_aur));
-                aurBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_aur_2);
+                aurBundle.putInt(INFO_DIALOG_ICON, R.drawable.stats_logo_aur_3);
                 aurBundle.putString(INFO_DIALOG_MESSAGE, getContext().getString(R.string.create_character_skill_info_aur));
                 aurInfoDialog.setArguments(aurBundle);
                 break;

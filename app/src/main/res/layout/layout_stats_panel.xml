@@ -72,7 +72,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:padding="4dp"
-            android:src="@drawable/stats_logo_prc_3"
+            android:src="@drawable/stats_logo_prc_4"
             app:layout_constraintStart_toEndOf="@+id/guideline_column_1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +95,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:padding="4dp"
-            android:src="@drawable/stats_logo_aur_2"
+            android:src="@drawable/stats_logo_aur_6"
             app:layout_constraintStart_toEndOf="@+id/guideline_column_2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -165,7 +165,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
             android:padding="4dp"
-            android:src="@drawable/stats_logo_memory_2"
+            android:src="@drawable/stats_logo_memory_4"
             app:layout_constraintStart_toEndOf="@+id/guideline_column_2"
             app:layout_constraintTop_toBottomOf="@+id/text_view_stats_panel_au_title" />
 
