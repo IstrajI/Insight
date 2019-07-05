@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.npgames.insight.data.model.Player;
 import com.npgames.insight.data.paragraph.ParagraphRepository;
-import com.npgames.insight.data.stats.StatsRepository;
 import com.npgames.insight.domain.CreatePlayerInteractor;
 
 @InjectViewState

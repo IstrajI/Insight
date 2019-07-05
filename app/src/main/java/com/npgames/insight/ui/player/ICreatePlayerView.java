@@ -1,7 +1,5 @@
 package com.npgames.insight.ui.player;
 
-import android.support.design.widget.BottomSheetBehavior;
-
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;

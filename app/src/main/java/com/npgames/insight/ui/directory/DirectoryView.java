@@ -1,7 +1,5 @@
 package com.npgames.insight.ui.directory;
 
-import android.provider.ContactsContract;
-
 import com.arellomobile.mvp.MvpView;
 import com.npgames.insight.data.directory.DirectoryItem;
 

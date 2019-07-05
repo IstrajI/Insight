@@ -1,19 +1,17 @@
 package com.npgames.insight.ui.directory;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.npgames.insight.R;
 import com.npgames.insight.data.directory.DirectoryItem;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
-import com.npgames.insight.ui.book.bottom_new.BottomPanelPresenter;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class DirectoryActivity extends BaseMvpActivity implements DirectoryView {
@@ -42,7 +40,7 @@ public class DirectoryActivity extends BaseMvpActivity implements DirectoryView 
         directoryAdapter = new DirectoryAdapter();
         listRecyclerView.setAdapter(directoryAdapter);
 
-        listRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
         directoryPresenter.loadDirectory();
     }

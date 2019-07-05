@@ -1,9 +1,8 @@
 package com.npgames.insight.ui.all.listeners;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.npgames.insight.ui.book.page.GamePageAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewListeners {
 

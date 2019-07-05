@@ -17,7 +17,7 @@
         android:textColor="@color/colorTextPrimary"
         android:textSize="18sp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="@dimen/spacing_16"
         android:id="@+id/recycler_view_adapter_page"
         android:layout_width="match_parent"

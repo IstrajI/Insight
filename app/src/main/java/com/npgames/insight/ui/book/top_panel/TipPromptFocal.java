@@ -4,10 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import uk.co.samuelwall.materialtaptargetprompt.extras.PromptFocal;
 import uk.co.samuelwall.materialtaptargetprompt.extras.PromptOptions;
 

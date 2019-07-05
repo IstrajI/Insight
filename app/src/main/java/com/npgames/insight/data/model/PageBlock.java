@@ -1,9 +1,9 @@
 package com.npgames.insight.data.model;
 
-import android.support.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 /**
  * Created by Влад on 26.10.2017.

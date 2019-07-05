@@ -3,9 +3,7 @@ package com.npgames.insight.ui.book;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +18,6 @@ import com.npgames.insight.application.ScreenUtils;
 import com.npgames.insight.data.model.Equipment;
 import com.npgames.insight.data.model.Stats;
 import com.npgames.insight.data.model.new_model.Paragraph;
-import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 import com.npgames.insight.ui.all.fragments.infoDialog.InfoDialog;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
@@ -38,6 +35,8 @@ import com.npgames.insight.ui.directory.DirectoryActivity;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 import static com.npgames.insight.ui.book.bottom_new.actions.BottomActionConfirmDialog.BOTTOM_ACTION_CONFIRM_DIALOG_TAG;

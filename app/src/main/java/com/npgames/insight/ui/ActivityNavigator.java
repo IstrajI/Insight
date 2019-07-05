@@ -2,7 +2,6 @@ package com.npgames.insight.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -14,6 +13,8 @@ import com.npgames.insight.ui.directory.DirectoryActivity;
 import com.npgames.insight.ui.home.HomeScreenActivity;
 import com.npgames.insight.ui.home.authors.AuthorsActivity;
 import com.npgames.insight.ui.player.CreatePlayerActivity;
+
+import androidx.annotation.NonNull;
 
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
 public final class ActivityNavigator {

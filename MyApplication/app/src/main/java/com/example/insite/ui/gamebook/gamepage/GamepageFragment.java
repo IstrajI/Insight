@@ -3,7 +3,7 @@ package com.example.insite.ui.gamebook.gamepage;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.core.app.Fragment;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;

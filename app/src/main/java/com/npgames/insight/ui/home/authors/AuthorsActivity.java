@@ -2,7 +2,6 @@ package com.npgames.insight.ui.home.authors;
 
 import android.os.Bundle;
 import com.npgames.insight.R;
-import com.npgames.insight.ui.InsightApplication;
 import com.npgames.insight.ui.all.activities.BaseMvpActivity;
 
 public class AuthorsActivity extends BaseMvpActivity {

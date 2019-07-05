@@ -1,7 +1,7 @@
 package com.example.insite.ui.gamebook;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.core.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.insite.R;

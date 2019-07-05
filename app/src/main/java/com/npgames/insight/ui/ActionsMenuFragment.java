@@ -2,8 +2,6 @@ package com.npgames.insight.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class ActionsMenuFragment extends BaseMvpFragment implements View.OnClickListener, ActionsMenuView{
@@ -46,7 +46,7 @@ public class ActionsMenuFragment extends BaseMvpFragment implements View.OnClick
 
     private void initActions() {
         final Context context = Objects.requireNonNull(getActivity()).getApplicationContext();
-        final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager actionsMenuLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
         final ActionsMenuAdapter actionsMenuAdapter = new ActionsMenuAdapter();
         actionsRecyclerView.setAdapter(actionsMenuAdapter);
         actionsRecyclerView.setLayoutManager(actionsMenuLayoutManager);

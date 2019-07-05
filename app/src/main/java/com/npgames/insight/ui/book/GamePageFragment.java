@@ -2,10 +2,6 @@ package com.npgames.insight.ui.book;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +13,9 @@ import com.npgames.insight.data.model.new_model.Page;
 import com.npgames.insight.ui.all.listeners.RecyclerViewListeners;
 import com.npgames.insight.ui.book.page.GamePageAdapter;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -56,7 +55,7 @@ public class GamePageFragment extends Fragment {
         blocksAdapter.setDirectoryOpenerListener(directoryOpenerListener);
 
         pageRecyclerView.setAdapter(blocksAdapter);
-        pageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        pageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         blocksAdapter.update(page.blocks);
         return view;
     }

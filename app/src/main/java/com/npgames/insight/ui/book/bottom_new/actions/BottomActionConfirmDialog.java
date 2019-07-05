@@ -1,15 +1,9 @@
 package com.npgames.insight.ui.book.bottom_new.actions;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.text.Layout;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +12,9 @@ import android.widget.TextView;
 
 import com.npgames.insight.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,13 +36,17 @@ public class BottomActionConfirmDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        getDialog().getWindow()
+                .setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
+                           ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View actionConfirmDialog = inflater.inflate(R.layout.fragment_bottom_action_confirm_dialog, container);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        final View actionConfirmDialog = inflater.inflate(
+                R.layout.fragment_bottom_action_confirm_dialog, container);
         ButterKnife.bind(this, actionConfirmDialog);
 
         return actionConfirmDialog;
@@ -61,8 +62,10 @@ public class BottomActionConfirmDialog extends DialogFragment {
         denyButtonTextView.setOnTouchListener(denyButtonTouchListener);
         acceptButtonTextView.setOnTouchListener(acceptButtonTouchListener);
 
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getDialog().getWindow()
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getDialog().getWindow()
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().setCancelable(false);
         getDialog().setCanceledOnTouchOutside(false);
         getDialog().setOnKeyListener((dialogInterface, i, keyEvent) -> {
@@ -77,9 +80,10 @@ public class BottomActionConfirmDialog extends DialogFragment {
     private View.OnTouchListener acceptButtonTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(final View view, final MotionEvent motionEvent) {
-            switch(motionEvent.getAction()) {
+            switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    final Drawable pressedAcceptButton = getResources().getDrawable(R.drawable.confirm_dialog_button_active);
+                    final Drawable pressedAcceptButton = getResources().getDrawable(
+                            R.drawable.confirm_dialog_button_active);
                     acceptButtonTextView.setBackground(pressedAcceptButton);
                     break;
 
@@ -89,7 +93,8 @@ public class BottomActionConfirmDialog extends DialogFragment {
                     dismiss();
 
                 case MotionEvent.ACTION_CANCEL:
-                    final Drawable defaultAcceptButton = getResources().getDrawable(R.drawable.confirm_dialog_button);
+                    final Drawable defaultAcceptButton = getResources().getDrawable(
+                            R.drawable.confirm_dialog_button);
                     acceptButtonTextView.setBackground(defaultAcceptButton);
                     break;
             }
@@ -100,9 +105,10 @@ public class BottomActionConfirmDialog extends DialogFragment {
     private View.OnTouchListener denyButtonTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(final View view, final MotionEvent motionEvent) {
-            switch(motionEvent.getAction()) {
+            switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    final Drawable pressedDenyButton = getResources().getDrawable(R.drawable.confirm_dialog_button_active);
+                    final Drawable pressedDenyButton = getResources().getDrawable(
+                            R.drawable.confirm_dialog_button_active);
                     denyButtonTextView.setBackground(pressedDenyButton);
                     break;
 
@@ -111,7 +117,8 @@ public class BottomActionConfirmDialog extends DialogFragment {
                     dismiss();
 
                 case MotionEvent.ACTION_CANCEL:
-                    final Drawable defaultDenyButton = getResources().getDrawable(R.drawable.confirm_dialog_button);
+                    final Drawable defaultDenyButton = getResources().getDrawable(
+                            R.drawable.confirm_dialog_button);
                     denyButtonTextView.setBackground(defaultDenyButton);
 
                     break;
@@ -120,7 +127,8 @@ public class BottomActionConfirmDialog extends DialogFragment {
         }
     };
 
-    public void setConfirmationListener(final BottomActionConfirmListener bottomActionConfirmListener) {
+    public void setConfirmationListener(
+            final BottomActionConfirmListener bottomActionConfirmListener) {
         this.confirmListener = bottomActionConfirmListener;
     }
 

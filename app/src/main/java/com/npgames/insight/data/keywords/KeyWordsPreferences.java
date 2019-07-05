@@ -2,12 +2,13 @@ package com.npgames.insight.data.keywords;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 import java.util.Set;
+
+import androidx.annotation.StringDef;
 
 public class KeyWordsPreferences {
     private SharedPreferences preferences;

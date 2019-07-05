@@ -1,14 +1,10 @@
 package com.npgames.insight.ui.book.page;
 
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.SpannedString;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -19,13 +15,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpDelegate;
 import com.npgames.insight.R;
-import com.npgames.insight.application.StringUtills;
 import com.npgames.insight.data.model.BlockAction;
 import com.npgames.insight.data.model.BlockArea;
 import com.npgames.insight.data.model.BlockButton;
@@ -33,14 +26,12 @@ import com.npgames.insight.ui.all.adapters.BaseRecyclerAdapter;
 import com.npgames.insight.ui.book.ICreatePlayer;
 import com.npgames.insight.ui.book.IDirectoryOpener;
 import com.npgames.insight.ui.player.CreatePlayerDexView;
-import com.npgames.insight.ui.player.CreatePlayerPrcView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
