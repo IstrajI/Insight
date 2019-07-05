@@ -18,7 +18,7 @@ public class AuthorsActivity extends BaseMvpActivity {
     protected void onResume() {
         super.onResume();
 
-        ((InsightApplication) getApplication()).setMusic(R.raw.main_menu_sound);
+        //((InsightApplication) getApplication()).setMusic(R.raw.main_menu_sound);
     }
 
     @Override

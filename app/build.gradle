@@ -59,7 +59,7 @@ dependencies {
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.14.0'
 
     //Achivement
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-identity:17.0.0'
     implementation 'com.google.android.gms:play-services-games:18.0.0'
-    implementation 'com.google.android.gms:play-services-wallet:17.0.0'
-
 }

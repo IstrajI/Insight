@@ -109,7 +109,7 @@ public class GameBookActivity extends BaseMvpActivity implements RecyclerViewLis
     @Override
     protected void onResume() {
         super.onResume();
-        ((InsightApplication)getApplication()).setMusic(R.raw.background_deep_space);
+        //((InsightApplication)getApplication()).setMusic(R.raw.background_deep_space);
     }
 
     @Override

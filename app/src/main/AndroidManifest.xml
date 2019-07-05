@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.npgames.insight">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -28,7 +29,5 @@
         <activity android:name=".ui.book.armory.ArmoryActivity" android:noHistory="true"/>
         <activity android:name=".ui.home.authors.AuthorsActivity" android:noHistory="true"/>
         <activity android:name=".ui.directory.DirectoryActivity" android:noHistory="true"/>
-        <service android:name=".application.MusicService"/>
     </application>
-
 </manifest>

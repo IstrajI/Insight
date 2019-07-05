@@ -5,15 +5,15 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.npgames.insight.application.MusicService;
+//import com.npgames.insight.application.MusicService;
 
 public class InsightApplication extends Application {
-        final MusicService musicService;
+/*        final MusicService musicService;
 
     public InsightApplication() {
         super();
         musicService = new MusicService();
-    }
+    }*/
 
     int consumersAmount = 0;
     @Override
@@ -43,9 +43,9 @@ public class InsightApplication extends Application {
 
             @Override
             public void onActivityStopped(Activity activity) {
-                consumersAmount--;
+/*                consumersAmount--;
                 if (consumersAmount == 0) musicService.pauseMusic();
-                Log.d("TestPish", "onStop");
+                Log.d("TestPish", "onStop");*/
             }
 
             @Override
@@ -60,13 +60,13 @@ public class InsightApplication extends Application {
         });
     }
 
-    public void setMusic(final int musicResource) {
+/*    public void setMusic(final int musicResource) {
         musicService.setMusic(getApplicationContext(), musicResource);
     }
 
     public void pauseMusic() {
         musicService.pauseMusic();
-    }
+    }*/
 
 
 }

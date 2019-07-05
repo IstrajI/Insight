@@ -3,7 +3,11 @@ package com.npgames.insight.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.npgames.insight.data.directory.DirectoryItem;
 import com.npgames.insight.ui.book.GameBookActivity;
 import com.npgames.insight.ui.directory.DirectoryActivity;
@@ -33,5 +37,17 @@ public final class ActivityNavigator {
     public static void startDirectoryActivity(final Context context) {
         final Intent intent = new Intent(context, DirectoryActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void startAchivementsActivity(final Context context) {
+        Log.d("TestPish", "startAchivements");
+        Games.getAchievementsClient(context, GoogleSignIn.getLastSignedInAccount(context))
+                .getAchievementsIntent()
+                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                    @Override
+                    public void onSuccess(final Intent intent) {
+                        context.startActivity(intent);
+                    }
+                });
     }
 }

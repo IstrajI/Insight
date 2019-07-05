@@ -1,3 +1,4 @@
+/*
 package com.npgames.insight.application;
 
 import android.content.Context;
@@ -101,3 +102,4 @@ public class MusicService implements MediaPlayer.OnCompletionListener,
 
     }
 }
+*/
