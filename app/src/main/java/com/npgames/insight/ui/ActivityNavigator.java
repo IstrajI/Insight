@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.npgames.insight.data.directory.DirectoryItem;
@@ -40,9 +41,9 @@ public final class ActivityNavigator {
         context.startActivity(intent);
     }
 
-    public static void startAchivementsActivity(final Context context) {
+    public static void startAchivementsActivity(final Context context, final GoogleSignInAccount googleSignInAccount) {
         Log.d("TestPish", "startAchivements");
-        Games.getAchievementsClient(context, GoogleSignIn.getLastSignedInAccount(context))
+        Games.getAchievementsClient(context, googleSignInAccount)
                 .getAchievementsIntent()
                 .addOnSuccessListener(new OnSuccessListener<Intent>() {
                     @Override

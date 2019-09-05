@@ -92,6 +92,7 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
+        homeScreenPresenter.checkContinueButtonState();
         //((InsightApplication)getApplication()).setMusic(R.raw.main_menu_sound);
     }
 
@@ -149,13 +150,11 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
     @Override
     public void setContinueButtonEnabled() {
         continueButton.setEnabled(true);
-        //continueButton.setBackground(getResources().getDrawable(R.drawable.main_menu_button_new_xxx_default));
     }
 
     @Override
     public void setContinueButtonDisabled() {
         continueButton.setEnabled(false);
-        //continueButton.setBackground(getResources().getDrawable(R.drawable.main_menu_button_new_xxx_disabled));
     }
 
     @Override
@@ -168,9 +167,8 @@ public class HomeScreenActivity extends BaseMvpActivity implements View.OnClickL
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //
+                ActivityNavigator.startAchivementsActivity(this, account);
             } catch (ApiException e) {
-                ActivityNavigator.startAchivementsActivity(this);
             }
         }
     }

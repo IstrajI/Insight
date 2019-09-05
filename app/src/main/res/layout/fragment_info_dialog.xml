@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -134,14 +134,14 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"

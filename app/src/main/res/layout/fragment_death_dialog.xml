@@ -6,7 +6,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="1dp"
         android:layout_height="match_parent"
@@ -70,7 +70,7 @@
         android:text="в мЕНЮ"
         android:textSize="16sp" />
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="1dp"
         android:layout_height="match_parent"

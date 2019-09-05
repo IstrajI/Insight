@@ -6,7 +6,7 @@
     android:background="#b2000000"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="1dp"
         android:layout_height="match_parent"
@@ -127,7 +127,7 @@
 
     -->
 
-    <androidx.constraintlayout.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="1dp"
         android:layout_height="match_parent"
