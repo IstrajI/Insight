@@ -3,6 +3,8 @@
 :video_game: :joystick: Interactive Old school quest. Home project. All graphic is also made by me :grinning:
 
 
+Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
