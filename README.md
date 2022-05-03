@@ -1,10 +1,11 @@
-
-
-
-
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
+![Alt text](/app/src/main/res/drawable-xxxhdpi/laser_2.png?raw=true "Optional Title")
+![Alt text](/app/src/main/res/drawable-xxxhdpi/helmet_11_xxx.png?raw=true "Optional Title")
+![Alt text](/app/src/main/res/drawable-xxxhdpi/shoker_2.png?raw=true "Optional Title")
 # Insight
-:video_game: :joystick: Interactive Old school quest. Home project. All graphic is also made by me :grinning:
+
+
 This work is licensed under a
 
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
