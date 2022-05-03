@@ -22,7 +22,7 @@
 
 <div id="badges">
   <a href="https://www.linkedin.com/in/unikitsin/">
-    <img src="/readme_images/game.png" width="540" height="960"/>
+    <img src="/readme_images/game.jpg"/>
   </a>
   <a href="https://www.instagram.com/raymond34670/">
     <img src="/readme_images/game_2.png" width="540" height="960"/>
