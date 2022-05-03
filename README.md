@@ -1,4 +1,4 @@
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 # Insight
 :video_game: :joystick: Interactive Old school quest. Home project. All graphic is also made by me :grinning:
 
