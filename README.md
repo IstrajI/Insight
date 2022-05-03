@@ -30,32 +30,19 @@ Special thanks for support and testing [**Alina Piletskaya**](https://github.com
 * Weight, time and evidence mechanics
 
 
-<div id="badges">
-  <a href="https://www.linkedin.com/in/unikitsin/">
+<div id="screenshot1">
     <img src="/readme_images/game.jpg"/>
-  </a>
-  <a href="https://www.instagram.com/raymond34670/">
     <img src="/readme_images/game_2.jpg"/>
-  </a>
 </div>
 
-
-<div id="badges">
-  <a href="https://www.linkedin.com/in/unikitsin/">
+<div id="screenshot2">
     <img src="/readme_images/armory_screen.jpg"/>
-  </a>
-  <a href="https://www.instagram.com/raymond34670/">
     <img src="/readme_images/dialog_equipment.jpg"/>
-  </a>
 </div>
 
-<div id="badges">
-  <a href="https://www.linkedin.com/in/unikitsin/">
+<div id="screenshot3">
     <img src="/readme_images/game_ended.jpg"/>
-  </a>
-    <a href="https://www.linkedin.com/in/unikitsin/">
     <img src="/readme_images/game.jpg"/>
-  </a>
 </div>
 
 <img src="/readme_images/map.jpg"/>
