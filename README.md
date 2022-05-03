@@ -3,31 +3,64 @@
 ![Alt text](/app/src/main/res/drawable-xxxhdpi/laser_2.png?raw=true "Optional Title")
 ![Alt text](/app/src/main/res/drawable-xxxhdpi/helmet_11_xxx.png?raw=true "Optional Title")
 ![Alt text](/app/src/main/res/drawable-xxxhdpi/shoker_2.png?raw=true "Optional Title")
-# Insight
 
-![Alt text](/app/src/main/res/drawable-xxxhdpi/laser_2.png?raw=true "Optional Title")
-![Alt text](/app/src/main/res/drawable-xxxhdpi/helmet_11_xxx.png?raw=true "Optional Title")
-![Alt text](/app/src/main/res/drawable-xxxhdpi/shoker_2.png?raw=true "Optional Title")
+# Insight
+Insight is an interactive story in the style of old-school RPG games based on the book by Ray Gard. A mixture of detective and action movie in a sci-fi setting.
+
+The ship of the mercenary Stig Spyro was damaged after a serious battle. In order to get some money for repairs, he decides to call on the order. There were five especially brutal murders at the nearest industrial station. According to rumors, a scumbag maniac wound up there. But it seems that everything is not so simple..
+
+# About
+This project is currently in [**Open Beta**](https://play.google.com/store/apps/details?id=com.npgames.insight)
+
+It's made on native AndroidSDK without aditional libraries, case back in times I use it to learn android, and have a lot of enthyziazm to make it on just native android :D
+# Credits: 
+Book Author: **Ray Gard**
+
+Development, Artist: [**Uladzislau Nikitsin**](https://github.com/IstrajI)
+
+Special thanks for support and testing [**Alina Piletskaya**](https://github.com/alinpiaa)
 
 <img src="/readme_images/home_screen.jpg" width="432" height="936"/>
 
-<div id="badges">
-  <a href="https://www.linkedin.com/in/unikitsin/">
-    <img src="/readme_images/home_screen.jpg" width="432" height="936"/>
-  </a>
-  <a href="https://www.instagram.com/raymond34670/">
-    <img src="/readme_images/home_screen.jpg" width="432" height="936"/>
-  </a>
-</div>
+# Peculiarities:
+
+* Captivating 160 page story
+* Complete and balanced game mechanics
+* Non-linear plot and more than 7 story endings
+* Weight, time and evidence mechanics
+
 
 <div id="badges">
   <a href="https://www.linkedin.com/in/unikitsin/">
     <img src="/readme_images/game.jpg"/>
   </a>
   <a href="https://www.instagram.com/raymond34670/">
-    <img src="/readme_images/game_2.png" width="540" height="960"/>
+    <img src="/readme_images/game_2.jpg"/>
   </a>
 </div>
+
+
+<div id="badges">
+  <a href="https://www.linkedin.com/in/unikitsin/">
+    <img src="/readme_images/armory_screen.jpg"/>
+  </a>
+  <a href="https://www.instagram.com/raymond34670/">
+    <img src="/readme_images/dialog_equipment.jpg"/>
+  </a>
+</div>
+
+<div id="badges">
+  <a href="https://www.linkedin.com/in/unikitsin/">
+    <img src="/readme_images/game_ended.jpg"/>
+  </a>
+    <a href="https://www.linkedin.com/in/unikitsin/">
+    <img src="/readme_images/game.jpg"/>
+  </a>
+</div>
+
+<img src="/readme_images/map.jpg"/>
+<img src="/readme_images/base.jpg"  width="1024" height="768"/>
+
 
 This work is licensed under a
 
